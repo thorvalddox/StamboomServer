@@ -2,6 +2,10 @@ __author__ = 'Thorvald'
 
 import core
 from itertools import chain
+import random
+import os.path
+
+from imageinfo import get_image_info
 
 class DrawJavaScript:
     def __init__(self,dimensions):
@@ -87,18 +91,35 @@ class DrawJavaScript:
         }}
         """.format(x1,x2,y1,y2,link))
 
-    def draw_image(self,image,width,height):
-        pass
+    def draw_image(self,image,x,y,width,height):
+        self.commands.append("""
+            var imageObj{0} = new Image();
+
+              imageObj{0}.onload = function() {{
+                var scale = Math.min({3}/imageObj{0}.naturalWidth,{4}/imageObj{0}.naturalHeight)
+                ctx.drawImage(imageObj{0}, {1}-(imageObj{0}.naturalWidth*scale-{3})/2, {2}, imageObj{0}.naturalWidth*scale, imageObj{0}.naturalHeight*scale);
+              }};
+
+              imageObj{0}.src = '/static/{5}';
+        """.format(random.randrange(2**64),x,y,width,height,image))
 
     def draw_person(self,person,x,y,width,height,border):
         xdif = width/2-border
         ydif = height/2-border
         self.draw_rectangle(x-xdif,y-ydif,x+xdif,y+ydif,"white")
-        self.draw_text(x,y+ydif-20,person.name)
-        self.draw_text(x,y+ydif-10,person.birth)
+        self.draw_text(x,y+ydif-21,person.name)
+        self.draw_text(x,y+ydif-11,"*"*bool(person.birth) + person.birth)
+        self.draw_text(x,y+ydif-2,"+"*bool(person.dead) + person.dead)
         self.add_mouse_pointer(x-xdif,y-ydif,x+xdif,y+ydif)
         self.add_mouse_link("/edit/"+person.name,x-xdif,y-ydif,x+xdif,y+ydif)
+        nw,nh = width-4*border,height-6*border
+        # _,w,h = get_image_info(open("static/"+ person.image))
+        # print(person.image,w,h)
+        # scale = min(nw/w,nh/h)
+        # new_width = w*scale
+        # new_height = h*scale
 
+        self.draw_image(person.image,x-xdif+border,y-ydif+border/2,nw,nh)
 
 
 class BuildTree:
@@ -125,6 +146,7 @@ class BuildTree:
                 generator = chain(*nextgen)
         except ValueError:
             return
+
     def make_top_layers(self):
         generator = [self.tree.head]
         try:
@@ -136,17 +158,21 @@ class BuildTree:
                 generator = list(chain(*nextgen))
         except ValueError:
             return
+
     def get_headsize(self,person):
         if person not in self.headsize:
             self.headsize[person] = self.calc_headsize(person)
         return self.headsize[person]
+
     def get_tailsize(self,person):
         if person not in self.tailsize:
             self.tailsize[person] = self.calc_tailsize(person)
         return self.tailsize[person]
+
     def calc_headsize(self,person):
         toplenght = len(self.tree.get_representation(person)[0])
         return(max(toplenght,self.get_tailsize(person)))
+
     def calc_tailsize(self,person):
         return sum(self.get_headsize(p) for p in self.tree.get_representation(person)[1])
 

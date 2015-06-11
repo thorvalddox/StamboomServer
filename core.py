@@ -3,6 +3,7 @@ __author__ = 'Thorvald'
 import time
 import sys,os,re
 import random
+import os.path
 
 
 import xml.etree.ElementTree as ET
@@ -189,6 +190,13 @@ class Person:
     def dead(self, value):
         self.udead = builddate(value)
 
+    @property
+    def image(self):
+        name = "kopkes/"+self.uname+".jpg"
+        if not os.path.exists("static/"+name):
+            name = "kopkes/smiley.jpg"
+        return name
+
     def __str__(self):
         return self.uname
 
@@ -220,7 +228,8 @@ class Commands(list):
             user,func,*args = c
             args = [i if i != "" else "*" for i in args]
             usercolor = {"$":"olive","#":"gold","?":"darkgrey"}[user[0]]
-            funccolor = {"person":"blue","family":"green","delete":"orange","merge":"purple","parents":"darkgreen"}[func]
+            funccolor = {"person":"blue","family":"green","delete":"orange","merge":"purple","parents":"darkgreen",
+                         "head":"darkblue","divorce":"darkorange"}[func]
             argscolor = []
             for i in args:
                 if i == "ERROR":

@@ -44,7 +44,9 @@ def show_fam_tree():
 
 @app.route('/edit/<name>/')
 def edit(name):
-    response = make_response(render_template("edit.html",name=name))
+    f = core.FamilyTree()
+    f.from_code("data.log")
+    response = make_response(render_template("edit.html",name=name,image=f.get_person(name).image))
     return response
 
 if __name__ == '__main__':
