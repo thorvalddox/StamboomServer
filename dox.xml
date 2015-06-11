@@ -1,0 +1,851 @@
+<root>
+    <opties path="D:\Graphviz2.34\bin\dot.exe"/>
+    <opties shape="rectangle" style-f="normal" style-p="bottom"/>
+    <opties font="Arial" lines="polyline"/>
+    <info>geb:</info>
+    <info>stf:</info>
+    <persoon id="$00000" naam="Camie Didelez">
+        <geb>25/03/1999</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00001" naam="Charlot Didelez">
+        <geb>27/09/2001</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00002" naam="Ortwin Dox">
+        <geb>22/08/1991</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00003" naam="Maarten Dox">
+        <geb>22/04/ 1993</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00004" naam="Zeger Dox">
+        <geb>20/07/1995</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00005" naam="Kathleen Dox">
+        <geb>24/02/1991</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00006" naam="Jorn Dox">
+        <geb>14/07/1993</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00007" naam="Robbe Dox">
+        <geb>17/05/1996</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00008" naam="Lien Valepyn">
+        <geb>16/10/2002</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00009" naam="Dorien Dox">
+        <geb>13/02/1997</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0000a" naam="Cato Dox">
+        <geb>29/06/1999</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0000b" naam="Kobe Dox">
+        <geb>14/05/2004</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0000c" naam="Joran Dox">
+        <geb>12/05/1993</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0000d" naam="Kirsten Daens">
+        <geb>27/12/1993</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0000e" naam="Ruben Dox">
+        <geb>24/07/2001</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0000f" naam="Stijn Waumans">
+        <geb>29/03/1992</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00010" naam="Lien Waumans">
+        <geb>30/07/1994</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00011" naam="Michelle Borghers">
+        <geb>17/07/1993</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00012" naam="Anke Borghers">
+        <geb>11/08/1995</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00013" naam="Daan Dox">
+        <geb>18/09/2001</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00014" naam="Hanne Verhelst">
+        <geb>16/02/1997</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00015" naam="Eva Verhelst">
+        <geb>13/11/1999</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00016" naam="Paulien Vermeulen">
+        <geb>9/10/1995</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00017" naam="Thijs Vermeulen">
+        <geb>7/12/1998</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00018" naam="Hanne Vermeulen">
+        <geb>28/09/2001</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00019" naam="Sylvester Leeuwenhart Dox">
+        <geb>8/06/2009</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0001a" naam="Elessar Elfman Dox">
+        <geb>2/06/2011</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0001b" naam="Matthias Michielsen">
+        <geb>17/02/1995</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0001c" naam="Lotte Michielsen">
+        <geb>29/09/1998</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0001d" naam="Emma Michielsen">
+        <geb>28/06/2007</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0001e" naam="Lies Michielsen">
+        <geb>6/07/2003</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0001f" naam="Kobus Michielsen">
+        <geb>23/12/2004</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00020" naam="Senne Dox">
+        <geb>5/03/2002</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00021" naam="Liam Dox">
+        <geb>9/10/2005</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00022" naam="Liv Dox">
+        <geb>20/06/2011</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00023" naam="Lukas Hughes">
+        <geb>5/07/2008</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00024" naam="Nell Hughes">
+        <geb>9/11/2010</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00025" naam="Elles Hughes">
+        <geb>9/11/2010</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00026" naam="Xander Bude">
+        <geb>6/07/2006</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00027" naam="Yarne Bude">
+        <geb>14/05/2008</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00028" naam="Peter Didelez">
+        <geb>7/03/1967</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00029" naam="Ilse Bruyninckx">
+        <geb>27/08/1969</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0002a" naam="Geert Dox">
+        <geb>23/02/1961</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0002b" naam="Ann Rombouts">
+        <geb>23/03/1964</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0002c" naam="Jan Dox">
+        <geb>1/10/1962</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0002d" naam="Marie-Claire Dedroog">
+        <geb>12/07/1963</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0002e" naam="Els Dox">
+        <geb>19/01/1967</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0002f" naam="Bennet">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00030" naam="Steven Dox">
+        <geb>28/10/1968</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00031" naam="Marjan Dessoy">
+        <geb>19/04/ 1970</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00032" naam="Peter Dox">
+        <geb>16/04/ 1962</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00033" naam="Anja Van Praet">
+        <geb>16/03/1967</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00034" naam="Thorvald Dox">
+        <geb>12/06/1994</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00084" naam="Gerwin Dox">
+        <geb>16/03/1996</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00036" naam="Annemie Dox">
+        <geb>5/03/1966</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00037" naam="Geertje Dox">
+        <geb>2/02/1967</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00038" naam="Raf Waumans">
+        <geb>24/06/1964</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00039" naam="Tinne Dox">
+        <geb>14/04/ 1968</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0003a" naam="Peter Hallaerts">
+        <geb>1/2/1962</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0003b" naam="Veerle Dox">
+        <geb>30/03/1970</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0003c" naam="Lieven Dox">
+        <geb>11/01/1973</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0003d" naam="Liesbet Berben">
+        <geb>14/11/1972</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0003e" naam="Luc Verhelst">
+        <geb>30/01/1964</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0003f" naam="Chris Van Laer">
+        <geb>15/03/1965</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00040" naam="Johan Verhelst">
+        <geb>5/08/1965</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00041" naam="Maria ???">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00042" naam="Wouter Verhelst">
+        <geb>1/11/1966</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00043" naam="Anita Van Gastel">
+        <geb>13/3/1962</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00044" naam="Koen Dox">
+        <geb>6/04/ 1965</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00045" naam="Marie-France Tielemans">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00046" naam="Karen Dox">
+        <geb>22/11/1967</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00047" naam="Wim Dox">
+        <geb>1/09/1970</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00048" naam="Annick Van Dijck">
+        <geb>16/04/ 1975</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00049" naam="Raf Dox">
+        <geb>8/08/1973</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0004a" naam="Yoon Kok">
+        <geb>8/04/ 1977</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0004b" naam="Kameliya Angelova">
+        <geb/>
+        <stf/>
+    </persoon>
+    <persoon id="$0004c" naam="Mi Sook Kok">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0004d" naam="Bert Michielsen">
+        <geb>23/07/1966</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0004e" naam="Saskia Vermeylen">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0004f" naam="Kris Michielsen">
+        <geb>13/07/1967</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00050" naam="Katrien Vercruysse">
+        <geb>22/10/1969</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00051" naam="Gert Dox">
+        <geb>21/05/1975</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00052" naam="Tamara Olaerts">
+        <geb>22/12/1977</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00053" naam="Elke Dox">
+        <geb>1/10/1977</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00054" naam="Douglas Hughes">
+        <geb/>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00055" naam="Leen Dox">
+        <geb>3/01/1981</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00056" naam="Gwen Bude">
+        <geb>01/02/1977</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00057" naam="Kristel Dox">
+        <geb>4/05/1984</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00058" naam="Karl Dox">
+        <geb>26/06/1987</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00059" naam="Linde Dox">
+        <geb>18/02/1990</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0005a" naam="Dries Vonck">
+        <geb/>
+        <stf/>
+    </persoon>
+    <persoon id="$0005b" naam="Arnout Dox">
+        <geb>12/07/1991</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0005c" naam="Ewout Dox">
+        <geb>12/07/1991</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0005d" naam="Sytze Van Herck">
+        <geb/>
+        <stf/>
+    </persoon>
+    <persoon id="$0005e" naam="Sarah Callaerts">
+        <geb/>
+        <stf/>
+    </persoon>
+    <persoon id="$0005f" naam="Henrik Dox">
+        <geb>23/09/1993</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00060" naam="Reinout Dox">
+        <geb>10/05/1995</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00061" naam="Hans De Becker">
+        <geb>21/01/1983</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00062" naam="Marleen De Becker">
+        <geb>12/05/1987</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00063" naam="Godelieve Dox">
+        <geb>30/08/1933</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00064" naam="Fernand Didelez">
+        <geb>14/09/1929</geb>
+        <stf>30/03/2013</stf>
+    </persoon>
+    <persoon id="$00065" naam="Herman Dox">
+        <geb>22/01/1935</geb>
+        <stf>17/11/1995</stf>
+    </persoon>
+    <persoon id="$00066" naam="Hilde Verschaeren">
+        <geb>1/01/1938</geb>
+        <stf>12/05/2014</stf>
+    </persoon>
+    <persoon id="$00067" naam="Hugo Dox">
+        <geb>4/08/1936</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00068" naam="Mieke Winkeler">
+        <geb>8/09/1940</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00069" naam="Reimborg Van Gool">
+        <geb>13/12/1967</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006a" naam="Ivo Dox">
+        <geb>15/12/1937</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006b" naam="Rosa Van Den Neucker">
+        <geb>28/05/1934</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006c" naam="Ria Dox">
+        <geb>27/12/1938</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006d" naam="Gilbert Verhelst">
+        <geb>12/01/1938</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006e" naam="Ludo Dox">
+        <geb>8/06/1940</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0006f" naam="Marthe Gys">
+        <geb>10/01/1942</geb>
+        <stf>8/04/ 1991</stf>
+    </persoon>
+    <persoon id="$00070" naam="Hilde Wagemans">
+        <geb>21/05/1951</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00071" naam="Hilde Dox">
+        <geb>22/04/ 1942</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00072" naam="Philippe Kok">
+        <geb>18/09/1950</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00073" naam="Gerda Dox">
+        <geb>13/09/1943</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00074" naam="Hugo Michielsen">
+        <geb>23/06/1936</geb>
+        <stf>20/04/ 2014</stf>
+    </persoon>
+    <persoon id="$00075" naam="Rudi Dox">
+        <geb>14/09/1945</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00076" naam="Rita Loos">
+        <geb>11/04/ 1949</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$00077" naam="Mieke Buntinx">
+        <geb/>
+        <stf/>
+    </persoon>
+    <persoon id="$00078" naam="Paul Dox">
+        <geb>22/07/1949</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00079" naam="Lou Gullinck">
+        <geb>15/08/1958</geb>
+        <stf/>
+
+    </persoon>
+    <persoon id="$0007a" naam="Rita Dox">
+        <geb>13/08/1950</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0007c" naam="Dirk Dox">
+        <geb>16/05/1955</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0007d" naam="Dina De Moor">
+        <geb>18/02/1959</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0007e" naam="Rein Dox">
+        <geb>11/01/1958</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$0007f" naam="Rudi De Becker">
+        <geb>24/12/1953</geb>
+        <stf/>
+    </persoon>
+    <persoon id="$00080" naam="Petrus Ludovicus Carolus Dox">
+        <geb>4/11/1903</geb>
+        <stf>28/11/1986</stf>
+        <head/>
+    </persoon>
+    <persoon id="$00081" naam="Clementina Joanna Behiels">
+        <geb>30/11/1913</geb>
+        <stf>2/02/1995</stf>
+    </persoon>
+    <persoon id="$00082" naam="Wiebe Michielsen">
+        <geb>28/10/2010</geb>
+        <stf/>
+
+    </persoon>
+    <familie>
+        <ouder>$00040</ouder>
+        <ouder>$00041</ouder>
+    </familie>
+    <familie>
+        <ouder>$0007b</ouder>
+        <ouder>$0007a</ouder>
+    </familie>
+    <familie>
+        <ouder>$00078</ouder>
+        <ouder>$00079</ouder>
+        <kind>$00057</kind>
+        <kind>$00058</kind>
+    </familie>
+    <familie>
+        <ouder>$00042</ouder>
+        <ouder>$00043</ouder>
+    </familie>
+    <familie>
+        <ouder>$0005c</ouder>
+        <ouder>$0005d</ouder>
+    </familie>
+    <familie>
+        <ouder>$0005b</ouder>
+        <ouder>$0005e</ouder>
+    </familie>
+    <familie>
+        <ouder>$0004f</ouder>
+        <ouder>$00050</ouder>
+        <kind>$0001e</kind>
+        <kind>$0001f</kind>
+        <kind>$00082</kind>
+    </familie>
+    <familie>
+        <ouder>$00067</ouder>
+        <ouder>$00069</ouder>
+        <kind>$00034</kind>
+        <kind>$00035</kind>
+        <kind>$00084</kind>
+    </familie>
+    <familie>
+        <ouder>$00051</ouder>
+        <ouder>$00052</ouder>
+        <kind>$00020</kind>
+        <kind>$00021</kind>
+        <kind>$00022</kind>
+    </familie>
+    <familie>
+        <ouder>$00038</ouder>
+        <ouder>$00037</ouder>
+        <kind>$0000f</kind>
+        <kind>$00010</kind>
+    </familie>
+    <familie>
+        <ouder>$00046</ouder>
+        <kind>$00016</kind>
+        <kind>$00017</kind>
+        <kind>$00018</kind>
+    </familie>
+    <familie>
+        <ouder>$00075</ouder>
+        <ouder>$00077</ouder>
+    </familie>
+    <familie>
+        <ouder>$0006e</ouder>
+        <ouder>$00070</ouder>
+    </familie>
+    <familie>
+        <ouder>$00056</ouder>
+        <ouder>$00055</ouder>
+        <kind>$00026</kind>
+        <kind>$00027</kind>
+    </familie>
+    <familie>
+        <ouder>$00044</ouder>
+        <ouder>$00045</ouder>
+    </familie>
+    <familie>
+        <ouder>$00047</ouder>
+        <ouder>$00048</ouder>
+        <kind>$00019</kind>
+        <kind>$0001a</kind>
+    </familie>
+    <familie>
+        <ouder>$0007f</ouder>
+        <ouder>$0007e</ouder>
+        <kind>$00061</kind>
+        <kind>$00062</kind>
+    </familie>
+    <familie>
+        <ouder>$00030</ouder>
+        <ouder>$00031</ouder>
+        <kind>$00009</kind>
+        <kind>$0000a</kind>
+        <kind>$0000b</kind>
+    </familie>
+    <familie>
+        <ouder>$0003c</ouder>
+        <ouder>$0003d</ouder>
+        <kind>$00013</kind>
+    </familie>
+    <familie>
+        <ouder>$00054</ouder>
+        <ouder>$00053</ouder>
+        <kind>$00023</kind>
+        <kind>$00024</kind>
+        <kind>$00025</kind>
+    </familie>
+    <familie>
+        <ouder>#err#</ouder>
+        <ouder>#err#</ouder>
+        <kind>$00033</kind>
+    </familie>
+    <familie>
+        <ouder>$00067</ouder>
+        <ouder>$00068</ouder>
+        <kind>$00032</kind>
+    </familie>
+    <familie>
+        <ouder>$0006a</ouder>
+        <ouder>$0006b</ouder>
+        <kind>$00036</kind>
+        <kind>$00037</kind>
+        <kind>$00039</kind>
+        <kind>$0003b</kind>
+        <kind>$0003c</kind>
+    </familie>
+    <familie>
+        <ouder>$0003a</ouder>
+        <ouder>$00039</ouder>
+        <kind>$00011</kind>
+        <kind>$00012</kind>
+    </familie>
+    <familie>
+        <ouder>$0002e</ouder>
+        <kind>$00008</kind>
+    </familie>
+    <familie>
+        <ouder>$0002f</ouder>
+        <ouder>$0002e</ouder>
+    </familie>
+    <familie>
+        <ouder>$00074</ouder>
+        <ouder>$00073</ouder>
+        <kind>$0004d</kind>
+        <kind>$0004f</kind>
+    </familie>
+    <familie>
+        <ouder>$00075</ouder>
+        <ouder>$00076</ouder>
+        <kind>$00051</kind>
+        <kind>$00053</kind>
+        <kind>$00055</kind>
+    </familie>
+    <familie>
+        <ouder>$0004a</ouder>
+        <ouder>$0004b</ouder>
+    </familie>
+    <familie>
+        <ouder>$0002c</ouder>
+        <ouder>$0002d</ouder>
+        <kind>$00005</kind>
+        <kind>$00006</kind>
+        <kind>$00007</kind>
+    </familie>
+    <familie>
+        <ouder>$0002a</ouder>
+        <ouder>$0002b</ouder>
+        <kind>$00002</kind>
+        <kind>$00003</kind>
+        <kind>$00004</kind>
+    </familie>
+    <familie>
+        <ouder>$00064</ouder>
+        <ouder>$00063</ouder>
+        <kind>$00028</kind>
+    </familie>
+    <familie>
+        <ouder>$00032</ouder>
+        <ouder>$00033</ouder>
+        <kind>$0000c</kind>
+        <kind>$0000e</kind>
+    </familie>
+    <familie>
+        <ouder>$00080</ouder>
+        <ouder>$00081</ouder>
+        <kind>$00063</kind>
+        <kind>$00065</kind>
+        <kind>$00067</kind>
+        <kind>$0006a</kind>
+        <kind>$0006c</kind>
+        <kind>$0006e</kind>
+        <kind>$00071</kind>
+        <kind>$00073</kind>
+        <kind>$00075</kind>
+        <kind>$00078</kind>
+        <kind>$0007a</kind>
+        <kind>$0007c</kind>
+        <kind>$0007e</kind>
+    </familie>
+    <familie>
+        <ouder>$0000c</ouder>
+        <ouder>$0000d</ouder>
+    </familie>
+    <familie>
+        <ouder>$0004d</ouder>
+        <ouder>$0004e</ouder>
+        <kind>$0001b</kind>
+        <kind>$0001c</kind>
+        <kind>$0001d</kind>
+    </familie>
+    <familie>
+        <ouder>$0005a</ouder>
+        <ouder>$00059</ouder>
+    </familie>
+    <familie>
+        <ouder>$0006d</ouder>
+        <ouder>$0006c</ouder>
+        <kind>$0003e</kind>
+        <kind>$00040</kind>
+        <kind>$00042</kind>
+    </familie>
+    <familie>
+        <ouder>$0006e</ouder>
+        <ouder>$0006f</ouder>
+        <kind>$00044</kind>
+        <kind>$00046</kind>
+        <kind>$00047</kind>
+        <kind>$00049</kind>
+    </familie>
+    <familie>
+        <ouder>$0003e</ouder>
+        <ouder>$0003f</ouder>
+        <kind>$00014</kind>
+        <kind>$00015</kind>
+    </familie>
+    <familie>
+        <ouder>$00072</ouder>
+        <ouder>$00071</ouder>
+        <kind>$0004a</kind>
+        <kind>$0004c</kind>
+    </familie>
+    <familie>
+        <ouder>$00028</ouder>
+        <ouder>$00029</ouder>
+        <kind>$00000</kind>
+        <kind>$00001</kind>
+    </familie>
+    <familie>
+        <ouder>$00065</ouder>
+        <ouder>$00066</ouder>
+        <kind>$0002a</kind>
+        <kind>$0002c</kind>
+        <kind>$0002e</kind>
+        <kind>$00030</kind>
+    </familie>
+    <familie>
+        <ouder>$0007c</ouder>
+        <ouder>$0007d</ouder>
+        <kind>$00059</kind>
+        <kind>$0005b</kind>
+        <kind>$0005c</kind>
+        <kind>$0005f</kind>
+        <kind>$00060</kind>
+    </familie>
+
+    <persoon id="$00083" naam="Patrick Vanhove">
+        <geb>28/5/1956</geb>
+        <stf/>
+    </persoon>
+    <familie>
+        <ouder>$00083</ouder>
+        <ouder>$00036</ouder>
+    </familie>
+
+
+</root>

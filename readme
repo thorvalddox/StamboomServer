@@ -1,0 +1,29 @@
+Voor de gene die dit leest, ik weet dat dit een gigantische rommel is.
+Als ge eraan uit wilt kunnen zou ik dit aan mij persoonlijk (Thorvald Dox) vragen.
+
+Werking van de command-API
+
+<user> <command> <arguments>
+
+user: degene die het commando heeft doorgevoert
+command: het commando
+arguments: de argumenten. Argumenten zijn altijd stings (dus typ geen ''). Deze worden letterlijk gebruikt, er is dus geen doe mogelijk.
+
+Als het argument een naam is moet deze gescheiden worden door underscores, dus voornaam_achternaam
+Als dit een datum is moet deze zoals 01/01/1990 ingegeven worden.
+
+de user bestaat uit een teken plus een string. De tekens betekenen het volgende:
+
+$ admin user (ook voor commandos dat het programma intern zelf maakt)
+TODO # ingelogde users (gevolgt door naam)
+? niet ingelogde users, hierna volgt het ip address.
+
+De commando's zien er als volgt uit:
+
+user person person_name 01/01/1900 01/01/2000
+user family parent_1 parent_2 child_1 child_2
+user delete person_name
+user parents child parent_1 parent_2
+user merge person_1 person_2
+
+Lege argumenten worden aangeduid met *
