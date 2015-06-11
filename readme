@@ -22,8 +22,12 @@ De commando's zien er als volgt uit:
 
 user person person_name 01/01/1900 01/01/2000
 user family parent_1 parent_2 child_1 child_2
+user divorce person_1 person_2
+user head person_name
 user delete person_name
 user parents child parent_1 parent_2
 user merge person_1 person_2
 
 Lege argumenten worden aangeduid met *
+
+De eertse 4 functies worden ook gecreerd bij de computer gegeneerde comandos
