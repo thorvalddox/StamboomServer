@@ -100,8 +100,13 @@ class FamilyTree:
                     elif i.tag == "divorsed":
                         div = True
                 self.families.append(Family(parents, children, div))
-    def from_code(self,filename):
-        c = CommandLoader(self)
+    def from_code(self,filename,level=0):
+        """
+        0 is admin
+        1 is logged in users
+        2 is all
+        """
+        c = CommandLoader(self,list("$#?"[:level+1]))
         with open(filename) as fff:
             for i in Commands.from_raw(fff.read()):
                 c(i)
@@ -258,12 +263,12 @@ class Commands(list):
 class CommandLoader:
     def __init__(self,tree,accepted=[]):
         self.tree = tree
-        self.accepted = accepted
+        self.accepted = accepted + ["$"]
     def __call__(self,command):
         #print(command)
         user,func,*args = command
         args = list(args) + [""]*4 #missing last arguments
-        if user in self.accepted or user[0] == "$":
+        if any(user.startswith(pref) for pref in self.accepted):
             getattr(self,func)(*args)
     def person(self,name,birth,dead,*_):
         #print("making",name)
@@ -275,13 +280,13 @@ class CommandLoader:
         parentlist = [p for p in (p1,p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.children.extend(self.tree.get_person(p) for p in children if p != "")
-    def delete(self,person):
+    def delete(self,person,*_):
         for f in self.tree.families:
             if person in f.parents:
                 f.parents.remove(person)
             if person in f.children:
                 f.children.remove(person)
-    def merge(self,person1,person2):
+    def merge(self,person1,person2,*_):
         for f in self.tree.families:
             if person2 in f.parents:
                 f.parents.remove(person2)
@@ -289,15 +294,22 @@ class CommandLoader:
             if person2 in f.children:
                 f.children.remove(person2)
                 f.children.append(person1)
-    def parents(self,child,p1,p2):
+    def parents(self,child,p1,p2,*_):
+        for f in self.tree.families:
+            if child in f.children:
+                f.children.remove(child)
         self.family(p1,p2,child)
-    def divorce(self,p1,p2):
+    def divorce(self,p1,p2,*_):
         parentlist = [p for p in (p1,p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.divorced = True
     def head(self,p,*_):
         self.tree.head = self.tree.get_person(p)
 
+
+def addcommand_ip(request,data):
+    with open("data.log","a") as fff:
+        fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'],data))
 
 def xmlTest():
     f = FamilyTree()

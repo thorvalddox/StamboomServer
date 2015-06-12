@@ -7,22 +7,25 @@ import os.path
 
 from imageinfo import get_image_info
 
+
 class DrawJavaScript:
-    def __init__(self,dimensions):
+    def __init__(self, dimensions):
         self.commands = []
         self.clickevents = []
         self.mouseoverevents = []
         self.dimensions = dimensions
+
     def get_html_canvas(self):
         return """
         <canvas id="FamilyTreeCanvas" width="{}" height="{}" style="border:1px solid #c3c3c3;">
         Your browser does not support the HTML5 canvas tag.
         </canvas>""".format(*self.dimensions)
-    def get_html_script(self):#put this between the <script> tag
+
+    def get_html_script(self):  # put this between the <script> tag
         return """
         var c = document.getElementById("FamilyTreeCanvas");
         var ctx = c.getContext("2d");
-        """+"\n".join(self.commands) + """
+        """ + "\n".join(self.commands) + """
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);
         function on_mousemove (ev) {
@@ -49,49 +52,50 @@ class DrawJavaScript:
             }
             x-=c.offsetLeft;
             y-=c.offsetTop;
-        """+ "\n".join(self.clickevents) + """
+        """ + "\n".join(self.clickevents) + """
         }"""
 
-    def draw_line(self,*coords):  #x1 y1 x2 y2
+    def draw_line(self, *coords):  # x1 y1 x2 y2
         self.commands.append("""
         ctx.moveTo({},{});
         ctx.lineTo({},{});
         ctx.stroke();
         """.format(*coords))
 
-    def draw_rectangle(self,x1,y1,x2,y2,back_color=None):
-        if back_color != None:
+    def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
+        if back_color is not None:
             self.commands.append("""
                 ctx.fillStyle = '{}';
                 ctx.fillRect({},{},{},{});
-            """.format(back_color,x1,y1,x2-x1,y2-y1))
-        self.draw_line(x1,y1,x1,y2)
-        self.draw_line(x2,y1,x2,y2)
-        self.draw_line(x1,y1,x2,y1)
-        self.draw_line(x1,y2,x2,y2)
-    def draw_text(self,x,y,text):
+            """.format(back_color, x1, y1, x2 - x1, y2 - y1))
+        self.draw_line(x1, y1, x1, y2)
+        self.draw_line(x2, y1, x2, y2)
+        self.draw_line(x1, y1, x2, y1)
+        self.draw_line(x1, y2, x2, y2)
+
+    def draw_text(self, x, y, text):
         self.commands.append("""
         ctx.font = "8px Arial";
         ctx.fillStyle = 'black';
         ctx.textAlign="center";
         ctx.fillText("{}",{},{});
-        """.format(text,x,y))
+        """.format(text, x, y))
 
-    def add_mouse_pointer(self,x1,y1,x2,y2):
+    def add_mouse_pointer(self, x1, y1, x2, y2):
         self.mouseoverevents.append("""
         if(x>={} && x <= {} && y>={} && y<= {}){{
             document.body.style.cursor = "pointer";
         }}
-        """.format(x1,x2,y1,y2))
+        """.format(x1, x2, y1, y2))
 
-    def add_mouse_link(self,link,x1,y1,x2,y2):
+    def add_mouse_link(self, link, x1, y1, x2, y2):
         self.clickevents.append("""
         if(x>={} && x <= {} && y>={} && y<= {}){{
             window.location = "{}"
         }}
-        """.format(x1,x2,y1,y2,link))
+        """.format(x1, x2, y1, y2, link))
 
-    def draw_image(self,image,x,y,width,height):
+    def draw_image(self, image, x, y, width, height):
         self.commands.append("""
             var imageObj{0} = new Image();
 
@@ -101,34 +105,34 @@ class DrawJavaScript:
               }};
 
               imageObj{0}.src = '/static/{5}';
-        """.format(random.randrange(2**64),x,y,width,height,image))
+        """.format(random.randrange(2 ** 64), x, y, width, height, image))
 
-    def draw_person(self,person,x,y,width,height,border):
-        xdif = width/2-border
-        ydif = height/2-border
-        self.draw_rectangle(x-xdif,y-ydif,x+xdif,y+ydif,"white")
-        self.draw_text(x,y+ydif-21,person.name)
-        self.draw_text(x,y+ydif-11,"*"*bool(person.birth) + person.birth)
-        self.draw_text(x,y+ydif-2,"+"*bool(person.dead) + person.dead)
-        self.add_mouse_pointer(x-xdif,y-ydif,x+xdif,y+ydif)
-        self.add_mouse_link("/edit/"+person.name,x-xdif,y-ydif,x+xdif,y+ydif)
-        nw,nh = width-4*border,height-6*border
+    def draw_person(self, person, x, y, width, height, border):
+        xdif = width / 2 - border
+        ydif = height / 2 - border
+        self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
+        self.draw_text(x, y + ydif - 21, person.name)
+        self.draw_text(x, y + ydif - 11, "*" * bool(person.birth) + person.birth)
+        self.draw_text(x, y + ydif - 2, "+" * bool(person.dead) + person.dead)
+        self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
+        self.add_mouse_link("/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
+        nw, nh = width - 4 * border, height - 6 * border
         # _,w,h = get_image_info(open("static/"+ person.image))
         # print(person.image,w,h)
         # scale = min(nw/w,nh/h)
         # new_width = w*scale
         # new_height = h*scale
 
-        self.draw_image(person.image,x-xdif+border,y-ydif+border/2,nw,nh)
+        self.draw_image(person.image, x - xdif + border, y - ydif + border / 2, nw, nh)
 
 
 class BuildTree:
-    def __init__(self,tree):
+    def __init__(self, tree):
         self.tree = tree
-        self.coords = {p:(0,0) for p in self.tree.people}
+        self.coords = {p: (0, 0) for p in self.tree.people}
         self.headsize = {}
         self.tailsize = {}
-        self.xpos = {p:0 for p in self.tree.get_representation(self.tree.head)[0]}
+        self.xpos = {p: 0 for p in self.tree.get_representation(self.tree.head)[0]}
         for l in self.make_top_layers():
             for p in l:
                 self.transfer_xpos(p)
@@ -138,10 +142,10 @@ class BuildTree:
         generator = [self.tree.head]
         try:
             while generator:
-                #print([self.tree.get_representation(p) for p in generator])
-                #print(list(zip(*[self.tree.get_representation(p) for p in generator])))
+                # print([self.tree.get_representation(p) for p in generator])
+                # print(list(zip(*[self.tree.get_representation(p) for p in generator])))
 
-                layer,nextgen = zip(*(self.tree.get_representation(p) for p in generator))
+                layer, nextgen = zip(*(self.tree.get_representation(p) for p in generator))
                 yield chain(*layer)
                 generator = chain(*nextgen)
         except ValueError:
@@ -151,97 +155,99 @@ class BuildTree:
         generator = [self.tree.head]
         try:
             while generator:
-                #print([self.tree.get_representation(p) for p in generator])
-                #print(list(zip(*[self.tree.get_representation(p) for p in generator])))
-                layer,nextgen = zip(*(self.tree.get_representation(p) for p in generator))
+                # print([self.tree.get_representation(p) for p in generator])
+                # print(list(zip(*[self.tree.get_representation(p) for p in generator])))
+                layer, nextgen = zip(*(self.tree.get_representation(p) for p in generator))
                 yield generator
                 generator = list(chain(*nextgen))
         except ValueError:
             return
 
-    def get_headsize(self,person):
+    def get_headsize(self, person):
         if person not in self.headsize:
             self.headsize[person] = self.calc_headsize(person)
         return self.headsize[person]
 
-    def get_tailsize(self,person):
+    def get_tailsize(self, person):
         if person not in self.tailsize:
             self.tailsize[person] = self.calc_tailsize(person)
         return self.tailsize[person]
 
-    def calc_headsize(self,person):
+    def calc_headsize(self, person):
         toplenght = len(self.tree.get_representation(person)[0])
-        return(max(toplenght,self.get_tailsize(person)))
+        return max(toplenght, self.get_tailsize(person))
 
-    def calc_tailsize(self,person):
+    def calc_tailsize(self, person):
         return sum(self.get_headsize(p) for p in self.tree.get_representation(person)[1])
 
-    def get_xpos(self,person):
+    def get_xpos(self, person):
         if person not in self.xpos:
-
             raise Exception("{} Not Indexed Yet".format(person.name))
         return self.xpos[person]
 
-    def transfer_xpos(self,person):
-        currentpos = self.get_xpos(person) + (self.get_headsize(person) - self.get_tailsize(person))/2
+    def transfer_xpos(self, person):
+        currentpos = self.get_xpos(person) + (self.get_headsize(person) - self.get_tailsize(person)) / 2
         for p in self.tree.get_representation(person)[1]:
             for s in self.tree.get_representation(p)[0]:
-                print(person.name,p.name,s.name,"->",currentpos)
+                print(person.name, p.name, s.name, "->", currentpos)
                 self.xpos[s] = currentpos
             currentpos += self.get_headsize(p)
+
     def build_coords(self):
-        for index,layer in enumerate(self.make_top_layers()):
+        for index, layer in enumerate(self.make_top_layers()):
             for person in layer:
                 tops = list(self.tree.get_representation(person)[0])
                 s = len(tops)
-                for i,p in enumerate(tops):
-                    print(p,person)
-                    self.coords[p] = (self.xpos[person] + self.get_headsize(person)/2 + i-s/2,index)
-    def get_pos(self,person,width,height):
-        return((i+1/2)*w for i,w in zip(self.coords[person],(width,height)))
-    def get_width(self,width):
-        return(self.get_headsize(self.tree.head)*width)
-    def get_height(self,height):
-        return(4*height)
+                for i, p in enumerate(tops):
+                    print(p, person)
+                    self.coords[p] = (self.xpos[person] + self.get_headsize(person) / 2 + i - s / 2, index)
 
-    def draw_family(self,draw:DrawJavaScript,fam:core.Family,width,height,border):
-        xdif = width/2-border
-        ydif = height/2-border
+    def get_pos(self, person, width, height):
+        return ((i + 1 / 2) * w for i, w in zip(self.coords[person], (width, height)))
+
+    def get_width(self, width):
+        return self.get_headsize(self.tree.head) * width
+
+    def get_height(self, height):
+        return 4 * height
+
+    def draw_family(self, draw:DrawJavaScript, fam:core.Family, width, height, border):
+        xdif = width / 2 - border
+        ydif = height / 2 - border
         if len(fam.parents) == 2:
-            p1,p2 = fam.parents
-            px1,py1 = self.get_pos(p1,width,height)
-            px2,py2 = self.get_pos(p2,width,height)
-            draw.draw_line(min(px1,px2)+xdif,py1,max(px1,px2)-xdif,py2)
-            px = (px1+px2)//2
+            p1, p2 = fam.parents
+            px1, py1 = self.get_pos(p1, width, height)
+            px2, py2 = self.get_pos(p2, width, height)
+            draw.draw_line(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
+            px = (px1 + px2) // 2
             py = py1
         elif len(fam.parents) == 1:
             p1, = fam.parents
-            px,py = self.get_pos(p1,width,height)
-            cy = list(self.get_pos(fam.children[0],width,height))[1]
-            cyInter = (py+cy)//2
-            draw.draw_line(px,py+ydif,px,cyInter)
+            px, py = self.get_pos(p1, width, height)
+            cy = list(self.get_pos(fam.children[0], width, height))[1]
+            cyInter = (py + cy) // 2
+            draw.draw_line(px, py + ydif, px, cyInter)
         else:
             raise Exception("Incorrect amoutn of parents")
         if fam.children:
-            cy = list(self.get_pos(fam.children[0],width,height))[1]
-            cyInter = (py+cy)//2
-            draw.draw_line(px,py+ydif*(len(fam.parents) == 1),px,cyInter)
+            cy = list(self.get_pos(fam.children[0], width, height))[1]
+            cyInter = (py + cy) // 2
+            draw.draw_line(px, py + ydif * (len(fam.parents) == 1), px, cyInter)
             for c in fam.children:
-                cx,_ = self.get_pos(c,width,height)
-                draw.draw_line(px,cyInter,cx,cyInter)
-                draw.draw_line(cx,cyInter,cx,cy-ydif)
+                cx, _ = self.get_pos(c, width, height)
+                draw.draw_line(px, cyInter, cx, cyInter)
+                draw.draw_line(cx, cyInter, cx, cy - ydif)
 
-def drawPeople(tree,width=120,height=150,border=10):
+
+def draw_people(tree, width=120, height=150, border=10):
     s = BuildTree(tree)
-    d = DrawJavaScript((s.get_width(width),s.get_height(height)))
+    d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:
-        s.draw_family(d,f,width,height,border)
+        s.draw_family(d, f, width, height, border)
     for p in tree.people:
-        print(list(s.get_pos(p,width,height)),s.coords[p])
-        d.draw_person(p,*s.get_pos(p,width,height),width=width,height=height,border=border)
-    return(d)
-
-
+        print(list(s.get_pos(p, width, height)), s.coords[p])
+        d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border)
+    return d
 
 
 def main():
@@ -251,5 +257,6 @@ def main():
     for l in b.make_layers():
         print(list(l))
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

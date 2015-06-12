@@ -1,9 +1,10 @@
 from flask import Flask
 
-from flask import render_template,make_response
-
+from flask import render_template,make_response,url_for,request,redirect
+import os,os.path
 import core
 import draw
+import imagechanger
 
 
 
@@ -11,8 +12,9 @@ app = Flask(__name__)
 
 app.debug = True
 
-#TODO image uploader
-#TODO interactive site
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+
+
 #TODO command set
 #TODO conversion
 
@@ -36,8 +38,16 @@ def show_raw_code():
 @app.route('/stamboom/')
 def show_fam_tree():
     f = core.FamilyTree()
+    f.from_code("data.log",2)
+    d = draw.draw_people(f)
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
+    return response
+
+@app.route('/stamboom/safe')
+def show_fam_tree_safe():
+    f = core.FamilyTree()
     f.from_code("data.log")
-    d = draw.drawPeople(f)
+    d = draw.draw_people(f)
     response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
     return response
 
@@ -46,8 +56,31 @@ def show_fam_tree():
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log")
-    response = make_response(render_template("edit.html",name=name,image=f.get_person(name).image))
+    person = f.get_person(name)
+    response = make_response(render_template("edit.html",name=person.name,uname=name,image=url_for('static', filename=person.image)))
     return response
+
+@app.route('/edit/<name>/upload/', methods = ['POST'])
+def upload_image(name):
+    print(name)
+    print(request.files)
+    file = request.files["file"]
+    imagechanger.change_image(name,file)
+    return redirect('/edit/'+name)
+
+
+@app.route('/edit/')
+def editRaw():
+    response = make_response(render_template("rawcommand.html"))
+    return response
+
+@app.route('/edit/rawcommand/', methods = ['POST'])
+def rawcommand():
+    print(request.form)
+    command = request.form["command"]
+    print(command)
+    core.addcommand_ip(request,command)
+    return redirect('/edit/')
 
 if __name__ == '__main__':
     app.run()
