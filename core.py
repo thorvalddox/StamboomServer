@@ -319,6 +319,8 @@ class CommandLoader:
             if person in f.children:
                 print("delete uplink")
                 f.children.remove(person)
+        self.tree.people.remove(person)
+        del person
     def merge(self,person1,person2,*_):
         for f in self.tree.families:
             if person2 in f.parents:
@@ -327,6 +329,10 @@ class CommandLoader:
             if person2 in f.children:
                 f.children.remove(person2)
                 f.children.append(person1)
+    def disband(self,person1,person2,*_):
+        f = self.tree.get_family(person1,person2)
+        self.tree.families.remove(f)
+        del f
     def parents(self,child,p1,p2,*_):
         for f in self.tree.families:
             if child in f.children:

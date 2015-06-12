@@ -36,8 +36,8 @@ class DrawJavaScript:
             x = ev.layerX;
             y = ev.layerY;
             }
-            x-=c.offsetLeft;
-            y-=c.offsetTop;
+            /*x-=c.offsetLeft;*/
+            /*y-=c.offsetTop;*/
             document.body.style.cursor = "";
 
         """ + "\n".join(self.mouseoverevents) + """
@@ -50,8 +50,8 @@ class DrawJavaScript:
             x = ev.layerX;
             y = ev.layerY;
             }
-            x-=c.offsetLeft;
-            y-=c.offsetTop;
+            /*x-=c.offsetLeft;*/
+            /*y-=c.offsetTop;*/
         """ + "\n".join(self.clickevents) + """
         }"""
 

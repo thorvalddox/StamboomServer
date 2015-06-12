@@ -6,14 +6,15 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+{{ titlebar | safe }}
 <table>
     <tr>
 
         <td>
-            <h2>Voer commando uit</h2>
-            <form action="/edit/newperson/" method="post" enctype="multipart/form-data">
-                Commando:<input type="text" name="name"><br /><br />
-                Uitvoeren:<input type="submit" value="Exec">
+            <h2>Voeg nieuwe persoon toe</h2>
+            <form action="/list/newperson/" method="post" enctype="multipart/form-data">
+                Naam:<input type="text" name="name"><br /><br />
+                <input type="submit" value="Voeg toe">
             </form>
         </td>
         <td>{{ people | safe }}</td>

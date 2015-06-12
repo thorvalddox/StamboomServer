@@ -25,6 +25,7 @@ user family parent_1 parent_2 child_1 child_2
 user divorce person_1 person_2
 user head person_name
 user delete person_name
+user disband person_1 person_2
 user parents child parent_1 parent_2
 user merge person_1 person_2
 

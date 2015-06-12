@@ -6,16 +6,18 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+{{ titlebar | safe }}
 <table>
     <tr>
-
+        <td><p style="font-family: 'Courier New'">{{ code |safe}}</p></td>
         <td>
             <h2>Voer commando uit</h2>
             <form action="rawcommand/" method="post" enctype="multipart/form-data">
-                Commando:<input type="text" name="command"><br /><br />
-                Uitvoeren:<input type="submit" value="Exec">
+                <input type="text" name="command"><br /><br />
+                <input type="submit" value="Uitvoeren">
             </form>
         </td>
+
     </tr>
 </table>
 

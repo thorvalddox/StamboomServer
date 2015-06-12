@@ -45,7 +45,8 @@ def show_fam_tree():
     f = core.FamilyTree()
     f.from_code("data.log",2)
     d = draw.draw_people(f)
-    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()
+                                             ,titlebar=titlebar()))
     return response
 
 @app.route('/stamboom/safe')
@@ -53,7 +54,8 @@ def show_fam_tree_safe():
     f = core.FamilyTree()
     f.from_code("data.log")
     d = draw.draw_people(f)
-    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()
+                                             ,titlebar=titlebar()))
     return response
 
 
@@ -65,7 +67,16 @@ def edit(name):
     data = [forms.create_person_link(i) for i in f.get_data(person)]
     form = list(forms.make_forms(f,person))
     response = make_response(render_template("edit.html",name=person.name,uname=name,
-                                             image=url_for('static', filename=person.image),data=data,form=form))
+                                             image=url_for('static', filename=person.image),data=data,form=form,
+                                             titlebar=titlebar()))
+    return response
+
+@app.route('/list/people')
+def list_people():
+    f = core.FamilyTree()
+    f.from_code("data.log")
+    data = forms.create_person_link(f.people)
+    response = make_response(render_template("newperson.html",people=data,titlebar=titlebar()))
     return response
 
 @app.route('/edit/<name>/upload/', methods = ['POST'])
@@ -79,7 +90,7 @@ def upload_image(name):
 
 @app.route('/edit/')
 def editRaw():
-    response = make_response(render_template("rawcommand.html"))
+    response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
     return response
 
 @app.route('/edit/rawcommand/', methods = ['POST'])
@@ -99,6 +110,33 @@ def edit_parents(name):
     second = request.form["parent1"]
     core.addcommand_ip(request,"parents {} {} {}".format(name,first,second))
     return redirect('/edit/'+name)
+
+
+@app.route('/edit/<name>/addPartner/', methods = ['POST'])
+def edit_add_partner(name):
+    print(name)
+    print(request.form)
+    partner = request.form["addPartner"]
+    core.addcommand_ip(request,"family {}".format(name,partner))
+    return redirect('/edit/'+name)
+
+@app.route('/edit/<name>/remPartner/', methods = ['POST'])
+def edit_rem_partner(name):
+    print(name)
+    print(request.form)
+    partner = request.form["remPartner"]
+    core.addcommand_ip(request,"disband {}".format(name,partner))
+    return redirect('/edit/'+name)
+
+
+@app.route("/templates/titlebar")
+def render_titlebar():
+    response = make_response(render_template("titlebar.html"))
+    return response
+
+def titlebar():
+    with open("templates/titlebar.html") as fff:
+        return fff.read()
 
 if __name__ == '__main__':
     app.run()
