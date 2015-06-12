@@ -1,7 +1,10 @@
 from flask import Flask
 
-from flask import render_template,make_response,url_for,request,redirect
+from flask import render_template,make_response,url_for,request,redirect,session
+
 import os,os.path
+import random
+
 import core
 import draw
 import imagechanger
@@ -14,14 +17,29 @@ app.debug = True
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
+app.secret_key = chr(random.randrange(16**16))
+
+
 if not os.getcwd().endswith("/StamboomServer"):
     os.chdir("StamboomServer")
 
 #TODO command set
 #TODO conversion
 
+def check_logged_in(session):
+    if "username" not in session:
+        return False
+
+def save_version(func):
+    def save_function(*args,**kwargs):
+        if not check_logged_in(session):
+            return redirect("/login")
+        func(*args,**kwargs)
+    return(save_function)
+
 
 @app.route('/')
+@save_version
 def index():
     response = make_response(render_template("titlepage.html"))
     return response
@@ -135,6 +153,10 @@ def edit_rem_partner(name):
 def render_titlebar():
     response = make_response(render_template("titlebar.html"))
     return response
+
+
+
+
 
 def titlebar():
     with open("templates/titlebar.html") as fff:
