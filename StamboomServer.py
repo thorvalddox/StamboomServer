@@ -14,6 +14,7 @@ app.debug = True
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
+print(os.getcwd())
 
 #TODO command set
 #TODO conversion
