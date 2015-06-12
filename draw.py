@@ -75,7 +75,7 @@ class DrawJavaScript:
 
     def draw_text(self, x, y, text):
         self.commands.append("""
-        ctx.font = "8px Arial";
+        ctx.font = "12px Arial";
         ctx.fillStyle = 'black';
         ctx.textAlign="center";
         ctx.fillText("{}",{},{});
@@ -111,12 +111,12 @@ class DrawJavaScript:
         xdif = width / 2 - border
         ydif = height / 2 - border
         self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
-        self.draw_text(x, y + ydif - 21, person.name)
-        self.draw_text(x, y + ydif - 11, "*" * bool(person.birth) + person.birth)
+        self.draw_text(x, y + ydif - 28, person.name)
+        self.draw_text(x, y + ydif - 15, "*" * bool(person.birth) + person.birth)
         self.draw_text(x, y + ydif - 2, "+" * bool(person.dead) + person.dead)
         self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
         self.add_mouse_link("/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
-        nw, nh = width - 4 * border, height - 6 * border
+        nw, nh = width - 4 * border, height - 8 * border
         # _,w,h = get_image_info(open("static/"+ person.image))
         # print(person.image,w,h)
         # scale = min(nw/w,nh/h)

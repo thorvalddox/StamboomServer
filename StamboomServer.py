@@ -26,8 +26,7 @@ app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 if not os.getcwd().endswith("StamboomServer"):
     os.chdir("StamboomServer")
 
-#TODO command set
-#TODO conversion
+#TODO clad stambomen afhankleijk van 1 richting
 
 def check_logged_in(session):
     if "username" not in session:
