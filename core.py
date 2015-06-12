@@ -350,6 +350,11 @@ def addcommand_ip(request,data):
     with open("data.log","a") as fff:
         fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'],data))
 
+
+def addcommand_user(session,data):
+    with open("data.log","a") as fff:
+        fff.write("#{} {}\n".format(session["username"],data))
+
 def xmlTest():
     f = FamilyTree()
     f.from_xml("dox.xml")
