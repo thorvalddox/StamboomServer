@@ -189,10 +189,15 @@ def validate_login():
     else:
         return redirect("/login/invalid")
 
+@app.route("/logout/")
+def render_login():
+    del session["username"]
+    return redirect("/")
+
 
 def titlebar():
     with open("templates/titlebar.html") as fff:
-        return fff.read().replace("{{ username }}",session["username"])
+        return fff.read().replace("{{ username }}",session.get("username","<not logged in>"))
 
 if __name__ == '__main__':
     app.run()
