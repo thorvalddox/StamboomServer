@@ -236,7 +236,7 @@ class BuildTree:
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
 
 
-def draw_people(tree, width=120, height=150, border=10):
+def draw_people(tree, width=170, height=150, border=10):
     s = BuildTree(tree)
     d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:
