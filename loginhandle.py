@@ -10,4 +10,4 @@ class LoginHandler:
         print(name,self.passworddict.get(name,None))
         return password == self.passworddict.get(name,None)
 
-loginHandler = LoginHandler({"Thorvald":"fire21"})
+loginHandler = LoginHandler({"Thorvald":"fire21","Anja":"maaktniuit"})
