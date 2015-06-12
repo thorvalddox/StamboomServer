@@ -14,7 +14,8 @@ app.debug = True
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
-print(os.getcwd())
+if not os.getcwd().endswith("/StamboomServer"):
+    os.chdir("/StamboomServer")
 
 #TODO command set
 #TODO conversion
