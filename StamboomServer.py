@@ -4,6 +4,7 @@ from flask import render_template,make_response,url_for,request,redirect,session
 
 import os,os.path
 import random
+from functools import wraps
 
 import core
 import draw
@@ -35,6 +36,7 @@ def check_logged_in(session):
         return loginHandler.valid_user(session["username"])
 
 def save_version(func):
+    @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
             return redirect("/login")
