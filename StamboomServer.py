@@ -35,7 +35,7 @@ def check_logged_in(session):
     else:
         return loginHandler.valid_user(session["username"])
 
-def save_version(func):
+def login_required(func):
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
@@ -50,19 +50,19 @@ def index():
     return response
 
 @app.route('/stamboom/commands/oldxml')
-@save_version
+@login_required
 def show_old_xml():
     response = make_response(render_template("code_show.html",code=core.xmlTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/handled')
-@save_version
+@login_required
 def show_handled_code():
     response = make_response(render_template("code_show.html",code=core.bashTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/raw')
-@save_version
+@login_required
 def show_raw_code():
     response = make_response(render_template("code_show.html",code=core.rawCode().replace("\n","<br/>")))
     return response
@@ -88,7 +88,7 @@ def show_fam_tree_safe():
 
 
 @app.route('/edit/<name>/')
-@save_version
+@login_required
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -101,7 +101,7 @@ def edit(name):
     return response
 
 @app.route('/list/people')
-@save_version
+@login_required
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -110,7 +110,7 @@ def list_people():
     return response
 
 @app.route('/edit/<name>/upload/', methods = ['POST'])
-@save_version
+@login_required
 def upload_image(name):
     print(name)
     print(request.files)
@@ -120,13 +120,13 @@ def upload_image(name):
 
 
 @app.route('/edit/')
-@save_version
+@login_required
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
     return response
 
 @app.route('/edit/rawcommand/', methods = ['POST'])
-@save_version
+@login_required
 def rawcommand():
     print(request.form)
     command = request.form["command"]
@@ -136,7 +136,7 @@ def rawcommand():
 
 
 @app.route('/edit/<name>/parents/', methods = ['POST'])
-@save_version
+@login_required
 def edit_parents(name):
     print(name)
     print(request.form)
@@ -147,7 +147,7 @@ def edit_parents(name):
 
 
 @app.route('/edit/<name>/addPartner/', methods = ['POST'])
-@save_version
+@login_required
 def edit_add_partner(name):
     print(name)
     print(request.form)
@@ -156,7 +156,7 @@ def edit_add_partner(name):
     return redirect('/edit/'+name)
 
 @app.route('/edit/<name>/remPartner/', methods = ['POST'])
-@save_version
+@login_required
 def edit_rem_partner(name):
     print(name)
     print(request.form)
