@@ -10,6 +10,7 @@ import draw
 import imagechanger
 import forms
 
+from loginhandle import loginHandler
 
 app = Flask(__name__)
 
@@ -17,10 +18,11 @@ app.debug = True
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
-app.secret_key = chr(random.randrange(16**16))
+app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
 
-if not os.getcwd().endswith("/StamboomServer"):
+
+if not os.getcwd().endswith("StamboomServer"):
     os.chdir("StamboomServer")
 
 #TODO command set
@@ -29,32 +31,36 @@ if not os.getcwd().endswith("/StamboomServer"):
 def check_logged_in(session):
     if "username" not in session:
         return False
+    else:
+        return loginHandler.valid_user(session["username"])
 
 def save_version(func):
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
             return redirect("/login")
-        func(*args,**kwargs)
+        return func(*args,**kwargs)
     return(save_function)
 
 
 @app.route('/')
-@save_version
 def index():
     response = make_response(render_template("titlepage.html"))
     return response
 
 @app.route('/stamboom/commands/oldxml')
+@save_version
 def show_old_xml():
     response = make_response(render_template("code_show.html",code=core.xmlTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/handled')
+@save_version
 def show_handled_code():
     response = make_response(render_template("code_show.html",code=core.bashTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/raw')
+@save_version
 def show_raw_code():
     response = make_response(render_template("code_show.html",code=core.rawCode().replace("\n","<br/>")))
     return response
@@ -80,6 +86,7 @@ def show_fam_tree_safe():
 
 
 @app.route('/edit/<name>/')
+@save_version
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -92,6 +99,7 @@ def edit(name):
     return response
 
 @app.route('/list/people')
+@save_version
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -100,6 +108,7 @@ def list_people():
     return response
 
 @app.route('/edit/<name>/upload/', methods = ['POST'])
+@save_version
 def upload_image(name):
     print(name)
     print(request.files)
@@ -109,11 +118,13 @@ def upload_image(name):
 
 
 @app.route('/edit/')
+@save_version
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
     return response
 
 @app.route('/edit/rawcommand/', methods = ['POST'])
+@save_version
 def rawcommand():
     print(request.form)
     command = request.form["command"]
@@ -123,6 +134,7 @@ def rawcommand():
 
 
 @app.route('/edit/<name>/parents/', methods = ['POST'])
+@save_version
 def edit_parents(name):
     print(name)
     print(request.form)
@@ -133,6 +145,7 @@ def edit_parents(name):
 
 
 @app.route('/edit/<name>/addPartner/', methods = ['POST'])
+@save_version
 def edit_add_partner(name):
     print(name)
     print(request.form)
@@ -141,6 +154,7 @@ def edit_add_partner(name):
     return redirect('/edit/'+name)
 
 @app.route('/edit/<name>/remPartner/', methods = ['POST'])
+@save_version
 def edit_rem_partner(name):
     print(name)
     print(request.form)
@@ -154,13 +168,29 @@ def render_titlebar():
     response = make_response(render_template("titlebar.html"))
     return response
 
+@app.route("/login/")
+def render_login():
+    response = make_response(render_template("login.html",message=""))
+    return response
+
+@app.route("/login/invalid/")
+def render_login_invalid():
+    response = make_response(render_template("login.html",message="The password combination was invalid"))
+    return response
 
 
+@app.route("/login/validate/",methods=["POST"])
+def validate_login():
+    if loginHandler.valid_login(request.form["name"],request.form["password"]):
+        session["username"] = request.form["name"]
+        return redirect("/")
+    else:
+        return redirect("/login/invalid")
 
 
 def titlebar():
     with open("templates/titlebar.html") as fff:
-        return fff.read()
+        return fff.read().replace("{{ username }}",session["username"])
 
 if __name__ == '__main__':
     app.run()
