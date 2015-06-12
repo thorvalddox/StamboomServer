@@ -26,6 +26,7 @@ class FamilyTree:
             for p in f.parents + f.children:
                 yield p
 
+
     @property
     def people_all(self):
         return sorted(self.people,key=lambda x:x.name.split(" ")[1:]+[x.name.split(" ")[0]])
@@ -126,11 +127,6 @@ class FamilyTree:
             if p != person:
                 return p
 
-    def get_children(self, person):
-        for f in self.get_family_down(person):
-            for p in f.children:
-                yield p
-
     def build_commands(self):
         for p in self.people_linked:
             yield "$convbot","person",p.uname,p.birth,p.dead
@@ -149,10 +145,12 @@ class FamilyTree:
                 for p in f.parents:
                     yield p
     def get_children(self,person):
+        ret = []
         for f in self.families:
             if person in f.parents:
                 for p in f.children:
-                    yield p
+                    ret.append(p)
+        return sorted(ret,key=lambda x:x.ubirth)
     def get_siblings(self,person):
         for p in self.get_parents(person):
             for c in self.get_children(p):

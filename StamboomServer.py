@@ -46,8 +46,8 @@ def login_required(func):
 
 @app.route('/')
 def index():
-    response = make_response(render_template("titlepage.html"))
-    return response
+    #response = make_response(render_template("titlepage.html"))
+    return redirect("/stamboom/")
 
 @app.route('/stamboom/commands/oldxml')
 @login_required
@@ -88,20 +88,21 @@ def show_fam_tree_safe():
 
 
 @app.route('/edit/<name>/')
-@login_required
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log")
     person = f.get_person(name)
     data = [forms.create_person_link(i) for i in f.get_data(person)]
-    form = list(forms.make_forms(f,person))
+    if check_logged_in(session):
+        form = list(forms.make_forms(f,person))
+    else:
+        form = ["<a href='/login/'>log in</a>"]*4
     response = make_response(render_template("edit.html",name=person.name,uname=name,
                                              image=url_for('static', filename=person.image),data=data,form=form,
                                              titlebar=titlebar()))
     return response
 
 @app.route('/list/people')
-@login_required
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -191,13 +192,16 @@ def validate_login():
 
 @app.route("/logout/")
 def logout():
-    del session["username"]
+    session.pop("username",None)
     return redirect("/")
 
 
 def titlebar():
     with open("templates/titlebar.html") as fff:
-        return fff.read().replace("{{ username }}",session.get("username","<not logged in>"))
+        string = fff.read()
+        if "username" not in session:
+            string = string.replace("logout","login")
+        return string.replace("{{ username }}",session.get("username","Log in"))
 
 if __name__ == '__main__':
     app.run()

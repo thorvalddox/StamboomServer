@@ -69,6 +69,5 @@ def edit_partners_form(tree:core.FamilyTree,person):
     </form>""".format(remBox)
 
 def make_forms(tree,person):
-
     yield edit_parents_form(tree,person)
     yield edit_partners_form(tree,person)
