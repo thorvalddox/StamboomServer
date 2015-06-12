@@ -11,11 +11,12 @@
 
         <td>
             <h2>Voer commando uit</h2>
-            <form action="rawcommand/" method="post" enctype="multipart/form-data">
-                Commando:<input type="text" name="command"><br /><br />
+            <form action="/edit/newperson/" method="post" enctype="multipart/form-data">
+                Commando:<input type="text" name="name"><br /><br />
                 Uitvoeren:<input type="submit" value="Exec">
             </form>
         </td>
+        <td>{{ people | safe }}</td>
     </tr>
 </table>
 

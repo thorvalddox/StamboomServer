@@ -17,26 +17,29 @@ import xml.etree.ElementTree as ET
 class FamilyTree:
     def __init__(self):
         self.families = []
+        self.people = []
         self.head = None
 
     @property
-    def people(self):
+    def people_linked(self):
         for f in self.families:
             for p in f.parents + f.children:
                 yield p
+
+    @property
+    def people_all(self):
+        return sorted(self.people,key=lambda x:x.name.split(" ")[1:]+[x.name.split(" ")[0]])
 
     def get_person(self, name):
         if not isinstance(name,str):
             Exception("{} is not a string".format(name))
         try:
-            return [p for p in self.people if p.name == name][0]
+            return [p for p in self.people if name in (p.name,p.uname)][0]
         except IndexError:
-            #print("did not find {}, looking in unconnected people".format(name))
-            try:
-                return [p for p in Person.all_.values() if p.uname == name or p.name == name][0]
-            except IndexError:
-                    #print("did not find {}, creating new person".format(name))
-                    return Person(name)
+            #print("did not find {}, creating new person".format(name))
+            p = Person(name)
+            self.people.append(p)
+            return p
 
     def get_family(self, *names):
         people = [self.get_person(name) for name in names]
@@ -129,7 +132,7 @@ class FamilyTree:
                 yield p
 
     def build_commands(self):
-        for p in self.people:
+        for p in self.people_linked:
             yield "$convbot","person",p.uname,p.birth,p.dead
             if self.head == p:
                 yield "$convbot","head",p.uname
@@ -139,6 +142,33 @@ class FamilyTree:
             yield ("$convbot","family",p1,p2) + tuple(clist)
             if f.divorced:
                 yield ("$convbot","divorce",p1,p2)
+
+    def get_parents(self,person):
+        for f in self.families:
+            if person in f.children:
+                for p in f.parents:
+                    yield p
+    def get_children(self,person):
+        for f in self.families:
+            if person in f.parents:
+                for p in f.children:
+                    yield p
+    def get_siblings(self,person):
+        for p in self.get_parents(person):
+            for c in self.get_children(p):
+                if c != person:
+                    yield c
+    def get_partners(self,person):
+        for f in self.families:
+            if person in f.parents:
+                for p in f.parents:
+                    if p != person:
+                        yield p
+    def get_data(self,person):
+        yield self.get_parents(person)
+        yield self.get_partners(person)
+        yield self.get_children(person)
+        yield list(set(self.get_siblings(person)))
 
 
 def filter_invalid(l):
@@ -161,7 +191,7 @@ def showdate(date):
 
 
 class Person:
-    all_ = {}  # used to get people not in the family tree. Only works for id's people in diffrenet trees can have te same name, but not the same id
+    all_ = {}  # used to get people_linked not in the family tree. Only works for id's people_linked in diffrenet trees can have te same name, but not the same id
 
     def __init__(self, name, birth="", dead="", id_="none"):
         self.name = name
@@ -281,10 +311,13 @@ class CommandLoader:
         f = self.tree.get_family(*parentlist)
         f.children.extend(self.tree.get_person(p) for p in children if p != "")
     def delete(self,person,*_):
+        person = self.tree.get_person(person)
         for f in self.tree.families:
             if person in f.parents:
+                print("delete downlink")
                 f.parents.remove(person)
             if person in f.children:
+                print("delete uplink")
                 f.children.remove(person)
     def merge(self,person1,person2,*_):
         for f in self.tree.families:

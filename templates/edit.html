@@ -3,13 +3,15 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>EDIT {{ name }}</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 <h1>{{ name }}</h1>
 <table>
     <tr>
         <td>
-            <img src='{{ image }}' alt="Loading image" style="max-height:400px;max-width:400px" />
+            <img src='{{ image }}' alt="Loading image" style="max-height:200px" />
         </td>
         <td>
             <h2>Wijzig afbeelding</h2>
@@ -19,9 +21,45 @@
             </form>
         </td>
     </tr>
+    <tr>
+        <td>
+            <h2>ouders</h2>
+                <a id="displayParents" href="javascript:toggle('displayParents','toggleParents');">bewerk</a>
+                <div id="toggleParents" style="display: none">{{ form.0 | safe}}</div>
+            {{ data.0 |safe }}
+        </td>
+        <td>
+            <h2>partners</h2>
+            {{ data.1 |safe }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>broers/zussen</h2>
+            {{ data.3 |safe }}
+        </td>
+        <td>
+            <h2>kinderen</h2>
+            {{ data.2 |safe }}
+        </td>
+    </tr>
+
 </table>
 
-
+<script>
+function toggle(link,display) {
+	var ele = document.getElementById(display);
+	var text = document.getElementById(link);
+	if(ele.style.display == "block") {
+    		ele.style.display = "none";
+		text.innerHTML = "bewerk";
+  	}
+	else {
+		ele.style.display = "block";
+		text.innerHTML = "verberg";
+	}
+}
+</script>
 </body>
 
 </html>

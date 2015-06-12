@@ -129,7 +129,7 @@ class DrawJavaScript:
 class BuildTree:
     def __init__(self, tree):
         self.tree = tree
-        self.coords = {p: (0, 0) for p in self.tree.people}
+        self.coords = {p: (0, 0) for p in self.tree.people_linked}
         self.headsize = {}
         self.tailsize = {}
         self.xpos = {p: 0 for p in self.tree.get_representation(self.tree.head)[0]}
@@ -189,7 +189,7 @@ class BuildTree:
         currentpos = self.get_xpos(person) + (self.get_headsize(person) - self.get_tailsize(person)) / 2
         for p in self.tree.get_representation(person)[1]:
             for s in self.tree.get_representation(p)[0]:
-                print(person.name, p.name, s.name, "->", currentpos)
+                #print(person.name, p.name, s.name, "->", currentpos)
                 self.xpos[s] = currentpos
             currentpos += self.get_headsize(p)
 
@@ -199,7 +199,7 @@ class BuildTree:
                 tops = list(self.tree.get_representation(person)[0])
                 s = len(tops)
                 for i, p in enumerate(tops):
-                    print(p, person)
+                    #print(p, person)
                     self.coords[p] = (self.xpos[person] + self.get_headsize(person) / 2 + i - s / 2, index)
 
     def get_pos(self, person, width, height):
@@ -224,9 +224,6 @@ class BuildTree:
         elif len(fam.parents) == 1:
             p1, = fam.parents
             px, py = self.get_pos(p1, width, height)
-            cy = list(self.get_pos(fam.children[0], width, height))[1]
-            cyInter = (py + cy) // 2
-            draw.draw_line(px, py + ydif, px, cyInter)
         else:
             raise Exception("Incorrect amoutn of parents")
         if fam.children:
@@ -244,8 +241,8 @@ def draw_people(tree, width=120, height=150, border=10):
     d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:
         s.draw_family(d, f, width, height, border)
-    for p in tree.people:
-        print(list(s.get_pos(p, width, height)), s.coords[p])
+    for p in tree.people_linked:
+        #print(list(s.get_pos(p, width, height)), s.coords[p])
         d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border)
     return d
 

@@ -1,5 +1,5 @@
 $convbot person Johan_Verhelst 05/08/1965 *
-$convbot person Maria_??? * *
+$convbot person Maria * *
 $convbot person Rita_Dox 13/08/1950 *
 $convbot person Paul_Dox 22/07/1949 *
 $convbot person Lou_Gullinck 15/08/1958 *
@@ -173,7 +173,7 @@ $convbot person Henrik_Dox 23/09/1993 *
 $convbot person Reinout_Dox 10/05/1995 *
 $convbot person Patrick_Vanhove 28/05/1956 *
 $convbot person Annemie_Dox 05/03/1966 *
-$convbot family Johan_Verhelst Maria_???
+$convbot family Johan_Verhelst Maria
 $convbot family Paul_Dox Lou_Gullinck Kristel_Dox Karl_Dox
 $convbot family Wouter_Verhelst Anita_Van_Gastel
 $convbot family Ewout_Dox Sytze_Van_Herck
@@ -217,6 +217,4 @@ $convbot family Peter_Didelez Ilse_Bruyninckx Camie_Didelez Charlot_Didelez
 $convbot family Herman_Dox Hilde_Verschaeren Geert_Dox Jan_Dox Els_Dox Steven_Dox
 $convbot family Dirk_Dox Dina_De_Moor Linde_Dox Arnout_Dox Ewout_Dox Henrik_Dox Reinout_Dox
 $convbot family Patrick_Vanhove Annemie_Dox
-?127.0.0.1 person giraffe_test
-?127.0.0.1 family Thorvald_Dox * giraffe_test
-?127.0.0.1 delete giraffe_test
+
