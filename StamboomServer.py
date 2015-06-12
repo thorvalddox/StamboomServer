@@ -190,7 +190,7 @@ def validate_login():
         return redirect("/login/invalid")
 
 @app.route("/logout/")
-def render_login():
+def logout():
     del session["username"]
     return redirect("/")
 
