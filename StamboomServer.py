@@ -20,16 +20,24 @@ app = Flask(__name__)
 app.debug = True
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config.update(
+    MAIL_SERVER = "smtp.gmail.com",
+    MAIL_PORT = 465,
+    MAIL_USE_TLS = False,
+    MAIL_USE_SSL= True,
+    MAIL_USERNAME = "stamboom.dox@gmail.com",
+    MAIL_PASSWORD = "d0xst1mb00m",
+    DEFAULT_MAIL_SENDER  = "stamboom.dox@gmail.com",
+)
+
 
 app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
 mail = Mail(app)
 
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_USERNAME"] = "doxstamboom@google.com"
-app.config["MAIL_PASSWORD"] = "d0xst1mb00m"
+print(app.config)
 
-
+print(mail)
 
 if not os.getcwd().endswith("StamboomServer"):
     os.chdir("StamboomServer")
@@ -50,11 +58,18 @@ def login_required(func):
         return func(*args,**kwargs)
     return(save_function)
 
+def admin_required(func):
+    @wraps(func)
+    def save_function(*args,**kwargs):
+        if not check_logged_in(session) or session["username"]!="thorvald_dox":
+            return "You have to be an admin to view this page"
+        return func(*args,**kwargs)
+    return(save_function)
 
 @app.route('/')
 def index():
-    with open("data.log") as fff:
-        mail.send(Message("stamboom_auto",body=fff.read(),recipients=["thorvalddx94@gmail.com"]))
+
+
     #response = make_response(render_template("titlepage.html"))
     return redirect("/stamboom/")
 
@@ -237,6 +252,21 @@ def titlebar():
         if "username" not in session:
             string = string.replace("logout","login")
         return string.replace("{{ username }}",session.get("username","Log in"))
+
+def send_valid_mail(user):
+    mail.send(Message("stamboom dox website",
+                      sender="stamboom.dox@gmail.com",
+                      html=render_template("email.html",username=user.name,password=user.password),
+                      recipients=["thorvalddx94@gmail.com"]))
+
+@app.route("/stamboom/admin/sendemails")
+@admin_required
+def send_user_mails():
+    for u in loginHandler.users.values():
+        send_valid_mail(u)
+    return(redirect("/"))
+
+
 
 if __name__ == '__main__':
     app.run()
