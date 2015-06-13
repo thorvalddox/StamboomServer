@@ -13,7 +13,7 @@ import draw
 import imagechanger
 import forms
 
-from loginhandle import loginHandler
+
 
 app = Flask(__name__)
 
@@ -41,6 +41,8 @@ print(mail)
 
 if not os.getcwd().endswith("StamboomServer"):
     os.chdir("StamboomServer")
+
+from loginhandle import loginHandler
 
 #TODO clad stambomen afhankleijk van 1 richting
 
