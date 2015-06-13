@@ -93,17 +93,27 @@ def edit_date_form(person):
          <input type="submit" value="Verzend wijzigingen">
     </form>""".format(person.birth,person.dead)
 
+def edit_image_form(person):
+    return """
+        <form action="upload/" method="post" enctype="multipart/form-data">
+        selecteer .jpg bestand :<input type="file" name="file"><br /><br />
+        bevestig hier:<input type="submit" value="Upload">
+    </form>
+    """
+
 def make_forms(tree,person):
     yield edit_parents_form(tree,person)
     yield edit_partners_form(tree,person)
     yield edit_children_form(tree,person)
     yield edit_date_form(person)
+    yield edit_image_form
 
 def disabled_forms(tree,person):
-    yield "<a href='/login/'>log in</a>"
-    yield "<a href='/login/'>log in</a>"
-    yield "<a href='/login/'>log in</a>"
+    yield "<a href='login/'>log in</a>"
+    yield "<a href='login/'>log in</a>"
+    yield "<a href='login/'>log in</a>"
     yield """<form action="dates/" method="post" enctype="multipart/form-data">
          Geboren op:{}</br>
          Gestorven op:{}</br>
     </form>""".format(person.birth,person.dead)
+    yield "<a href='login/'>log in</a>"

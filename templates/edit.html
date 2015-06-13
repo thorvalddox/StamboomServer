@@ -18,10 +18,7 @@
             <h2>data</h2>
             {{ form.3 |safe }}
             <h2>Wijzig afbeelding</h2>
-            <form action="upload/" method="post" enctype="multipart/form-data">
-                selecteer .jpg bestand :<input type="file" name="file"><br /><br />
-                bevestig hier:<input type="submit" value="Upload">
-            </form>
+            {{ form.4 |safe }}
 
         </td>
         <td rowspan="3">
