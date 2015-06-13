@@ -265,7 +265,7 @@ class FamilyTree:
             print(p)
             for f in self.get_family_down(p):
                 print(f)
-                if f not in families:
+                if all(p in new.people for p in f.parents) and f not in families:
                     families.append(f)
         print(new.people)
         new.families = [Family(f.parents, [c for c in f.children if c in new.people]) for f in families]
