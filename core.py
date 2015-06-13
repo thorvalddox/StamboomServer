@@ -237,7 +237,6 @@ class FamilyTree:
         """
         returns all posterity and there partners
         """
-        print(person, self.get_representation(person).head)
         for p in self.get_representation(person).head:
             yield p
         for p in self.get_representation(person).tail:
@@ -255,6 +254,7 @@ class FamilyTree:
         returns new famaily tree representing a certain root of the family.
         Gives the posterity and the single direction ancestors
         """
+        print("1")
         new = FamilyTree()
         families = []
         for p in self.get_clan(key):
@@ -463,6 +463,13 @@ class CommandLoader:
     def head(self, p, *_):
         self.tree.head = self.tree.get_person(p)
 
+    def loginas(self, name, *_):
+        """not accually a command, but is added to the log to track the author of different commands"""
+        pass
+
+    def logout(self,  *_):
+        """not accually a command, but is added to the log to track the author of different commands"""
+        pass
 
 def addcommand_ip(request, data):
     with open("data.log", "a") as fff:

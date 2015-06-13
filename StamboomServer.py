@@ -38,7 +38,7 @@ def login_required(func):
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
-            return redirect("/login")
+            return redirect("login/")
         return func(*args,**kwargs)
     return(save_function)
 
@@ -194,29 +194,31 @@ def render_titlebar():
     response = make_response(render_template("titlebar.html"))
     return response
 
-@app.route("/login/")
-def render_login():
-    response = make_response(render_template("login.html",message=""))
+@app.route("/<path:path>/login/")
+def render_login(path):
+    response = make_response(render_template("login.html",message="",path=path))
     return response
 
-@app.route("/login/invalid/")
-def render_login_invalid():
-    response = make_response(render_template("login.html",message="The password combination was invalid"))
+@app.route("/<path:path>/login/invalid/")
+def render_login_invalid(path):
+    response = make_response(render_template("login.html",message="The password combination was invalid",path=path))
     return response
 
 
-@app.route("/login/validate/",methods=["POST"])
-def validate_login():
+@app.route("/<path:path>/login/validate/",methods=["POST"])
+def validate_login(path):
     if loginHandler.valid_login(request.form["name"],request.form["password"]):
         session["username"] = request.form["name"]
-        return redirect("/")
+        core.addcommand_ip(request,"loginas #{}".format(session["username"]))
+        return redirect("/"+path+"/")
     else:
-        return redirect("/login/invalid")
+        return redirect("/" + path+"/login/invalid/")
 
-@app.route("/logout/")
-def logout():
+@app.route("/<path:path>/logout/")
+def logout(path):
+    core.addcommand(request,session,"logout")
     session.pop("username",None)
-    return redirect("/")
+    return redirect("/"+path+"/")
 
 
 def titlebar():

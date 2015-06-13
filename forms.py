@@ -36,7 +36,7 @@ def create_person_link(pList):
         {}
     </ul>
     """.format("\n".join(
-        """<li><a href='/edit/{}'>{}</a></li>""".format(
+        """<li><a href='/stamboom/edit/{}'>{}</a></li>""".format(
             p.uname, p.name
         ) for p in pList
     ))
