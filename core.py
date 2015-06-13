@@ -454,6 +454,7 @@ class CommandLoader:
         f.children = [c for c in f.children if child not in (c.name,c.uname)]
 
     def parents(self, child, p1, p2, *_):
+        child=self.tree.get_person(child)
         for f in self.tree.families:
             if child in f.children:
                 f.children.remove(child)
