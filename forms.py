@@ -81,7 +81,7 @@ def edit_children_form(tree:core.FamilyTree,person):
     return """<form action="child/" method="post" enctype="multipart/form-data">
          Selecteer Partner:{}<br/>
          Selecteer nieuw kind:{}<br/>
-         <input type="submit" name="addChildPress" value="Voeg toe & Verzend">
+         <input type="submit" name="addChildPress" value="Voeg toe & Verzend"><br/>
          Verwijder kind:{}<br/>
          <input type="submit" name="remChildPress" value="Verwijder & Verzend">
     </form>""".format(partBox,addBox,remBox)
@@ -96,8 +96,8 @@ def edit_date_form(person):
 def edit_image_form():
     return """
         <form action="upload/" method="post" enctype="multipart/form-data">
-        selecteer .jpg bestand :<input type="file" name="file"><br /><br />
-        bevestig hier:<input type="submit" value="Upload">
+        selecteer .jpg bestand :<input type="file" name="file"><br />
+        <input type="submit" value="Upload"><br/>
     </form>
     """
 
