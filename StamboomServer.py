@@ -185,7 +185,7 @@ def edit_child(name):
         core.addcommand(request,session,"family {} {} {}".format(name,partner,child))
     elif "remChildPress" in request.form:
         child = request.form["remChild"]
-        core.addcommand(request,session,"parents {}".format(name,partner,child))
+        core.addcommand(request,session,"disconnect {} {} {}".format(name,partner,child))
     return redirect('/stamboom/edit/'+name)
 
 

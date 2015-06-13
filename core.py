@@ -371,9 +371,9 @@ class Commands(list):
         for c in self:
             user, func, *args = c
             args = [i if i != "" else "*" for i in args]
-            usercolor = {"$": "olive", "#": "gold", "?": "darkgrey"}[user[0]]
-            funccolor = {"person": "blue", "family": "green", "delete": "orange", "merge": "purple",
-                         "parents": "darkgreen",
+            usercolor = {"$": "gold", "#": "olive", "?": "darkgrey"}[user[0]]
+            funccolor = {"person": "blue", "family": "green", "delete": "darkcyan", "merge": "purple",
+                         "parents": "darkgreen","disconnect":"darkred",
                          "head": "darkblue", "divorce": "darkorange"}.get(func, "orange")
             argscolor = []
             for i in args:
@@ -448,6 +448,10 @@ class CommandLoader:
         f = self.tree.get_family(person1, person2)
         self.tree.families.remove(f)
         del f
+
+    def disconnect(self, person1, person2, child, *_):
+        f = self.tree.get_family(person1, person2)
+        f.children = [c for c in f.children if child not in (c.name,c.uname)]
 
     def parents(self, child, p1, p2, *_):
         for f in self.tree.families:
