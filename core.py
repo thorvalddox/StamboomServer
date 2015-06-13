@@ -1,13 +1,12 @@
 __author__ = 'Thorvald'
 
 import time
-import sys,os,re
+import sys, os, re
 import random
 import os.path
 
 from itertools import chain
 from collections import namedtuple
-
 
 import xml.etree.ElementTree as ET
 
@@ -17,7 +16,7 @@ import xml.etree.ElementTree as ET
 #                               user parents child parent_1 parent_2
 #                               user merge person_1 person_2
 
-Representation = namedtuple("Representation","head,tail")
+Representation = namedtuple("Representation", "head,tail")
 
 
 class FamilyTree:
@@ -35,24 +34,23 @@ class FamilyTree:
             for p in f.parents + f.children:
                 yield p
 
-
     @property
     def people_all(self):
         """
         returns a list of people the family tree contains, iven the not yet connected ones
         """
-        return sorted(self.people,key=lambda x:x.name.split(" ")[1:]+[x.name.split(" ")[0]])
+        return sorted(self.people, key=lambda x: x.name.split(" ")[1:] + [x.name.split(" ")[0]])
 
     def get_person(self, name):
         """
         returns a person woth the given name. If there isn't one, it creates a new one and retusn that one
         """
-        if not isinstance(name,str):
+        if not isinstance(name, str):
             Exception("{} is not a string".format(name))
         try:
-            return [p for p in self.people if name in (p.name,p.uname)][0]
+            return [p for p in self.people if name in (p.name, p.uname)][0]
         except IndexError:
-            #print("did not find {}, creating new person".format(name))
+            # print("did not find {}, creating new person".format(name))
             p = Person(name)
             self.people.append(p)
             return p
@@ -66,7 +64,7 @@ class FamilyTree:
             return [f for f in self.families if set(f.parents) == set(people)][0]
         except IndexError:
             f = Family(people, [])
-            #print(f)
+            # print(f)
             self.families.append(f)
             return f
 
@@ -75,7 +73,7 @@ class FamilyTree:
         returns a iterator of families where the given person is a parent of
         """
         for f in self.families:
-            #print(str(f))
+            # print(str(f))
             if person in f.parents:
                 yield f
 
@@ -89,17 +87,17 @@ class FamilyTree:
         """
         if person is None:
             print("Invalid representation")
-            return(Representation([], []))
+            return (Representation([], []))
         famlist = list(self.get_family_down(person))
         if len(famlist) == 0:
-            #print(person.name, "never married")
+            # print(person.name, "never married")
             return Representation([person], [])
         elif len(famlist) == 1:
-            #print(person.name, "married ones")
+            # print(person.name, "married ones")
             fam, = famlist
             return Representation(filter_invalid([person, self.get_parther(person, fam)]), fam.children)
         elif len(famlist) == 2:
-            #print(person.name, "married twice")
+            # print(person.name, "married twice")
             fam2, fam1 = famlist
             return Representation(
                 filter_invalid([self.get_parther(person, fam1), person, self.get_parther(person, fam2)]),
@@ -111,7 +109,7 @@ class FamilyTree:
         """
         Build the family tree given an old-format xml file
         """
-        #print(os.getcwd())
+        # print(os.getcwd())
         root = ET.parse(filename).getroot()
         for node in root:
             if node.tag == "persoon":
@@ -140,14 +138,15 @@ class FamilyTree:
                     elif i.tag == "divorsed":
                         div = True
                 self.families.append(Family(parents, children, div))
-    def from_code(self,filename,level=0):
+
+    def from_code(self, filename, level=0):
         """
         generates family tree from a code object
         0 is admin
         1 is logged in users
         2 is all
         """
-        c = CommandLoader(self,list("$#?"[:level+1]))
+        c = CommandLoader(self, list("$#?"[:level + 1]))
         with open(filename) as fff:
             for i in Commands.from_raw(fff.read()):
                 c(i)
@@ -176,17 +175,17 @@ class FamilyTree:
         Build a list of commands that could rebuild this whole family tree
         """
         for p in self.people_linked:
-            yield "$convbot","person",p.uname,p.birth,p.dead
+            yield "$convbot", "person", p.uname, p.birth, p.dead
             if self.head == p:
-                yield "$convbot","head",p.uname
+                yield "$convbot", "head", p.uname
         for f in self.families:
-            p1,p2,*_ = [p.uname for p in f.parents] + [""]*2
+            p1, p2, *_ = [p.uname for p in f.parents] + [""] * 2
             clist = [c.uname for c in f.children]
-            yield ("$convbot","family",p1,p2) + tuple(clist)
+            yield ("$convbot", "family", p1, p2) + tuple(clist)
             if f.divorced:
-                yield ("$convbot","divorce",p1,p2)
+                yield ("$convbot", "divorce", p1, p2)
 
-    def get_parents(self,person):
+    def get_parents(self, person):
         """
         returns all persons parents
         """
@@ -194,7 +193,8 @@ class FamilyTree:
             if person in f.children:
                 for p in f.parents:
                     yield p
-    def get_children(self,person):
+
+    def get_children(self, person):
         """
         returns all persons children
         """
@@ -203,8 +203,9 @@ class FamilyTree:
             if person in f.parents:
                 for p in f.children:
                     ret.append(p)
-        return sorted(ret,key=lambda x:x.ubirth)
-    def get_siblings(self,person):
+        return sorted(ret, key=lambda x: x.ubirth)
+
+    def get_siblings(self, person):
         """
         returns all persons siblings and half-siblings
         """
@@ -212,7 +213,8 @@ class FamilyTree:
             for c in self.get_children(p):
                 if c != person:
                     yield c
-    def get_partners(self,person):
+
+    def get_partners(self, person):
         """
         returns all persons partners
         """
@@ -221,7 +223,8 @@ class FamilyTree:
                 for p in f.parents:
                     if p != person:
                         yield p
-    def get_data(self,person):
+
+    def get_data(self, person):
         """
         returns all data to use in edit.html
         """
@@ -230,25 +233,24 @@ class FamilyTree:
         yield self.get_children(person)
         yield list(set(self.get_siblings(person)))
 
-    def get_clan(self,person):
+    def get_clan(self, person):
         """
         returns all posterity and there partners
         """
-        print(person,self.get_representation(person).head)
+        print(person, self.get_representation(person).head)
         for p in self.get_representation(person).head:
             yield p
         for p in self.get_representation(person).tail:
             for i in self.get_clan(p):
                 yield i
 
-    def get_ancestors(self,person):
+    def get_ancestors(self, person):
         yield person
         for p in self.get_parents(person):
             for i in self.get_ancestors(p):
                 yield i
 
-
-    def build_new(self,key):
+    def build_new(self, key):
         """
         returns new famaily tree representing a certain root of the family.
         Gives the posterity and the single direction ancestors
@@ -266,7 +268,7 @@ class FamilyTree:
                 if f not in families:
                     families.append(f)
         print(new.people)
-        new.families = [Family(f.parents,[c for c in f.children if c in new.people]) for f in families]
+        new.families = [Family(f.parents, [c for c in f.children if c in new.people]) for f in families]
         # for f in families:
         #     for p in f.children:
         #         if p not in new.people:
@@ -284,7 +286,7 @@ def filter_invalid(l):
 
 def builddate(date):
     if date and date != "never":
-        date = re.sub(r"[ */-]+","/",date)
+        date = re.sub(r"[ */-]+", "/", date)
         return time.strptime(date, "%d/%m/%Y")
     else:
         return time.strptime("01/01/3000", "%d/%m/%Y")
@@ -304,9 +306,9 @@ class Person:
         self.name = name
         self.birth = birth
         self.dead = dead
-        self.id_ = id_ if id_ != "none" else hex(random.randrange(16**32))
+        self.id_ = id_ if id_ != "none" else hex(random.randrange(16 ** 32))
         Person.all_[self.id_] = self
-        #print(self.name, self.id_)
+        # print(self.name, self.id_)
 
     @property
     def name(self):
@@ -334,8 +336,8 @@ class Person:
 
     @property
     def image(self):
-        name = "kopkes/"+self.uname+".jpg"
-        if not os.path.exists("static/"+name):
+        name = "kopkes/" + self.uname + ".jpg"
+        if not os.path.exists("static/" + name):
             name = "kopkes/smiley.jpg"
         return name
 
@@ -361,34 +363,34 @@ class Commands(list):
         ret = ""
         for c in self:
             args = " ".join(i if i != "" else "*" for i in c)
-            ret += args+"\n"
+            ret += args + "\n"
         return ret
 
     def to_html(self):
         ret = ""
         for c in self:
-            user,func,*args = c
+            user, func, *args = c
             args = [i if i != "" else "*" for i in args]
-            usercolor = {"$":"olive","#":"gold","?":"darkgrey"}[user[0]]
-            funccolor = {"person":"blue","family":"green","delete":"orange","merge":"purple","parents":"darkgreen",
-                         "head":"darkblue","divorce":"darkorange"}.get(func,"orange")
+            usercolor = {"$": "olive", "#": "gold", "?": "darkgrey"}[user[0]]
+            funccolor = {"person": "blue", "family": "green", "delete": "orange", "merge": "purple",
+                         "parents": "darkgreen",
+                         "head": "darkblue", "divorce": "darkorange"}.get(func, "orange")
             argscolor = []
             for i in args:
                 if i == "ERROR":
                     argscolor.append("red")
-                elif re.match(r"[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]",i):
+                elif re.match(r"[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]", i):
                     argscolor.append("darkcyan")
                 else:
                     argscolor.append("black")
             ret += """<span style="color:{1}">{0}</span> <span style="color:{3}">{2}</span> {4}</br>""" \
-                .format(user,usercolor,func,funccolor,
-                        " ".join('<span style="color:{1}">{0}</span>'.format(*a) for a in zip(args,argscolor)))
-
+                .format(user, usercolor, func, funccolor,
+                        " ".join('<span style="color:{1}">{0}</span>'.format(*a) for a in zip(args, argscolor)))
 
         return ret
 
     @classmethod
-    def from_raw(cls,data):
+    def from_raw(cls, data):
         ret = []
         for line in data.split("\n"):
             if line.count(" ") < 2:
@@ -398,26 +400,30 @@ class Commands(list):
 
 
 class CommandLoader:
-    def __init__(self,tree,accepted=[]):
+    def __init__(self, tree, accepted=[]):
         self.tree = tree
         self.accepted = accepted + ["$"]
-    def __call__(self,command):
-        #print(command)
-        user,func,*args = command
-        args = list(args) + [""]*4 #missing last arguments
+
+    def __call__(self, command):
+        # print(command)
+        user, func, *args = command
+        args = list(args) + [""] * 4  # missing last arguments
         if any(user.startswith(pref) for pref in self.accepted):
-            getattr(self,func)(*args)
-    def person(self,name,birth,dead,*_):
-        #print("making",name)
+            getattr(self, func)(*args)
+
+    def person(self, name, birth, dead, *_):
+        # print("making",name)
         p = self.tree.get_person(name)
         p.birth = birth
         p.dead = dead
-    def family(self,p1,p2,*children):
-        #print("making family")
-        parentlist = [p for p in (p1,p2) if p != ""]
+
+    def family(self, p1, p2, *children):
+        # print("making family")
+        parentlist = [p for p in (p1, p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.children.extend(self.tree.get_person(p) for p in children if p != "" and p not in f.children)
-    def delete(self,person,*_):
+
+    def delete(self, person, *_):
         person = self.tree.get_person(person)
         for f in self.tree.families:
             if person in f.parents:
@@ -428,7 +434,8 @@ class CommandLoader:
                 f.children.remove(person)
         self.tree.people.remove(person)
         del person
-    def merge(self,person1,person2,*_):
+
+    def merge(self, person1, person2, *_):
         for f in self.tree.families:
             if person2 in f.parents:
                 f.parents.remove(person2)
@@ -436,56 +443,65 @@ class CommandLoader:
             if person2 in f.children:
                 f.children.remove(person2)
                 f.children.append(person1)
-    def disband(self,person1,person2,*_):
-        f = self.tree.get_family(person1,person2)
+
+    def disband(self, person1, person2, *_):
+        f = self.tree.get_family(person1, person2)
         self.tree.families.remove(f)
         del f
-    def parents(self,child,p1,p2,*_):
+
+    def parents(self, child, p1, p2, *_):
         for f in self.tree.families:
             if child in f.children:
                 f.children.remove(child)
-        self.family(p1,p2,child)
-    def divorce(self,p1,p2,*_):
-        parentlist = [p for p in (p1,p2) if p != ""]
+        self.family(p1, p2, child)
+
+    def divorce(self, p1, p2, *_):
+        parentlist = [p for p in (p1, p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.divorced = True
-    def head(self,p,*_):
+
+    def head(self, p, *_):
         self.tree.head = self.tree.get_person(p)
 
 
-def addcommand_ip(request,data):
-    with open("data.log","a") as fff:
-        fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'],data))
+def addcommand_ip(request, data):
+    with open("data.log", "a") as fff:
+        fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'], data))
 
 
-def addcommand_user(session,data):
-    with open("data.log","a") as fff:
-        fff.write("#{} {}\n".format(session["username"],data))
+def addcommand_user(session, data):
+    with open("data.log", "a") as fff:
+        fff.write("#{} {}\n".format(session["username"], data))
 
-def addcommand(request,session,data):
+
+def addcommand(request, session, data):
     if "username" in session:
-        addcommand_user(session,data)
+        addcommand_user(session, data)
     else:
-        addcommand_ip(request,data)
+        addcommand_ip(request, data)
+
 
 def xmlTest():
     f = FamilyTree()
     f.from_xml("dox.xml")
     return Commands(f.build_commands()).to_html()
 
+
 def bashTest():
     f = FamilyTree()
     f.from_code("data.log")
     return Commands(f.build_commands()).to_html()
 
+
 def rawCode():
     with open("data.log") as fff:
         return Commands.from_raw(fff.read()).to_html()
 
+
 def main():
     f = FamilyTree()
     f.from_xml("dox.xml")
-    with open("autodata.log","w") as fff:
+    with open("autodata.log", "w") as fff:
         fff.write(Commands(f.build_commands()).to_raw())
 
 

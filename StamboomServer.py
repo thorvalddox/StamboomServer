@@ -86,7 +86,7 @@ def show_fam_tree_safe():
     return response
 
 
-@app.route('/edit/<name>/')
+@app.route('/stamboom/edit/<name>/')
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log",2)
@@ -104,7 +104,7 @@ def edit(name):
                                              titlebar=titlebar()))
     return response
 
-@app.route('/list/people')
+@app.route('/stamboom/list/people')
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -112,7 +112,7 @@ def list_people():
     response = make_response(render_template("newperson.html",people=data,titlebar=titlebar()))
     return response
 
-@app.route('/edit/<name>/upload/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
 @login_required
 def upload_image(name):
     print(name)
@@ -122,23 +122,23 @@ def upload_image(name):
     return redirect('/edit/'+name)
 
 
-@app.route('/edit/')
+@app.route('/stamboom/edit/')
 @login_required
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
     return response
 
-@app.route('/edit/rawcommand/', methods = ['POST'])
+@app.route('/stamboom/edit/rawcommand/', methods = ['POST'])
 @login_required
 def rawcommand():
     print(request.form)
     command = request.form["command"]
     print(command)
     core.addcommand(request,session,command)
-    return redirect('/edit/')
+    return redirect('/stamboom/edit/')
 
 
-@app.route('/edit/<name>/parents/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
 @login_required
 def edit_parents(name):
     print(name)
@@ -146,9 +146,9 @@ def edit_parents(name):
     first = request.form["parent0"]
     second = request.form["parent1"]
     core.addcommand(request,session,"parents {} {} {}".format(name,first,second))
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
-@app.route('/edit/<name>/dates/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/dates/', methods = ['POST'])
 @login_required
 def edit_dates(name):
     print(name)
@@ -156,27 +156,27 @@ def edit_dates(name):
     first = request.form["birth"]
     second = request.form["dead"]
     core.addcommand(request,session,"person {} {} {}".format(name,first,second))
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
-@app.route('/edit/<name>/addPartner/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/addPartner/', methods = ['POST'])
 @login_required
 def edit_add_partner(name):
     print(name)
     print(request.form)
     partner = request.form["addPartner"]
     core.addcommand(request,session,"family {}".format(name,partner))
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
-@app.route('/edit/<name>/remPartner/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
 @login_required
 def edit_rem_partner(name):
     print(name)
     print(request.form)
     partner = request.form["remPartner"]
     core.addcommand(request,session,"disband {}".format(name,partner))
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
-@app.route('/edit/<name>/child/', methods = ['POST'])
+@app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
 @login_required
 def edit_child(name):
     partner = request.form["partner"]
@@ -186,7 +186,7 @@ def edit_child(name):
     elif "remChildPress" in request.form:
         child = request.form["remChild"]
         core.addcommand(request,session,"parents {}".format(name,partner,child))
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
 
 @app.route("/templates/titlebar")

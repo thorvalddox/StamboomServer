@@ -115,7 +115,7 @@ class DrawJavaScript:
         self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
         self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
         self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
-        self.add_mouse_link("/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
+        self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
         nw, nh = width - 3 * border, height - 3 * border - 3*textsize
         # _,w,h = get_image_info(open("static/"+ person.image))
         # print(person.image,w,h)
