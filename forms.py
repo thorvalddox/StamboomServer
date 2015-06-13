@@ -93,7 +93,7 @@ def edit_date_form(person):
          <input type="submit" value="Verzend wijzigingen">
     </form>""".format(person.birth,person.dead)
 
-def edit_image_form(person):
+def edit_image_form():
     return """
         <form action="upload/" method="post" enctype="multipart/form-data">
         selecteer .jpg bestand :<input type="file" name="file"><br /><br />
@@ -106,7 +106,7 @@ def make_forms(tree,person):
     yield edit_partners_form(tree,person)
     yield edit_children_form(tree,person)
     yield edit_date_form(person)
-    yield edit_image_form
+    yield edit_image_form()
 
 def disabled_forms(tree,person):
     yield "<a href='login/'>log in</a>"
