@@ -254,10 +254,11 @@ def titlebar():
         return string.replace("{{ username }}",session.get("username","Log in"))
 
 def send_valid_mail(user):
+    print("seding email to " + user.email)
     mail.send(Message("stamboom dox website",
                       sender="stamboom.dox@gmail.com",
                       html=render_template("email.html",username=user.name,password=user.password),
-                      recipients=["thorvalddx94@gmail.com"]))
+                      recipients=[user.email]))
 
 @app.route("/stamboom/admin/sendemails")
 @admin_required

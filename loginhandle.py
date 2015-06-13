@@ -17,7 +17,7 @@ def randomstring(lenght=12):
 def load_users():
     random.seed(159357456)
     with open("users.txt") as fff:
-        for i in fff.readlines():
+        for i in fff.read().split("\n"):
             name,email = i.split(" ")
             yield name,User(name.lower(),email)
 
