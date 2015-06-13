@@ -38,7 +38,7 @@ def login_required(func):
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
-            return redirect("login/")
+            return redirect(request.path +"login/")
         return func(*args,**kwargs)
     return(save_function)
 
@@ -104,7 +104,7 @@ def edit(name):
                                              titlebar=titlebar()))
     return response
 
-@app.route('/stamboom/list/people')
+@app.route('/stamboom/list/people/')
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -128,14 +128,14 @@ def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
     return response
 
-@app.route('/stamboom/edit/rawcommand/', methods = ['POST'])
+@app.route('/stamboom/console/rawcommand/', methods = ['POST'])
 @login_required
 def rawcommand():
     print(request.form)
     command = request.form["command"]
     print(command)
     core.addcommand(request,session,command)
-    return redirect('/stamboom/edit/')
+    return redirect('/stamboom/console/')
 
 
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])

@@ -30,15 +30,21 @@ def create_person_dropdown(pList, default=None,name="selector"):
                (default.uname if default is not None else "")
     )
 
-def create_person_link(pList):
+def create_person_link(pList,split=30):
     return """
+    <table>
+    <tr>
+    <td>
     <ul>
         {}
     </ul>
+    </td>
+    </tr>
+    </table>
     """.format("\n".join(
-        """<li><a href='/stamboom/edit/{}'>{}</a></li>""".format(
-            p.uname, p.name
-        ) for p in pList
+        """<li><a href='/stamboom/edit/{}'>{}</a></li>{}""".format(
+            p.uname, p.name, ["</ul></td><td><ul>",""][bool((i+1)%split)]
+        ) for i,p in enumerate(pList)
     ))
 
 invalidPerson = namedtuple("InvalidPerson","name,uname")("--none--","")
