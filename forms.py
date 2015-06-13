@@ -115,6 +115,6 @@ def disabled_forms(tree,person):
     yield """<form action="dates/" method="post" enctype="multipart/form-data">
          Geboren op:{}</br>
          Gestorven op:{}</br>
-         log in om te bewerken
+         <a href='login/'>log in om te bewerken</a>
     </form>""".format(person.birth,person.dead)
     yield "<a href='login/'>log in om</br>te bewerken</a>"
