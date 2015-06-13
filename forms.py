@@ -109,11 +109,12 @@ def make_forms(tree,person):
     yield edit_image_form()
 
 def disabled_forms(tree,person):
-    yield "<a href='login/'>log in</a>"
-    yield "<a href='login/'>log in</a>"
-    yield "<a href='login/'>log in</a>"
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
     yield """<form action="dates/" method="post" enctype="multipart/form-data">
          Geboren op:{}</br>
          Gestorven op:{}</br>
+         log in om te bewerken
     </form>""".format(person.birth,person.dead)
-    yield "<a href='login/'>log in</a>"
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
