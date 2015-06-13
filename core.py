@@ -5,6 +5,9 @@ import sys,os,re
 import random
 import os.path
 
+from itertools import chain
+from collections import namedtuple
+
 
 import xml.etree.ElementTree as ET
 
@@ -14,6 +17,9 @@ import xml.etree.ElementTree as ET
 #                               user parents child parent_1 parent_2
 #                               user merge person_1 person_2
 
+Representation = namedtuple("Representation","head,tail")
+
+
 class FamilyTree:
     def __init__(self):
         self.families = []
@@ -22,6 +28,9 @@ class FamilyTree:
 
     @property
     def people_linked(self):
+        """
+        returns a list of people the family tree contains and are connected
+        """
         for f in self.families:
             for p in f.parents + f.children:
                 yield p
@@ -29,9 +38,15 @@ class FamilyTree:
 
     @property
     def people_all(self):
+        """
+        returns a list of people the family tree contains, iven the not yet connected ones
+        """
         return sorted(self.people,key=lambda x:x.name.split(" ")[1:]+[x.name.split(" ")[0]])
 
     def get_person(self, name):
+        """
+        returns a person woth the given name. If there isn't one, it creates a new one and retusn that one
+        """
         if not isinstance(name,str):
             Exception("{} is not a string".format(name))
         try:
@@ -43,6 +58,9 @@ class FamilyTree:
             return p
 
     def get_family(self, *names):
+        """
+        returns a family with the given parent names. Makes a new one if not found.
+        """
         people = [self.get_person(name) for name in names]
         try:
             return [f for f in self.families if set(f.parents) == set(people)][0]
@@ -53,28 +71,46 @@ class FamilyTree:
             return f
 
     def get_family_down(self, person):
+        """
+        returns a iterator of families where the given person is a parent of
+        """
         for f in self.families:
             #print(str(f))
             if person in f.parents:
                 yield f
 
     def get_representation(self, person):
+        """
+            Object to represent a part of the family tree.
+            head represents the people on the same line indicated by the given person,
+            they include the person himself and all the partners he ever had
+            tail represents the people on the next line. These contain the children.
+            This one is usually chained, as to give the correct representation, they need the head entry of each child
+        """
+        if person is None:
+            print("Invalid representation")
+            return(Representation([], []))
         famlist = list(self.get_family_down(person))
         if len(famlist) == 0:
             #print(person.name, "never married")
-            return ([person], [])
+            return Representation([person], [])
         elif len(famlist) == 1:
             #print(person.name, "married ones")
             fam, = famlist
-            return (filter_invalid([person, self.get_parther(person, fam)]), fam.children)
+            return Representation(filter_invalid([person, self.get_parther(person, fam)]), fam.children)
         elif len(famlist) == 2:
             #print(person.name, "married twice")
             fam2, fam1 = famlist
-            return (
+            return Representation(
                 filter_invalid([self.get_parther(person, fam1), person, self.get_parther(person, fam2)]),
                 fam1.children + fam2.children)
+        else:
+            return Representation([person], [])
 
     def from_xml(self, filename):
+        """
+        Build the family tree given an old-format xml file
+        """
         #print(os.getcwd())
         root = ET.parse(filename).getroot()
         for node in root:
@@ -106,6 +142,7 @@ class FamilyTree:
                 self.families.append(Family(parents, children, div))
     def from_code(self,filename,level=0):
         """
+        generates family tree from a code object
         0 is admin
         1 is logged in users
         2 is all
@@ -116,6 +153,9 @@ class FamilyTree:
                 c(i)
 
     def write(self, person):
+        """
+        returns a string representing the posterity of the given person
+        """
         top, bottom = self.get_representation(person)
         return "{} {{ {} }}".format("+".join(t.name for t in top), ",".join(self.write(p) for p in bottom))
 
@@ -123,11 +163,18 @@ class FamilyTree:
         return self.write(self.head)
 
     def get_parther(self, person, family):
+        """
+        give the partner of the person in the given family. If you want all pertners the person even had,
+        use: get_partners(person)
+        """
         for p in family.parents:
             if p != person:
                 return p
 
     def build_commands(self):
+        """
+        Build a list of commands that could rebuild this whole family tree
+        """
         for p in self.people_linked:
             yield "$convbot","person",p.uname,p.birth,p.dead
             if self.head == p:
@@ -140,11 +187,17 @@ class FamilyTree:
                 yield ("$convbot","divorce",p1,p2)
 
     def get_parents(self,person):
+        """
+        returns all persons parents
+        """
         for f in self.families:
             if person in f.children:
                 for p in f.parents:
                     yield p
     def get_children(self,person):
+        """
+        returns all persons children
+        """
         ret = []
         for f in self.families:
             if person in f.parents:
@@ -152,21 +205,77 @@ class FamilyTree:
                     ret.append(p)
         return sorted(ret,key=lambda x:x.ubirth)
     def get_siblings(self,person):
+        """
+        returns all persons siblings and half-siblings
+        """
         for p in self.get_parents(person):
             for c in self.get_children(p):
                 if c != person:
                     yield c
     def get_partners(self,person):
+        """
+        returns all persons partners
+        """
         for f in self.families:
             if person in f.parents:
                 for p in f.parents:
                     if p != person:
                         yield p
     def get_data(self,person):
+        """
+        returns all data to use in edit.html
+        """
         yield self.get_parents(person)
         yield self.get_partners(person)
         yield self.get_children(person)
         yield list(set(self.get_siblings(person)))
+
+    def get_clan(self,person):
+        """
+        returns all posterity and there partners
+        """
+        print(person,self.get_representation(person).head)
+        for p in self.get_representation(person).head:
+            yield p
+        for p in self.get_representation(person).tail:
+            for i in self.get_clan(p):
+                yield i
+
+    def get_ancestors(self,person):
+        yield person
+        for p in self.get_parents(person):
+            for i in self.get_ancestors(p):
+                yield i
+
+
+    def build_new(self,key):
+        """
+        returns new famaily tree representing a certain root of the family.
+        Gives the posterity and the single direction ancestors
+        """
+        new = FamilyTree()
+        families = []
+        for p in self.get_clan(key):
+            new.people.append(p)
+        for p in self.get_ancestors(key):
+            new.people.append(p)
+        for p in new.people:
+            print(p)
+            for f in self.get_family_down(p):
+                print(f)
+                if f not in families:
+                    families.append(f)
+        print(new.people)
+        new.families = [Family(f.parents,[c for c in f.children if c in new.people]) for f in families]
+        # for f in families:
+        #     for p in f.children:
+        #         if p not in new.people:
+        #             new.people.append(p)
+        if self.head in new.people:
+            new.head = self.head
+        else:
+            new.head = key
+        return new
 
 
 def filter_invalid(l):
@@ -262,7 +371,7 @@ class Commands(list):
             args = [i if i != "" else "*" for i in args]
             usercolor = {"$":"olive","#":"gold","?":"darkgrey"}[user[0]]
             funccolor = {"person":"blue","family":"green","delete":"orange","merge":"purple","parents":"darkgreen",
-                         "head":"darkblue","divorce":"darkorange"}[func]
+                         "head":"darkblue","divorce":"darkorange"}.get(func,"orange")
             argscolor = []
             for i in args:
                 if i == "ERROR":
@@ -307,7 +416,7 @@ class CommandLoader:
         #print("making family")
         parentlist = [p for p in (p1,p2) if p != ""]
         f = self.tree.get_family(*parentlist)
-        f.children.extend(self.tree.get_person(p) for p in children if p != "")
+        f.children.extend(self.tree.get_person(p) for p in children if p != "" and p not in f.children)
     def delete(self,person,*_):
         person = self.tree.get_person(person)
         for f in self.tree.families:
@@ -352,6 +461,12 @@ def addcommand_ip(request,data):
 def addcommand_user(session,data):
     with open("data.log","a") as fff:
         fff.write("#{} {}\n".format(session["username"],data))
+
+def addcommand(request,session,data):
+    if "username" in session:
+        addcommand_user(session,data)
+    else:
+        addcommand_ip(request,data)
 
 def xmlTest():
     f = FamilyTree()

@@ -73,13 +73,13 @@ class DrawJavaScript:
         self.draw_line(x1, y1, x2, y1)
         self.draw_line(x1, y2, x2, y2)
 
-    def draw_text(self, x, y, text):
+    def draw_text(self, x, y, text, size=12):
         self.commands.append("""
-        ctx.font = "12px Arial";
+        ctx.font = "{}px Arial";
         ctx.fillStyle = 'black';
         ctx.textAlign="center";
         ctx.fillText("{}",{},{});
-        """.format(text, x, y))
+        """.format(size, text, x, y))
 
     def add_mouse_pointer(self, x1, y1, x2, y2):
         self.mouseoverevents.append("""
@@ -107,23 +107,23 @@ class DrawJavaScript:
               imageObj{0}.src = '/static/{5}';
         """.format(random.randrange(2 ** 64), x, y, width, height, image))
 
-    def draw_person(self, person, x, y, width, height, border):
+    def draw_person(self, person, x, y, width, height, border, textsize):
         xdif = width / 2 - border
         ydif = height / 2 - border
         self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
-        self.draw_text(x, y + ydif - 28, person.name)
-        self.draw_text(x, y + ydif - 15, "*" * bool(person.birth) + person.birth)
-        self.draw_text(x, y + ydif - 2, "+" * bool(person.dead) + person.dead)
+        self.draw_text(x, y + ydif - 4-2*(textsize+1), person.name,textsize)
+        self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
+        self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
         self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
         self.add_mouse_link("/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
-        nw, nh = width - 4 * border, height - 8 * border
+        nw, nh = width - 3 * border, height - 3 * border - 3*textsize
         # _,w,h = get_image_info(open("static/"+ person.image))
         # print(person.image,w,h)
         # scale = min(nw/w,nh/h)
         # new_width = w*scale
         # new_height = h*scale
 
-        self.draw_image(person.image, x - xdif + border, y - ydif + border / 2, nw, nh)
+        self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
 
 
 class BuildTree:
@@ -236,14 +236,14 @@ class BuildTree:
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
 
 
-def draw_people(tree, width=170, height=150, border=10):
+def draw_people(tree, width=170, height=200, border=15, textsize=12):
     s = BuildTree(tree)
     d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:
         s.draw_family(d, f, width, height, border)
     for p in tree.people_linked:
         #print(list(s.get_pos(p, width, height)), s.coords[p])
-        d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border)
+        d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
 
 

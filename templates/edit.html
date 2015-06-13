@@ -11,15 +11,22 @@
 <h1>{{ name }}</h1>
 <table>
     <tr>
-        <td>
-            <img src='{{ image }}' alt="Loading image" style="max-height:200px" />
+        <td style="width:300px">
+            <img src='{{ image }}' alt="Loading image" style="max-height:300px;max-width:300px" />
         </td>
-        <td>
+        <td style="width:300px">
+            <h2>data</h2>
+            {{ form.3 |safe }}
             <h2>Wijzig afbeelding</h2>
             <form action="upload/" method="post" enctype="multipart/form-data">
                 selecteer .jpg bestand :<input type="file" name="file"><br /><br />
                 bevestig hier:<input type="submit" value="Upload">
             </form>
+
+        </td>
+        <td rowspan="3">
+            <h2>locale stamboom</h2>
+            {{ tree |safe }}
         </td>
     </tr>
     <tr>
@@ -43,6 +50,8 @@
         </td>
         <td>
             <h2>kinderen</h2>
+                <a id="displayC" href="javascript:toggle('displayC','toggleC');">bewerk</a>
+                <div id="toggleC" style="display: none">{{ form.2 | safe}}</div>
             {{ data.2 |safe }}
         </td>
     </tr>
@@ -62,6 +71,7 @@ function toggle(link,display) {
 		text.innerHTML = "verberg";
 	}
 }
+{{ tree_script |safe }}
 </script>
 </body>
 

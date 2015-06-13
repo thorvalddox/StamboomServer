@@ -61,13 +61,43 @@ def edit_partners_form(tree:core.FamilyTree,person):
     remBox =  create_person_dropdown(tree.get_partners(person),None,"remPartner")
     return """<form action="addPartner/" method="post" enctype="multipart/form-data">
          Selecteer nieuwe partner:{}<br/>
-         <input type="submit" value="Voeg toe">
+         <input type="submit" value="Voeg toe & Verzend">
     </form>""".format(addBox) + \
     """<form action="remPartner/" method="post" enctype="multipart/form-data">
          Verwijder partner:{}<br/>
-         <input type="submit" value="Verwijder">
+         <input type="submit" value="Verwijder & Verzend">
     </form>""".format(remBox)
+
+def edit_children_form(tree:core.FamilyTree,person):
+    partBox = create_person_dropdown(tree.get_partners(person),None,"partner")
+    addBox =  create_person_dropdown(tree.people_all,None,"addChild")
+    remBox =  create_person_dropdown(tree.get_children(person),None,"remChild")
+    return """<form action="child/" method="post" enctype="multipart/form-data">
+         Selecteer Partner:{}<br/>
+         Selecteer nieuw kind:{}<br/>
+         <input type="submit" name="addChildPress" value="Voeg toe & Verzend">
+         Verwijder kind:{}<br/>
+         <input type="submit" name="remChildPress" value="Verwijder & Verzend">
+    </form>""".format(partBox,addBox,remBox)
+
+def edit_date_form(person):
+    return """<form action="dates/" method="post" enctype="multipart/form-data">
+         Geboren op:<input type="text" name="birth" value="{}"></br>
+         Gestorven op:<input type="text" name="dead" value="{}"></br>
+         <input type="submit" value="Verzend wijzigingen">
+    </form>""".format(person.birth,person.dead)
 
 def make_forms(tree,person):
     yield edit_parents_form(tree,person)
     yield edit_partners_form(tree,person)
+    yield edit_children_form(tree,person)
+    yield edit_date_form(person)
+
+def disabled_forms(tree,person):
+    yield "<a href='/login/'>log in</a>"
+    yield "<a href='/login/'>log in</a>"
+    yield "<a href='/login/'>log in</a>"
+    yield """<form action="dates/" method="post" enctype="multipart/form-data">
+         Geboren op:{}</br>
+         Gestorven op:{}</br>
+    </form>""".format(person.birth,person.dead)

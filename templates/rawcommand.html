@@ -9,7 +9,6 @@
 {{ titlebar | safe }}
 <table>
     <tr>
-        <td><p style="font-family: 'Courier New'">{{ code |safe}}</p></td>
         <td>
             <h2>Voer commando uit</h2>
             <form action="rawcommand/" method="post" enctype="multipart/form-data">
@@ -17,8 +16,9 @@
                 <input type="submit" value="Uitvoeren">
             </form>
         </td>
-
+        <td nowrap><p style="font-family: 'Courier New'">{{ code |safe}}</p></td>
     </tr>
+
 </table>
 
 
