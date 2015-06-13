@@ -33,11 +33,11 @@ class DrawJavaScript:
 
             // Get the mouse position relative to the canvas element.
             if (ev.layerX || ev.layerX == 0) { //for firefox
-            x = ev.layerX;
-            y = ev.layerY;
+            x = ev.pageX;
+            y = ev.pageY;
             }
-            /*x-=c.offsetLeft;*/
-            /*y-=c.offsetTop;*/
+            x-=c.offsetLeft;
+            y-=c.offsetTop;
             document.body.style.cursor = "";
 
         """ + "\n".join(self.mouseoverevents) + """
@@ -46,12 +46,12 @@ class DrawJavaScript:
             var x, y;
 
             // Get the mouse position relative to the canvas element.
-            if (ev.layerX || ev.layerX == 0) { //for firefox
-            x = ev.layerX;
-            y = ev.layerY;
+            if (ev.pageX || ev.pageX == 0) { //for firefox
+            x = ev.pageX;
+            y = ev.pageY;
             }
-            /*x-=c.offsetLeft;*/
-            /*y-=c.offsetTop;*/
+            x-=c.offsetLeft;
+            y-=c.offsetTop;
         """ + "\n".join(self.clickevents) + """
         }"""
 
