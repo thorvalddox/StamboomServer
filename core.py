@@ -458,7 +458,7 @@ class CommandLoader:
         for f in self.tree.families:
             if child in f.children:
                 f.children.remove(child)
-        self.family(p1, p2, child)
+        self.family(p1, p2, child.uname)
 
     def divorce(self, p1, p2, *_):
         parentlist = [p for p in (p1, p2) if p != ""]
