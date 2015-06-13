@@ -122,7 +122,7 @@ def upload_image(name):
     return redirect('/edit/'+name)
 
 
-@app.route('/stamboom/edit/')
+@app.route('/stamboom/console/')
 @login_required
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
