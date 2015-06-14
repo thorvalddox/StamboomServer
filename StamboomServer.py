@@ -266,6 +266,7 @@ def send_valid_mail(user):
                           html=render_template("email.html",username=user.name,password=user.password),
                           recipients=[user.email]))
         yield "mailing succesfull"
+        yield "check spam"
     except smtplib.SMTPAuthenticationError as e:
         import traceback
         yield traceback.format_exc()
@@ -278,7 +279,7 @@ def send_user_mails():
     #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
     #msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
     for u in loginHandler.users.values():
-        msg += "\n".join(send_valid_mail(u)) + "\n\n"
+        msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
     return(msg)
 
 
