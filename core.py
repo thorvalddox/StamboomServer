@@ -495,7 +495,7 @@ def addcommand(request, session, data):
 
 def xmlTest():
     f = FamilyTree()
-    f.from_xml("dox.xml")
+    f.from_xml("alles.xml")
     return Commands(f.build_commands()).to_html()
 
 
