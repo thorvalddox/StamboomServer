@@ -271,6 +271,14 @@ def send_valid_mail(user):
         import traceback
         yield traceback.format_exc()
         yield "Could not send any mails"
+    except smtplib.SMTPDataError as e:
+        import traceback
+        yield traceback.format_exc()
+        yield "Data limit exceeded"
+    except Exception as e:
+        import traceback
+        yield traceback.format_exc()
+
 
 @app.route("/stamboom/admin/sendemails")
 @admin_required
