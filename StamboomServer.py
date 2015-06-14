@@ -264,9 +264,9 @@ def send_valid_mail(user):
                           sender="stamboom.dox@gmail.com",
                           html=render_template("email.html",username=user.name,password=user.password),
                           recipients=[user.email]))
-    except smtplib.SMTPAuthenticationError:
+    except smtplib.SMTPAuthenticationError as e:
+        print(e)
         print("Could not send any mails")
-        pass
 
 @app.route("/stamboom/admin/sendemails")
 #@admin_required
