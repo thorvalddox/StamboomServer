@@ -258,7 +258,7 @@ def titlebar():
         return string.replace("{{ username }}",session.get("username","Log in"))
 
 def send_valid_mail(user):
-    print("seding email to " + user.email)
+    print("sending email to " + user.email)
     try:
         mail.send(Message("stamboom dox website",
                           sender="stamboom.dox@gmail.com",
