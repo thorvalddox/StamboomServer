@@ -259,13 +259,16 @@ def titlebar():
 
 def send_valid_mail(user):
     print("sending email to " + repr(user.email))
+    print("logged in with "+app.config["MAIL_USERNAME"])
+    print("password: "+app.config["MAIL_PASSWORD"])
     try:
         mail.send(Message("stamboom dox website",
                           sender="stamboom.dox@gmail.com",
                           html=render_template("email.html",username=user.name,password=user.password),
                           recipients=[user.email]))
     except smtplib.SMTPAuthenticationError as e:
-        print(e)
+        import traceback
+        traceback.print_exc()
         print("Could not send any mails")
 
 @app.route("/stamboom/admin/sendemails")
