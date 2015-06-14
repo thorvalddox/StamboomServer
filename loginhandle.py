@@ -17,7 +17,7 @@ def randomstring(lenght=12):
 def load_users():
     with open("users.txt") as fff:
         command = "#test"
-        while command != seed:
+        while command != "seed":
             command,seed = fff.readline().split(" ")
 
         random.seed(int(seed))
