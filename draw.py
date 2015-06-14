@@ -52,6 +52,8 @@ class DrawJavaScript:
             }
             x-=c.offsetLeft;
             y-=c.offsetTop;
+            console.info(x +","+y);
+
         """ + "\n".join(self.clickevents) + """
         }"""
 
