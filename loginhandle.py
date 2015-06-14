@@ -20,7 +20,7 @@ def load_users():
         while command != seed:
             command,seed = fff.readline().split(" ")
 
-        random.seed(hex(seed))
+        random.seed(int(seed))
 
         for i in fff:
             if i[0] == "#":

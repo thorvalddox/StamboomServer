@@ -1,4 +1,4 @@
 #This file is only stored on pythonanywhere.com, not on Github for security reasons
 #Editing this file will most certainly result in merge conflicts.
 #The seed in this file is also different then the seed on pythonanywhere
-seed 5eed
+seed 0x5eed
