@@ -293,11 +293,12 @@ def send_user_mails():
 @app.route("/stamboom/admin/seeUsers")
 @admin_required
 def see_users():
-    msg = ""
+    msg = "<table>"
     #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
     #msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
     for u in loginHandler.users.values():
-        msg += "{} {} {}".format(u.name,u.password,u.email) + "<br/>"
+        msg += "<tr><td>{}</td><td>{}</td><td>{}</td></tr>".format(u.name,u.password,u.email)
+    msg += "</table>"
     return(msg)
 
 if __name__ == '__main__':
