@@ -28,7 +28,7 @@ app.config.update(
     MAIL_USE_TLS = False,
     MAIL_USE_SSL= True,
     MAIL_USERNAME = "stamboom.dox@gmail.com",
-    MAIL_PASSWORD = "d0xst1mb00m",
+    MAIL_PASSWORD = "d0xst4mb00m",
     DEFAULT_MAIL_SENDER  = "stamboom.dox@gmail.com",
 )
 
