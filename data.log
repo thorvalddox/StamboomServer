@@ -1,6 +1,5 @@
 ?local loginas $convbot
 $convbot person Johan_Verhelst 05/08/1965 *
-$convbot person Maria * *
 $convbot person Rita_Dox 13/08/1950 *
 $convbot person Paul_Dox 22/07/1949 *
 $convbot person Lou_Gullinck 15/08/1958 *
@@ -43,7 +42,7 @@ $convbot person Leen_Dox 03/01/1981 *
 $convbot person Xander_Bude 06/07/2006 *
 $convbot person Yarne_Bude 14/05/2008 *
 $convbot person Koen_Dox 06/04/1965 *
-$convbot person Marie-France_Tielemans * *
+$convbot person Marie-France_Tielemans 01/07/1970 *
 $convbot person Wim_Dox 01/09/1970 *
 $convbot person Annick_Van_Dijck 16/04/1975 *
 $convbot person Sylvester_Leeuwenhart_Dox 08/06/2009 *
@@ -174,7 +173,67 @@ $convbot person Henrik_Dox 23/09/1993 *
 $convbot person Reinout_Dox 10/05/1995 *
 $convbot person Patrick_Vanhove 28/05/1956 *
 $convbot person Annemie_Dox 05/03/1966 *
-$convbot family Johan_Verhelst Maria
+$convbot person Pieter_Verwoerdt 15/08/1927 *
+$convbot head Pieter_Verwoerdt
+$convbot person Elza_Behiels 18/09/1927 *
+$convbot person Lena_Verwoerdt 20/05/1948 *
+$convbot person Astrid_Verwoerdt 23/12/1949 *
+$convbot person Paul_Verwoerdt 06/01/1952 *
+$convbot person Lucette_Verwoerdt 26/03/1953 *
+$convbot person Wilma_Verwoerdt 28/11/1954 *
+$convbot person Marcella_Verwoerdt 19/10/1956 *
+$convbot person Pieter_Verwoerdt 15/08/1927 *
+$convbot head Pieter_Verwoerdt
+$convbot person Rita_Dox 23/08/1950 *
+$convbot person Lena_Verwoerdt 20/05/1948 *
+$convbot person Andy_Bednarz 31/08/1947 *
+$convbot person Timmy_Bednarz 27/09/1966 *
+$convbot person Kevin_Bednarz 23/08/1970 *
+$convbot person Debora_Bednarz 06/06/1973 *
+$convbot person Lena_Verwoerdt 20/05/1948 *
+$convbot person Lorrie_Pile * *
+$convbot person Kevin_Bednarz 23/08/1970 *
+$convbot person Jemina * *
+$convbot person Jessica_Bednarz * *
+$convbot person Zacharias_Bednarz * *
+$convbot person Debora_Bednarz 06/06/1973 *
+$convbot person Lee_Patterson * *
+$convbot person Astrid_Verwoerdt 23/12/1949 *
+$convbot person Jan_Swolfs * *
+$convbot person Johnny_Swolfs 29/06/1978 *
+$convbot person Wesley_Swolfs 18/09/1979 *
+$convbot person Paul_Verwoerdt 06/01/1952 *
+$convbot person Peggie_Rogers * *
+$convbot person Hank_Verwoerdt 19/08/1979 *
+$convbot person Hank_Verwoerdt 19/08/1979 *
+$convbot person April_Kellet * *
+$convbot person Chase_Verwoerdt 06/01/2008 *
+$convbot person Lucette_Verwoerdt 26/03/1953 *
+$convbot person Henricus_Janssens * *
+$convbot person Bart_Janssens 26/06/1976 *
+$convbot person Saskia_Janssens 02/02/1979 *
+$convbot person Saskia_Janssens 02/02/1979 *
+$convbot person Diederik_Willems * *
+$convbot person Wilma_Verwoerdt 28/11/1954 *
+$convbot person Rene_Cares 09/08/1954 *
+$convbot person Davy_Cares 27/02/1976 *
+$convbot person Ronny_Cares 09/07/1977 *
+$convbot person Benny_Cares 14/05/1984 *
+$convbot person Davy_Cares 27/02/1976 *
+$convbot person An_Van_Den_Meerschaut 24/10/1980 *
+$convbot person Sebastiaan_Cares 27/02/2007 *
+$convbot person Alexander_Cares 15/10/2009 *
+$convbot person Ronny_Cares 09/07/1977 *
+$convbot person Nele_Stalmans * *
+$convbot person Benny_Cares 14/05/1984 *
+$convbot person Vicky_Wuyts 18/12/1985 *
+$convbot person Lore_Cares 24/11/2004 *
+$convbot person Marcella_Verwoerdt 19/10/1956 *
+$convbot person Peter_Van_Dinter 14/09/1981 *
+$convbot person Caroline_Agtmael * *
+$convbot person Peter_Van_Dinter 14/09/1981 *
+$convbot family Johan_Verhelst Maria_???
+$convbot family Pieter_Verwoerdt Rita_Dox
 $convbot family Paul_Dox Lou_Gullinck Kristel_Dox Karl_Dox
 $convbot family Wouter_Verhelst Anita_Van_Gastel
 $convbot family Ewout_Dox Sytze_Van_Herck
@@ -206,7 +265,6 @@ $convbot family Geert_Dox Ann_Rombouts Ortwin_Dox Maarten_Dox Zeger_Dox
 $convbot family Fernand_Didelez Godelieve_Dox Peter_Didelez
 $convbot family Peter_Dox Anja_Van_Praet Joran_Dox Ruben_Dox
 $convbot family Petrus_Ludovicus_Carolus_Dox Clementina_Joanna_Behiels Godelieve_Dox Herman_Dox Hugo_Dox Ivo_Dox Ria_Dox Ludo_Dox Hilde_Dox Gerda_Dox Rudi_Dox Paul_Dox Rita_Dox Dirk_Dox Rein_Dox
-$convbot head Petrus_Ludovicus_Carolus_Dox
 $convbot family Joran_Dox Kirsten_Daens
 $convbot family Bert_Michielsen Saskia_Vermeylen Matthias_Michielsen Lotte_Michielsen Emma_Michielsen
 $convbot family Dries_Vonck Linde_Dox
@@ -218,6 +276,23 @@ $convbot family Peter_Didelez Ilse_Bruyninckx Camie_Didelez Charlot_Didelez
 $convbot family Herman_Dox Hilde_Verschaeren Geert_Dox Jan_Dox Els_Dox Steven_Dox
 $convbot family Dirk_Dox Dina_De_Moor Linde_Dox Arnout_Dox Ewout_Dox Henrik_Dox Reinout_Dox
 $convbot family Patrick_Vanhove Annemie_Dox
+$convbot family Pieter_Verwoerdt Elza_Behiels Lena_Verwoerdt Astrid_Verwoerdt Paul_Verwoerdt Lucette_Verwoerdt Wilma_Verwoerdt Marcella_Verwoerdt
+$convbot family Pieter_Verwoerdt Rita_Dox
+$convbot family Lena_Verwoerdt Andy_Bednarz Timmy_Bednarz Kevin_Bednarz Debora_Bednarz
+$convbot family Lena_Verwoerdt Lorrie_Pile
+$convbot family Kevin_Bednarz Jemina Jessica_Bednarz Zacharias_Bednarz
+$convbot family Debora_Bednarz Lee_Patterson
+$convbot family Astrid_Verwoerdt Jan_Swolfs Johnny_Swolfs Wesley_Swolfs
+$convbot family Paul_Verwoerdt Peggie_Rogers Hank_Verwoerdt
+$convbot family Hank_Verwoerdt April_Kellet Chase_Verwoerdt
+$convbot family Lucette_Verwoerdt Henricus_Janssens Bart_Janssens Saskia_Janssens
+$convbot family Saskia_Janssens Diederik_Willems
+$convbot family Wilma_Verwoerdt Rene_Cares Davy_Cares Ronny_Cares Benny_Cares
+$convbot family Davy_Cares An_Van_Den_Meerschaut Sebastiaan_Cares Alexander_Cares
+$convbot family Ronny_Cares Nele_Stalmans
+$convbot family Benny_Cares Vicky_Wuyts Lore_Cares
+$convbot family Marcella_Verwoerdt * Peter_Van_Dinter
+$convbot family Caroline_Agtmael Peter_Van_Dinter
 $convbot logout
 ?127.0.0.1 loginas #thorvald_dox
 ?127.0.0.1 loginas #thorvald_dox
