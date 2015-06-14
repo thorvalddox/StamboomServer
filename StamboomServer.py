@@ -259,14 +259,14 @@ def titlebar():
 
 def send_valid_mail(user):
     yield "sending email to " + repr(user.email)
-
+    yield "username=" + repr(user.name)
     try:
         mail.send(Message("stamboom dox website",
                           sender="stamboom.dox@gmail.com",
                           html=render_template("email.html",username=user.name,password=user.password),
                           recipients=[user.email]))
         yield "mailing succesfull"
-        yield "check spam"
+        yield "-> check spam"
     except smtplib.SMTPAuthenticationError as e:
         import traceback
         yield traceback.format_exc()
