@@ -126,6 +126,7 @@ class DrawJavaScript:
         self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
 
 
+
 class BuildTree:
     def __init__(self, tree):
         self.tree = tree
@@ -214,6 +215,8 @@ class BuildTree:
     def draw_family(self, draw:DrawJavaScript, fam:core.Family, width, height, border):
         xdif = width / 2 - border
         ydif = height / 2 - border
+        if not all(self.check_valid(p) for p in fam.parents):
+            return
         if len(fam.parents) == 2:
             p1, p2 = fam.parents
             px1, py1 = self.get_pos(p1, width, height)
@@ -231,10 +234,13 @@ class BuildTree:
             cyInter = (py + cy) // 2
             draw.draw_line(px, py + ydif * (len(fam.parents) == 1), px, cyInter)
             for c in fam.children:
+                if not self.check_valid(c):
+                    continue
                 cx, _ = self.get_pos(c, width, height)
                 draw.draw_line(px, cyInter, cx, cyInter)
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
-
+    def check_valid(self,person):
+        return(self.coords[person] is not None)
 
 def draw_people(tree, width=170, height=200, border=15, textsize=12):
     s = BuildTree(tree)
@@ -242,7 +248,7 @@ def draw_people(tree, width=170, height=200, border=15, textsize=12):
     for f in tree.families:
         s.draw_family(d, f, width, height, border)
     for p in tree.people_linked:
-        if s.coord[p] is not None:
+        if s.check_valid(p):
             d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
 

@@ -174,7 +174,6 @@ $convbot person Reinout_Dox 10/05/1995 *
 $convbot person Patrick_Vanhove 28/05/1956 *
 $convbot person Annemie_Dox 05/03/1966 *
 $convbot person Pieter_Verwoerdt 15/08/1927 *
-$convbot head Pieter_Verwoerdt
 $convbot person Elza_Behiels 18/09/1927 *
 $convbot person Lena_Verwoerdt 20/05/1948 *
 $convbot person Astrid_Verwoerdt 23/12/1949 *
@@ -293,6 +292,7 @@ $convbot family Ronny_Cares Nele_Stalmans
 $convbot family Benny_Cares Vicky_Wuyts Lore_Cares
 $convbot family Marcella_Verwoerdt * Peter_Van_Dinter
 $convbot family Caroline_Agtmael Peter_Van_Dinter
+$convbot head Petrus_Ludovicus_Carolus_Dox
 $convbot logout
 ?127.0.0.1 loginas #thorvald_dox
 ?127.0.0.1 loginas #thorvald_dox
