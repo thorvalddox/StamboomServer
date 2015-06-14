@@ -263,7 +263,7 @@ def send_valid_mail(user):
                       recipients=[user.email]))
 
 @app.route("/stamboom/admin/sendemails")
-@admin_required
+#@admin_required
 def send_user_mails():
     for u in loginHandler.users.values():
         send_valid_mail(u)

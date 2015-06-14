@@ -15,10 +15,17 @@ def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
 
 def load_users():
-    random.seed(159357456)
     with open("users.txt") as fff:
-        for i in fff.read().split("\n"):
-            name,email = i.split(" ")
+        command = "#test"
+        while command != seed:
+            command,seed = fff.readline().split(" ")
+
+        random.seed(hex(seed))
+
+        for i in fff:
+            if i[0] == "#":
+                continue
+            name,email = i[:-1].split(" ") #[:-1] to ignore newline character
             yield name,User(name.lower(),email)
 
 

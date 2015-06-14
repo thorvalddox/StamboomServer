@@ -1,6 +1,8 @@
 Voor de gene die dit leest, ik weet dat dit een gigantische rommel is.
 Als ge eraan uit wilt kunnen zou ik dit aan mij persoonlijk (Thorvald Dox) vragen.
 
+Als ge de code download en in het correcte framework stopt zal deze waarschijnlijk werken maar zal het onmogelijk zijn om in te loggen. Dit komt omdat de gebruikersnamen en wachtwoord-generatie-seed alleen op de server zijn opgeslagen. Bewerkt ook lieft niers in users.txt, dit zal waarschijnlijk leiden tot een merge-conflict wanneer ik deze inlaad in de server.
+
 Werking van de command-API
 
 <user> <command> <arguments>
