@@ -280,6 +280,16 @@ def send_valid_mail(user):
         yield traceback.format_exc()
 
 
+@app.route("/stamboom/admin/sendemails")
+@admin_required
+def send_user_mails():
+    msg = ""
+    #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
+    #msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
+    for u in loginHandler.users.values():
+        msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+    return(msg)
+
 @app.route("/stamboom/admin/seeUsers")
 @admin_required
 def see_users():
@@ -289,8 +299,6 @@ def see_users():
     for u in loginHandler.users.values():
         msg += "{} {} {}".format(u.name,u.password,u.email) + "<br/>"
     return(msg)
-
-
 
 if __name__ == '__main__':
     app.run()
