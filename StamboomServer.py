@@ -77,19 +77,19 @@ def index():
     #response = make_response(render_template("titlepage.html"))
     return redirect("/stamboom/")
 
-@app.route('/stamboom/commands/oldxml')
+@app.route('/stamboom/commands/oldxml/')
 @login_required
 def show_old_xml():
     response = make_response(render_template("code_show.html",code=core.xmlTest().replace("\n","<br/>")))
     return response
 
-@app.route('/stamboom/commands/handled')
+@app.route('/stamboom/commands/handled/')
 @login_required
 def show_handled_code():
     response = make_response(render_template("code_show.html",code=core.bashTest().replace("\n","<br/>")))
     return response
 
-@app.route('/stamboom/commands/raw')
+@app.route('/stamboom/commands/raw/')
 @login_required
 def show_raw_code():
     response = make_response(render_template("code_show.html",code=core.rawCode().replace("\n","<br/>")))
@@ -105,7 +105,7 @@ def show_fam_tree():
                                              titlebar=titlebar()))
     return response
 
-@app.route('/stamboom/safe')
+@app.route('/stamboom/safe/')
 def show_fam_tree_safe():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -280,7 +280,7 @@ def send_valid_mail(user):
         yield traceback.format_exc()
 
 
-@app.route("/stamboom/admin/sendemails")
+@app.route("/stamboom/admin/sendemails/")
 @admin_required
 def send_user_mails():
     msg = ""
@@ -290,7 +290,7 @@ def send_user_mails():
         msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
     return(msg)
 
-@app.route("/stamboom/admin/seeUsers")
+@app.route("/stamboom/admin/seeUsers/")
 @admin_required
 def see_users():
     msg = "<table>"
