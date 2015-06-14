@@ -129,7 +129,7 @@ class DrawJavaScript:
 class BuildTree:
     def __init__(self, tree):
         self.tree = tree
-        self.coords = {p: (0, 0) for p in self.tree.people_linked}
+        self.coords = {p: None for p in self.tree.people_linked}
         self.headsize = {}
         self.tailsize = {}
         self.xpos = {p: 0 for p in self.tree.get_representation(self.tree.head)[0]}
@@ -242,8 +242,8 @@ def draw_people(tree, width=170, height=200, border=15, textsize=12):
     for f in tree.families:
         s.draw_family(d, f, width, height, border)
     for p in tree.people_linked:
-        #print(list(s.get_pos(p, width, height)), s.coords[p])
-        d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
+        if s.coord[p] is not None:
+            d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
 
 
