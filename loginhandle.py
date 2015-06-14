@@ -18,14 +18,20 @@ def load_users():
     with open("users.txt") as fff:
         command = "#test"
         while command != "seed":
-            command,seed = fff.readline().split(" ")
-
-        random.seed(int(seed))
-
-        for i in fff:
-            if i[0] == "#":
+            line = fff.readline()
+            if line.startswith("#"):
                 continue
-            name,email = i[:-1].split(" ") #[:-1] to ignore newline character
+            command,seed = line.split(" ")
+
+        random.seed(int(seed,16))
+        print(int(seed,16))
+
+        for line in fff:
+            if line.startswith("#"):
+                continue
+            name,email = line[:-1].split(" ") #[:-1] to ignore newline character
+            if name == "seed":
+                continue
             yield name,User(name.lower(),email)
 
 
