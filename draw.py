@@ -28,6 +28,23 @@ class DrawJavaScript:
         """ + "\n".join(self.commands) + """
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);
+        function getOffsetRect(elem) {
+            var box = elem.getBoundingClientRect()
+
+            var body = document.body
+            var docElem = document.documentElement
+
+            var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop
+            var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft
+
+            var clientTop = docElem.clientTop || body.clientTop || 0
+            var clientLeft = docElem.clientLeft || body.clientLeft || 0
+
+            var top  = box.top +  scrollTop - clientTop
+            var left = box.left + scrollLeft - clientLeft
+
+            return { top: Math.round(top), left: Math.round(left) }
+        }
         function on_mousemove (ev) {
             var x, y;
 
@@ -36,8 +53,8 @@ class DrawJavaScript:
             x = ev.pageX;
             y = ev.pageY;
             }
-            x-=c.offsetLeft;
-            y-=c.offsetTop;
+            x-=getOffsetRect(c).left;
+            y-=getOffsetRect(c).top;
             document.body.style.cursor = "";
 
         """ + "\n".join(self.mouseoverevents) + """
@@ -50,12 +67,13 @@ class DrawJavaScript:
             x = ev.pageX;
             y = ev.pageY;
             }
-            x-=c.offsetLeft;
-            y-=c.offsetTop;
-            console.info(x +","+y + "(" + ev.pageX + "," + ev.pageY + ")");
+            x-=getOffsetRect(c).left;
+            y-=getOffsetRect(c).top;
+            console.info(x +","+y + "(" + ev.pageX + "," + ev.pageY + ")" + c.offsetLeft + "," + c.offsetTop);
 
         """ + "\n".join(self.clickevents) + """
-        }"""
+        }
+        """
 
     def draw_line(self, *coords):  # x1 y1 x2 y2
         self.commands.append("""
