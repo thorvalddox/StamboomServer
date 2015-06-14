@@ -130,10 +130,10 @@ class DrawJavaScript:
 class BuildTree:
     def __init__(self, tree):
         self.tree = tree
-        self.coords = {p: None for p in self.tree.people_linked}
+        self.coords = {p: (0,0) for p in self.tree.people_linked}
         self.headsize = {}
         self.tailsize = {}
-        self.xpos = {p: None for p in self.tree.get_representation(self.tree.head)[0]}
+        self.xpos = {p: 0 for p in self.tree.get_representation(self.tree.head)[0]}
         for l in self.make_top_layers():
             for p in l:
                 self.transfer_xpos(p)
@@ -240,7 +240,7 @@ class BuildTree:
                 draw.draw_line(px, cyInter, cx, cyInter)
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
     def check_valid(self,person):
-        return(self.coords[person] is not None)
+        return(self.coords[person] != (0,0))
 
 def draw_people(tree, width=170, height=200, border=15, textsize=12):
     s = BuildTree(tree)
