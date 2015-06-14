@@ -133,7 +133,7 @@ class BuildTree:
         self.coords = {p: None for p in self.tree.people_linked}
         self.headsize = {}
         self.tailsize = {}
-        self.xpos = {p: 0 for p in self.tree.get_representation(self.tree.head)[0]}
+        self.xpos = {p: None for p in self.tree.get_representation(self.tree.head)[0]}
         for l in self.make_top_layers():
             for p in l:
                 self.transfer_xpos(p)
