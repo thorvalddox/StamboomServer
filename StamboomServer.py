@@ -4,6 +4,8 @@ from flask import render_template,make_response,url_for,request,redirect,session
 
 from flask_mail import Mail,Message
 
+import smtplib
+
 import os,os.path
 import random
 from functools import wraps
@@ -257,10 +259,14 @@ def titlebar():
 
 def send_valid_mail(user):
     print("seding email to " + user.email)
-    mail.send(Message("stamboom dox website",
-                      sender="stamboom.dox@gmail.com",
-                      html=render_template("email.html",username=user.name,password=user.password),
-                      recipients=[user.email]))
+    try:
+        mail.send(Message("stamboom dox website",
+                          sender="stamboom.dox@gmail.com",
+                          html=render_template("email.html",username=user.name,password=user.password),
+                          recipients=[user.email]))
+    except smtplib.SMTPAuthenticationError:
+        print("Could not send any mails")
+        pass
 
 @app.route("/stamboom/admin/sendemails")
 #@admin_required
