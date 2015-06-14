@@ -258,25 +258,28 @@ def titlebar():
         return string.replace("{{ username }}",session.get("username","Log in"))
 
 def send_valid_mail(user):
-    print("sending email to " + repr(user.email))
-    print("logged in with "+app.config["MAIL_USERNAME"])
-    print("password: "+app.config["MAIL_PASSWORD"])
+    yield "sending email to " + repr(user.email)
+
     try:
         mail.send(Message("stamboom dox website",
                           sender="stamboom.dox@gmail.com",
                           html=render_template("email.html",username=user.name,password=user.password),
                           recipients=[user.email]))
+        yield "mailing succesfull"
     except smtplib.SMTPAuthenticationError as e:
         import traceback
-        traceback.print_exc()
-        print("Could not send any mails")
+        yield traceback.format_exc()
+        yield "Could not send any mails"
 
 @app.route("/stamboom/admin/sendemails")
 @admin_required
 def send_user_mails():
+    msg = ""
+    #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
+    #msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
     for u in loginHandler.users.values():
-        send_valid_mail(u)
-    return(redirect("/"))
+        msg += "\n".join(send_valid_mail(u)) + "\n\n"
+    return(msg)
 
 
 
