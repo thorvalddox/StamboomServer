@@ -291,7 +291,7 @@ def send_valid_mail(user):
 @app.route("/stamboom/admin/")
 @admin_required
 def email_form():
-    response = make_response(render_template("send_emails.html",users=loginHandler.get_user_list()))
+    response = make_response(render_template("send_emails.html",users=list(loginHandler.get_user_list())))
     return response
 
 
