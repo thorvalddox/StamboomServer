@@ -156,7 +156,7 @@ def upload_image(name):
     print(request.files)
     file = request.files["file"]
     imagechanger.change_image(name,file)
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
 
 @app.route('/stamboom/console/')
