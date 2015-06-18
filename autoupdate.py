@@ -40,7 +40,7 @@ def try_update() -> bool:
 
 def restart_server():
     print("Restart Server")
-    proc = subprocess.Popen(["touch /var/www/wsgi.py"], stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen(["touch /var/www/lightning939_pythonanywhere_com_wsgi.py"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
     print("touch:", out)
 
