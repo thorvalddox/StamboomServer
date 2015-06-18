@@ -1,6 +1,6 @@
 __author__ = 'Thorvald'
 import subprocess
-import threading
+#import threading
 
 BASH_CHANGE = \
 """
