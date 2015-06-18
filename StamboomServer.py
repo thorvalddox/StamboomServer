@@ -15,8 +15,11 @@ import draw
 import imagechanger
 import forms
 
+from loginhandle import LoginHandler
+from autoupdate import run_update_process
 
 
+#Init Flask application
 app = Flask(__name__)
 
 app.debug = True
@@ -35,18 +38,22 @@ app.config.update(
 
 app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
+#Init Flask_mail
+
 mail = Mail(app)
-
-print(app.config)
-
-print(mail)
 
 if not os.getcwd().endswith("StamboomServer"):
     os.chdir("StamboomServer")
 
-from loginhandle import loginHandler
 
-#TODO clad stambomen afhankleijk van 1 richting
+#Init side processes
+
+
+loginHandler = LoginHandler()
+run_update_process()
+
+
+#Function from here.
 
 def check_logged_in(session):
     if "username" not in session:

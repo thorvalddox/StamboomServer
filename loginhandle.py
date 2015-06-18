@@ -47,4 +47,4 @@ class User:
 
 
 
-loginHandler = LoginHandler()
+
