@@ -301,8 +301,8 @@ def email_form():
 def send_user_mails():
     msg = ""
     for u in loginHandler.users.values():
-        print(request.files)
-        if request.files[u.name]:
+        print(request.form)
+        if request.form[u.name]:
             msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
     return(msg)
 
