@@ -19,7 +19,10 @@ def check_for_changes() -> bool:
     print("Done checking")
 
 
+#Pythonanywhere free account doesn't allow threading. Do not use this function.
 def run_update_process():
     threading.Timer(5.0, run_update_process).start()
-    check_for_changes()
+    update()
 
+def update():
+    check_for_changes()

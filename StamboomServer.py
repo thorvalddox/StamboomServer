@@ -16,7 +16,7 @@ import imagechanger
 import forms
 
 from loginhandle import LoginHandler
-from autoupdate import run_update_process
+from autoupdate import update
 
 
 #Init Flask application
@@ -50,7 +50,7 @@ if not os.getcwd().endswith("StamboomServer"):
 
 
 loginHandler = LoginHandler()
-run_update_process()
+
 
 
 #Function from here.
@@ -105,6 +105,7 @@ def show_raw_code():
 
 @app.route('/stamboom/')
 def show_fam_tree():
+    update() #Lazy update of the source code.
     f = core.FamilyTree()
     f.from_code("data.log",2)
     d = draw.draw_people(f)
