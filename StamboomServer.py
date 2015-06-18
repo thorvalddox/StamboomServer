@@ -156,7 +156,7 @@ def upload_image(name):
     print(request.files)
     file = request.files["file"]
     imagechanger.change_image(name,file)
-    return redirect('/edit/'+name)
+    return redirect('/stamboom/edit/'+name)
 
 
 @app.route('/stamboom/console/')
@@ -263,7 +263,8 @@ def titlebar():
         string = fff.read()
         if "username" not in session:
             string = string.replace("logout","login")
-        return string.replace("{{ username }}",session.get("username","Log in"))
+            string = string.replace("Log uit","Log in")
+        return string
 
 def send_valid_mail(user):
     yield "sending email to " + repr(user.email)
