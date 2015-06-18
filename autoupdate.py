@@ -5,9 +5,9 @@ import subprocess
 BASH_CHANGE = \
 """
 if git diff-index --quiet HEAD --; then
-  echo True
-else
   echo False
+else
+  echo True
 fi
 """
 
