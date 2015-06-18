@@ -8,7 +8,7 @@
 <form action="sendemails/" method="post" enctype="multipart/form-data">
     {% for user in users %}
     <input type="checkbutton" id="{{ user.name }}" value="{{ user.name }}"/> {{ user.email }}
-    {% end for %}
+    {% endfor %}
     <input type="submit" value="Send"><br/>
 </form>
 </body>
