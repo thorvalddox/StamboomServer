@@ -7,6 +7,11 @@ import os.path
 
 from imageinfo import get_image_info
 
+try:
+    import Image
+except ImportError:
+    from PIL import Image
+
 
 class DrawJavaScript:
     def __init__(self, dimensions):
@@ -116,6 +121,23 @@ class DrawJavaScript:
         """.format(x1, x2, y1, y2, link))
 
     def draw_image(self, image, x, y, width, height):
+        delim_array = image.split('.', 1)
+        path = "static/%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
+        if not os.path.exists(path):
+            im = Image.open("static/" + image)
+            old_width, old_height = im.size
+            w_scale = float(width) / old_width
+            h_scale = float(height) / old_height
+            if (w_scale < 1) or (h_scale < 1):
+                # Image needs to be scaled
+                scale = min(w_scale, h_scale)
+                new_width = int(scale * old_width)
+                new_height = int(scale * old_height)
+                newimage = im.resize((new_width, new_height), Image.ANTIALIAS)
+                newimage.save(path, im.format)
+            else:
+                im.save(path, im.format)
+
         self.commands.append("""
             var imageObj{0} = new Image();
 
@@ -125,7 +147,7 @@ class DrawJavaScript:
               }};
 
               imageObj{0}.src = '/static/{5}';
-        """.format(random.randrange(2 ** 64), x, y, width, height, image))
+        """.format(random.randrange(2 ** 64), x, y, width, height, path))
 
     def draw_person(self, person, x, y, width, height, border, textsize):
         xdif = width / 2 - border
