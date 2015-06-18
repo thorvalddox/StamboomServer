@@ -106,7 +106,6 @@ def show_raw_code():
 @app.route('/stamboom/')
 def show_fam_tree():
     update() #Lazy update of the source code.
-    return("TEST TEST TEST")
     f = core.FamilyTree()
     f.from_code("data.log",2)
     d = draw.draw_people(f)
