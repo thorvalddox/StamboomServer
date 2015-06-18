@@ -44,6 +44,8 @@ class User:
     def match_password(self,password):
         print(self.password,password)
         return self.password == password
+    def __repr__(self):
+        return "{}({},{})".format(self.name,self.email,self.password)
 
 
 
