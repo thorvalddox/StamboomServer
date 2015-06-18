@@ -4,7 +4,7 @@ import subprocess
 
 BASH_CHANGE = \
 """
-if [[ `git status --porcelain` ]]; then
+if [[`git status --porcelain`]]; then
   echo True
 else
   echo False
