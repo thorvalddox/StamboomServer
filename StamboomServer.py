@@ -201,7 +201,7 @@ def edit_add_partner(name):
     print(name)
     print(request.form)
     partner = request.form["addPartner"]
-    core.addcommand(request,session,"family {} {}".format(name,partner))
+    core.addcommand(request,session,"family {} {}".format(name,partner.replace(" ","_")))
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
@@ -210,7 +210,7 @@ def edit_rem_partner(name):
     print(name)
     print(request.form)
     partner = request.form["remPartner"]
-    core.addcommand(request,session,"disband {} {}".format(name,partner))
+    core.addcommand(request,session,"disband {} {}".format(name,partner.replace(" ","_")))
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
@@ -219,10 +219,10 @@ def edit_child(name):
     partner = request.form["partner"]
     if "addChildPress" in request.form:
         child = request.form["addChild"]
-        core.addcommand(request,session,"family {} {} {}".format(name,partner,child))
+        core.addcommand(request,session,"family {} {} {}".format(name,partner.replace(" ","_"),child.replace(" ","_")))
     elif "remChildPress" in request.form:
         child = request.form["remChild"]
-        core.addcommand(request,session,"disconnect {} {} {}".format(name,partner,child))
+        core.addcommand(request,session,"disconnect {} {} {}".format(name,partner.replace(" ","_"),child.replace(" ","_")))
     return redirect('/stamboom/edit/'+name)
 
 
