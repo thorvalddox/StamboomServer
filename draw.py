@@ -123,7 +123,6 @@ class DrawJavaScript:
     def draw_image(self, image, x, y, width, height):
         delim_array = image.split('.', 1)
         path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
-        print path
         if not os.path.exists("static/" + path):
             im = Image.open("static/" + image)
             old_width, old_height = im.size
