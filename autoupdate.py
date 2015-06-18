@@ -26,17 +26,17 @@ def check_for_changes() -> bool:
 #     update()
 
 def update():
-    if check_for_changes():
-        force_update()
+    if try_update():
         restart_server()
 
 
-def force_update():
+def try_update() -> bool:
     print("Updating Code")
     proc = subprocess.Popen(["git pull"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
     print("git:", out)
     print("Done updating Code")
+    return out != b'Already up-to-date.\n'
 
 def restart_server():
     print("Restart Server")
