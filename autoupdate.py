@@ -13,7 +13,7 @@ fi
 
 def check_for_changes() -> bool:
     print("Checking for changes")
-    proc = subprocess.Popen(["BASH_CHANGE"], stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen([BASH_CHANGE], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
     print("git:", out)
     print("Done checking")
