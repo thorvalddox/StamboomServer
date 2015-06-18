@@ -98,7 +98,8 @@ class FamilyTree:
             return Representation(filter_invalid([person, self.get_parther(person, fam)]), fam.children)
         elif len(famlist) == 2:
             # print(person.name, "married twice")
-            fam2, fam1 = sorted(famlist,key=lambda f:self.get_parther(person,f).ubirth)
+            fam1, fam2 = sorted(famlist,key=lambda f:self.get_parther(person,f).ubirth
+                                if self.get_parther(person,f) is not None else time.localtime())
             return Representation(
                 filter_invalid([self.get_parther(person, fam1), person, self.get_parther(person, fam2)]),
                 fam1.children + fam2.children)
