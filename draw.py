@@ -122,8 +122,9 @@ class DrawJavaScript:
 
     def draw_image(self, image, x, y, width, height):
         delim_array = image.split('.', 1)
-        path = "static/%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
-        if not os.path.exists(path):
+        path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
+        print path
+        if not os.path.exists("static/" + path):
             im = Image.open("static/" + image)
             old_width, old_height = im.size
             w_scale = float(width) / old_width
@@ -134,9 +135,9 @@ class DrawJavaScript:
                 new_width = int(scale * old_width)
                 new_height = int(scale * old_height)
                 newimage = im.resize((new_width, new_height), Image.ANTIALIAS)
-                newimage.save(path, im.format)
+                newimage.save("static/" + path, im.format)
             else:
-                im.save(path, im.format)
+                im.save("static/" + path, im.format)
 
         self.commands.append("""
             var imageObj{0} = new Image();
