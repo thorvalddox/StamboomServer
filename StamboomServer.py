@@ -288,14 +288,21 @@ def send_valid_mail(user):
         yield traceback.format_exc()
 
 
-@app.route("/stamboom/admin/sendemails/")
+@app.route("/stamboom/admin/")
+@admin_required
+def email_form():
+    response = make_response(render_template("send_emails.html",users=loginHandler.get_user_list()))
+    return response
+
+
+
+@app.route("/stamboom/admin/sendemails/", methods=["POST"])
 @admin_required
 def send_user_mails():
     msg = ""
-    #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
-    #msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
     for u in loginHandler.users.values():
-        msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+        if request.files[u.name]:
+            msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
     return(msg)
 
 @app.route("/stamboom/admin/seeUsers/")

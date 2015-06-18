@@ -10,6 +10,8 @@ class LoginHandler:
     def valid_login(self,name,password):
         print(self.users)
         return self.valid_user(name) and self.users[name.lower()].match_password(password)
+    def get_user_list(self):
+        return [{"name": k,"email": v.email} for k,v in self.users.items()]
 
 def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
