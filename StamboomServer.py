@@ -201,7 +201,7 @@ def edit_add_partner(name):
     print(name)
     print(request.form)
     partner = request.form["addPartner"]
-    core.addcommand(request,session,"family {}".format(name,partner))
+    core.addcommand(request,session,"family {} {}".format(name,partner))
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
@@ -210,7 +210,7 @@ def edit_rem_partner(name):
     print(name)
     print(request.form)
     partner = request.form["remPartner"]
-    core.addcommand(request,session,"disband {}".format(name,partner))
+    core.addcommand(request,session,"disband {} {}".format(name,partner))
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
