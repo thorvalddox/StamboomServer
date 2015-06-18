@@ -59,7 +59,7 @@ class FamilyTree:
         """
         returns a family with the given parent names. Makes a new one if not found.
         """
-        people = [self.get_person(name) for name in names]
+        people = [self.get_person(name) for name in names if name not in ("","*")]
         try:
             return [f for f in self.families if set(f.parents) == set(people)][0]
         except IndexError:
