@@ -302,8 +302,13 @@ def send_user_mails():
     msg = ""
     for u in loginHandler.users.values():
         print(request.form)
-        if request.form[u.name]:
-            msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+        if u.name in request.form:
+            if request.form[u.name]:
+                msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+            else:
+                msg += "no mail was send to " + u.email +  "<br/><br/>"
+        else:
+            msg += "no form data about " + u.email +  "<br/><br/>"
     return(msg)
 
 @app.route("/stamboom/admin/seeUsers/")
