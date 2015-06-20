@@ -8,10 +8,13 @@ class LoginHandler:
     def valid_user(self,name):
         return name.lower() in self.users
     def valid_login(self,name,password):
-        print(self.users)
+        for i in self.users.values:
+            print(i)
         return self.valid_user(name) and self.users[name.lower()].match_password(password)
     def get_user_list(self):
         return [{"name": k,"email": v.email} for k,v in self.users.items()]
+    def check_admin(self,session):
+        return session.get("username","") in ("thorvalddx94","gerwind96",)
 
 def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
