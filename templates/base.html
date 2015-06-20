@@ -35,18 +35,31 @@
         <li><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
     </ul>-->
         <ul id="nav">
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li>
-                <a href="#">stamboom</a>
+                <a href="/stamboom/">stamboom</a>
                 <ul>
                     <li><a href="/stamboom/">Dox</a></li>
-                    <li><a href="/stamboom/">Dox</a></li>
+                    <li><a href="/stamboom/view/Pieter_Verwoerdt">Verwoerdt</a></li>
+                    <li><a href="/stamboom/view/Godelieve_Dox">Clan Godelieve</a></li>
+                    <li><a href="/stamboom/view/Herman_Dox">Clan Herman</a></li>
+                    <li><a href="/stamboom/view/Hugo_Dox">Clan Hugo</a></li>
+                    <li><a href="/stamboom/view/Ivo_Dox">Clan Ivo</a></li>
+                    <li><a href="/stamboom/view/Ria_Dox">Clan Ria</a></li>
+                    <li><a href="/stamboom/view/Ludo_Dox">Clan Ludo</a></li>
+                    <li><a href="/stamboom/view/Hilde_Dox">Clan Hilde</a></li>
+                    <li><a href="/stamboom/view/Gerda_Dox">Clan Gerda</a></li>
+                    <li><a href="/stamboom/view/Rudi_Dox">Clan Rudi</a></li>
+                    <li><a href="/stamboom/view/Paul_Dox">Clan Paul</a></li>
+                    <li><a href="/stamboom/view/Rita_Dox">Clan Rita</a></li>
+                    <li><a href="/stamboom/view/Dirk_Dox">Clan Dirk</a></li>
+                    <li><a href="/stamboom/view/Rein_Dox">Clan Rein</a></li>
                 </ul>
             </li>
             <li><a href="/stamboom/list/people/">Lijst</a></li>
             <li>
                 {% if session is defined and username in session %}
-                    <a href="#">Login</a>
+                    <a href="login">Login</a>
                 {% else %}
                     <a href="#">{{ session.username }}</a>
                     <ul>
