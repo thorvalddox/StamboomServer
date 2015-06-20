@@ -59,12 +59,12 @@
             <li class="toplevel"><a href="/stamboom/list/people/">Lijst</a></li>
             <li class="toplevel">
                 {% if session is defined and username in session %}
-                    <a href="login">Login</a>
-                {% else %}
                     <a href="#">{{ session.username }}</a>
                     <ul>
                         <li><a href="/logout/">Log uit</a></li>
                     </ul>
+                {% else %}
+                    <a href="login">Login</a>
                 {% endif %}
             </li>
             <li class="toplevel">

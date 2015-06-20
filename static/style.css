@@ -37,7 +37,8 @@ td {
 	    overflow: hidden;
 	}
 
-#nav li .toplevel{
+li .toplevel
+{
 	    float: left;
 	}
 
