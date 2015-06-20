@@ -5,7 +5,7 @@ from itertools import chain
 import random
 import os.path
 
-from imageinfo import get_image_info
+#from imageinfo import get_image_info
 
 try:
     import Image
