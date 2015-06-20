@@ -34,10 +34,11 @@ td {
 	    padding: 0;
 	    overflow: hidden;
 		list-style: none;
+	float:left;
 	}
 
 #nav, #nav li  {
-	float:left;
+
 	}
 
 
