@@ -107,8 +107,8 @@ def show_fam_tree():
     response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
     return response
 
-@app.route('/stamboom/view/<name>')
-def show_fam_tree(name):
+@app.route('/stamboom/view/<name>/')
+def show_fam_tree_custom(name):
     update() #Lazy update of the source code.
     f = core.FamilyTree()
     f.from_code("data.log",2)
