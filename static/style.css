@@ -37,14 +37,14 @@ td {
 
 #nav li  {
 	float:left;
-	width: 120px;
+	width: 200px;
 	}
 
 
 #nav ul {
 	position: absolute;
 	left: -1000px;
-	width: 120px;
+	width: 200px;
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
