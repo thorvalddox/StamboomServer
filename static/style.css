@@ -52,3 +52,6 @@ td {
 left: auto;
 }
 
+#nav a {
+display: block;
+}
