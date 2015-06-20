@@ -107,13 +107,23 @@ def show_fam_tree():
     response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
     return response
 
+@app.route('/stamboom/view/<name>')
+def show_fam_tree(name):
+    update() #Lazy update of the source code.
+    f = core.FamilyTree()
+    f.from_code("data.log",2)
+    person = f.get_person(name)
+    localfam = f.build_new(person)
+    d = draw.draw_people(localfam,120,150,10,8)
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
+    return response
+
 @app.route('/stamboom/safe/')
 def show_fam_tree_safe():
     f = core.FamilyTree()
     f.from_code("data.log")
     d = draw.draw_people(f)
-    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script(),
-                                             titlebar=titlebar()))
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
     return response
 
 
@@ -131,8 +141,7 @@ def edit(name):
         form = list(forms.disabled_forms(f,person))
     response = make_response(render_template("edit.html",name=person.name,uname=name,
                                              image=url_for('static', filename=person.image),data=data,form=form,
-                                             tree=tree.get_html_canvas(),tree_script=tree.get_html_script(),
-                                             titlebar=titlebar()))
+                                             tree=tree.get_html_canvas(),tree_script=tree.get_html_script()))
     return response
 
 @app.route('/stamboom/list/people/')
