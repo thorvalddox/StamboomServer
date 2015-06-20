@@ -25,7 +25,7 @@ td {
 	    text-transform: uppercase;
 	}
 
-#content a:visited {
+#content a:visited { /*The above block overides the default to white so this sets it back to purple*/
 	color: purple;
 }
 
