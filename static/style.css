@@ -3,7 +3,7 @@ td {
 }
 
 #stamboomheader {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -44,7 +44,6 @@ td {
 
 #nav ul {
 	position: absolute;
-	width: 120px;
 	left: -1000px;
 }
 
