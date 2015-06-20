@@ -1,3 +1,5 @@
+print("--STARTING APP--")
+
 try:
 
     from flask import Flask
