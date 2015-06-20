@@ -338,7 +338,7 @@ class Person:
     @property
     def image(self):
         name = "kopkes/" + self.uname + ".jpg"
-        if not os.path.exists("static/" + name):
+        if not os.path.exists("StamboomServer/static/" + name):
             name = "kopkes/smiley.jpg"
         return name
 
