@@ -42,12 +42,12 @@ td {
 
 
 #nav ul {
-	position: absolute;
+	/*position: absolute;*/
 	left: -1000px;
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
-/*left: auto;*/
+left: auto;
 	background-position: 0 0;
 }
 
