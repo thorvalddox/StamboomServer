@@ -40,7 +40,7 @@ td {
 	width: 120px;
 	}
 
-
+/*
 #nav ul {
 	position: absolute;
 	left: -1000px;
@@ -49,13 +49,7 @@ td {
 #nav li:hover ul, #nav li.ie_does_hover ul  {
 left: auto;
 	background-position: 0 0;
-}
-
-/*
-#nav, #nav li  {
-	float:top;
-	width: 120px;
-	}*/
+}*/
 
 #nav a {
 display: block;
