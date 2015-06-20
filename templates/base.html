@@ -76,7 +76,7 @@
 					<li>
                         {% if username in flask.session %}
 						<a href="#">Login</a>
-                        {% Else %}
+                        {% else %}
                         <a href="#">{{ flask.session.username }}<span class="arrow">&#9660;</span></a>
 						<ul>
 							<li><a href="/logout/">Log uit</a></li>
