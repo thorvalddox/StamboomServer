@@ -1,71 +1,80 @@
-
 <html>
 
-	<style>
+<style>
 
 
     a:link.report, a:visited.report {
-	    display: block;
-	    width: 120px;
-	    font-weight: bold;
-	    color: #FFFFFF;
-	    background-color: #bf9821;
-	    text-align: center;
-	    padding: 4px;
-	    text-decoration: none;
+        display: block;
+        width: 120px;
+        font-weight: bold;
+        color: #FFFFFF;
+        background-color: #bf9821;
+        text-align: center;
+        padding: 4px;
+        text-decoration: none;
         font-size: 12px;
-	}
-
+    }
 
     a:hover.report, a:active.report {
-	    background-color: #997A1A;
-	}
+        background-color: #997A1A;
+    }
 
-	</style>
+</style>
 
-	<head>
-		<link rel="stylesheet" href="/static/style.css" type="text/css">
-	</head>
-	<body>
-		<div id="stamboomheader"> 
-			<!--<ul class="titlebar">
-				<li class="titlebar"><a class="titlebar" href="/">Home</a></li>
-				<li class="titlebar"><a class="titlebar" href="/stamboom/">Stamboom</a></li>
-				<li class="titlebar"><a class="titlebar" href="/stamboom/list/people/">Lijst</a></li>
-			    <li class="titlebar"><a class="titlebar" href="logout">Log uit</a></li>
-				<li class="titlebar"><a class="report" href="/stamboom/console/">Console</a></li>
-				<li class="titlebar"><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
-			</ul>-->
-            <nav>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li>
-						<a href="#">stamboom<span class="arrow">&#9660;</span></a>
-                        <div id="dropdown">
-                            <ul>
-                                <li><a href="/stamboom/">Dox</a></li>
-                                <li><a href="/stamboom/">Dox</a></li>
-                            </ul>
-                        </div>
-					</li>
-					<li><a href="/stamboom/list/people/">Lijst</a></li>
-					<li>
-                        {% if session is defined and username in session %}
-						<a href="#">Login</a>
-                        {% else %}
-                        <a href="#">{{ session.username }}<span class="arrow">&#9660;</span></a>
-						<ul>
-							<li><a href="/logout/">Log uit</a></li>
-						</ul>
-                        {% endif %}
-					</li>
-				</ul>
-			</nav>
-		</div>
-		<div id="content">
-			{% block content %}
-		
-			{% endblock %}
-		</div>
-	</body>
+<head>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+</head>
+<body>
+
+    <!--<ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/stamboom/">Stamboom</a></li>
+        <li><a href="/stamboom/list/people/">Lijst</a></li>
+        <li><a href="logout">Log uit</a></li>
+        <li><a class="report" href="/stamboom/console/">Console</a></li>
+        <li><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
+    </ul>-->
+        <ul id="stamboomheader">
+            <li><a href="#">Home</a></li>
+            <li>
+                <a href="#">stamboom<span class="arrow">&#9660;</span></a>
+                <ul>
+                    <li><a href="/stamboom/">Dox</a></li>
+                    <li><a href="/stamboom/">Dox</a></li>
+                </ul>
+            </li>
+            <li><a href="/stamboom/list/people/">Lijst</a></li>
+            <li>
+                {% if session is defined and username in session %}
+                    <a href="#">Login</a>
+                {% else %}
+                    <a href="#">{{ session.username }}<span class="arrow">&#9660;</span></a>
+                    <ul>
+                        <li><a href="/logout/">Log uit</a></li>
+                    </ul>
+                {% endif %}
+            </li>
+        </ul>
+
+
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script language="JavaScript">
+    sfHover = function () {
+        var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+        for (var i = 0; i < sfEls.length; i++) {
+            sfEls[i].onmouseover = function () {
+                this.className += " ie_does_hover";
+            }
+            sfEls[i].onmouseout = function () {
+                this.className = this.className.replace(new RegExp(" ie_does_hover\\b"), "");
+            }
+        }
+    }
+    if (window.attachEvent) window.attachEvent("onload", sfHover);
+</script>
+</body>
 </html>

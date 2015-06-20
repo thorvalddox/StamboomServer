@@ -16,7 +16,7 @@ td {
 	    list-style-type: none;
 	    margin: 0;
 	    padding: 0;
-	    /*overflow: hidden;*/
+	    overflow: hidden;
 	}
 
 #stamboomheader	li {
@@ -40,10 +40,14 @@ td {
 	    background-color: #7A991A;
 	}
 
-#dropdown li  {
-	    float: top;
-	}
 
-#dropdown ul  {
 
-	}
+#stamboomheader ul {
+position: absolute;
+width: 120px;
+left: -1000px;
+}
+
+#stamboomheader li:hover ul {
+left: auto;
+}
