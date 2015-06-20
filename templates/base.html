@@ -35,8 +35,8 @@
         <li><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
     </ul>-->
         <ul id="nav">
-            <li><a href="/">Home</a></li>
-            <li>
+            <li class="toplevel"><a href="/">Home</a></li>
+            <li class="toplevel">
                 <a href="/stamboom/">stamboom</a>
                 <ul>
                     <li><a href="/stamboom/">Dox</a></li>
@@ -56,8 +56,8 @@
                     <li><a href="/stamboom/view/Rein_Dox">Clan Rein</a></li>
                 </ul>
             </li>
-            <li><a href="/stamboom/list/people/">Lijst</a></li>
-            <li>
+            <li class="toplevel"><a href="/stamboom/list/people/">Lijst</a></li>
+            <li class="toplevel">
                 {% if session is defined and username in session %}
                     <a href="login">Login</a>
                 {% else %}
@@ -67,7 +67,7 @@
                     </ul>
                 {% endif %}
             </li>
-            <li>
+            <li class="toplevel">
                 <a href="https://github.com/thorvalddox/StamboomServer/issues/new">rapporteer</a>
                 <ul>
                     <li><a href="/stamboom/console/">Console</a></li>
