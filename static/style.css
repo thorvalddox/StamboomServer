@@ -38,8 +38,7 @@ td {
 		float:left;
 	}
 
-#nav li  {
-	display: inline;
+#nav li .toplevel {
 	float:left;
 	}
 
