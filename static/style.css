@@ -2,6 +2,7 @@ td {
     vertical-align: top;
 }
 
+/*
 #stamboomheader {
 	position: fixed;
 	top: 0;
@@ -24,7 +25,7 @@ td {
 
 #stamboomheader	a:hover, a:active {
 	    background-color: #7A991A;
-	}
+	}*/
 
 #nav, #nav ul{
 	    list-style-type: none;
