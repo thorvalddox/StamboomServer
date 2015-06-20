@@ -25,6 +25,10 @@ td {
 	    text-transform: uppercase;
 	}
 
+#content a:visited {
+	color: purple;
+}
+
 #stamboomheader	a:hover, a:active {
 	    background-color: #7A991A;
 	}
