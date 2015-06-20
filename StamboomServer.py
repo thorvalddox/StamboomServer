@@ -146,7 +146,7 @@ def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
     data = forms.create_person_link(f.people)
-    response = make_response(render_template("newperson.html",people=data,titlebar=titlebar()))
+    response = make_response(render_template("newperson.html",people=data))
     return response
 
 @app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
@@ -162,7 +162,7 @@ def upload_image(name):
 @app.route('/stamboom/console/')
 @login_required
 def editRaw():
-    response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>"),titlebar=titlebar()))
+    response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/console/rawcommand/', methods = ['POST'])

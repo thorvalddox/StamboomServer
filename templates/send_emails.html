@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 <form action="sendemails/" method="post" enctype="multipart/form-data">
     {% for user in users %}
     <input type="checkbox" name="{{ user.name }}" value="True"/> {{ user.email }}<br/>
     {% endfor %}
     <input type="submit" value="Send emails"><br/>
 </form>
-</body>
-</html>
+{% endblock %}
