@@ -44,6 +44,7 @@ td {
 #nav ul {
 	position: absolute;
 	left: -1000px;
+	width: 120px;
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
