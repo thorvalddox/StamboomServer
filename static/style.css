@@ -2,6 +2,12 @@ td {
     vertical-align: top;
 }
 
+a:link, a:visited {
+
+	    color: #0000FF;
+
+	}
+
 #stamboomheader {
 	position: fixed;
 	top: 0;
@@ -49,3 +55,4 @@ td {
 	left: auto;
 	background-position: 0 0;
 }
+
