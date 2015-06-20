@@ -263,6 +263,7 @@ def logout(path):
 
 
 def send_valid_mail(user):
+    print("sending email")
     yield "sending email to " + repr(user.email)
     yield "username=" + repr(user.name)
     try:
