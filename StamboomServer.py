@@ -47,7 +47,7 @@ mail = Mail(app)
 
 loginHandler = LoginHandler()
 
-
+print(os.getcwd())
 
 #Function from here.
 
