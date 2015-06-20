@@ -38,7 +38,7 @@ td {
 		float:left;
 	}
 
-#nav li .toplevel {
+#nav, #nav li  {
 	float:left;
 	}
 
