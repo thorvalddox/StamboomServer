@@ -75,8 +75,7 @@ def admin_required(func):
 
 @app.route('/')
 def index():
-
-
+    update()
     #response = make_response(render_template("titlepage.html"))
     return redirect("/stamboom/")
 

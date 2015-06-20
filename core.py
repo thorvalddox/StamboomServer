@@ -23,6 +23,7 @@ class FamilyTree:
     def __init__(self):
         self.families = []
         self.people = []
+        self.subHeads = []
         self.head = None
 
     @property
@@ -468,6 +469,9 @@ class CommandLoader:
 
     def head(self, p, *_):
         self.tree.head = self.tree.get_person(p)
+
+    def subhead(self, p, *_):
+        self.tree.subhead.append(self.tree.get_person(p))
 
     def loginas(self, name, *_):
         """not accually a command, but is added to the log to track the author of different commands"""

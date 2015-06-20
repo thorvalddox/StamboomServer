@@ -53,14 +53,32 @@
 	</head>
 	<body>
 		<div id="stamboomheader"> 
-			<ul class="titlebar">
+			<!--<ul class="titlebar">
 				<li class="titlebar"><a class="titlebar" href="/">Home</a></li>
 				<li class="titlebar"><a class="titlebar" href="/stamboom/">Stamboom</a></li>
 				<li class="titlebar"><a class="titlebar" href="/stamboom/list/people/">Lijst</a></li>
 			    <li class="titlebar"><a class="titlebar" href="logout">Log uit</a></li>
 				<li class="titlebar"><a class="report" href="/stamboom/console/">Console</a></li>
 				<li class="titlebar"><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
-			</ul>
+			</ul>-->
+            <nav class="menu">
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li>
+						<a href="#">stamboom<span class="arrow">&#9660;</span></a>
+
+						<ul class="sub-menu">
+							<li><a href="/stamboom/">Dox</a></li>
+							<li><a href="/stamboom/">Coming Soon</a></li>
+							<li><a href="#">On DVD/Blu-ray</a></li>
+							<li><a href="#">Showtimes &amp; Tickets</a></li>
+						</ul>
+					</li>
+					<li><a href="#">T.V. Shows</a></li>
+					<li class="current-item"><a href="#">Photos</a></li>
+					<li><a href="#">Site Help</a></li>
+				</ul>
+			</nav>
 		</div>
 		<div id="content">
 			{% block content %}
