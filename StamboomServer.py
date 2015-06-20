@@ -68,7 +68,7 @@ def login_required(func):
 def admin_required(func):
     @wraps(func)
     def save_function(*args,**kwargs):
-        if not check_logged_in(session) or session["username"]!="thorvald_dox":
+        if not check_logged_in(session) or not loginHandler.check_admin(session):
             return "You have to be an admin to view this page"
         return func(*args,**kwargs)
     return(save_function)
