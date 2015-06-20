@@ -47,7 +47,7 @@ class User:
         print(self.password,password)
         return self.password == password
     def __repr__(self):
-        return "{}({},************)".format(self.name,self.email,self.password)
+        return "{}({},{})".format(self.name,self.email,self.password)
 
 
 
