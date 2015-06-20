@@ -148,7 +148,7 @@ class FamilyTree:
         2 is all
         """
         c = CommandLoader(self, list("$#?"[:level + 1]))
-        with open(filename) as fff:
+        with open("StamboomServer/"+filename) as fff:
             for i in Commands.from_raw(fff.read()):
                 c(i)
 
@@ -478,12 +478,12 @@ class CommandLoader:
         pass
 
 def addcommand_ip(request, data):
-    with open("data.log", "a") as fff:
+    with open("StamboomServer/data.log", "a") as fff:
         fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'], data))
 
 
 def addcommand_user(session, data):
-    with open("data.log", "a") as fff:
+    with open("StamboomServer/data.log", "a") as fff:
         fff.write("#{} {}\n".format(session["username"], data))
 
 
@@ -507,14 +507,14 @@ def bashTest():
 
 
 def rawCode():
-    with open("data.log") as fff:
+    with open("StamboomServer/data.log") as fff:
         return Commands.from_raw(fff.read()).to_html()
 
 
 def main():
     f = FamilyTree()
     f.from_xml("dox.xml")
-    with open("autodata.log", "w") as fff:
+    with open("StamboomServer/autodata.log", "w") as fff:
         fff.write(Commands(f.build_commands()).to_raw())
 
 

@@ -42,10 +42,6 @@ app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
 mail = Mail(app)
 
-#if not os.getcwd().endswith("StamboomServer"):
-#    os.chdir("./StamboomServer")
-
-print(os.getcwd())
 #Init side processes
 
 
@@ -258,13 +254,7 @@ def logout(path):
     return redirect("/"+path+"/")
 
 
-def titlebar():
-    with open("templates/titlebar.html") as fff:
-        string = fff.read()
-        if "username" not in session:
-            string = string.replace("logout","login")
-            string = string.replace("Log uit","Log in")
-        return string
+
 
 def send_valid_mail(user):
     yield "sending email to " + repr(user.email)

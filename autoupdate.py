@@ -4,6 +4,7 @@ import subprocess
 
 BASH_CHANGE = \
 """
+cd StamboomServer
 if git diff-index --quiet HEAD --; then
   echo False
 else
@@ -32,7 +33,7 @@ def update():
 
 def try_update() -> bool:
     print("Updating Code")
-    proc = subprocess.Popen(["git pull"], stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen(["cd StamboomServer;git pull"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
     print("git:", out)
     print("Done updating Code")

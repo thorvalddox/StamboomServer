@@ -17,7 +17,7 @@ def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
 
 def load_users():
-    with open("users.txt") as fff:
+    with open("StamboomServer/users.txt") as fff:
         command = "#test"
         while command != "seed":
             line = fff.readline()

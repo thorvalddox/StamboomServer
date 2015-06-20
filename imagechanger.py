@@ -9,7 +9,7 @@ def check_valid(filename:str):
 
 def name_to_path(name):
     name = name.replace(" ","_")
-    return("static/kopkes/{}.jpg".format(name))
+    return("StamboomServer/static/kopkes/{}.jpg".format(name))
 
 def makeversion(name):
     location = name_to_path(name)

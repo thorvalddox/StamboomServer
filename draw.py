@@ -123,8 +123,8 @@ class DrawJavaScript:
     def draw_image(self, image, x, y, width, height):
         delim_array = image.split('.', 1)
         path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
-        if not os.path.exists("static/" + path):
-            im = Image.open("static/" + image)
+        if not os.path.exists("StamboomServer/static/" + path):
+            im = Image.open("StamboomServer/static/" + image)
             old_width, old_height = im.size
             w_scale = float(width) / old_width
             h_scale = float(height) / old_height
@@ -134,9 +134,9 @@ class DrawJavaScript:
                 new_width = int(scale * old_width)
                 new_height = int(scale * old_height)
                 newimage = im.resize((new_width, new_height), Image.ANTIALIAS)
-                newimage.save("static/" + path, im.format)
+                newimage.save("StamboomServer/static/" + path, im.format)
             else:
-                im.save("static/" + path, im.format)
+                im.save("StamboomServer/static/" + path, im.format)
 
         self.commands.append("""
             var imageObj{0} = new Image();
@@ -159,12 +159,6 @@ class DrawJavaScript:
         self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
         self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
         nw, nh = width - 3 * border, height - 3 * border - 3*textsize
-        # _,w,h = get_image_info(open("static/"+ person.image))
-        # print(person.image,w,h)
-        # scale = min(nw/w,nh/h)
-        # new_width = w*scale
-        # new_height = h*scale
-
         self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
 
 
