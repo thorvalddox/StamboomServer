@@ -10,9 +10,6 @@ td {
 	font-size: 16px;
 }
 
-
-
-
 #stamboomheader	a:link, a:visited {
 	    width: 120px;
 	    font-weight: bold;
@@ -46,5 +43,5 @@ td {
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
-	display: inline;
+	display: inherit;
 }
