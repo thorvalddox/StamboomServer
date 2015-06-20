@@ -105,8 +105,7 @@ def show_fam_tree():
     f = core.FamilyTree()
     f.from_code("data.log",2)
     d = draw.draw_people(f,120,150,10,8)
-    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script(),
-                                             titlebar=titlebar()))
+    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
     return response
 
 @app.route('/stamboom/safe/')
