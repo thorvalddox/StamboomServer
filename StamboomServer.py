@@ -18,6 +18,10 @@ import forms
 from loginhandle import LoginHandler
 from autoupdate import update
 
+from jinja2 import Environment, PackageLoader
+env = Environment(loader=PackageLoader('StamboomServer', 'templates'))
+
+env["session"] = session
 
 #Init Flask application
 app = Flask(__name__)
