@@ -42,13 +42,11 @@ td {
 
 
 #nav ul {
-	position: absolute;
-	left: -1000px;
+	visibility: hidden;
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
-left: auto;
-	background-position: 0 0;
+	visibility: visible;
 }
 
 #nav a {
