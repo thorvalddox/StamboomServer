@@ -3,7 +3,6 @@ td {
 }
 
 #stamboomheader {
-	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -15,7 +14,6 @@ td {
 
 
 #stamboomheader	a:link, a:visited {
-	    display: block;
 	    width: 120px;
 	    font-weight: bold;
 	    color: #FFFFFF;
@@ -35,6 +33,7 @@ td {
 	    margin: 0;
 	    padding: 0;
 	    /*overflow: hidden;*/
+		list-style: none;
 		float:left;
 	}
 
