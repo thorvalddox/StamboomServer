@@ -42,10 +42,10 @@ app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
 mail = Mail(app)
 
-if not os.getcwd().endswith("StamboomServer"):
-    os.chdir("StamboomServer")
+#if not os.getcwd().endswith("StamboomServer"):
+#    os.chdir("./StamboomServer")
 
-
+print(os.getcwd())
 #Init side processes
 
 
