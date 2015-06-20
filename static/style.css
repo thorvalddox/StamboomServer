@@ -10,9 +10,6 @@ td {
 	font-size: 16px;
 }
 
-
-
-
 #stamboomheader	a:link, a:visited {
 	    width: 120px;
 	    font-weight: bold;
@@ -33,6 +30,8 @@ td {
 	    margin: 0;
 	    padding: 0;
 		list-style: none;
+		top: 0;
+		left: 0;
 	}
 
 #nav li  {
