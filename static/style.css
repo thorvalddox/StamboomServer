@@ -12,16 +12,6 @@ td {
 }
 
 
-#stamboomheader	ul{
-	    list-style-type: none;
-	    margin: 0;
-	    padding: 0;
-	    overflow: hidden;
-	}
-
-#stamboomheader	li {
-	    float: left;
-	}
 
 
 #stamboomheader	a:link, a:visited {
@@ -40,14 +30,24 @@ td {
 	    background-color: #7A991A;
 	}
 
+#nav,#nav ul{
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	}
+
+#nav li {
+	    float: left;
+	}
 
 
-#stamboomheader ul {
+#nav ul {
 position: absolute;
 width: 120px;
 left: -1000px;
 }
 
-#stamboomheader li:hover ul {
+#nav li:hover ul {
 left: auto;
 }
