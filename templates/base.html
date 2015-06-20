@@ -1,90 +1,79 @@
 <html>
 
-<style>
-
-
-    a:link.report, a:visited.report {
-        display: block;
-        width: 120px;
-        font-weight: bold;
-        color: #FFFFFF;
-        background-color: #bf9821;
-        text-align: center;
-        padding: 4px;
-        text-decoration: none;
-        font-size: 12px;
-    }
-
-    a:hover.report, a:active.report {
-        background-color: #997A1A;
-    }
-
-</style>
 
 <head>
     <link rel="stylesheet" href="/static/style.css" type="text/css">
 </head>
 <body>
-<div id="stamboomheader">
-    <!--<ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/stamboom/">Stamboom</a></li>
-        <li><a href="/stamboom/list/people/">Lijst</a></li>
-        <li><a href="logout">Log uit</a></li>
-        <li><a class="report" href="/stamboom/console/">Console</a></li>
-        <li><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
-    </ul>-->
-        <ul id="nav">
-            <li class="toplevel"><a href="/">Home</a></li>
-            <li class="toplevel">
-                <a href="/stamboom/">stamboom</a>
-                <ul>
-                    <li><a href="/stamboom/">Dox</a></li>
-                    <li><a href="/stamboom/view/Pieter_Verwoerdt">Verwoerdt</a></li>
-                    <li><a href="/stamboom/view/Godelieve_Dox">Clan Godelieve</a></li>
-                    <li><a href="/stamboom/view/Herman_Dox">Clan Herman</a></li>
-                    <li><a href="/stamboom/view/Hugo_Dox">Clan Hugo</a></li>
-                    <li><a href="/stamboom/view/Ivo_Dox">Clan Ivo</a></li>
-                    <li><a href="/stamboom/view/Ria_Dox">Clan Ria</a></li>
-                    <li><a href="/stamboom/view/Ludo_Dox">Clan Ludo</a></li>
-                    <li><a href="/stamboom/view/Hilde_Dox">Clan Hilde</a></li>
-                    <li><a href="/stamboom/view/Gerda_Dox">Clan Gerda</a></li>
-                    <li><a href="/stamboom/view/Rudi_Dox">Clan Rudi</a></li>
-                    <li><a href="/stamboom/view/Paul_Dox">Clan Paul</a></li>
-                    <li><a href="/stamboom/view/Rita_Dox">Clan Rita</a></li>
-                    <li><a href="/stamboom/view/Dirk_Dox">Clan Dirk</a></li>
-                    <li><a href="/stamboom/view/Rein_Dox">Clan Rein</a></li>
+<table>
+    <tr>
+        <td>
+            <div id="stamboomheader">
+                <!--<ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/stamboom/">Stamboom</a></li>
+                    <li><a href="/stamboom/list/people/">Lijst</a></li>
+                    <li><a href="logout">Log uit</a></li>
+                    <li><a class="report" href="/stamboom/console/">Console</a></li>
+                    <li><a class="report" href="https://github.com/thorvalddox/StamboomServer/issues/new">Rapporteer</a></li>
+                </ul>-->
+                <ul id="nav">
+                    <li class="toplevel"><a href="/">Home</a></li>
+                    <li class="toplevel">
+                        <a href="/stamboom/">stamboom</a>
+                        <ul>
+                            <li><a href="/stamboom/">Dox</a></li>
+                            <li><a href="/stamboom/view/Pieter_Verwoerdt">Verwoerdt</a></li>
+                            <li><a href="/stamboom/view/Godelieve_Dox">Clan Godelieve</a></li>
+                            <li><a href="/stamboom/view/Herman_Dox">Clan Herman</a></li>
+                            <li><a href="/stamboom/view/Hugo_Dox">Clan Hugo</a></li>
+                            <li><a href="/stamboom/view/Ivo_Dox">Clan Ivo</a></li>
+                            <li><a href="/stamboom/view/Ria_Dox">Clan Ria</a></li>
+                            <li><a href="/stamboom/view/Ludo_Dox">Clan Ludo</a></li>
+                            <li><a href="/stamboom/view/Hilde_Dox">Clan Hilde</a></li>
+                            <li><a href="/stamboom/view/Gerda_Dox">Clan Gerda</a></li>
+                            <li><a href="/stamboom/view/Rudi_Dox">Clan Rudi</a></li>
+                            <li><a href="/stamboom/view/Paul_Dox">Clan Paul</a></li>
+                            <li><a href="/stamboom/view/Rita_Dox">Clan Rita</a></li>
+                            <li><a href="/stamboom/view/Dirk_Dox">Clan Dirk</a></li>
+                            <li><a href="/stamboom/view/Rein_Dox">Clan Rein</a></li>
+                        </ul>
+                    </li>
+                    <li class="toplevel"><a href="/stamboom/list/people/">Lijst</a></li>
+                    <li class="toplevel">
+                        {% if session is defined and username in session %}
+                            <a href="#">{{ session.username }}</a>
+                            <ul>
+                                <li><a href="/logout/">Log uit</a></li>
+                            </ul>
+                        {% else %}
+                            <a href="login">Login</a>
+                        {% endif %}
+                    </li>
+                    <li class="toplevel">
+                        <a href="https://github.com/thorvalddox/StamboomServer/issues/new">rapporteer</a>
+                        <ul>
+                            <li><a href="/stamboom/console/">Console</a></li>
+                            <li><a href="https://github.com/thorvalddox/StamboomServer">Github</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            <li class="toplevel"><a href="/stamboom/list/people/">Lijst</a></li>
-            <li class="toplevel">
-                {% if session is defined and username in session %}
-                    <a href="#">{{ session.username }}</a>
-                    <ul>
-                        <li><a href="/logout/">Log uit</a></li>
-                    </ul>
-                {% else %}
-                    <a href="login">Login</a>
-                {% endif %}
-            </li>
-            <li class="toplevel">
-                <a href="https://github.com/thorvalddox/StamboomServer/issues/new">rapporteer</a>
-                <ul>
-                    <li><a href="/stamboom/console/">Console</a></li>
-                    <li><a href="https://github.com/thorvalddox/StamboomServer">Github</a></li>
-                </ul>
-            </li>
-        </ul>
 
-</div>
-<br/>
-<br/>
-<br/>
-<div id="content">
-    {% block content %}
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="content">
+                {% block content %}
 
-    {% endblock %}
-</div>
+                {% endblock %}
+            </div>
+        </td>
+    </tr>
+</table>
+
+
 <script language="JavaScript">
     sfHover = function () {
         var sfEls = document.getElementById("nav").getElementsByTagName("LI");
