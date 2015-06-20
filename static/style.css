@@ -39,7 +39,7 @@ td {
 
 li .toplevel
 {
-	    float: left;
+	display: inline;
 	}
 
 
