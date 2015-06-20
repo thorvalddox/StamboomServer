@@ -48,6 +48,6 @@ td {
 	left: -1000px;
 }
 
-#nav li:hover ul {
+#nav li:hover ul, #nav li.ie_does_hover ul  {
 left: auto;
 }
