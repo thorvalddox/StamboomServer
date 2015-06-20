@@ -43,9 +43,9 @@ td {
 
 
 #nav ul {
-position: absolute;
-width: 120px;
-left: -1000px;
+	position: absolute;
+	width: 120px;
+	left: -1000px;
 }
 
 #nav li:hover ul {
