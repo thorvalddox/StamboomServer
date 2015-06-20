@@ -74,10 +74,10 @@
 					</li>
 					<li><a href="/stamboom/list/people/">Lijst</a></li>
 					<li>
-                        {% if flask.session is defined and username in flask.session %}
+                        {% if session is defined and username in session %}
 						<a href="#">Login</a>
                         {% else %}
-                        <a href="#">{{ flask.session.username }}<span class="arrow">&#9660;</span></a>
+                        <a href="#">{{ session.username }}<span class="arrow">&#9660;</span></a>
 						<ul>
 							<li><a href="/logout/">Log uit</a></li>
 						</ul>
