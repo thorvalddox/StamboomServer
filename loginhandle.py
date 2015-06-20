@@ -29,12 +29,12 @@ def load_users():
         print(int(seed,16))
 
         for line in fff:
-            if line.startswith("#"):
+            if line.startswith(("#","seed")):
                 continue
-            name,email = line[:-1].split(" ") #[:-1] to ignore newline character
-            if name == "seed":
-                continue
-            yield name,User(name.lower(),email)
+            #name,email = line[:-1].split(" ") #[:-1] to ignore newline character
+            email = line.strip(" \n\t")
+            name = email.split("@")[0]
+            yield name.lower(),User(name.lower(),email)
 
 
 class User:
