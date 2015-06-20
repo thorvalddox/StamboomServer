@@ -30,7 +30,7 @@ def create_person_dropdown(pList, default=None,name="selector"):
                (default.uname if default is not None else "")
     )
 
-def create_person_link(pList,split=30):
+def create_person_link(pList,split=50):
     return """
     <table>
     <tr>
