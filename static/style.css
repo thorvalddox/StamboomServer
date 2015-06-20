@@ -12,7 +12,7 @@ td {
 
 
 
-
+/*
 #stamboomheader	a:link, a:visited {
 	    width: 120px;
 	    font-weight: bold;
@@ -26,29 +26,29 @@ td {
 
 #stamboomheader	a:hover, a:active {
 	    background-color: #7A991A;
-	}
+	}*/
 
 #nav, #nav ul{
 	    list-style-type: none;
 	    margin: 0;
 	    padding: 0;
-	    overflow: hidden;
 		list-style: none;
-	float:left;
 	}
 
 #nav, #nav li  {
-
+	float:left;
+	width: 120px;
 	}
 
 
 #nav ul {
 	position: absolute;
-	left: -1000000px;
+	left: -1000px;
 }
 
 #nav li:hover ul, #nav li.ie_does_hover ul  {
 left: auto;
+	background-position: 0 0;
 }
 
 #nav a {
