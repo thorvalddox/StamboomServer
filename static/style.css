@@ -35,7 +35,7 @@ td {
 		list-style: none;
 	}
 
-#nav, #nav li  {
+#nav li  {
 	float:left;
 	width: 120px;
 	}
@@ -50,6 +50,11 @@ td {
 left: auto;
 	background-position: 0 0;
 }
+
+#nav, #nav li  {
+	float:top;
+	width: 120px;
+	}
 
 #nav a {
 display: block;
