@@ -69,9 +69,18 @@ def admin_required(func):
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session) or not loginHandler.check_admin(session):
-            return "You have to be an admin to view this page"
+            return redirect(request.path +"login/admin/")
         return func(*args,**kwargs)
     return(save_function)
+
+
+def auto_update(func):
+    @wraps(func)
+    def updated_func(*args,**kwargs):
+        update()
+        return func(*args,**kwargs)
+    return(updated_func)
+
 
 @app.route('/')
 def index():
@@ -81,32 +90,36 @@ def index():
 
 @app.route('/stamboom/commands/oldxml/')
 @login_required
+@auto_update
 def show_old_xml():
     response = make_response(render_template("code_show.html",code=core.xmlTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/handled/')
 @login_required
+@auto_update
 def show_handled_code():
     response = make_response(render_template("code_show.html",code=core.bashTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/raw/')
 @login_required
+@auto_update
 def show_raw_code():
     response = make_response(render_template("code_show.html",code=core.rawCode().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/')
+@auto_update
 def show_fam_tree():
-    update() #Lazy update of the source code.
-    f = core.FamilyTree()
-    f.from_code("data.log",2)
-    d = draw.draw_people(f,120,150,10,8)
-    response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
-    return response
+    # f = core.FamilyTree()
+    # f.from_code("data.log",2)
+    # d = draw.draw_people(f,120,150,10,8)
+    # response = make_response(render_template("famtree.html",canvas=d.get_html_canvas(),script=d.get_html_script()))
+    return redirect("/stamboom/view/Petrus_Ludovicus_Carolus_Dox")
 
 @app.route('/stamboom/view/<name>/')
+@auto_update
 def show_fam_tree_custom(name):
     update() #Lazy update of the source code.
     f = core.FamilyTree()
@@ -118,6 +131,7 @@ def show_fam_tree_custom(name):
     return response
 
 @app.route('/stamboom/safe/')
+@auto_update
 def show_fam_tree_safe():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -127,6 +141,7 @@ def show_fam_tree_safe():
 
 
 @app.route('/stamboom/edit/<name>/')
+@auto_update
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log",2)
@@ -144,6 +159,7 @@ def edit(name):
     return response
 
 @app.route('/stamboom/list/people/')
+@auto_update
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -153,6 +169,7 @@ def list_people():
 
 @app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
 @login_required
+@auto_update
 def upload_image(name):
     print(name)
     print(request.files)
@@ -163,12 +180,14 @@ def upload_image(name):
 
 @app.route('/stamboom/console/')
 @login_required
+@auto_update
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/console/rawcommand/', methods = ['POST'])
 @login_required
+@auto_update
 def rawcommand():
     print(request.form)
     command = request.form["command"]
@@ -179,6 +198,7 @@ def rawcommand():
 
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
 @login_required
+@auto_update
 def edit_parents(name):
     print(name)
     print(request.form)
@@ -189,6 +209,7 @@ def edit_parents(name):
 
 @app.route('/stamboom/edit/<name>/dates/', methods = ['POST'])
 @login_required
+@auto_update
 def edit_dates(name):
     print(name)
     print(request.form)
@@ -199,6 +220,7 @@ def edit_dates(name):
 
 @app.route('/stamboom/edit/<name>/addPartner/', methods = ['POST'])
 @login_required
+@auto_update
 def edit_add_partner(name):
     print(name)
     print(request.form)
@@ -208,6 +230,7 @@ def edit_add_partner(name):
 
 @app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
 @login_required
+@auto_update
 def edit_rem_partner(name):
     print(name)
     print(request.form)
@@ -217,6 +240,7 @@ def edit_rem_partner(name):
 
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
 @login_required
+@auto_update
 def edit_child(name):
     partner = request.form["partner"]
     if "addChildPress" in request.form:
@@ -241,6 +265,11 @@ def render_login(path):
 @app.route("/<path:path>/login/invalid/")
 def render_login_invalid(path):
     response = make_response(render_template("login.html",message="The password combination was invalid",path=path))
+    return response
+
+@app.route("/<path:path>/login/admin/")
+def render_login_invalid(path):
+    response = make_response(render_template("login.html",message="You need to be an admin to view this page",path=path))
     return response
 
 
@@ -288,6 +317,7 @@ def send_valid_mail(user):
 
 @app.route("/stamboom/admin/")
 @admin_required
+@auto_update
 def email_form():
     response = make_response(render_template("send_emails.html",users=list(loginHandler.get_user_list())))
     return response
@@ -296,6 +326,7 @@ def email_form():
 
 @app.route("/stamboom/admin/sendemails/", methods=["POST"])
 @admin_required
+@auto_update
 def send_user_mails():
     msg = ""
     for u in loginHandler.users.values():
@@ -311,6 +342,7 @@ def send_user_mails():
 
 @app.route("/stamboom/admin/seeUsers/")
 @admin_required
+@auto_update
 def see_users():
     msg = "<table>"
     #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
