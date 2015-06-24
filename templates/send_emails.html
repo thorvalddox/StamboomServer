@@ -2,8 +2,9 @@
 {% block content %}
 <form action="sendemails/" method="post" enctype="multipart/form-data">
     {% for user in users %}
-    <input type="checkbox" name="{{ user.name }}" value="True"/> {{ user.email }}<br/>
+    <input type="checkbox" name="name_{{ user.name }}" value="True"/> {{ user.email }}<br/>
     {% endfor %}
+    password:<input type="password" name="password">
     <input type="submit" value="Send emails"><br/>
 </form>
 {% endblock %}
