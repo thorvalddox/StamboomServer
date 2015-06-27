@@ -31,7 +31,7 @@ app.config.update(
     MAIL_USE_TLS = False,
     MAIL_USE_SSL= True,
     MAIL_USERNAME = "stamboom.dox@gmail.com",
-    MAIL_PASSWORD = "",
+    MAIL_PASSWORD = "d0xst4mb00m",
     DEFAULT_MAIL_SENDER  = "stamboom.dox@gmail.com",
 )
 
@@ -307,7 +307,7 @@ def send_valid_mail(user):
     except smtplib.SMTPAuthenticationError as e:
         import traceback
         yield traceback.format_exc()
-        yield "Could not send any mails"
+        yield "Authentication not valid"
     except smtplib.SMTPDataError as e:
         import traceback
         yield traceback.format_exc()
@@ -331,12 +331,12 @@ def email_form():
 @auto_update
 def send_user_mails():
     msg = ""
-    app.config.update(MAIL_PASSWORD=request.form.get("password",""))
+    #app.config.update(MAIL_PASSWORD=request.form.get("password",""))
     for u in loginHandler.users.values():
         print(request.form)
         if "name_"+u.name in request.form:
             if request.form["name_"+u.name]:
-                msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+                msg += "sending to " + u.email +  "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
             else:
                 msg += "no mail was send to " + u.email +  "<br/><br/>"
         else:
