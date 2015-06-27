@@ -2,6 +2,12 @@ td {
     vertical-align: top;
 }
 
+ul .makecolumns {
+  columns: 6;
+  -webkit-columns: 6;
+  -moz-columns: 6;
+}
+
 
 #stamboomheader {
 	position: fixed;

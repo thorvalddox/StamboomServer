@@ -336,7 +336,7 @@ def send_user_mails():
         print(request.form)
         if "name_"+u.name in request.form:
             if request.form["name_"+u.name]:
-                msg += "sending to " + u.email +  "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+                msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
             else:
                 msg += "no mail was send to " + u.email +  "<br/><br/>"
         else:
