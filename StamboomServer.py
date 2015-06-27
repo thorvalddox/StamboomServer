@@ -334,7 +334,7 @@ def send_user_mails():
     app.config.update(MAIL_PASSWORD=request.form.get("password",""))
     for u in loginHandler.users.values():
         print(request.form)
-        if u.name in request.form:
+        if "name_"+u.name in request.form:
             if request.form["name_"+u.name]:
                 msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
             else:
