@@ -109,9 +109,14 @@ def update_jinja2_env(func):
         env.globals["session"] = session
         return func(*args,**kwargs)
 
-def catch_update(func):
+def default_page(func): #combines different decoratoes
     return catch_errors(auto_update(update_jinja2_env(func)))
 
+def login_page(func): #combines default_age with login_required
+    return default_page(login_required(func))
+
+def admin_page(func): #combines default_age with login_required
+    return default_page(admin_required(func))
 
 #apps from here
 
@@ -122,32 +127,25 @@ def index():
     return redirect("/stamboom/")
 
 @app.route('/stamboom/commands/oldxml/')
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def show_old_xml():
     response = make_response(render_template("code_show.html",code=core.xmlTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/handled/')
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def show_handled_code():
     response = make_response(render_template("code_show.html",code=core.bashTest().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/commands/raw/')
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def show_raw_code():
     response = make_response(render_template("code_show.html",code=core.rawCode().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/')
-@catch_errors
-@auto_update
+@default_page
 def show_fam_tree():
     # f = core.FamilyTree()
     # f.from_code("data.log",2)
@@ -156,8 +154,7 @@ def show_fam_tree():
     return redirect("/stamboom/view/Petrus_Ludovicus_Carolus_Dox")
 
 @app.route('/stamboom/view/<name>/')
-@catch_errors
-@auto_update
+@default_page
 def show_fam_tree_custom(name):
     f = core.FamilyTree()
     f.from_code("data.log",2)
@@ -168,8 +165,7 @@ def show_fam_tree_custom(name):
     return response
 
 @app.route('/stamboom/safe/')
-@catch_errors
-@auto_update
+@default_page
 def show_fam_tree_safe():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -179,8 +175,7 @@ def show_fam_tree_safe():
 
 
 @app.route('/stamboom/edit/<name>/')
-@catch_errors
-@auto_update
+@default_page
 def edit(name):
     f = core.FamilyTree()
     f.from_code("data.log",2)
@@ -198,8 +193,7 @@ def edit(name):
     return response
 
 @app.route('/stamboom/list/people/')
-@catch_errors
-@auto_update
+@default_page
 def list_people():
     f = core.FamilyTree()
     f.from_code("data.log")
@@ -208,9 +202,7 @@ def list_people():
     return response
 
 @app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def upload_image(name):
     print(name)
     print(request.files)
@@ -220,17 +212,13 @@ def upload_image(name):
 
 
 @app.route('/stamboom/console/')
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def editRaw():
     response = make_response(render_template("rawcommand.html",code=core.rawCode().replace("\n","<br/>")))
     return response
 
 @app.route('/stamboom/console/rawcommand/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def rawcommand():
     print(request.form)
     command = request.form["command"]
@@ -240,9 +228,7 @@ def rawcommand():
 
 
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def edit_parents(name):
     print(name)
     print(request.form)
@@ -252,9 +238,7 @@ def edit_parents(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/dates/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def edit_dates(name):
     print(name)
     print(request.form)
@@ -264,9 +248,7 @@ def edit_dates(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/addPartner/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def edit_add_partner(name):
     print(name)
     print(request.form)
@@ -275,9 +257,7 @@ def edit_add_partner(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def edit_rem_partner(name):
     print(name)
     print(request.form)
@@ -286,9 +266,7 @@ def edit_rem_partner(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
-@catch_errors
-@login_required
-@auto_update
+@login_page
 def edit_child(name):
     partner = request.form["partner"]
     if "addChildPress" in request.form:
@@ -368,9 +346,7 @@ def send_mail(user,contents):
 
 
 @app.route("/stamboom/admin/")
-@catch_errors
-@admin_required
-@auto_update
+@admin_page
 def email_form():
     response = make_response(render_template("send_emails.html",users=list(loginHandler.get_user_list())))
     return response
@@ -378,9 +354,7 @@ def email_form():
 
 
 @app.route("/stamboom/admin/sendemails/", methods=["POST"])
-@catch_errors
-@admin_required
-@auto_update
+@admin_page
 def send_user_mails():
     msg = ""
     #app.config.update(MAIL_PASSWORD=request.form.get("password",""))
@@ -396,9 +370,7 @@ def send_user_mails():
     return(msg)
 
 @app.route("/stamboom/admin/seeUsers/")
-@catch_errors
-@admin_required
-@auto_update
+@admin_page
 def see_users():
     msg = "<table>"
     #msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
