@@ -2,7 +2,10 @@ from flask import Flask
 
 from flask import render_template,make_response,url_for,request,redirect,session
 
+from jinja2 import Environment, PackageLoader
+
 from flask_mail import Mail,Message
+from jinja2 import Environment, PackageLoader
 
 import smtplib
 
@@ -42,7 +45,9 @@ app.secret_key = ''.join(chr(random.randrange(64)+64) for _ in range(32))
 
 mail = Mail(app)
 
+#init jinja2 enviroment
 
+env = Environment(loader=PackageLoader('yourapplication', 'templates'))
 
 #Init side processes
 
@@ -50,6 +55,9 @@ mail = Mail(app)
 loginHandler = LoginHandler()
 
 print(os.getcwd())
+
+if os.getcwd().endswith("StamboomServer/"):
+    os.chdir("../")
 
 #Function from here.
 
@@ -94,6 +102,16 @@ def catch_errors(func):
             out = send_mail('thorvalddx','<h1>stamboom error<h1>'+error_code)
             return make_response(render_template("error.html",error=error_code)),500
     return catch_erros
+
+def update_jinja2_env(func):
+    @wraps(func)
+    def update_jinja2(*args,**kwargs):
+        env.globals["session"] = session
+        return func(*args,**kwargs)
+
+def catch_update(func):
+    return catch_errors(auto_update(update_jinja2_env(func)))
+
 
 #apps from here
 
@@ -141,7 +159,6 @@ def show_fam_tree():
 @catch_errors
 @auto_update
 def show_fam_tree_custom(name):
-    update() #Lazy update of the source code.
     f = core.FamilyTree()
     f.from_code("data.log",2)
     person = f.get_person(name)
