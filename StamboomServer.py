@@ -118,7 +118,7 @@ def catch_errors(func):
 def update_jinja2_env(func):
     @wraps(func)
     def update_jinja2(*args,**kwargs):
-        env.globals["username"] = session.get("username","")
+        env.globals["username"] = session.get("username","none")
         return func(*args,**kwargs)
     return(update_jinja2)
 
