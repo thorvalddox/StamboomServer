@@ -37,7 +37,7 @@ def try_update() -> bool:
     (out, err) = proc.communicate()
     print("git:", out)
     print("Done updating Code")
-    return out != b'Already up-to-date.\n'
+    return out not in  (b'Already up-to-date.\n',b'')
 
 def restart_server():
     print("Restart Server")

@@ -1,6 +1,6 @@
 from flask import Flask
 
-from flask import render_template,make_response,url_for,request,redirect,session
+from flask import make_response,url_for,request,redirect,session
 
 from jinja2 import Environment, PackageLoader
 
@@ -47,7 +47,11 @@ mail = Mail(app)
 
 #init jinja2 enviroment
 
-env = Environment(loader=PackageLoader('flask', 'templates'))
+env = Environment(loader=PackageLoader('StamboomServer', 'templates'))
+
+def render_template(name,*args,**kwargs):
+    template = env.get_template(name)
+    return template.render(*args,**kwargs)
 
 #fix path on local machines
 
@@ -119,6 +123,7 @@ def update_jinja2_env(func):
     @wraps(func)
     def update_jinja2(*args,**kwargs):
         env.globals["username"] = session.get("username","none")
+        print("username:",env.globals["username"])
         return func(*args,**kwargs)
     return(update_jinja2)
 

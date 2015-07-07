@@ -31,7 +31,7 @@
         </li>
         <li class="toplevel"><a href="/stamboom/list/people/">Lijst</a></li>
         <li class="toplevel">
-            {% if username != "" %}
+            {% if username %}
                 <a href="#">{{ username }}</a>
                 <ul>
                     <li><a href="/logout/">Log uit</a></li>
@@ -40,7 +40,6 @@
                 <a href="login/">Login</a>
             {% endif %}
         </li>
-        <li class="toplevel"><a href="#">{{ username }}</a></li>
         <li class="toplevel">
             <a href="https://github.com/thorvalddox/StamboomServer/issues/new">rapporteer</a>
             <ul>

@@ -51,7 +51,7 @@ class FamilyTree:
         try:
             return [p for p in self.people if name in (p.name, p.uname)][0]
         except IndexError:
-            # print("did not find {}, creating new person".format(name))
+            # #print("did not find {}, creating new person".format(name))
             p = Person(name)
             self.people.append(p)
             return p
@@ -65,7 +65,7 @@ class FamilyTree:
             return [f for f in self.families if set(f.parents) == set(people)][0]
         except IndexError:
             f = Family(people, [])
-            # print(f)
+            # #print(f)
             self.families.append(f)
             return f
 
@@ -74,7 +74,7 @@ class FamilyTree:
         returns a iterator of families where the given person is a parent of
         """
         for f in self.families:
-            # print(str(f))
+            # #print(str(f))
             if person in f.parents:
                 yield f
 
@@ -87,18 +87,18 @@ class FamilyTree:
             This one is usually chained, as to give the correct representation, they need the head entry of each child
         """
         if person is None:
-            print("Invalid representation")
+            #print("Invalid representation")
             return (Representation([], []))
         famlist = list(self.get_family_down(person))
         if len(famlist) == 0:
-            # print(person.name, "never married")
+            # #print(person.name, "never married")
             return Representation([person], [])
         elif len(famlist) == 1:
-            # print(person.name, "married ones")
+            # #print(person.name, "married ones")
             fam, = famlist
             return Representation(filter_invalid([person, self.get_parther(person, fam)]), fam.children)
         elif len(famlist) == 2:
-            # print(person.name, "married twice")
+            # #print(person.name, "married twice")
             fam1, fam2 = sorted(famlist,key=lambda f:self.get_parther(person,f).ubirth
                                 if self.get_parther(person,f) is not None else time.localtime())
             return Representation(
@@ -111,7 +111,7 @@ class FamilyTree:
         """
         Build the family tree given an old-format xml file
         """
-        # print(os.getcwd())
+        # #print(os.getcwd())
         root = ET.parse(filename).getroot()
         for node in root:
             if node.tag == "persoon":
@@ -256,7 +256,7 @@ class FamilyTree:
         returns new famaily tree representing a certain root of the family.
         Gives the posterity and the single direction ancestors
         """
-        print("1")
+        #print("1")
         new = FamilyTree()
         families = []
         for p in self.get_clan(key):
@@ -264,12 +264,12 @@ class FamilyTree:
         for p in self.get_ancestors(key):
             new.people.append(p)
         for p in new.people:
-            print(p)
+            #print(p)
             for f in self.get_family_down(p):
-                print(f)
+                #print(f)
                 if all(p in new.people for p in f.parents) and f not in families:
                     families.append(f)
-        print(new.people)
+        #print(new.people)
         new.families = [Family(f.parents, [c for c in f.children if c in new.people]) for f in families]
         # for f in families:
         #     for p in f.children:
@@ -310,7 +310,7 @@ class Person:
         self.dead = dead
         self.id_ = id_ if id_ != "none" else hex(random.randrange(16 ** 32))
         Person.all_[self.id_] = self
-        # print(self.name, self.id_)
+        # #print(self.name, self.id_)
 
     @property
     def name(self):
@@ -407,20 +407,20 @@ class CommandLoader:
         self.accepted = accepted + ["$"]
 
     def __call__(self, command):
-        # print(command)
+        # #print(command)
         user, func, *args = command
         args = list(args) + [""] * 4  # missing last arguments
         if any(user.startswith(pref) for pref in self.accepted):
             getattr(self, func)(*args)
 
     def person(self, name, birth, dead, *_):
-        # print("making",name)
+        # #print("making",name)
         p = self.tree.get_person(name)
         p.birth = birth
         p.dead = dead
 
     def family(self, p1, p2, *children):
-        # print("making family")
+        # #print("making family")
         parentlist = [p for p in (p1, p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.children.extend(self.tree.get_person(p) for p in children if p != "" and p not in f.children)
@@ -429,10 +429,10 @@ class CommandLoader:
         person = self.tree.get_person(person)
         for f in self.tree.families:
             if person in f.parents:
-                print("delete downlink")
+                #print("delete downlink")
                 f.parents.remove(person)
             if person in f.children:
-                print("delete uplink")
+                #print("delete uplink")
                 f.children.remove(person)
         self.tree.people.remove(person)
         del person
