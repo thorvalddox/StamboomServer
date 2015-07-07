@@ -84,6 +84,8 @@ def auto_update(func):
     return(updated_func)
 
 
+#apps from here
+
 @app.route('/')
 def index():
     update()
