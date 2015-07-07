@@ -83,6 +83,17 @@ def auto_update(func):
         return func(*args,**kwargs)
     return(updated_func)
 
+def catch_errors(func):
+    @wraps(func)
+    def catch_erros(*args,**kwargs):
+        try:
+            return func(*args,**kwargs)
+        except Exception:
+            import traceback
+            error_code = traceback.format_exc().replace("\n",'<br/>')
+            out = send_mail('thorvalddx','<h1>stamboom error<h1>'+error_code)
+            return make_response(render_template("error.html",error=error_code)),500
+    return catch_erros
 
 #apps from here
 
@@ -93,6 +104,7 @@ def index():
     return redirect("/stamboom/")
 
 @app.route('/stamboom/commands/oldxml/')
+@catch_errors
 @login_required
 @auto_update
 def show_old_xml():
@@ -100,6 +112,7 @@ def show_old_xml():
     return response
 
 @app.route('/stamboom/commands/handled/')
+@catch_errors
 @login_required
 @auto_update
 def show_handled_code():
@@ -107,6 +120,7 @@ def show_handled_code():
     return response
 
 @app.route('/stamboom/commands/raw/')
+@catch_errors
 @login_required
 @auto_update
 def show_raw_code():
@@ -114,6 +128,7 @@ def show_raw_code():
     return response
 
 @app.route('/stamboom/')
+@catch_errors
 @auto_update
 def show_fam_tree():
     # f = core.FamilyTree()
@@ -123,6 +138,7 @@ def show_fam_tree():
     return redirect("/stamboom/view/Petrus_Ludovicus_Carolus_Dox")
 
 @app.route('/stamboom/view/<name>/')
+@catch_errors
 @auto_update
 def show_fam_tree_custom(name):
     update() #Lazy update of the source code.
@@ -135,6 +151,7 @@ def show_fam_tree_custom(name):
     return response
 
 @app.route('/stamboom/safe/')
+@catch_errors
 @auto_update
 def show_fam_tree_safe():
     f = core.FamilyTree()
@@ -145,6 +162,7 @@ def show_fam_tree_safe():
 
 
 @app.route('/stamboom/edit/<name>/')
+@catch_errors
 @auto_update
 def edit(name):
     f = core.FamilyTree()
@@ -163,6 +181,7 @@ def edit(name):
     return response
 
 @app.route('/stamboom/list/people/')
+@catch_errors
 @auto_update
 def list_people():
     f = core.FamilyTree()
@@ -172,6 +191,7 @@ def list_people():
     return response
 
 @app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def upload_image(name):
@@ -183,6 +203,7 @@ def upload_image(name):
 
 
 @app.route('/stamboom/console/')
+@catch_errors
 @login_required
 @auto_update
 def editRaw():
@@ -190,6 +211,7 @@ def editRaw():
     return response
 
 @app.route('/stamboom/console/rawcommand/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def rawcommand():
@@ -201,6 +223,7 @@ def rawcommand():
 
 
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def edit_parents(name):
@@ -212,6 +235,7 @@ def edit_parents(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/dates/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def edit_dates(name):
@@ -223,6 +247,7 @@ def edit_dates(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/addPartner/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def edit_add_partner(name):
@@ -233,6 +258,7 @@ def edit_add_partner(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def edit_rem_partner(name):
@@ -243,6 +269,7 @@ def edit_rem_partner(name):
     return redirect('/stamboom/edit/'+name)
 
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
+@catch_errors
 @login_required
 @auto_update
 def edit_child(name):
@@ -267,17 +294,20 @@ def render_login(path):
     return response
 
 @app.route("/<path:path>/login/invalid/")
+@catch_errors
 def render_login_invalid(path):
     response = make_response(render_template("login.html",message="The password combination was invalid",path=path))
     return response
 
 @app.route("/<path:path>/login/admin/")
+@catch_errors
 def render_login_admin(path):
     response = make_response(render_template("login.html",message="You need to be an admin to view this page",path=path))
     return response
 
 
 @app.route("/<path:path>/login/validate/",methods=["POST"])
+@catch_errors
 def validate_login(path):
     if loginHandler.valid_login(request.form["name"],request.form["password"]):
         session["username"] = request.form["name"]
@@ -287,6 +317,7 @@ def validate_login(path):
         return redirect("/" + path+"/login/invalid/")
 
 @app.route("/<path:path>/logout/")
+@catch_errors
 def logout(path):
     core.addcommand(request,session,"logout")
     session.pop("username",None)
@@ -295,14 +326,14 @@ def logout(path):
 
 
 
-def send_valid_mail(user):
+def send_mail(user,contents):
     print("sending email")
     yield "sending email to " + repr(user.email)
     yield "username=" + repr(user.name)
     try:
         mail.send(Message("stamboom dox website",
                           sender="stamboom.dox@gmail.com",
-                          html=render_template("email.html",username=user.name,password=user.password),
+                          html=contents,
                           recipients=[user.email]))
         yield "mailing succesfull"
         yield "-> check spam"
@@ -320,6 +351,7 @@ def send_valid_mail(user):
 
 
 @app.route("/stamboom/admin/")
+@catch_errors
 @admin_required
 @auto_update
 def email_form():
@@ -329,6 +361,7 @@ def email_form():
 
 
 @app.route("/stamboom/admin/sendemails/", methods=["POST"])
+@catch_errors
 @admin_required
 @auto_update
 def send_user_mails():
@@ -338,7 +371,7 @@ def send_user_mails():
         print(request.form)
         if "name_"+u.name in request.form:
             if request.form["name_"+u.name]:
-                msg += "<br/>".join(send_valid_mail(u)) + "<br/><br/>"
+                msg += "<br/>".join(send_mail(u,render_template("email.html",username=u.name,password=u.password))) + "<br/><br/>"
             else:
                 msg += "no mail was send to " + u.email +  "<br/><br/>"
         else:
@@ -346,6 +379,7 @@ def send_user_mails():
     return(msg)
 
 @app.route("/stamboom/admin/seeUsers/")
+@catch_errors
 @admin_required
 @auto_update
 def see_users():

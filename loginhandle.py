@@ -14,8 +14,10 @@ class LoginHandler:
     def get_user_list(self):
         return [{"name": k,"email": v.email} for k,v in self.users.items()]
     def check_admin(self,session):
-        print(session.get("username","nope"),("thorvalddx94","gerwind96","joran.dox"))
-        return session.get("username","") in ("thorvalddx94","gerwind96","joran.dox")
+        print(session.get("username","nope"),self.admins())
+        return session.get("username","") in self.admins()
+    def admins(self):
+        return ("thorvalddx94","gerwind96","joran.dox")
 
 def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
