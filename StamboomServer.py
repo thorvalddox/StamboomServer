@@ -25,7 +25,7 @@ from autoupdate import update
 #Init Flask application
 app = Flask(__name__)
 
-app.debug = True
+
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config.update(
@@ -47,17 +47,27 @@ mail = Mail(app)
 
 #init jinja2 enviroment
 
-env = Environment(loader=PackageLoader('yourapplication', 'templates'))
+env = Environment(loader=PackageLoader('flask', 'templates'))
 
-#Init side processes
+#fix path on local machines
 
-
-loginHandler = LoginHandler()
+OFFLINE = False #true if the server is ran on a local machine.
 
 print(os.getcwd())
 
-if os.getcwd().endswith("StamboomServer/"):
+
+if os.getcwd().endswith("StamboomServer"):
     os.chdir("../")
+    OFFLINE = True
+
+app.debug = OFFLINE
+
+print("status:",["ONLINE","OFFLINE/DEBUG"][OFFLINE])
+#Init side processes
+
+loginHandler = LoginHandler()
+
+
 
 #Function from here.
 
@@ -87,7 +97,8 @@ def admin_required(func):
 def auto_update(func):
     @wraps(func)
     def updated_func(*args,**kwargs):
-        update()
+        if not OFFLINE: #not updating when offline.
+            update()
         return func(*args,**kwargs)
     return(updated_func)
 
@@ -99,8 +110,9 @@ def catch_errors(func):
         except Exception:
             import traceback
             error_code = traceback.format_exc().replace("\n",'<br/>')
+            traceback.print_exc()
             out = send_mail('thorvalddx','<h1>stamboom error<h1>'+error_code)
-            return make_response(render_template("error.html",error=error_code)),500
+            return make_response(render_template("error.html",log=error_code+"</p><p>"+out)),500
     return catch_erros
 
 def update_jinja2_env(func):
@@ -108,15 +120,17 @@ def update_jinja2_env(func):
     def update_jinja2(*args,**kwargs):
         env.globals["session"] = session
         return func(*args,**kwargs)
+    return(update_jinja2)
+
 
 def default_page(func): #combines different decoratoes
-    return catch_errors(auto_update(update_jinja2_env(func)))
+    return wraps(func)(catch_errors(auto_update(update_jinja2_env(func))))
 
 def login_page(func): #combines default_age with login_required
-    return default_page(login_required(func))
+    return wraps(func)(default_page(login_required(func)))
 
 def admin_page(func): #combines default_age with login_required
-    return default_page(admin_required(func))
+    return wraps(func)(default_page(admin_required(func)))
 
 #apps from here
 
@@ -304,7 +318,7 @@ def render_login_admin(path):
 @app.route("/<path:path>/login/validate/",methods=["POST"])
 @catch_errors
 def validate_login(path):
-    if loginHandler.valid_login(request.form["name"],request.form["password"]):
+    if loginHandler.valid_login(request.form["name"],request.form["password"]) or OFFLINE: #offline you can always log in.
         session["username"] = request.form["name"]
         core.addcommand_ip(request,"loginas #{}".format(session["username"]))
         return redirect("/"+path+"/")
@@ -319,8 +333,12 @@ def logout(path):
     return redirect("/"+path+"/")
 
 
+def chain_strings(func):
+    def chains(*args,**kwargs):
+        return "<br/>".join(func(*args,**kwargs))
+    return chains
 
-
+@chain_strings
 def send_mail(user,contents):
     print("sending email")
     yield "sending email to " + repr(user.email)
@@ -362,7 +380,7 @@ def send_user_mails():
         print(request.form)
         if "name_"+u.name in request.form:
             if request.form["name_"+u.name]:
-                msg += "<br/>".join(send_mail(u,render_template("email.html",username=u.name,password=u.password))) + "<br/><br/>"
+                msg += send_mail(u,render_template("email.html",username=u.name,password=u.password)) + "<br/><br/>"
             else:
                 msg += "no mail was send to " + u.email +  "<br/><br/>"
         else:
