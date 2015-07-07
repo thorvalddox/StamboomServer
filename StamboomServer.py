@@ -69,7 +69,7 @@ loginHandler = LoginHandler()
 
 
 
-#Function from here.
+#Decorators from here.
 
 def check_logged_in(session):
     if "username" not in session:
@@ -118,7 +118,7 @@ def catch_errors(func):
 def update_jinja2_env(func):
     @wraps(func)
     def update_jinja2(*args,**kwargs):
-        env.globals["session"] = session
+        env.globals["username"] = session.get("username","")
         return func(*args,**kwargs)
     return(update_jinja2)
 
@@ -133,6 +133,8 @@ def admin_page(func): #combines default_age with login_required
     return wraps(func)(default_page(admin_required(func)))
 
 #apps from here
+
+#webpages from here:
 
 @app.route('/')
 def index():
