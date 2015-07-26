@@ -115,7 +115,7 @@ def catch_errors(func):
             import traceback
             error_code = traceback.format_exc().replace("\n",'<br/>')
             traceback.print_exc()
-            out = send_mail('thorvalddx','<h1>stamboom error<h1>'+error_code)
+            out = send_mail(loginhandler.users['thorvalddx'],'<h1>stamboom error<h1>'+error_code)
             return make_response(render_template("error.html",log=error_code+"</p><p>"+out)),500
     return catch_erros
 
