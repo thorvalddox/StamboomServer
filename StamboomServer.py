@@ -347,7 +347,8 @@ def chain_strings(func):
 
 @chain_strings
 def send_mail(user,contents):
-    print("sending email")
+    print("sending email",user)
+
     yield "sending email to " + repr(user.email)
     yield "username=" + repr(user.name)
     try:
