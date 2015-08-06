@@ -16,7 +16,7 @@ class FormCom: #Changes form ouput to data command
         if data == "name":
             return name
         else:
-            return str(request.form(data)).replace(" ","_")
+            return str(request.form[data]).replace(" ","_")
     def buildcommand(self,command,name,request):
         if self.pathname != command:
             return None
