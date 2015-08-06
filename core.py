@@ -47,7 +47,7 @@ class FamilyTree:
         returns a person woth the given name. If there isn't one, it creates a new one and retusn that one
         """
         if not isinstance(name, str):
-            Exception("{} is not a string".format(name))
+            raise Exception("{} is not a string".format(name))
         try:
             return [p for p in self.people if name in (p.name, p.uname)][0]
         except IndexError:
