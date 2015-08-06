@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>loginhandle &mdash; StamboomServer 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="StamboomServer 0.2.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for loginhandle</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<div class="viewcode-block" id="LoginHandler"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler">[docs]</a><span class="k">class</span> <span class="nc">LoginHandler</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">load_users</span><span class="p">())</span>
+<div class="viewcode-block" id="LoginHandler.valid_user"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_user">[docs]</a>    <span class="k">def</span> <span class="nf">valid_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span></div>
+<div class="viewcode-block" id="LoginHandler.valid_login"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_login">[docs]</a>    <span class="k">def</span> <span class="nf">valid_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_user</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">match_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span></div>
+<div class="viewcode-block" id="LoginHandler.get_user_list"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.get_user_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[{</span><span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span><span class="s">&quot;email&quot;</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">email</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span></div>
+<div class="viewcode-block" id="LoginHandler.check_admin"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.check_admin">[docs]</a>    <span class="k">def</span> <span class="nf">check_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">session</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;nope&quot;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">admins</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">admins</span><span class="p">()</span></div>
+<div class="viewcode-block" id="LoginHandler.admins"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.admins">[docs]</a>    <span class="k">def</span> <span class="nf">admins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;thorvalddx94&quot;</span><span class="p">,</span><span class="s">&quot;gerwind96&quot;</span><span class="p">,</span><span class="s">&quot;joran.dox&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="randomstring"><a class="viewcode-back" href="../loginhandle.html#loginhandle.randomstring">[docs]</a><span class="k">def</span> <span class="nf">randomstring</span><span class="p">(</span><span class="n">lenght</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&quot;azertyuiopqsdfghjklmwxcvbn0123456789&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lenght</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="load_users"><a class="viewcode-back" href="../loginhandle.html#loginhandle.load_users">[docs]</a><span class="k">def</span> <span class="nf">load_users</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/users.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;#test&quot;</span>
+            <span class="k">while</span> <span class="n">command</span> <span class="o">!=</span> <span class="s">&quot;seed&quot;</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">fff</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">command</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fff</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s">&quot;#&quot;</span><span class="p">,</span><span class="s">&quot;seed&quot;</span><span class="p">)):</span>
+                    <span class="k">continue</span>
+                <span class="c">#name,email = line[:-1].split(&quot; &quot;) #[:-1] to ignore newline character</span>
+                <span class="n">email</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot; </span><span class="se">\n\t</span><span class="s">&quot;</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">yield</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">email</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+</div>
+<div class="viewcode-block" id="User"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">randomstring</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+<div class="viewcode-block" id="User.match_password"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User.match_password">[docs]</a>    <span class="k">def</span> <span class="nf">match_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span><span class="n">password</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="n">password</span></div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;{}({},{})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Thorvald_Dox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>core module &mdash; StamboomServer 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-core">
+<span id="core-module"></span><h1>core module<a class="headerlink" href="#module-core" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="core.CommandLoader">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">CommandLoader</code><span class="sig-paren">(</span><em>tree</em>, <em>accepted=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>An object that can execute commands.
+Its member functions match the names of the different commands, and are the
+functions that are accually called when executing the command.</p>
+<dl class="method">
+<dt id="core.CommandLoader.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>person</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.disband">
+<code class="descname">disband</code><span class="sig-paren">(</span><em>person1</em>, <em>person2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.disband"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.disband" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.disconnect">
+<code class="descname">disconnect</code><span class="sig-paren">(</span><em>person1</em>, <em>person2</em>, <em>child</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.disconnect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.divorce">
+<code class="descname">divorce</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.divorce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.divorce" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.family">
+<code class="descname">family</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em>, <em>*children</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.family" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.head">
+<code class="descname">head</code><span class="sig-paren">(</span><em>p</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.head"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.loginas">
+<code class="descname">loginas</code><span class="sig-paren">(</span><em>name</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.loginas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.loginas" title="Permalink to this definition">¶</a></dt>
+<dd><p>not accually a command, but is added to the log to track the author of different commands</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.logout">
+<code class="descname">logout</code><span class="sig-paren">(</span><em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.logout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>not accually a command, but is added to the log to track the author of different commands</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>person1</em>, <em>person2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.merge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.parents">
+<code class="descname">parents</code><span class="sig-paren">(</span><em>child</em>, <em>p1</em>, <em>p2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.parents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.parents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.person">
+<code class="descname">person</code><span class="sig-paren">(</span><em>name</em>, <em>birth</em>, <em>dead</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.person" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.remarry">
+<code class="descname">remarry</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.remarry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.remarry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.subhead">
+<code class="descname">subhead</code><span class="sig-paren">(</span><em>p</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.subhead"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.subhead" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.Commands">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">Commands</code><a class="reference internal" href="_modules/core.html#Commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">list</span></code></p>
+<p>This object is a list of tuples of strings. The tuples represent single commands,
+the first element is the user, the second the functions and the rest are the arguments.</p>
+<dl class="classmethod">
+<dt id="core.Commands.from_raw">
+<em class="property">classmethod </em><code class="descname">from_raw</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#Commands.from_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Commands.from_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes a string of commands to a list of command objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.Commands.to_html">
+<code class="descname">to_html</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#Commands.to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Commands.to_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes a list of command object to a html display, used to show the console on the website</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.Commands.to_raw">
+<code class="descname">to_raw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#Commands.to_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Commands.to_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes a list of command object to a raw string of commands</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.Family">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">Family</code><span class="sig-paren">(</span><em>parents</em>, <em>children</em>, <em>divorced=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#Family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Family" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="core.FamilyTree">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">FamilyTree</code><a class="reference internal" href="_modules/core.html#FamilyTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="core.FamilyTree.build_commands">
+<code class="descname">build_commands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.build_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.build_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a list of commands that could rebuild this whole family tree</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.build_new">
+<code class="descname">build_new</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.build_new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.build_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns new famaily tree representing a certain root of the family.
+Gives the posterity and the single direction ancestors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.from_code">
+<code class="descname">from_code</code><span class="sig-paren">(</span><em>filename</em>, <em>level=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.from_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.from_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>generates family tree from a code object
+0 is admin
+1 is logged in users
+2 is all</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.from_xml">
+<code class="descname">from_xml</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.from_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.from_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the family tree given an old-format xml file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_ancestors">
+<code class="descname">get_ancestors</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_ancestors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_ancestors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_children">
+<code class="descname">get_children</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_children" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all persons children</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_clan">
+<code class="descname">get_clan</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_clan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_clan" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all posterity and there partners</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all data to use in edit.html</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_family">
+<code class="descname">get_family</code><span class="sig-paren">(</span><em>*names</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_family" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a family with the given parent names. Makes a new one if not found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_family_down">
+<code class="descname">get_family_down</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_family_down"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_family_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a iterator of families where the given person is a parent of</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_parents">
+<code class="descname">get_parents</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_parents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_parents" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all persons parents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_parther">
+<code class="descname">get_parther</code><span class="sig-paren">(</span><em>person</em>, <em>family</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_parther"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_parther" title="Permalink to this definition">¶</a></dt>
+<dd><p>give the partner of the person in the given family. If you want all pertners the person even had,
+use: get_partners(person)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_partners">
+<code class="descname">get_partners</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_partners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_partners" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all persons partners</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_person">
+<code class="descname">get_person</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a person woth the given name. If there isn&#8217;t one, it creates a new one and retusn that one</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_representation">
+<code class="descname">get_representation</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object to represent a part of the family tree.
+head represents the people on the same line indicated by the given person,
+they include the person himself and all the partners he ever had
+tail represents the people on the next line. These contain the children.
+This one is usually chained, as to give the correct representation, they need the head entry of each child</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_siblings">
+<code class="descname">get_siblings</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_siblings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_siblings" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all persons siblings and half-siblings</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.FamilyTree.people_all">
+<code class="descname">people_all</code><a class="headerlink" href="#core.FamilyTree.people_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of people the family tree contains, iven the not yet connected ones</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.FamilyTree.people_linked">
+<code class="descname">people_linked</code><a class="headerlink" href="#core.FamilyTree.people_linked" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of people the family tree contains and are connected</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a string representing the posterity of the given person</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.Person">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">Person</code><span class="sig-paren">(</span><em>name</em>, <em>birth=''</em>, <em>dead=''</em>, <em>id_='none'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#Person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.Person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="core.Person.all_">
+<code class="descname">all_</code><em class="property"> = {}</em><a class="headerlink" href="#core.Person.all_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="core.Person.birth">
+<code class="descname">birth</code><a class="headerlink" href="#core.Person.birth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="core.Person.dead">
+<code class="descname">dead</code><a class="headerlink" href="#core.Person.dead" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="core.Person.image">
+<code class="descname">image</code><a class="headerlink" href="#core.Person.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the path to the image</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.Person.name">
+<code class="descname">name</code><a class="headerlink" href="#core.Person.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="core.Representation">
+<em class="property">class </em><code class="descclassname">core.</code><code class="descname">Representation</code><span class="sig-paren">(</span><em>head</em>, <em>tail</em><span class="sig-paren">)</span><a class="headerlink" href="#core.Representation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></p>
+<dl class="attribute">
+<dt id="core.Representation.head">
+<code class="descname">head</code><a class="headerlink" href="#core.Representation.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="core.Representation.tail">
+<code class="descname">tail</code><a class="headerlink" href="#core.Representation.tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="core.addcommand">
+<code class="descclassname">core.</code><code class="descname">addcommand</code><span class="sig-paren">(</span><em>request</em>, <em>session</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#addcommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.addcommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a command to the command log</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.addcommand_ip">
+<code class="descclassname">core.</code><code class="descname">addcommand_ip</code><span class="sig-paren">(</span><em>request</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#addcommand_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.addcommand_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a command to the command log for a user that is not logged in.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.addcommand_user">
+<code class="descclassname">core.</code><code class="descname">addcommand_user</code><span class="sig-paren">(</span><em>session</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#addcommand_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.addcommand_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a command to the command log for a user who is logged in</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.bashTest">
+<code class="descclassname">core.</code><code class="descname">bashTest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#bashTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.bashTest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="core.builddate">
+<code class="descclassname">core.</code><code class="descname">builddate</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#builddate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.builddate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a datetime object out of a string</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.filter_invalid">
+<code class="descclassname">core.</code><code class="descname">filter_invalid</code><span class="sig-paren">(</span><em>l</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#filter_invalid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.filter_invalid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters the None objects out of a list</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.main">
+<code class="descclassname">core.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="core.rawCode">
+<code class="descclassname">core.</code><code class="descname">rawCode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#rawCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.rawCode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="core.showdate">
+<code class="descclassname">core.</code><code class="descname">showdate</code><span class="sig-paren">(</span><em>date</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#showdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.showdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a string out of a datetime object</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="core.xmlTest">
+<code class="descclassname">core.</code><code class="descname">xmlTest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#xmlTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.xmlTest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/core.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Thorvald_Dox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/core.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

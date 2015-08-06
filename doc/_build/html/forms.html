@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>forms module &mdash; StamboomServer 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-forms">
+<span id="forms-module"></span><h1>forms module<a class="headerlink" href="#module-forms" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="forms.FormCom">
+<em class="property">class </em><code class="descclassname">forms.</code><code class="descname">FormCom</code><span class="sig-paren">(</span><em>pathname</em>, <em>command</em>, <em>*info</em>, <em>submit=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="forms.FormCom.all_">
+<code class="descname">all_</code><em class="property"> = [&lt;forms.FormCom object at 0x2b307e5e5390&gt;, &lt;forms.FormCom object at 0x2b307e5e53c8&gt;, &lt;forms.FormCom object at 0x2b307e5e5400&gt;, &lt;forms.FormCom object at 0x2b307e5e5438&gt;, &lt;forms.FormCom object at 0x2b307e5e5470&gt;, &lt;forms.FormCom object at 0x2b307e5e54a8&gt;, &lt;forms.FormCom object at 0x2b307e5e54e0&gt;, &lt;forms.FormCom object at 0x2b307e5e5518&gt;]</em><a class="headerlink" href="#forms.FormCom.all_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="forms.FormCom.buildcommand">
+<code class="descname">buildcommand</code><span class="sig-paren">(</span><em>command</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.buildcommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.buildcommand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="forms.FormCom.get_command">
+<em class="property">static </em><code class="descname">get_command</code><span class="sig-paren">(</span><em>command</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.get_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.get_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="forms.FormCom.getreq">
+<code class="descname">getreq</code><span class="sig-paren">(</span><em>data</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.getreq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.getreq" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="forms.create_person_dropdown">
+<code class="descclassname">forms.</code><code class="descname">create_person_dropdown</code><span class="sig-paren">(</span><em>pList</em>, <em>default=None</em>, <em>name='selector'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_dropdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_dropdown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.create_person_dropdown_safe">
+<code class="descclassname">forms.</code><code class="descname">create_person_dropdown_safe</code><span class="sig-paren">(</span><em>pList</em>, <em>default=None</em>, <em>name='selector'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_dropdown_safe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_dropdown_safe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.create_person_link">
+<code class="descclassname">forms.</code><code class="descname">create_person_link</code><span class="sig-paren">(</span><em>pList</em>, <em>split=50</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.disabled_forms">
+<code class="descclassname">forms.</code><code class="descname">disabled_forms</code><span class="sig-paren">(</span><em>tree</em>, <em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#disabled_forms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.disabled_forms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.edit_children_form">
+<code class="descclassname">forms.</code><code class="descname">edit_children_form</code><span class="sig-paren">(</span><em>tree: core.FamilyTree</em>, <em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#edit_children_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.edit_children_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.edit_date_form">
+<code class="descclassname">forms.</code><code class="descname">edit_date_form</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#edit_date_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.edit_date_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.edit_image_form">
+<code class="descclassname">forms.</code><code class="descname">edit_image_form</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#edit_image_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.edit_image_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.edit_parents_form">
+<code class="descclassname">forms.</code><code class="descname">edit_parents_form</code><span class="sig-paren">(</span><em>tree: core.FamilyTree</em>, <em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#edit_parents_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.edit_parents_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.edit_partners_form">
+<code class="descclassname">forms.</code><code class="descname">edit_partners_form</code><span class="sig-paren">(</span><em>tree: core.FamilyTree</em>, <em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#edit_partners_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.edit_partners_form" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.generate_basic_forms">
+<code class="descclassname">forms.</code><code class="descname">generate_basic_forms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#generate_basic_forms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.generate_basic_forms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="forms.make_forms">
+<code class="descclassname">forms.</code><code class="descname">make_forms</code><span class="sig-paren">(</span><em>tree</em>, <em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#make_forms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.make_forms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/forms.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Thorvald_Dox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/forms.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>flask_mail module &mdash; StamboomServer 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-flask_mail">
+<span id="flask-mail-module"></span><h1>flask_mail module<a class="headerlink" href="#module-flask_mail" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="flaskext-mail">
+<h2>flaskext.mail<a class="headerlink" href="#flaskext-mail" title="Permalink to this headline">¶</a></h2>
+<p>Flask extension for sending email.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">copyright:</th><td class="field-body"><ol class="first loweralpha simple" start="3">
+<li>2010 by Dan Jacob.</li>
+</ol>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">license:</th><td class="field-body"><p class="first last">BSD, see LICENSE for more details.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="flask_mail.Attachment">
+<em class="property">class </em><code class="descclassname">flask_mail.</code><code class="descname">Attachment</code><span class="sig-paren">(</span><em>filename=None</em>, <em>content_type=None</em>, <em>data=None</em>, <em>disposition=None</em>, <em>headers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Attachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Attachment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Encapsulates file attachment information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Versionadded:</th><td class="field-body"><p class="first">0.3.5</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> &#8211; filename of attachment</li>
+<li><strong>content_type</strong> &#8211; file mimetype</li>
+<li><strong>data</strong> &#8211; the raw file data</li>
+<li><strong>disposition</strong> &#8211; content-disposition (if any)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_mail.BadHeaderError">
+<em class="property">exception </em><code class="descclassname">flask_mail.</code><code class="descname">BadHeaderError</code><a class="reference internal" href="_modules/flask_mail.html#BadHeaderError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.BadHeaderError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="flask_mail.Connection">
+<em class="property">class </em><code class="descclassname">flask_mail.</code><code class="descname">Connection</code><span class="sig-paren">(</span><em>mail</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Handles connection to host.</p>
+<dl class="method">
+<dt id="flask_mail.Connection.configure_host">
+<code class="descname">configure_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Connection.configure_host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Connection.configure_host" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Connection.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>message</em>, <em>envelope_from=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Connection.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Connection.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies and sends message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> &#8211; Message instance.</li>
+<li><strong>envelope_from</strong> &#8211; Email address to be used in MAIL FROM command.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Connection.send_message">
+<code class="descname">send_message</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Connection.send_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Connection.send_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut for send(msg).</p>
+<p>Takes same arguments as Message constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Versionadded:</th><td class="field-body">0.3.5</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_mail.FlaskMailUnicodeDecodeError">
+<em class="property">exception </em><code class="descclassname">flask_mail.</code><code class="descname">FlaskMailUnicodeDecodeError</code><span class="sig-paren">(</span><em>obj</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#FlaskMailUnicodeDecodeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.FlaskMailUnicodeDecodeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">UnicodeDecodeError</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="flask_mail.Mail">
+<em class="property">class </em><code class="descclassname">flask_mail.</code><code class="descname">Mail</code><span class="sig-paren">(</span><em>app=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Mail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Mail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_mail._MailMixin</span></code></p>
+<p>Manages email messaging</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> &#8211; Flask instance</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="flask_mail.Mail.init_app">
+<code class="descname">init_app</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Mail.init_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Mail.init_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes your mail settings from the application settings.</p>
+<p>You can use this if you want to set up your Mail instance
+at configuration time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> &#8211; Flask application instance</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Mail.init_mail">
+<code class="descname">init_mail</code><span class="sig-paren">(</span><em>config</em>, <em>debug=False</em>, <em>testing=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Mail.init_mail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Mail.init_mail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="flask_mail.Message">
+<em class="property">class </em><code class="descclassname">flask_mail.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>subject=''</em>, <em>recipients=None</em>, <em>body=None</em>, <em>html=None</em>, <em>sender=None</em>, <em>cc=None</em>, <em>bcc=None</em>, <em>attachments=None</em>, <em>reply_to=None</em>, <em>date=None</em>, <em>charset=None</em>, <em>extra_headers=None</em>, <em>mail_options=None</em>, <em>rcpt_options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Encapsulates an email message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subject</strong> &#8211; email subject header</li>
+<li><strong>recipients</strong> &#8211; list of email addresses</li>
+<li><strong>body</strong> &#8211; plain text message</li>
+<li><strong>html</strong> &#8211; HTML message</li>
+<li><strong>sender</strong> &#8211; email sender address, or <strong>MAIL_DEFAULT_SENDER</strong> by default</li>
+<li><strong>cc</strong> &#8211; CC list</li>
+<li><strong>bcc</strong> &#8211; BCC list</li>
+<li><strong>attachments</strong> &#8211; list of Attachment instances</li>
+<li><strong>reply_to</strong> &#8211; reply-to address</li>
+<li><strong>date</strong> &#8211; send date</li>
+<li><strong>charset</strong> &#8211; message character set</li>
+<li><strong>extra_headers</strong> &#8211; A dictionary of additional headers for the message</li>
+<li><strong>mail_options</strong> &#8211; A list of ESMTP options to be used in MAIL FROM command</li>
+<li><strong>rcpt_options</strong> &#8211; A list of ESMTP options to be used in RCPT commands</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="flask_mail.Message.add_recipient">
+<code class="descname">add_recipient</code><span class="sig-paren">(</span><em>recipient</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.add_recipient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.add_recipient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds another recipient to the message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>recipient</strong> &#8211; email address of recipient.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.as_bytes">
+<code class="descname">as_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.as_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.as_bytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.as_string">
+<code class="descname">as_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.as_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.as_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.attach">
+<code class="descname">attach</code><span class="sig-paren">(</span><em>filename=None</em>, <em>content_type=None</em>, <em>data=None</em>, <em>disposition=None</em>, <em>headers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.attach"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.attach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an attachment to the message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> &#8211; filename of attachment</li>
+<li><strong>content_type</strong> &#8211; file mimetype</li>
+<li><strong>data</strong> &#8211; the raw file data</li>
+<li><strong>disposition</strong> &#8211; content-disposition (if any)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.has_bad_headers">
+<code class="descname">has_bad_headers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.has_bad_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.has_bad_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for bad headers i.e. newlines in subject, sender or recipients.
+RFC5322: Allows multiline CRLF with trailing whitespace (FWS) in headers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.is_bad_headers">
+<code class="descname">is_bad_headers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.is_bad_headers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.is_bad_headers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_mail.Message.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>connection</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#Message.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.Message.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies and sends the message.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="flask_mail.Message.send_to">
+<code class="descname">send_to</code><a class="headerlink" href="#flask_mail.Message.send_to" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="flask_mail.force_text">
+<code class="descclassname">flask_mail.</code><code class="descname">force_text</code><span class="sig-paren">(</span><em>s</em>, <em>encoding='utf-8'</em>, <em>errors='strict'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#force_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.force_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to smart_text, except that lazy instances are resolved to
+strings, rather than kept as lazy objects.</p>
+<p>If strings_only is True, don&#8217;t convert (some) non-string-like objects.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="flask_mail.sanitize_address">
+<code class="descclassname">flask_mail.</code><code class="descname">sanitize_address</code><span class="sig-paren">(</span><em>addr</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#sanitize_address"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.sanitize_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="flask_mail.sanitize_addresses">
+<code class="descclassname">flask_mail.</code><code class="descname">sanitize_addresses</code><span class="sig-paren">(</span><em>addresses</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#sanitize_addresses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.sanitize_addresses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="flask_mail.sanitize_subject">
+<code class="descclassname">flask_mail.</code><code class="descname">sanitize_subject</code><span class="sig-paren">(</span><em>subject</em>, <em>encoding='utf-8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/flask_mail.html#sanitize_subject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#flask_mail.sanitize_subject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">flask_mail module</a><ul>
+<li><a class="reference internal" href="#flaskext-mail">flaskext.mail</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/flask_mail.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Thorvald_Dox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="_sources/flask_mail.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

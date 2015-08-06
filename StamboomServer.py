@@ -394,7 +394,9 @@ def send_mail(user,contents):
         yield traceback.format_exc()
 
 
-
+@app.route("/doc/<name>.html")
+def see_doc(name):
+    return make_response(render_template('doc/_build/html/{}.html'.format(name)))
 
 @app.route("/stamboom/admin/")
 @admin_page

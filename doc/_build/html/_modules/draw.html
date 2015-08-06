@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>draw &mdash; StamboomServer 0.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="StamboomServer 0.2.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for draw</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
+
+<span class="kn">import</span> <span class="nn">core</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="c">#from imageinfo import get_image_info</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">Image</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+
+<div class="viewcode-block" id="DrawJavaScript"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript">[docs]</a><span class="k">class</span> <span class="nc">DrawJavaScript</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A wrapper to draw a family tree using javascript. Different methods will create different shapes.</span>
+<span class="sd">    The methods get_html_canvas and get_html_script return all the data needed on the html script.</span>
+<span class="sd">    Put get_html_canvas on the place where you want to show the tree and get_html_script in the script section.</span>
+<span class="sd">    You can also use get_html, which already contains a script section.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clickevents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mouseoverevents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">dimensions</span>
+
+<div class="viewcode-block" id="DrawJavaScript.get_html_canvas"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.get_html_canvas">[docs]</a>    <span class="k">def</span> <span class="nf">get_html_canvas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the needed html code to create the canvas</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        &lt;canvas id=&quot;FamilyTreeCanvas&quot; width=&quot;{}&quot; height=&quot;{}&quot; style=&quot;border:1px solid #c3c3c3;&quot;&gt;</span>
+<span class="s">        Your browser does not support the HTML5 canvas tag.</span>
+<span class="s">        &lt;/canvas&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.get_html_script"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.get_html_script">[docs]</a>    <span class="k">def</span> <span class="nf">get_html_script</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c"># put this between the &lt;script&gt; tag</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the javascript code needed to build the tree</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        var c = document.getElementById(&quot;FamilyTreeCanvas&quot;);</span>
+<span class="s">        var ctx = c.getContext(&quot;2d&quot;);</span>
+<span class="s">        &quot;&quot;&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">            c.addEventListener(&quot;mousemove&quot;, on_mousemove, false);</span>
+<span class="s">            c.addEventListener(&quot;click&quot;, on_click, false);</span>
+<span class="s">        function getOffsetRect(elem) {</span>
+<span class="s">            var box = elem.getBoundingClientRect()</span>
+
+<span class="s">            var body = document.body</span>
+<span class="s">            var docElem = document.documentElement</span>
+
+<span class="s">            var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop</span>
+<span class="s">            var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft</span>
+
+<span class="s">            var clientTop = docElem.clientTop || body.clientTop || 0</span>
+<span class="s">            var clientLeft = docElem.clientLeft || body.clientLeft || 0</span>
+
+<span class="s">            var top  = box.top +  scrollTop - clientTop</span>
+<span class="s">            var left = box.left + scrollLeft - clientLeft</span>
+
+<span class="s">            return { top: Math.round(top), left: Math.round(left) }</span>
+<span class="s">        }</span>
+<span class="s">        function on_mousemove (ev) {</span>
+<span class="s">            var x, y;</span>
+
+<span class="s">            // Get the mouse position relative to the canvas element.</span>
+<span class="s">            if (ev.layerX || ev.layerX == 0) { //for firefox</span>
+<span class="s">            x = ev.pageX;</span>
+<span class="s">            y = ev.pageY;</span>
+<span class="s">            }</span>
+<span class="s">            x-=getOffsetRect(c).left;</span>
+<span class="s">            y-=getOffsetRect(c).top;</span>
+<span class="s">            document.body.style.cursor = &quot;&quot;;</span>
+
+<span class="s">        &quot;&quot;&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mouseoverevents</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        }</span>
+<span class="s">        function on_click(ev) {</span>
+<span class="s">            var x, y;</span>
+
+<span class="s">            // Get the mouse position relative to the canvas element.</span>
+<span class="s">            if (ev.pageX || ev.pageX == 0) { //for firefox</span>
+<span class="s">            x = ev.pageX;</span>
+<span class="s">            y = ev.pageY;</span>
+<span class="s">            }</span>
+<span class="s">            x-=getOffsetRect(c).left;</span>
+<span class="s">            y-=getOffsetRect(c).top;</span>
+<span class="s">            console.info(x +&quot;,&quot;+y + &quot;(&quot; + ev.pageX + &quot;,&quot; + ev.pageY + &quot;)&quot; + c.offsetLeft + &quot;,&quot; + c.offsetTop);</span>
+
+<span class="s">        &quot;&quot;&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clickevents</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">        }</span>
+<span class="s">        &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.get_html"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.get_html">[docs]</a>    <span class="k">def</span> <span class="nf">get_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            {}</span>
+<span class="sd">            &lt;script&gt;</span>
+<span class="sd">            {}</span>
+<span class="sd">            &lt;/script&gt;</span>
+<span class="sd">            &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">())</span>
+        <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.draw_line"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_line">[docs]</a>    <span class="k">def</span> <span class="nf">draw_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">coords</span><span class="p">):</span>  <span class="c"># x1 y1 x2 y2</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a line between to points</span>
+<span class="sd">        :param coords: x1 y1 x2 y2</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        ctx.moveTo({},{});</span>
+<span class="s">        ctx.lineTo({},{});</span>
+<span class="s">        ctx.stroke();</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">coords</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.draw_rectangle"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_rectangle">[docs]</a>    <span class="k">def</span> <span class="nf">draw_rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">back_color</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        draws a rectangle between the given coordinates</span>
+<span class="sd">        :param x1:</span>
+<span class="sd">        :param y1:</span>
+<span class="sd">        :param x2:</span>
+<span class="sd">        :param y2:</span>
+<span class="sd">        :param back_color:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">back_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                ctx.fillStyle = &#39;{}&#39;;</span>
+<span class="s">                ctx.fillRect({},{},{},{});</span>
+<span class="s">            &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">back_color</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.draw_text"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_text">[docs]</a>    <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        draw a text at the given position. The position is the mid-top of the text</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param text:</span>
+<span class="sd">        :param size:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        ctx.font = &quot;{}px Arial&quot;;</span>
+<span class="s">        ctx.fillStyle = &#39;black&#39;;</span>
+<span class="s">        ctx.textAlign=&quot;center&quot;;</span>
+<span class="s">        ctx.fillText(&quot;{}&quot;,{},{});</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.add_mouse_pointer"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.add_mouse_pointer">[docs]</a>    <span class="k">def</span> <span class="nf">add_mouse_pointer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the mouse pointer to a pointer style (like over hyperlinks) in the given rectangle</span>
+<span class="sd">        :param x1:</span>
+<span class="sd">        :param y1:</span>
+<span class="sd">        :param x2:</span>
+<span class="sd">        :param y2:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mouseoverevents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        if(x&gt;={} &amp;&amp; x &lt;= {} &amp;&amp; y&gt;={} &amp;&amp; y&lt;= {}){{</span>
+<span class="s">            document.body.style.cursor = &quot;pointer&quot;;</span>
+<span class="s">        }}</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.add_mouse_link"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.add_mouse_link">[docs]</a>    <span class="k">def</span> <span class="nf">add_mouse_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to</span>
+<span class="sd">        the given page.</span>
+<span class="sd">        :param link:</span>
+<span class="sd">        :param x1:</span>
+<span class="sd">        :param y1:</span>
+<span class="sd">        :param x2:</span>
+<span class="sd">        :param y2:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        Note: The hyperlink will not show up as link. Therefor use the function add_mouse_pointer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clickevents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        if(x&gt;={} &amp;&amp; x &lt;= {} &amp;&amp; y&gt;={} &amp;&amp; y&lt;= {}){{</span>
+<span class="s">            window.location = &quot;{}&quot;</span>
+<span class="s">        }}</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">link</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.draw_image"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_image">[docs]</a>    <span class="k">def</span> <span class="nf">draw_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws an image at a given place with given dimensions</span>
+<span class="sd">        :param image: path of the image</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param width:</span>
+<span class="sd">        :param height:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">delim_array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%d</span><span class="s">x</span><span class="si">%d</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">delim_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">delim_array</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
+            <span class="n">old_width</span><span class="p">,</span> <span class="n">old_height</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span>
+            <span class="n">w_scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_width</span>
+            <span class="n">h_scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_height</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">w_scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">h_scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="c"># Image needs to be scaled</span>
+                <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">w_scale</span><span class="p">,</span> <span class="n">h_scale</span><span class="p">)</span>
+                <span class="n">new_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_width</span><span class="p">)</span>
+                <span class="n">new_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_height</span><span class="p">)</span>
+                <span class="n">newimage</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">new_width</span><span class="p">,</span> <span class="n">new_height</span><span class="p">),</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
+                <span class="n">newimage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">            var imageObj{0} = new Image();</span>
+
+<span class="s">              imageObj{0}.onload = function() {{</span>
+<span class="s">                var scale = Math.min({3}/imageObj{0}.naturalWidth,{4}/imageObj{0}.naturalHeight)</span>
+<span class="s">                ctx.drawImage(imageObj{0}, {1}-(imageObj{0}.naturalWidth*scale-{3})/2, {2}, imageObj{0}.naturalWidth*scale, imageObj{0}.naturalHeight*scale);</span>
+<span class="s">              }};</span>
+
+<span class="s">              imageObj{0}.src = &#39;/static/{5}&#39;;</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">64</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawJavaScript.draw_person"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_person">[docs]</a>    <span class="k">def</span> <span class="nf">draw_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws a person at a given position with given dimensions</span>
+<span class="sd">        :param person:</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param width:</span>
+<span class="sd">        :param height:</span>
+<span class="sd">        :param border: border between image and rectangle</span>
+<span class="sd">        :param textsize:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xdif</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="n">ydif</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_rectangle</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">,</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;*&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;+&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_pointer</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_link</span><span class="p">(</span><span class="s">&quot;/stamboom/edit/&quot;</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">)</span>
+        <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">textsize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span> <span class="o">+</span> <span class="n">border</span><span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span> <span class="o">+</span> <span class="n">border</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span><span class="p">)</span>
+
+
+</div></div>
+<div class="viewcode-block" id="BuildTree"><a class="viewcode-back" href="../draw.html#draw.BuildTree">[docs]</a><span class="k">class</span> <span class="nc">BuildTree</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This object calculates the position of all the people and the correct connections, displayed</span>
+<span class="sd">    on the canvas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coords</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">people_linked</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span><span class="p">)[</span><span class="mi">0</span><span class="p">]}</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_top_layers</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">transfer_xpos</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_coords</span><span class="p">()</span>
+
+<div class="viewcode-block" id="BuildTree.make_layers"><a class="viewcode-back" href="../draw.html#draw.BuildTree.make_layers">[docs]</a>    <span class="k">def</span> <span class="nf">make_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator of iterators containing people.</span>
+<span class="sd">        Each iterator contains the people who have to be displayed on a layer,</span>
+<span class="sd">        in the correct order, starting with the top layer.</span>
+<span class="sd">        This iterator does not contain the spouses. If you want to include the spouses,</span>
+<span class="sd">        use make_top_layers() instead</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">generator</span><span class="p">:</span>
+                <span class="c"># print([self.tree.get_representation(p) for p in generator])</span>
+                <span class="c"># print(list(zip(*[self.tree.get_representation(p) for p in generator])))</span>
+
+                <span class="n">layer</span><span class="p">,</span> <span class="n">nextgen</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">))</span>
+                <span class="k">yield</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">layer</span><span class="p">)</span>
+                <span class="n">generator</span> <span class="o">=</span> <span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">nextgen</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span>
+</div>
+<div class="viewcode-block" id="BuildTree.make_top_layers"><a class="viewcode-back" href="../draw.html#draw.BuildTree.make_top_layers">[docs]</a>    <span class="k">def</span> <span class="nf">make_top_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an iterator of iterators containing people. Each iterator contains the people who have to be displayed on a layer,</span>
+<span class="sd">        in the correct order, starting with the top layer.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">generator</span><span class="p">:</span>
+                <span class="c"># print([self.tree.get_representation(p) for p in generator])</span>
+                <span class="c"># print(list(zip(*[self.tree.get_representation(p) for p in generator])))</span>
+                <span class="n">layer</span><span class="p">,</span> <span class="n">nextgen</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">))</span>
+                <span class="k">yield</span> <span class="n">generator</span>
+                <span class="n">generator</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">nextgen</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_headsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_headsize">[docs]</a>    <span class="k">def</span> <span class="nf">get_headsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the size of the head (person and spouses) of the family this person is</span>
+<span class="sd">        :param person:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_headsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_tailsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_tailsize">[docs]</a>    <span class="k">def</span> <span class="nf">get_tailsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_tailsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="BuildTree.calc_headsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.calc_headsize">[docs]</a>    <span class="k">def</span> <span class="nf">calc_headsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="n">toplenght</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">toplenght</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tailsize</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="BuildTree.calc_tailsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.calc_tailsize">[docs]</a>    <span class="k">def</span> <span class="nf">calc_tailsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_xpos"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_xpos">[docs]</a>    <span class="k">def</span> <span class="nf">get_xpos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;{} Not Indexed Yet&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="BuildTree.transfer_xpos"><a class="viewcode-back" href="../draw.html#draw.BuildTree.transfer_xpos">[docs]</a>    <span class="k">def</span> <span class="nf">transfer_xpos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="n">currentpos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xpos</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tailsize</span><span class="p">(</span><span class="n">person</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">p</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="c">#print(person.name, p.name, s.name, &quot;-&gt;&quot;, currentpos)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">currentpos</span>
+            <span class="n">currentpos</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BuildTree.build_coords"><a class="viewcode-back" href="../draw.html#draw.BuildTree.build_coords">[docs]</a>    <span class="k">def</span> <span class="nf">build_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_top_layers</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
+                <span class="n">tops</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tops</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tops</span><span class="p">):</span>
+                    <span class="c">#print(p, person)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_pos"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_pos">[docs]</a>    <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">person</span><span class="p">],</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_width"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_width">[docs]</a>    <span class="k">def</span> <span class="nf">get_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span>
+</div>
+<div class="viewcode-block" id="BuildTree.get_height"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_height">[docs]</a>    <span class="k">def</span> <span class="nf">get_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">height</span>
+</div>
+<div class="viewcode-block" id="BuildTree.draw_family"><a class="viewcode-back" href="../draw.html#draw.BuildTree.draw_family">[docs]</a>    <span class="k">def</span> <span class="nf">draw_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw</span><span class="p">:</span><span class="n">DrawJavaScript</span><span class="p">,</span> <span class="n">fam</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">Family</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">):</span>
+        <span class="n">xdif</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="n">ydif</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">fam</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">fam</span><span class="o">.</span><span class="n">parents</span>
+            <span class="n">px1</span><span class="p">,</span> <span class="n">py1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+            <span class="n">px2</span><span class="p">,</span> <span class="n">py2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+            <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">px1</span><span class="p">,</span> <span class="n">px2</span><span class="p">)</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">py1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">px1</span><span class="p">,</span> <span class="n">px2</span><span class="p">)</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">py2</span><span class="p">)</span>
+            <span class="n">px</span> <span class="o">=</span> <span class="p">(</span><span class="n">px1</span> <span class="o">+</span> <span class="n">px2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">py</span> <span class="o">=</span> <span class="n">py1</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="o">=</span> <span class="n">fam</span><span class="o">.</span><span class="n">parents</span>
+            <span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Incorrect amoutn of parents&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fam</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="n">cy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">cyInter</span> <span class="o">=</span> <span class="p">(</span><span class="n">py</span> <span class="o">+</span> <span class="n">cy</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),</span> <span class="n">px</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">fam</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">cx</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+                <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">)</span>
+                <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">)</span></div>
+<div class="viewcode-block" id="BuildTree.check_valid"><a class="viewcode-back" href="../draw.html#draw.BuildTree.check_valid">[docs]</a>    <span class="k">def</span> <span class="nf">check_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</div></div>
+<div class="viewcode-block" id="draw_people"><a class="viewcode-back" href="../draw.html#draw.draw_people">[docs]</a><span class="k">def</span> <span class="nf">draw_people</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">BuildTree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">DrawJavaScript</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">get_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="n">s</span><span class="o">.</span><span class="n">get_height</span><span class="p">(</span><span class="n">height</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">draw_family</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">people_linked</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">draw_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+</div>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../draw.html#draw.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">BuildTree</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">make_layers</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Thorvald_Dox.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
