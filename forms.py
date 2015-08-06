@@ -35,7 +35,7 @@ def generate_basic_forms():
     FormCom("parents","parents","name","parent0","parent1")
     FormCom("dates","person","name","birth","dead")
     FormCom("addPartner","family","name","addPartner")
-    FormCom("remPartner","disband","name","remPartner")
+    FormCom("remPartner","delete","remPartner")
     FormCom("divPartner","divorce","name","divPartner")
     FormCom("rmrPartner","remarry","name","rmrPartner")
     FormCom("child","family","name","partner","addChild",submit=["addChildPress"])
