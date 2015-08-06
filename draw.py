@@ -412,6 +412,7 @@ class BuildTree:
                 cx, _ = self.get_pos(c, width, height)
                 draw.draw_line(px, cyInter, cx, cyInter)
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
+
     def check_valid(self,person):
         """
         Check if a person has a valid position. (And has one at all)
