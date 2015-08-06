@@ -48,6 +48,8 @@ def generate_basic_forms():
     generates the correct FormCom objects to the edit ui
     """
     FormCom("parents","parents","name","parent0","parent1")
+    FormCom("addSibling","sibling","name","addSibling")
+    FormCom("remSibling","delete","remSibling")
     FormCom("dates","person","name","birth","dead")
     FormCom("addPartner","family","name","addPartner")
     FormCom("remPartner","delete","remPartner")
@@ -147,6 +149,19 @@ def edit_partners_form(tree:core.FamilyTree,person):
          <input type="submit" value="Hertrouw & Verzend">
     </form>""".format(rmrBox)
 
+def edit_siblings_form(tree:core.FamilyTree,person):
+    partners = list(tree.get_partners(person))
+    addBox =  create_person_dropdown(tree.people_all,None,"addSibling")
+    remBox =  create_person_dropdown(tree.get_partners(person),None,"remSibling")
+    return """<form action="addSibling/" method="post" enctype="multipart/form-data">
+         Selecteer nieuwe broer/zus:{}<br/>
+         <input type="submit" value="Voeg toe & Verzend">
+    </form>""".format(addBox) + \
+    """<form action="remSibling/" method="post" enctype="multipart/form-data">
+         Verwijder broer/zus:{}<br/>
+         <input type="submit" value="Verwijder & Verzend">
+    </form>""".format(remBox)
+
 def edit_children_form(tree:core.FamilyTree,person):
     partBox = create_person_dropdown(tree.get_partners(person),None,"partner")
     addBox =  create_person_dropdown(tree.people_all,None,"addChild")
@@ -176,12 +191,14 @@ def edit_image_form():
 
 def make_forms(tree,person):
     yield edit_parents_form(tree,person)
+    yield edit_siblings_form(tree,person)
     yield edit_partners_form(tree,person)
     yield edit_children_form(tree,person)
     yield edit_date_form(person)
     yield edit_image_form()
 
 def disabled_forms(tree,person):
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
     yield "<a href='login/'>log in om</br>te bewerken</a>"
     yield "<a href='login/'>log in om</br>te bewerken</a>"
     yield "<a href='login/'>log in om</br>te bewerken</a>"

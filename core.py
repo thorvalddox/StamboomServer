@@ -80,6 +80,15 @@ class FamilyTree:
             if person in f.parents:
                 yield f
 
+    def get_family_up(self, person):
+        """
+        returns a the family the person is a child of
+        """
+        for f in self.families:
+            # #print(str(f))
+            if person in f.children:
+                return f
+
     def get_representation(self, person):
         """
             Object to represent a part of the family tree.
@@ -512,12 +521,19 @@ class CommandLoader:
     def subhead(self, p, *_):
         self.tree.subhead.append(self.tree.get_person(p))
 
+    def sibling(self, old, new):
+        for f in self.tree.families:
+            if new in f.children:
+                f.children.remove(new)
+        f = self.tree.get_family_up(old)
+        f.children.append(new)
+
     def loginas(self, name, *_):
-        """not accually a command, but is added to the log to track the author of different commands"""
+        """not actually a command, but is added to the log to track the author of different commands"""
         pass
 
     def logout(self,  *_):
-        """not accually a command, but is added to the log to track the author of different commands"""
+        """not actually a command, but is added to the log to track the author of different commands"""
         pass
 
 def addcommand_ip(request, data):
