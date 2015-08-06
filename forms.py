@@ -65,6 +65,10 @@ def edit_partners_form(tree:core.FamilyTree,person):
     partners = list(tree.get_partners(person))
     addBox =  create_person_dropdown(tree.people_all,None,"addPartner")
     remBox =  create_person_dropdown(tree.get_partners(person),None,"remPartner")
+    divBox =  create_person_dropdown(filter(lambda x:not tree.get_family(x,person).divorced,tree.get_partners(person))
+                                     ,None,"divPartner")
+    rmrBox =  create_person_dropdown(filter(lambda x:tree.get_family(x,person).divorced,tree.get_partners(person))
+                                     ,None,"rmrPartner")
     return """<form action="addPartner/" method="post" enctype="multipart/form-data">
          Selecteer nieuwe partner:{}<br/>
          <input type="submit" value="Voeg toe & Verzend">
@@ -72,7 +76,15 @@ def edit_partners_form(tree:core.FamilyTree,person):
     """<form action="remPartner/" method="post" enctype="multipart/form-data">
          Verwijder partner:{}<br/>
          <input type="submit" value="Verwijder & Verzend">
-    </form>""".format(remBox)
+    </form>""".format(remBox) + \
+    """<form action="divPartner/" method="post" enctype="multipart/form-data">
+         Scheiden van:{}<br/>
+         <input type="submit" value="Scheid & Verzend">
+    </form>""".format(divBox) + \
+    """<form action="rmrPartner/" method="post" enctype="multipart/form-data">
+         Hertrouwen:{}<br/>
+         <input type="submit" value="Hertrouw & Verzend">
+    </form>""".format(rmrBox)
 
 def edit_children_form(tree:core.FamilyTree,person):
     partBox = create_person_dropdown(tree.get_partners(person),None,"partner")

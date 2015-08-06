@@ -10,7 +10,7 @@ from collections import namedtuple
 
 import xml.etree.ElementTree as ET
 
-# comment should look like this: user person person_name 01/01/1900 01/01/2000
+# commands should look like this: user person person_name 01/01/1900 01/01/2000
 #                               user family parent_1 parent_2 child_1 child_2
 #                               user delete person_name
 #                               user parents child parent_1 parent_2
@@ -466,6 +466,11 @@ class CommandLoader:
         parentlist = [p for p in (p1, p2) if p != ""]
         f = self.tree.get_family(*parentlist)
         f.divorced = True
+
+    def remarry(self, p1, p2, *_):
+        parentlist = [p for p in (p1, p2) if p != ""]
+        f = self.tree.get_family(*parentlist)
+        f.divorced = False
 
     def head(self, p, *_):
         self.tree.head = self.tree.get_person(p)
