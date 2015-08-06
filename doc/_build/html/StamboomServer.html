@@ -43,22 +43,27 @@
 <dl class="function">
 <dt id="StamboomServer.admin_page">
 <code class="descclassname">StamboomServer.</code><code class="descname">admin_page</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#admin_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.admin_page" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>combines different decorators. (default_page, admin_required)</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.admin_required">
 <code class="descclassname">StamboomServer.</code><code class="descname">admin_required</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#admin_required"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.admin_required" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decorater. Put this after &#64;app.route. Defines if you need to be an admin to access a certain page.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.auto_update">
 <code class="descclassname">StamboomServer.</code><code class="descname">auto_update</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#auto_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.auto_update" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decorater. Put this after &#64;app.route. Defines if the page must check for updates before loading.
+It should be the default. Only f.e. the login page shouldn&#8217;t have it.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.catch_errors">
 <code class="descclassname">StamboomServer.</code><code class="descname">catch_errors</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#catch_errors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.catch_errors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decorater. Put this after &#64;app.route. Catches the errors of the different functions</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.chain_strings">
@@ -68,12 +73,14 @@
 <dl class="function">
 <dt id="StamboomServer.check_logged_in">
 <code class="descclassname">StamboomServer.</code><code class="descname">check_logged_in</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#check_logged_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.check_logged_in" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>check if the currect user is logged in.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.default_page">
 <code class="descclassname">StamboomServer.</code><code class="descname">default_page</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#default_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.default_page" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>combines different decorators. (catch_errors, update_jinja2_env, auto_update)</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.edit">
@@ -108,12 +115,14 @@
 <dl class="function">
 <dt id="StamboomServer.login_page">
 <code class="descclassname">StamboomServer.</code><code class="descname">login_page</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#login_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.login_page" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>combines different decorators. (default_page, login_required)</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.login_required">
 <code class="descclassname">StamboomServer.</code><code class="descname">login_required</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#login_required"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.login_required" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decorater. Put this after &#64;app.route. Defines if you need to be logged in to access a certain page.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.logout">
@@ -148,7 +157,8 @@
 <dl class="function">
 <dt id="StamboomServer.render_template">
 <code class="descclassname">StamboomServer.</code><code class="descname">render_template</code><span class="sig-paren">(</span><em>name</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#render_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.render_template" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>renders a flask template with the correct enviroment variables</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.render_titlebar">
@@ -208,7 +218,8 @@
 <dl class="function">
 <dt id="StamboomServer.update_jinja2_env">
 <code class="descclassname">StamboomServer.</code><code class="descname">update_jinja2_env</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/StamboomServer.html#update_jinja2_env"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#StamboomServer.update_jinja2_env" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decorater. Put this after &#64;app.route. Updates the global variables</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="StamboomServer.upload_image">

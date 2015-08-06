@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="imagechanger module" href="imagechanger.html" />
+    <link rel="prev" title="autoupdate module" href="autoupdate.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -42,30 +44,42 @@
 <dt id="loginhandle.LoginHandler">
 <em class="property">class </em><code class="descclassname">loginhandle.</code><code class="descname">LoginHandler</code><a class="reference internal" href="_modules/loginhandle.html#LoginHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>An object handling the logins</p>
 <dl class="method">
 <dt id="loginhandle.LoginHandler.admins">
 <code class="descname">admins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.admins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.admins" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns a list of users with admin access</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="loginhandle.LoginHandler.check_admin">
 <code class="descname">check_admin</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.check_admin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.check_admin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>check if the currently logged in user is an admin</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="loginhandle.LoginHandler.get_user_list">
 <code class="descname">get_user_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.get_user_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.get_user_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns a list of directiroes containing user data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="loginhandle.LoginHandler.user">
+<code class="descname">user</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the same of the currently logged in user, or an empty string if no user has logged in.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="loginhandle.LoginHandler.valid_login">
 <code class="descname">valid_login</code><span class="sig-paren">(</span><em>name</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.valid_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.valid_login" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>check if a username exists and has the correct password</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="loginhandle.LoginHandler.valid_user">
 <code class="descname">valid_user</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.valid_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.valid_user" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>check if a username exists</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -88,7 +102,8 @@
 <dl class="function">
 <dt id="loginhandle.randomstring">
 <code class="descclassname">loginhandle.</code><code class="descname">randomstring</code><span class="sig-paren">(</span><em>lenght=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#randomstring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.randomstring" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>generates a random lower alphanumerical string with a given lenght</p>
+</dd></dl>
 
 </div>
 
@@ -101,6 +116,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="autoupdate.html" title="previous chapter">autoupdate module</a></li>
+      <li>Next: <a href="imagechanger.html" title="next chapter">imagechanger module</a></li>
   </ul></li>
 </ul>
 </div>

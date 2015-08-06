@@ -43,23 +43,49 @@
 <span class="kn">import</span> <span class="nn">random</span>
 
 <div class="viewcode-block" id="LoginHandler"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler">[docs]</a><span class="k">class</span> <span class="nc">LoginHandler</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An object handling the logins</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">load_users</span><span class="p">())</span>
 <div class="viewcode-block" id="LoginHandler.valid_user"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_user">[docs]</a>    <span class="k">def</span> <span class="nf">valid_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if a username exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span></div>
 <div class="viewcode-block" id="LoginHandler.valid_login"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_login">[docs]</a>    <span class="k">def</span> <span class="nf">valid_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if a username exists and has the correct password</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_user</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">.</span><span class="n">match_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span></div>
 <div class="viewcode-block" id="LoginHandler.get_user_list"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.get_user_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns a list of directiroes containing user data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[{</span><span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span><span class="s">&quot;email&quot;</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">email</span><span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span></div>
 <div class="viewcode-block" id="LoginHandler.check_admin"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.check_admin">[docs]</a>    <span class="k">def</span> <span class="nf">check_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">session</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the currently logged in user is an admin</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">print</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;nope&quot;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">admins</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">admins</span><span class="p">()</span></div>
+<div class="viewcode-block" id="LoginHandler.user"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.user">[docs]</a>    <span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">session</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the same of the currently logged in user, or an empty string if no user has logged in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span></div>
 <div class="viewcode-block" id="LoginHandler.admins"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.admins">[docs]</a>    <span class="k">def</span> <span class="nf">admins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns a list of users with admin access</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="s">&quot;thorvalddx94&quot;</span><span class="p">,</span><span class="s">&quot;gerwind96&quot;</span><span class="p">,</span><span class="s">&quot;joran.dox&quot;</span><span class="p">)</span>
 </div></div>
 <div class="viewcode-block" id="randomstring"><a class="viewcode-back" href="../loginhandle.html#loginhandle.randomstring">[docs]</a><span class="k">def</span> <span class="nf">randomstring</span><span class="p">(</span><span class="n">lenght</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generates a random lower alphanumerical string with a given lenght</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&quot;azertyuiopqsdfghjklmwxcvbn0123456789&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lenght</span><span class="p">)))</span>
 </div>
 <div class="viewcode-block" id="load_users"><a class="viewcode-back" href="../loginhandle.html#loginhandle.load_users">[docs]</a><span class="k">def</span> <span class="nf">load_users</span><span class="p">():</span>

@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="autoupdate module" href="autoupdate.html" />
+    <link rel="prev" title="draw module" href="draw.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -42,42 +44,49 @@
 <dt id="forms.FormCom">
 <em class="property">class </em><code class="descclassname">forms.</code><code class="descname">FormCom</code><span class="sig-paren">(</span><em>pathname</em>, <em>command</em>, <em>*info</em>, <em>submit=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Changes form ouput to data command</p>
 <dl class="attribute">
 <dt id="forms.FormCom.all_">
-<code class="descname">all_</code><em class="property"> = [&lt;forms.FormCom object at 0x2b307e5e5390&gt;, &lt;forms.FormCom object at 0x2b307e5e53c8&gt;, &lt;forms.FormCom object at 0x2b307e5e5400&gt;, &lt;forms.FormCom object at 0x2b307e5e5438&gt;, &lt;forms.FormCom object at 0x2b307e5e5470&gt;, &lt;forms.FormCom object at 0x2b307e5e54a8&gt;, &lt;forms.FormCom object at 0x2b307e5e54e0&gt;, &lt;forms.FormCom object at 0x2b307e5e5518&gt;]</em><a class="headerlink" href="#forms.FormCom.all_" title="Permalink to this definition">¶</a></dt>
+<code class="descname">all_</code><em class="property"> = [&lt;forms.FormCom object at 0x2b62aca69d30&gt;, &lt;forms.FormCom object at 0x2b62aca69d68&gt;, &lt;forms.FormCom object at 0x2b62aca69da0&gt;, &lt;forms.FormCom object at 0x2b62aca69dd8&gt;, &lt;forms.FormCom object at 0x2b62aca69e10&gt;, &lt;forms.FormCom object at 0x2b62aca69e48&gt;, &lt;forms.FormCom object at 0x2b62aca69e80&gt;, &lt;forms.FormCom object at 0x2b62aca69eb8&gt;]</em><a class="headerlink" href="#forms.FormCom.all_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="forms.FormCom.buildcommand">
 <code class="descname">buildcommand</code><span class="sig-paren">(</span><em>command</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.buildcommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.buildcommand" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>build a command from a request.form data if the command matches</p>
+</dd></dl>
 
 <dl class="staticmethod">
 <dt id="forms.FormCom.get_command">
 <em class="property">static </em><code class="descname">get_command</code><span class="sig-paren">(</span><em>command</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.get_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.get_command" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>build a command from a request.form data. searches the correct command.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="forms.FormCom.getreq">
 <code class="descname">getreq</code><span class="sig-paren">(</span><em>data</em>, <em>name</em>, <em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#FormCom.getreq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.FormCom.getreq" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>get data from request</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="forms.create_person_dropdown">
 <code class="descclassname">forms.</code><code class="descname">create_person_dropdown</code><span class="sig-paren">(</span><em>pList</em>, <em>default=None</em>, <em>name='selector'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_dropdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_dropdown" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>creates a dropdown list, where the user can select a person or type the name of a new one</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="forms.create_person_dropdown_safe">
 <code class="descclassname">forms.</code><code class="descname">create_person_dropdown_safe</code><span class="sig-paren">(</span><em>pList</em>, <em>default=None</em>, <em>name='selector'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_dropdown_safe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_dropdown_safe" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>creates a dropdown list, forcing you to take a given option</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="forms.create_person_link">
 <code class="descclassname">forms.</code><code class="descname">create_person_link</code><span class="sig-paren">(</span><em>pList</em>, <em>split=50</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#create_person_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.create_person_link" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates aa list of people, splitting it in columns after a given amount.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="forms.disabled_forms">
@@ -112,7 +121,8 @@
 <dl class="function">
 <dt id="forms.generate_basic_forms">
 <code class="descclassname">forms.</code><code class="descname">generate_basic_forms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/forms.html#generate_basic_forms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#forms.generate_basic_forms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>generates the correct FormCom objects to the edit ui</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="forms.make_forms">
@@ -130,6 +140,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="draw.html" title="previous chapter">draw module</a></li>
+      <li>Next: <a href="autoupdate.html" title="next chapter">autoupdate module</a></li>
   </ul></li>
 </ul>
 </div>

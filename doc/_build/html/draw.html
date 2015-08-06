@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="forms module" href="forms.html" />
+    <link rel="prev" title="core module" href="core.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -47,60 +49,73 @@ on the canvas</p>
 <dl class="method">
 <dt id="draw.BuildTree.build_coords">
 <code class="descname">build_coords</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.build_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.build_coords" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>calculates the position of all people (in units chere 1 unit is the width/height of a person)</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.calc_headsize">
 <code class="descname">calc_headsize</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.calc_headsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.calc_headsize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Used by get_headsize. Do not use.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.calc_tailsize">
 <code class="descname">calc_tailsize</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.calc_tailsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.calc_tailsize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Used by get_tailsize. Do not use.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.check_valid">
 <code class="descname">check_valid</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.check_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.check_valid" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Check if a person has a valid position. (And has one at all)</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.draw_family">
 <code class="descname">draw_family</code><span class="sig-paren">(</span><em>draw: draw.DrawJavaScript</em>, <em>fam: core.Family</em>, <em>width</em>, <em>height</em>, <em>border</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.draw_family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.draw_family" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_headsize">
 <code class="descname">get_headsize</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_headsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_headsize" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the size of the head (person and spouses) of the family this person is
-:param person:
-:return:</p>
+<dd><p>returns the minimal space the branch of the person needs.
+(preson with spouces, children, spouces of children,
+grandchildren etc
+Calculates the space he and his spouces need, and compares it to the tailsize</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_height">
 <code class="descname">get_height</code><span class="sig-paren">(</span><em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_height"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_height" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns the total height of the family tree given the height of a single person</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_pos">
 <code class="descname">get_pos</code><span class="sig-paren">(</span><em>person</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_pos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_pos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>gets the position of a person in pixels.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_tailsize">
 <code class="descname">get_tailsize</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_tailsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_tailsize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns the sum of the headsizes of all the children.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_width">
 <code class="descname">get_width</code><span class="sig-paren">(</span><em>width</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_width"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_width" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns the total width of the family tree given the width of a single person</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.get_xpos">
 <code class="descname">get_xpos</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.get_xpos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.get_xpos" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>returns the correct x-coordinate of the person in the tree. The person has to be indexed first.
+It is not the exact position of the person, but the x-position of the reserved square. The width
+of the reserved square is defined by get_headsize</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.BuildTree.make_layers">
@@ -242,7 +257,8 @@ Note: The hyperlink will not show up as link. Therefor use the function add_mous
 <dl class="function">
 <dt id="draw.draw_people">
 <code class="descclassname">draw.</code><code class="descname">draw_people</code><span class="sig-paren">(</span><em>tree</em>, <em>width=170</em>, <em>height=200</em>, <em>border=15</em>, <em>textsize=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#draw_people"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.draw_people" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates a DrawJavaScript object with all needed data to draw a tree and returns it.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="draw.main">
@@ -260,6 +276,8 @@ Note: The hyperlink will not show up as link. Therefor use the function add_mous
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="core.html" title="previous chapter">core module</a></li>
+      <li>Next: <a href="forms.html" title="next chapter">forms module</a></li>
   </ul></li>
 </ul>
 </div>

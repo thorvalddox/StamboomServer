@@ -344,27 +344,42 @@
 </div>
 <div class="viewcode-block" id="BuildTree.get_headsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_headsize">[docs]</a>    <span class="k">def</span> <span class="nf">get_headsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        returns the size of the head (person and spouses) of the family this person is</span>
-<span class="sd">        :param person:</span>
-<span class="sd">        :return:</span>
+<span class="sd">        returns the minimal space the branch of the person needs.</span>
+<span class="sd">        (preson with spouces, children, spouces of children,</span>
+<span class="sd">        grandchildren etc</span>
+<span class="sd">        Calculates the space he and his spouces need, and compares it to the tailsize</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_headsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">headsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="BuildTree.get_tailsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_tailsize">[docs]</a>    <span class="k">def</span> <span class="nf">get_tailsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the sum of the headsizes of all the children.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_tailsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tailsize</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="BuildTree.calc_headsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.calc_headsize">[docs]</a>    <span class="k">def</span> <span class="nf">calc_headsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Used by get_headsize. Do not use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">toplenght</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">toplenght</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tailsize</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="BuildTree.calc_tailsize"><a class="viewcode-back" href="../draw.html#draw.BuildTree.calc_tailsize">[docs]</a>    <span class="k">def</span> <span class="nf">calc_tailsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Used by get_tailsize. Do not use.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 </div>
 <div class="viewcode-block" id="BuildTree.get_xpos"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_xpos">[docs]</a>    <span class="k">def</span> <span class="nf">get_xpos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the correct x-coordinate of the person in the tree. The person has to be indexed first.</span>
+<span class="sd">        It is not the exact position of the person, but the x-position of the reserved square. The width</span>
+<span class="sd">        of the reserved square is defined by get_headsize</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">person</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;{} Not Indexed Yet&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">[</span><span class="n">person</span><span class="p">]</span>
@@ -378,6 +393,9 @@
             <span class="n">currentpos</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="BuildTree.build_coords"><a class="viewcode-back" href="../draw.html#draw.BuildTree.build_coords">[docs]</a>    <span class="k">def</span> <span class="nf">build_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculates the position of all people (in units chere 1 unit is the width/height of a person)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_top_layers</span><span class="p">()):</span>
             <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">layer</span><span class="p">:</span>
                 <span class="n">tops</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
@@ -387,15 +405,27 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xpos</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="n">person</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="BuildTree.get_pos"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_pos">[docs]</a>    <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        gets the position of a person in pixels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">person</span><span class="p">],</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)))</span>
 </div>
 <div class="viewcode-block" id="BuildTree.get_width"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_width">[docs]</a>    <span class="k">def</span> <span class="nf">get_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the total width of the family tree given the width of a single person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_headsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span><span class="p">)</span> <span class="o">*</span> <span class="n">width</span>
 </div>
 <div class="viewcode-block" id="BuildTree.get_height"><a class="viewcode-back" href="../draw.html#draw.BuildTree.get_height">[docs]</a>    <span class="k">def</span> <span class="nf">get_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns the total height of the family tree given the height of a single person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">height</span>
 </div>
 <div class="viewcode-block" id="BuildTree.draw_family"><a class="viewcode-back" href="../draw.html#draw.BuildTree.draw_family">[docs]</a>    <span class="k">def</span> <span class="nf">draw_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw</span><span class="p">:</span><span class="n">DrawJavaScript</span><span class="p">,</span> <span class="n">fam</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">Family</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">xdif</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
         <span class="n">ydif</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">fam</span><span class="o">.</span><span class="n">parents</span><span class="p">):</span>
@@ -423,9 +453,15 @@
                 <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">)</span>
                 <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">)</span></div>
 <div class="viewcode-block" id="BuildTree.check_valid"><a class="viewcode-back" href="../draw.html#draw.BuildTree.check_valid">[docs]</a>    <span class="k">def</span> <span class="nf">check_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if a person has a valid position. (And has one at all)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">person</span><span class="p">]</span> <span class="o">!=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </div></div>
 <div class="viewcode-block" id="draw_people"><a class="viewcode-back" href="../draw.html#draw.draw_people">[docs]</a><span class="k">def</span> <span class="nf">draw_people</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a DrawJavaScript object with all needed data to draw a tree and returns it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">BuildTree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">DrawJavaScript</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">get_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="n">s</span><span class="o">.</span><span class="n">get_height</span><span class="p">(</span><span class="n">height</span><span class="p">)))</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
