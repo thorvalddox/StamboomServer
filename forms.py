@@ -26,7 +26,7 @@ class FormCom: #Changes form ouput to data command
     @staticmethod
     def get_command(command,name,request):
         for i in FormCom.all_:
-            s = i.buildcommand()
+            s = i.buildcommand(command,name,request)
             if s is not None:
                 return s
 
