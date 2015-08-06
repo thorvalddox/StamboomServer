@@ -285,10 +285,16 @@ class FamilyTree:
 
 
 def filter_invalid(l):
+    """
+    Filters the None objects out of a list
+    """
     return ([x for x in l if x is not None])
 
 
 def builddate(date):
+    """
+    Builds a datetime object out of a string
+    """
     if date and date != "never":
         date = re.sub(r"[ */-]+", "/", date)
         return time.strptime(date, "%d/%m/%Y")
@@ -297,6 +303,9 @@ def builddate(date):
 
 
 def showdate(date):
+    """
+    Builds a string out of a datetime object
+    """
     if date == time.strptime("01/01/3000", "%d/%m/%Y"):
         return ""
     else:
@@ -340,6 +349,9 @@ class Person:
 
     @property
     def image(self):
+        """
+        returns the path to the image
+        """
         name = "kopkes/" + self.uname + ".jpg"
         if not os.path.exists("StamboomServer/static/" + name):
             name = "kopkes/smiley.jpg"
@@ -363,7 +375,14 @@ class Family:
 
 
 class Commands(list):
+    """
+    This object is a list of tuples of strings. The tuples represent single commands,
+    the first element is the user, the second the functions and the rest are the arguments.
+    """
     def to_raw(self):
+        """
+        changes a list of command object to a raw string of commands
+        """
         ret = ""
         for c in self:
             args = " ".join(i if i != "" else "*" for i in c)
@@ -371,6 +390,9 @@ class Commands(list):
         return ret
 
     def to_html(self):
+        """
+        changes a list of command object to a html display, used to show the console on the website
+        """
         ret = ""
         for c in self:
             user, func, *args = c
@@ -395,6 +417,11 @@ class Commands(list):
 
     @classmethod
     def from_raw(cls, data):
+        """
+
+
+        changes a string of commands to a list of command objects
+        """
         ret = []
         for line in data.split("\n"):
             if line.count(" ") < 2:
@@ -404,6 +431,11 @@ class Commands(list):
 
 
 class CommandLoader:
+    """
+    An object that can execute commands.
+    Its member functions match the names of the different commands, and are the
+    functions that are accually called when executing the command.
+    """
     def __init__(self, tree, accepted=[]):
         self.tree = tree
         self.accepted = accepted + ["$"]
@@ -489,16 +521,25 @@ class CommandLoader:
         pass
 
 def addcommand_ip(request, data):
+    """
+    adds a command to the command log for a user that is not logged in.
+    """
     with open("StamboomServer/data.log", "a") as fff:
         fff.write("?{} {}\n".format(request.environ['REMOTE_ADDR'], data))
 
 
 def addcommand_user(session, data):
+    """
+    adds a command to the command log for a user who is logged in
+    """
     with open("StamboomServer/data.log", "a") as fff:
         fff.write("#{} {}\n".format(session["username"], data))
 
 
 def addcommand(request, session, data):
+    """
+    adds a command to the command log
+    """
     if "username" in session:
         addcommand_user(session, data)
     else:

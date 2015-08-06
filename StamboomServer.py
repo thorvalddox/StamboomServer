@@ -60,11 +60,6 @@ OFFLINE = False #true if the server is ran on a local machine.
 print(os.getcwd())
 
 
-if os.getcwd().endswith("StamboomServer"):
-    os.chdir("../")
-    OFFLINE = True
-
-app.debug = OFFLINE
 
 print("status:",["ONLINE","OFFLINE/DEBUG"][OFFLINE])
 #Init side processes
@@ -397,6 +392,8 @@ def send_mail(user,contents):
     except Exception as e:
         import traceback
         yield traceback.format_exc()
+
+
 
 
 @app.route("/stamboom/admin/")

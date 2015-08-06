@@ -14,6 +14,12 @@ except ImportError:
 
 
 class DrawJavaScript:
+    """
+    A wrapper to draw a family tree using javascript. Different methods will create different shapes.
+    The methods get_html_canvas and get_html_script return all the data needed on the html script.
+    Put get_html_canvas on the place where you want to show the tree and get_html_script in the script section.
+    You can also use get_html, which already contains a script section.
+    """
     def __init__(self, dimensions):
         self.commands = []
         self.clickevents = []
@@ -21,12 +27,20 @@ class DrawJavaScript:
         self.dimensions = dimensions
 
     def get_html_canvas(self):
+        """
+        returns the needed html code to create the canvas
+        :return:
+        """
         return """
         <canvas id="FamilyTreeCanvas" width="{}" height="{}" style="border:1px solid #c3c3c3;">
         Your browser does not support the HTML5 canvas tag.
         </canvas>""".format(*self.dimensions)
 
     def get_html_script(self):  # put this between the <script> tag
+        """
+        returns the javascript code needed to build the tree
+        :return:
+        """
         return """
         var c = document.getElementById("FamilyTreeCanvas");
         var ctx = c.getContext("2d");
@@ -80,7 +94,22 @@ class DrawJavaScript:
         }
         """
 
+    def get_html(self):
+        return(
+            """
+            {}
+            <script>
+            {}
+            </script>
+            """.format(self.get_html_canvas(),self.get_html_script())
+        )
+
     def draw_line(self, *coords):  # x1 y1 x2 y2
+        """
+        Adds a line between to points
+        :param coords: x1 y1 x2 y2
+        :return:
+        """
         self.commands.append("""
         ctx.moveTo({},{});
         ctx.lineTo({},{});
@@ -88,6 +117,15 @@ class DrawJavaScript:
         """.format(*coords))
 
     def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
+        """
+        draws a rectangle between the given coordinates
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :param back_color:
+        :return:
+        """
         if back_color is not None:
             self.commands.append("""
                 ctx.fillStyle = '{}';
@@ -99,6 +137,14 @@ class DrawJavaScript:
         self.draw_line(x1, y2, x2, y2)
 
     def draw_text(self, x, y, text, size=12):
+        """
+        draw a text at the given position. The position is the mid-top of the text
+        :param x:
+        :param y:
+        :param text:
+        :param size:
+        :return:
+        """
         self.commands.append("""
         ctx.font = "{}px Arial";
         ctx.fillStyle = 'black';
@@ -107,6 +153,14 @@ class DrawJavaScript:
         """.format(size, text, x, y))
 
     def add_mouse_pointer(self, x1, y1, x2, y2):
+        """
+        Changes the mouse pointer to a pointer style (like over hyperlinks) in the given rectangle
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :return:
+        """
         self.mouseoverevents.append("""
         if(x>={} && x <= {} && y>={} && y<= {}){{
             document.body.style.cursor = "pointer";
@@ -114,6 +168,17 @@ class DrawJavaScript:
         """.format(x1, x2, y1, y2))
 
     def add_mouse_link(self, link, x1, y1, x2, y2):
+        """
+        Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to
+        the given page.
+        :param link:
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :return:
+        Note: The hyperlink will not show up as link. Therefor use the function add_mouse_pointer
+        """
         self.clickevents.append("""
         if(x>={} && x <= {} && y>={} && y<= {}){{
             window.location = "{}"
@@ -121,6 +186,15 @@ class DrawJavaScript:
         """.format(x1, x2, y1, y2, link))
 
     def draw_image(self, image, x, y, width, height):
+        """
+        Draws an image at a given place with given dimensions
+        :param image: path of the image
+        :param x:
+        :param y:
+        :param width:
+        :param height:
+        :return:
+        """
         delim_array = image.split('.', 1)
         path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
         if not os.path.exists("StamboomServer/static/" + path):
@@ -150,6 +224,17 @@ class DrawJavaScript:
         """.format(random.randrange(2 ** 64), x, y, width, height, path))
 
     def draw_person(self, person, x, y, width, height, border, textsize):
+        """
+        Draws a person at a given position with given dimensions
+        :param person:
+        :param x:
+        :param y:
+        :param width:
+        :param height:
+        :param border: border between image and rectangle
+        :param textsize:
+        :return:
+        """
         xdif = width / 2 - border
         ydif = height / 2 - border
         self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
@@ -164,6 +249,10 @@ class DrawJavaScript:
 
 
 class BuildTree:
+    """
+    This object calculates the position of all the people and the correct connections, displayed
+    on the canvas
+    """
     def __init__(self, tree):
         self.tree = tree
         self.coords = {p: (-1,-1) for p in self.tree.people_linked}
@@ -176,6 +265,14 @@ class BuildTree:
         self.build_coords()
 
     def make_layers(self):
+        """
+        Returns an iterator of iterators containing people.
+        Each iterator contains the people who have to be displayed on a layer,
+        in the correct order, starting with the top layer.
+        This iterator does not contain the spouses. If you want to include the spouses,
+        use make_top_layers() instead
+        :return:
+        """
         generator = [self.tree.head]
         try:
             while generator:
@@ -189,6 +286,11 @@ class BuildTree:
             return
 
     def make_top_layers(self):
+        """
+        Returns an iterator of iterators containing people. Each iterator contains the people who have to be displayed on a layer,
+        in the correct order, starting with the top layer.
+        :return:
+        """
         generator = [self.tree.head]
         try:
             while generator:
@@ -201,6 +303,11 @@ class BuildTree:
             return
 
     def get_headsize(self, person):
+        """
+        returns the size of the head (person and spouses) of the family this person is
+        :param person:
+        :return:
+        """
         if person not in self.headsize:
             self.headsize[person] = self.calc_headsize(person)
         return self.headsize[person]

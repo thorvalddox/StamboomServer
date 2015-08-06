@@ -23,24 +23,27 @@ def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
 
 def load_users():
-    with open("StamboomServer/users.txt") as fff:
-        command = "#test"
-        while command != "seed":
-            line = fff.readline()
-            if line.startswith("#"):
-                continue
-            command,seed = line.split(" ")
+    try:
+        with open("StamboomServer/users.txt") as fff:
+            command = "#test"
+            while command != "seed":
+                line = fff.readline()
+                if line.startswith("#"):
+                    continue
+                command,seed = line.split(" ")
 
-        random.seed(int(seed,16))
-        print(int(seed,16))
+            random.seed(int(seed,16))
+            print(int(seed,16))
 
-        for line in fff:
-            if line.startswith(("#","seed")):
-                continue
-            #name,email = line[:-1].split(" ") #[:-1] to ignore newline character
-            email = line.strip(" \n\t")
-            name = email.split("@")[0]
-            yield name.lower(),User(name.lower(),email)
+            for line in fff:
+                if line.startswith(("#","seed")):
+                    continue
+                #name,email = line[:-1].split(" ") #[:-1] to ignore newline character
+                email = line.strip(" \n\t")
+                name = email.split("@")[0]
+                yield name.lower(),User(name.lower(),email)
+    except FileNotFoundError:
+        return []
 
 
 class User:

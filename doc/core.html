@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module core</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>core</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/thorvald/PycharmProjects/StamboomServer/core.py">/home/thorvald/PycharmProjects/StamboomServer/core.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+<a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="random.html">random</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#list">builtins.list</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="core.html#Commands">Commands</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="core.html#CommandLoader">CommandLoader</a>
+</font></dt><dt><font face="helvetica, arial"><a href="core.html#Family">Family</a>
+</font></dt><dt><font face="helvetica, arial"><a href="core.html#FamilyTree">FamilyTree</a>
+</font></dt><dt><font face="helvetica, arial"><a href="core.html#Person">Person</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#tuple">builtins.tuple</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="core.html#Representation">Representation</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CommandLoader">class <strong>CommandLoader</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;can&nbsp;execute&nbsp;commands.<br>
+Its&nbsp;member&nbsp;functions&nbsp;match&nbsp;the&nbsp;names&nbsp;of&nbsp;the&nbsp;different&nbsp;commands,&nbsp;and&nbsp;are&nbsp;the<br>
+functions&nbsp;that&nbsp;are&nbsp;accually&nbsp;called&nbsp;when&nbsp;executing&nbsp;the&nbsp;command.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="CommandLoader-__call__"><strong>__call__</strong></a>(self, command)</dt></dl>
+
+<dl><dt><a name="CommandLoader-__init__"><strong>__init__</strong></a>(self, tree, accepted=[])</dt></dl>
+
+<dl><dt><a name="CommandLoader-delete"><strong>delete</strong></a>(self, person, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-disband"><strong>disband</strong></a>(self, person1, person2, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-disconnect"><strong>disconnect</strong></a>(self, person1, person2, child, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-divorce"><strong>divorce</strong></a>(self, p1, p2, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-family"><strong>family</strong></a>(self, p1, p2, *children)</dt></dl>
+
+<dl><dt><a name="CommandLoader-head"><strong>head</strong></a>(self, p, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-loginas"><strong>loginas</strong></a>(self, name, *_)</dt><dd><tt>not&nbsp;accually&nbsp;a&nbsp;command,&nbsp;but&nbsp;is&nbsp;added&nbsp;to&nbsp;the&nbsp;log&nbsp;to&nbsp;track&nbsp;the&nbsp;author&nbsp;of&nbsp;different&nbsp;commands</tt></dd></dl>
+
+<dl><dt><a name="CommandLoader-logout"><strong>logout</strong></a>(self, *_)</dt><dd><tt>not&nbsp;accually&nbsp;a&nbsp;command,&nbsp;but&nbsp;is&nbsp;added&nbsp;to&nbsp;the&nbsp;log&nbsp;to&nbsp;track&nbsp;the&nbsp;author&nbsp;of&nbsp;different&nbsp;commands</tt></dd></dl>
+
+<dl><dt><a name="CommandLoader-merge"><strong>merge</strong></a>(self, person1, person2, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-parents"><strong>parents</strong></a>(self, child, p1, p2, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-person"><strong>person</strong></a>(self, name, birth, dead, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-remarry"><strong>remarry</strong></a>(self, p1, p2, *_)</dt></dl>
+
+<dl><dt><a name="CommandLoader-subhead"><strong>subhead</strong></a>(self, p, *_)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Commands">class <strong>Commands</strong></a>(<a href="builtins.html#list">builtins.list</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;a&nbsp;<a href="builtins.html#list">list</a>&nbsp;of&nbsp;tuples&nbsp;of&nbsp;strings.&nbsp;The&nbsp;tuples&nbsp;represent&nbsp;single&nbsp;commands,<br>
+the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;user,&nbsp;the&nbsp;second&nbsp;the&nbsp;functions&nbsp;and&nbsp;the&nbsp;rest&nbsp;are&nbsp;the&nbsp;arguments.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="core.html#Commands">Commands</a></dd>
+<dd><a href="builtins.html#list">builtins.list</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Commands-to_html"><strong>to_html</strong></a>(self)</dt><dd><tt>changes&nbsp;a&nbsp;<a href="builtins.html#list">list</a>&nbsp;of&nbsp;command&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;a&nbsp;html&nbsp;display,&nbsp;used&nbsp;to&nbsp;show&nbsp;the&nbsp;console&nbsp;on&nbsp;the&nbsp;website</tt></dd></dl>
+
+<dl><dt><a name="Commands-to_raw"><strong>to_raw</strong></a>(self)</dt><dd><tt>changes&nbsp;a&nbsp;<a href="builtins.html#list">list</a>&nbsp;of&nbsp;command&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;a&nbsp;raw&nbsp;string&nbsp;of&nbsp;commands</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="Commands-from_raw"><strong>from_raw</strong></a>(data)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>changes&nbsp;a&nbsp;string&nbsp;of&nbsp;commands&nbsp;to&nbsp;a&nbsp;<a href="builtins.html#list">list</a>&nbsp;of&nbsp;command&nbsp;objects</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="builtins.html#list">builtins.list</a>:<br>
+<dl><dt><a name="Commands-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__delitem__"><strong>__delitem__</strong></a>(self, key, /)</dt><dd><tt>Delete&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Commands-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>__ge__=($self,&nbsp;value,&nbsp;/)<br>
+--<br>
+&nbsp;<br>
+Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Commands-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#Commands-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="Commands-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__iadd__"><strong>__iadd__</strong></a>(self, value, /)</dt><dd><tt>Implement&nbsp;self+=value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__imul__"><strong>__imul__</strong></a>(self, value, /)</dt><dd><tt>Implement&nbsp;self*=value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Commands-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Commands-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Commands-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="Commands-__reversed__"><strong>__reversed__</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-__reversed__">__reversed__</a>()&nbsp;--&nbsp;return&nbsp;a&nbsp;reverse&nbsp;iterator&nbsp;over&nbsp;the&nbsp;<a href="builtins.html#list">list</a></tt></dd></dl>
+
+<dl><dt><a name="Commands-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__setitem__"><strong>__setitem__</strong></a>(self, key, value, /)</dt><dd><tt>Set&nbsp;self[key]&nbsp;to&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="Commands-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-__sizeof__">__sizeof__</a>()&nbsp;--&nbsp;size&nbsp;of&nbsp;L&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="Commands-append"><strong>append</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-append">append</a>(<a href="builtins.html#object">object</a>)&nbsp;-&gt;&nbsp;None&nbsp;--&nbsp;append&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;end</tt></dd></dl>
+
+<dl><dt><a name="Commands-clear"><strong>clear</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-clear">clear</a>()&nbsp;-&gt;&nbsp;None&nbsp;--&nbsp;remove&nbsp;all&nbsp;items&nbsp;from&nbsp;L</tt></dd></dl>
+
+<dl><dt><a name="Commands-copy"><strong>copy</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-copy">copy</a>()&nbsp;-&gt;&nbsp;<a href="builtins.html#list">list</a>&nbsp;--&nbsp;a&nbsp;shallow&nbsp;copy&nbsp;of&nbsp;L</tt></dd></dl>
+
+<dl><dt><a name="Commands-count"><strong>count</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Commands-extend"><strong>extend</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-extend">extend</a>(iterable)&nbsp;-&gt;&nbsp;None&nbsp;--&nbsp;extend&nbsp;<a href="builtins.html#list">list</a>&nbsp;by&nbsp;appending&nbsp;elements&nbsp;from&nbsp;the&nbsp;iterable</tt></dd></dl>
+
+<dl><dt><a name="Commands-index"><strong>index</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<dl><dt><a name="Commands-insert"><strong>insert</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-insert">insert</a>(index,&nbsp;<a href="builtins.html#object">object</a>)&nbsp;--&nbsp;insert&nbsp;<a href="builtins.html#object">object</a>&nbsp;before&nbsp;index</tt></dd></dl>
+
+<dl><dt><a name="Commands-pop"><strong>pop</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-pop">pop</a>([index])&nbsp;-&gt;&nbsp;item&nbsp;--&nbsp;remove&nbsp;and&nbsp;return&nbsp;item&nbsp;at&nbsp;index&nbsp;(default&nbsp;last).<br>
+Raises&nbsp;IndexError&nbsp;if&nbsp;<a href="builtins.html#list">list</a>&nbsp;is&nbsp;empty&nbsp;or&nbsp;index&nbsp;is&nbsp;out&nbsp;of&nbsp;range.</tt></dd></dl>
+
+<dl><dt><a name="Commands-remove"><strong>remove</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-remove">remove</a>(value)&nbsp;-&gt;&nbsp;None&nbsp;--&nbsp;remove&nbsp;first&nbsp;occurrence&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<dl><dt><a name="Commands-reverse"><strong>reverse</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-reverse">reverse</a>()&nbsp;--&nbsp;reverse&nbsp;*IN&nbsp;PLACE*</tt></dd></dl>
+
+<dl><dt><a name="Commands-sort"><strong>sort</strong></a>(...)</dt><dd><tt>L.<a href="#Commands-sort">sort</a>(key=None,&nbsp;reverse=False)&nbsp;-&gt;&nbsp;None&nbsp;--&nbsp;stable&nbsp;sort&nbsp;*IN&nbsp;PLACE*</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="builtins.html#list">builtins.list</a>:<br>
+<dl><dt><strong>__hash__</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Family">class <strong>Family</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Family-__init__"><strong>__init__</strong></a>(self, parents, children, divorced=False)</dt></dl>
+
+<dl><dt><a name="Family-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FamilyTree">class <strong>FamilyTree</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FamilyTree-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FamilyTree-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FamilyTree-build_commands"><strong>build_commands</strong></a>(self)</dt><dd><tt>Build&nbsp;a&nbsp;<a href="builtins.html#list">list</a>&nbsp;of&nbsp;commands&nbsp;that&nbsp;could&nbsp;rebuild&nbsp;this&nbsp;whole&nbsp;family&nbsp;tree</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-build_new"><strong>build_new</strong></a>(self, key)</dt><dd><tt>returns&nbsp;new&nbsp;famaily&nbsp;tree&nbsp;representing&nbsp;a&nbsp;certain&nbsp;root&nbsp;of&nbsp;the&nbsp;family.<br>
+Gives&nbsp;the&nbsp;posterity&nbsp;and&nbsp;the&nbsp;single&nbsp;direction&nbsp;ancestors</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-from_code"><strong>from_code</strong></a>(self, filename, level=0)</dt><dd><tt>generates&nbsp;family&nbsp;tree&nbsp;from&nbsp;a&nbsp;code&nbsp;<a href="builtins.html#object">object</a><br>
+0&nbsp;is&nbsp;admin<br>
+1&nbsp;is&nbsp;logged&nbsp;in&nbsp;users<br>
+2&nbsp;is&nbsp;all</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-from_xml"><strong>from_xml</strong></a>(self, filename)</dt><dd><tt>Build&nbsp;the&nbsp;family&nbsp;tree&nbsp;given&nbsp;an&nbsp;old-format&nbsp;xml&nbsp;file</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_ancestors"><strong>get_ancestors</strong></a>(self, person)</dt></dl>
+
+<dl><dt><a name="FamilyTree-get_children"><strong>get_children</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;persons&nbsp;children</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_clan"><strong>get_clan</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;posterity&nbsp;and&nbsp;there&nbsp;partners</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_data"><strong>get_data</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;data&nbsp;to&nbsp;use&nbsp;in&nbsp;edit.html</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_family"><strong>get_family</strong></a>(self, *names)</dt><dd><tt>returns&nbsp;a&nbsp;family&nbsp;with&nbsp;the&nbsp;given&nbsp;parent&nbsp;names.&nbsp;Makes&nbsp;a&nbsp;new&nbsp;one&nbsp;if&nbsp;not&nbsp;found.</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_family_down"><strong>get_family_down</strong></a>(self, person)</dt><dd><tt>returns&nbsp;a&nbsp;iterator&nbsp;of&nbsp;families&nbsp;where&nbsp;the&nbsp;given&nbsp;person&nbsp;is&nbsp;a&nbsp;parent&nbsp;of</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_parents"><strong>get_parents</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;persons&nbsp;parents</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_parther"><strong>get_parther</strong></a>(self, person, family)</dt><dd><tt>give&nbsp;the&nbsp;partner&nbsp;of&nbsp;the&nbsp;person&nbsp;in&nbsp;the&nbsp;given&nbsp;family.&nbsp;If&nbsp;you&nbsp;want&nbsp;all&nbsp;pertners&nbsp;the&nbsp;person&nbsp;even&nbsp;had,<br>
+use:&nbsp;<a href="#FamilyTree-get_partners">get_partners</a>(person)</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_partners"><strong>get_partners</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;persons&nbsp;partners</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_person"><strong>get_person</strong></a>(self, name)</dt><dd><tt>returns&nbsp;a&nbsp;person&nbsp;woth&nbsp;the&nbsp;given&nbsp;name.&nbsp;If&nbsp;there&nbsp;isn't&nbsp;one,&nbsp;it&nbsp;creates&nbsp;a&nbsp;new&nbsp;one&nbsp;and&nbsp;retusn&nbsp;that&nbsp;one</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_representation"><strong>get_representation</strong></a>(self, person)</dt><dd><tt>Object&nbsp;to&nbsp;represent&nbsp;a&nbsp;part&nbsp;of&nbsp;the&nbsp;family&nbsp;tree.<br>
+head&nbsp;represents&nbsp;the&nbsp;people&nbsp;on&nbsp;the&nbsp;same&nbsp;line&nbsp;indicated&nbsp;by&nbsp;the&nbsp;given&nbsp;person,<br>
+they&nbsp;include&nbsp;the&nbsp;person&nbsp;himself&nbsp;and&nbsp;all&nbsp;the&nbsp;partners&nbsp;he&nbsp;ever&nbsp;had<br>
+tail&nbsp;represents&nbsp;the&nbsp;people&nbsp;on&nbsp;the&nbsp;next&nbsp;line.&nbsp;These&nbsp;contain&nbsp;the&nbsp;children.<br>
+This&nbsp;one&nbsp;is&nbsp;usually&nbsp;chained,&nbsp;as&nbsp;to&nbsp;give&nbsp;the&nbsp;correct&nbsp;representation,&nbsp;they&nbsp;need&nbsp;the&nbsp;head&nbsp;entry&nbsp;of&nbsp;each&nbsp;child</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-get_siblings"><strong>get_siblings</strong></a>(self, person)</dt><dd><tt>returns&nbsp;all&nbsp;persons&nbsp;siblings&nbsp;and&nbsp;half-siblings</tt></dd></dl>
+
+<dl><dt><a name="FamilyTree-write"><strong>write</strong></a>(self, person)</dt><dd><tt>returns&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;posterity&nbsp;of&nbsp;the&nbsp;given&nbsp;person</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>people_all</strong></dt>
+<dd><tt>returns&nbsp;a&nbsp;list&nbsp;of&nbsp;people&nbsp;the&nbsp;family&nbsp;tree&nbsp;contains,&nbsp;iven&nbsp;the&nbsp;not&nbsp;yet&nbsp;connected&nbsp;ones</tt></dd>
+</dl>
+<dl><dt><strong>people_linked</strong></dt>
+<dd><tt>returns&nbsp;a&nbsp;list&nbsp;of&nbsp;people&nbsp;the&nbsp;family&nbsp;tree&nbsp;contains&nbsp;and&nbsp;are&nbsp;connected</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Person">class <strong>Person</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Person-__init__"><strong>__init__</strong></a>(self, name, birth='', dead='', id_='none')</dt></dl>
+
+<dl><dt><a name="Person-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Person-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>birth</strong></dt>
+</dl>
+<dl><dt><strong>dead</strong></dt>
+</dl>
+<dl><dt><strong>image</strong></dt>
+<dd><tt>returns&nbsp;the&nbsp;path&nbsp;to&nbsp;the&nbsp;image</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>all_</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Representation">class <strong>Representation</strong></a>(<a href="builtins.html#tuple">builtins.tuple</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Representation">Representation</a>(head,&nbsp;tail)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="core.html#Representation">Representation</a></dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Representation-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;<a href="builtins.html#tuple">tuple</a>.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><tt>Exclude&nbsp;the&nbsp;OrderedDict&nbsp;from&nbsp;pickling</tt></dd></dl>
+
+<dl><dt><a name="Representation-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Representation-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Representation-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Representation">Representation</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="Representation-_make"><strong>_make</strong></a>(iterable, new=<built-in method __new__ of type object at 0x9ca6e0>, len=<built-in function len>)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Representation">Representation</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Representation-__new__"><strong>__new__</strong></a>(_cls, head, tail)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Representation">Representation</a>(head,&nbsp;tail)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>A&nbsp;new&nbsp;OrderedDict&nbsp;mapping&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values</tt></dd>
+</dl>
+<dl><dt><strong>head</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<dl><dt><strong>tail</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;1</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>_fields</strong> = ('head', 'tail')</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(1), doc='Alias for field number 1')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Representation-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__eq__"><strong>__eq__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>__ge__=($self,&nbsp;value,&nbsp;/)<br>
+--<br>
+&nbsp;<br>
+Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Representation-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Representation-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__hash__"><strong>__hash__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Representation-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Representation-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Representation-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Representation-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Representation-__sizeof__"><strong>__sizeof__</strong></a>(...)</dt><dd><tt>T.<a href="#Representation-__sizeof__">__sizeof__</a>()&nbsp;--&nbsp;size&nbsp;of&nbsp;T&nbsp;in&nbsp;memory,&nbsp;in&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="Representation-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Representation-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Representation-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Representation-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-addcommand"><strong>addcommand</strong></a>(request, session, data)</dt><dd><tt>adds&nbsp;a&nbsp;command&nbsp;to&nbsp;the&nbsp;command&nbsp;log</tt></dd></dl>
+ <dl><dt><a name="-addcommand_ip"><strong>addcommand_ip</strong></a>(request, data)</dt><dd><tt>adds&nbsp;a&nbsp;command&nbsp;to&nbsp;the&nbsp;command&nbsp;log&nbsp;for&nbsp;a&nbsp;user&nbsp;that&nbsp;is&nbsp;not&nbsp;logged&nbsp;in.</tt></dd></dl>
+ <dl><dt><a name="-addcommand_user"><strong>addcommand_user</strong></a>(session, data)</dt><dd><tt>adds&nbsp;a&nbsp;command&nbsp;to&nbsp;the&nbsp;command&nbsp;log&nbsp;for&nbsp;a&nbsp;user&nbsp;who&nbsp;is&nbsp;logged&nbsp;in</tt></dd></dl>
+ <dl><dt><a name="-bashTest"><strong>bashTest</strong></a>()</dt></dl>
+ <dl><dt><a name="-builddate"><strong>builddate</strong></a>(date)</dt><dd><tt>Builds&nbsp;a&nbsp;datetime&nbsp;<a href="builtins.html#object">object</a>&nbsp;out&nbsp;of&nbsp;a&nbsp;string</tt></dd></dl>
+ <dl><dt><a name="-filter_invalid"><strong>filter_invalid</strong></a>(l)</dt><dd><tt>Filters&nbsp;the&nbsp;None&nbsp;objects&nbsp;out&nbsp;of&nbsp;a&nbsp;<a href="builtins.html#list">list</a></tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-rawCode"><strong>rawCode</strong></a>()</dt></dl>
+ <dl><dt><a name="-showdate"><strong>showdate</strong></a>(date)</dt><dd><tt>Builds&nbsp;a&nbsp;string&nbsp;out&nbsp;of&nbsp;a&nbsp;datetime&nbsp;<a href="builtins.html#object">object</a></tt></dd></dl>
+ <dl><dt><a name="-xmlTest"><strong>xmlTest</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Thorvald</td></tr></table>
+</body></html>
