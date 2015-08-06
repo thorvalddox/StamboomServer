@@ -304,27 +304,42 @@ class BuildTree:
 
     def get_headsize(self, person):
         """
-        returns the size of the head (person and spouses) of the family this person is
-        :param person:
-        :return:
+        returns the minimal space the branch of the person needs.
+        (preson with spouces, children, spouces of children,
+        grandchildren etc
+        Calculates the space he and his spouces need, and compares it to the tailsize
         """
         if person not in self.headsize:
             self.headsize[person] = self.calc_headsize(person)
         return self.headsize[person]
 
     def get_tailsize(self, person):
+        """
+        returns the sum of the headsizes of all the children.
+        """
         if person not in self.tailsize:
             self.tailsize[person] = self.calc_tailsize(person)
         return self.tailsize[person]
 
     def calc_headsize(self, person):
+        """
+        Used by get_headsize. Do not use.
+        """
         toplenght = len(self.tree.get_representation(person)[0])
         return max(toplenght, self.get_tailsize(person))
 
     def calc_tailsize(self, person):
+        """
+        Used by get_tailsize. Do not use.
+        """
         return sum(self.get_headsize(p) for p in self.tree.get_representation(person)[1])
 
     def get_xpos(self, person):
+        """
+        returns the correct x-coordinate of the person in the tree. The person has to be indexed first.
+        It is not the exact position of the person, but the x-position of the reserved square. The width
+        of the reserved square is defined by get_headsize
+        """
         if person not in self.xpos:
             raise Exception("{} Not Indexed Yet".format(person.name))
         return self.xpos[person]
@@ -338,6 +353,9 @@ class BuildTree:
             currentpos += self.get_headsize(p)
 
     def build_coords(self):
+        """
+        calculates the position of all people (in units chere 1 unit is the width/height of a person)
+        """
         for index, layer in enumerate(self.make_top_layers()):
             for person in layer:
                 tops = list(self.tree.get_representation(person)[0])
@@ -347,15 +365,27 @@ class BuildTree:
                     self.coords[p] = (self.xpos[person] + self.get_headsize(person) / 2 + i - s / 2, index)
 
     def get_pos(self, person, width, height):
+        """
+        gets the position of a person in pixels.
+        """
         return ((i + 1 / 2) * w for i, w in zip(self.coords[person], (width, height)))
 
     def get_width(self, width):
+        """
+        returns the total width of the family tree given the width of a single person
+        """
         return self.get_headsize(self.tree.head) * width
 
     def get_height(self, height):
+        """
+        returns the total height of the family tree given the height of a single person
+        """
         return 4 * height
 
     def draw_family(self, draw:DrawJavaScript, fam:core.Family, width, height, border):
+        """
+        Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person
+        """
         xdif = width / 2 - border
         ydif = height / 2 - border
         if not all(self.check_valid(p) for p in fam.parents):
@@ -383,9 +413,15 @@ class BuildTree:
                 draw.draw_line(px, cyInter, cx, cyInter)
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
     def check_valid(self,person):
+        """
+        Check if a person has a valid position. (And has one at all)
+        """
         return(self.coords[person] != (-1,-1))
 
 def draw_people(tree, width=170, height=200, border=15, textsize=12):
+    """
+    Creates a DrawJavaScript object with all needed data to draw a tree and returns it.
+    """
     s = BuildTree(tree)
     d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:

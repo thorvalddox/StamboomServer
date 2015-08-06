@@ -3,23 +3,49 @@ __author__ = 'Thorvald'
 import random
 
 class LoginHandler:
+    """
+    An object handling the logins
+    """
     def __init__(self):
         self.users = dict(load_users())
     def valid_user(self,name):
+        """
+        check if a username exists
+        """
         return name.lower() in self.users
     def valid_login(self,name,password):
+        """
+        check if a username exists and has the correct password
+        """
         for i in self.users.values():
             print(i)
         return self.valid_user(name) and self.users[name.lower()].match_password(password)
     def get_user_list(self):
+        """
+        returns a list of directiroes containing user data
+        """
         return [{"name": k,"email": v.email} for k,v in self.users.items()]
     def check_admin(self,session):
+        """
+        check if the currently logged in user is an admin
+        """
         print(session.get("username","nope"),self.admins())
         return session.get("username","") in self.admins()
+    def user(self,session):
+        """
+        returns the same of the currently logged in user, or an empty string if no user has logged in.
+        """
+        return session.get("username","")
     def admins(self):
+        """
+        returns a list of users with admin access
+        """
         return ("thorvalddx94","gerwind96","joran.dox")
 
 def randomstring(lenght=12):
+    """
+    generates a random lower alphanumerical string with a given lenght
+    """
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
 
 def load_users():

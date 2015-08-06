@@ -50,6 +50,9 @@ mail = Mail(app)
 env = Environment(loader=PackageLoader('StamboomServer', 'templates'))
 
 def render_template(name,*args,**kwargs):
+    """
+    renders a flask template with the correct enviroment variables
+    """
     template = env.get_template(name)
     return template.render(*args,**kwargs)
 
@@ -71,12 +74,18 @@ loginHandler = LoginHandler()
 #Decorators from here.
 
 def check_logged_in(session):
+    """
+    check if the currect user is logged in.
+    """
     if "username" not in session:
         return False
     else:
         return loginHandler.valid_user(session["username"])
 
 def login_required(func):
+    """
+    Decorater. Put this after @app.route. Defines if you need to be logged in to access a certain page.
+    """
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session):
@@ -85,6 +94,9 @@ def login_required(func):
     return(save_function)
 
 def admin_required(func):
+    """
+    Decorater. Put this after @app.route. Defines if you need to be an admin to access a certain page.
+    """
     @wraps(func)
     def save_function(*args,**kwargs):
         if not check_logged_in(session) or not loginHandler.check_admin(session):
@@ -94,6 +106,10 @@ def admin_required(func):
 
 
 def auto_update(func):
+    """
+    Decorater. Put this after @app.route. Defines if the page must check for updates before loading.
+    It should be the default. Only f.e. the login page shouldn't have it.
+    """
     @wraps(func)
     def updated_func(*args,**kwargs):
         if not OFFLINE: #not updating when offline.
@@ -102,6 +118,9 @@ def auto_update(func):
     return(updated_func)
 
 def catch_errors(func):
+    """
+    Decorater. Put this after @app.route. Catches the errors of the different functions
+    """
     @wraps(func)
     def catch_erros(*args,**kwargs):
         try:
@@ -115,6 +134,10 @@ def catch_errors(func):
     return catch_erros
 
 def update_jinja2_env(func):
+    """
+    Decorater. Put this after @app.route. Updates the global variables
+    """
+
     @wraps(func)
     def update_jinja2(*args,**kwargs):
         env.globals["username"] = session.get("username","")
@@ -123,13 +146,23 @@ def update_jinja2_env(func):
     return(update_jinja2)
 
 
-def default_page(func): #combines different decoratoes
+def default_page(func):
+    """
+    combines different decorators. (catch_errors, update_jinja2_env, auto_update)
+    """
     return wraps(func)(catch_errors(auto_update(update_jinja2_env(func))))
 
-def login_page(func): #combines default_age with login_required
+def login_page(func):
+    """
+    combines different decorators. (default_page, login_required)
+    """
+
     return wraps(func)(default_page(login_required(func)))
 
 def admin_page(func): #combines default_age with login_required
+    """
+    combines different decorators. (default_page, admin_required)
+    """
     return wraps(func)(default_page(admin_required(func)))
 
 #wrappers from here

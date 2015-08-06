@@ -4,7 +4,10 @@ import core
 from collections import namedtuple
 
 
-class FormCom: #Changes form ouput to data command
+class FormCom:
+    """
+    Changes form ouput to data command
+    """
     all_ = []
     def __init__(self,pathname,command,*info,submit=[]):
         self.pathname = pathname
@@ -13,11 +16,17 @@ class FormCom: #Changes form ouput to data command
         self.submit = submit
         FormCom.all_.append(self)
     def getreq(self,data,name,request):
+        """
+        get data from request
+        """
         if data == "name":
             return name
         else:
             return str(request.form[data]).replace(" ","_")
     def buildcommand(self,command,name,request):
+        """
+        build a command from a request.form data if the command matches
+        """
         if self.pathname != command:
             return None
         if not all(s in request.form for s in self.submit):
@@ -25,6 +34,9 @@ class FormCom: #Changes form ouput to data command
         return self.command + " " + " ".join(self.getreq(i,name,request) for i in self.info)
     @staticmethod
     def get_command(command,name,request):
+        """
+        build a command from a request.form data. searches the correct command.
+        """
         for i in FormCom.all_:
             s = i.buildcommand(command,name,request)
             if s is not None:
@@ -32,6 +44,9 @@ class FormCom: #Changes form ouput to data command
 
 
 def generate_basic_forms():
+    """
+    generates the correct FormCom objects to the edit ui
+    """
     FormCom("parents","parents","name","parent0","parent1")
     FormCom("dates","person","name","birth","dead")
     FormCom("addPartner","family","name","addPartner")
@@ -42,6 +57,9 @@ def generate_basic_forms():
     FormCom("child","disconnect","name","partner","remChild",submit=["remChildPress"])
 
 def create_person_dropdown_safe(pList, default=None,name="selector"):
+    """
+    creates a dropdown list, forcing you to take a given option
+    """
     return """
     <select name="{0}">
         <option value="*" {2}> -- geen --</option>
@@ -54,6 +72,9 @@ def create_person_dropdown_safe(pList, default=None,name="selector"):
     )
 
 def create_person_dropdown(pList, default=None,name="selector"):
+    """
+    creates a dropdown list, where the user can select a person or type the name of a new one
+    """
     return """
     <input name="{0}" list="{0}_data" value="{3}">
     <datalist id="{0}_data">
@@ -68,6 +89,9 @@ def create_person_dropdown(pList, default=None,name="selector"):
     )
 
 def create_person_link(pList,split=50):
+    """
+    Creates aa list of people, splitting it in columns after a given amount.
+    """
     return """
     <table>
     <tr>

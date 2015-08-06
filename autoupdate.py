@@ -13,6 +13,9 @@ fi
 """
 
 def check_for_changes() -> bool:
+    """
+    returns wheather github has a newer version
+    """
     print("Checking for changes")
     proc = subprocess.Popen([BASH_CHANGE], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
@@ -32,6 +35,9 @@ def update():
 
 
 def try_update() -> bool:
+    """
+    tries to update to a newer version and returns if succesfull (returns false if 'Already up-to-date')
+    """
     print("Updating Code")
     proc = subprocess.Popen(["cd StamboomServer;git pull"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
@@ -40,6 +46,9 @@ def try_update() -> bool:
     return out not in  (b'Already up-to-date.\n',b'')
 
 def restart_server():
+    """
+    resets the wsgi application, forcing the server to restart
+    """
     print("Restart Server")
     proc = subprocess.Popen(["touch /var/www/lightning939_pythonanywhere_com_wsgi.py"], stdout=subprocess.PIPE, shell=True)
     (out, err) = proc.communicate()
