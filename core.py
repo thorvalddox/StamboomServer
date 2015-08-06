@@ -418,9 +418,9 @@ class Commands(list):
                     argscolor.append("darkcyan")
                 else:
                     argscolor.append("black")
-            ret += """<span style="color:{1}">{0:<15}</span> <span style="color:{3}">{2:<15}</span> {4}</br>""" \
+            ret += """<span style="color:{1}"><pre>{0:<15}</pre></span> <span style="color:{3}"><pre>{2:<15}</pre></span> {4}</br>""" \
                 .format(user, usercolor, func, funccolor,
-                        " ".join('<span style="color:{1}">{0:<15}</span>'.format(*a) for a in zip(args, argscolor)))
+                        " ".join('<span style="color:{1}"><pre>{0:<15}</pre></span>'.format(*a) for a in zip(args, argscolor)))
 
         return ret
 
