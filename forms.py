@@ -65,9 +65,9 @@ def edit_partners_form(tree:core.FamilyTree,person):
     partners = list(tree.get_partners(person))
     addBox =  create_person_dropdown(tree.people_all,None,"addPartner")
     remBox =  create_person_dropdown(tree.get_partners(person),None,"remPartner")
-    divBox =  create_person_dropdown(filter(lambda x:not tree.get_family(x,person).divorced,tree.get_partners(person))
+    divBox =  create_person_dropdown(filter(lambda x:not tree.get_family(x.name,person.name).divorced,tree.get_partners(person))
                                      ,None,"divPartner")
-    rmrBox =  create_person_dropdown(filter(lambda x:tree.get_family(x,person).divorced,tree.get_partners(person))
+    rmrBox =  create_person_dropdown(filter(lambda x:tree.get_family(x.name,person.name).divorced,tree.get_partners(person))
                                      ,None,"rmrPartner")
     return """<form action="addPartner/" method="post" enctype="multipart/form-data">
          Selecteer nieuwe partner:{}<br/>
