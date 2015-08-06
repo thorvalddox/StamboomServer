@@ -17,7 +17,7 @@ Als dit een datum is moet deze zoals 01/01/1990 ingegeven worden.
 de user bestaat uit een teken plus een string. De tekens betekenen het volgende:
 
 $ admin user (ook voor commandos dat het programma intern zelf maakt)
-# ingelogde users (gevolgt door naam)
+\# ingelogde users (gevolgt door naam)
 ? niet ingelogde users, hierna volgt het ip address.
 
 De commando's zien er als volgt uit:
