@@ -137,6 +137,13 @@ def login_page(func): #combines default_age with login_required
 def admin_page(func): #combines default_age with login_required
     return wraps(func)(default_page(admin_required(func)))
 
+#wrappers from here
+
+
+#initilisize forms
+
+forms.generate_basic_forms()
+
 #apps from here
 
 #webpages from here:
@@ -222,14 +229,6 @@ def list_people():
     response = make_response(render_template("newperson.html",people=data))
     return response
 
-@app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
-@login_page
-def upload_image(name):
-    print(name)
-    print(request.files)
-    file = request.files["file"]
-    imagechanger.change_image(name,file)
-    return redirect('/stamboom/edit/'+name)
 
 
 @app.route('/stamboom/console/')
@@ -248,6 +247,16 @@ def rawcommand():
     return redirect('/stamboom/console/')
 
 
+@app.route('/stamboom/edit/<name>/upload/', methods = ['POST'])
+@login_page
+def upload_image(name):
+    print(name)
+    print(request.files)
+    file = request.files["file"]
+    imagechanger.change_image(name,file)
+    return redirect('/stamboom/edit/'+name)
+
+""" #commented out for data-driven counterpart.
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
 @login_page
 def edit_parents(name):
@@ -286,6 +295,15 @@ def edit_rem_partner(name):
     core.addcommand(request,session,"disband {} {}".format(name,partner.replace(" ","_")))
     return redirect('/stamboom/edit/'+name)
 
+@app.route('/stamboom/edit/<name>/divPartner/', methods = ['POST'])
+@login_page
+def edit_div_partner(name):
+    print(name)
+    print(request.form)
+    partner = request.form["divPartner"]
+    core.addcommand(request,session,"divorce {} {}".format(name,partner.replace(" ","_")))
+    return redirect('/stamboom/edit/'+name)
+
 @app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
 @login_page
 def edit_child(name):
@@ -297,6 +315,16 @@ def edit_child(name):
         child = request.form["remChild"]
         core.addcommand(request,session,"disconnect {} {} {}".format(name,partner.replace(" ","_"),child.replace(" ","_")))
     return redirect('/stamboom/edit/'+name)
+"""
+
+@app.route('/stamboom/edit/<name>/<action>/', methods = ['POST'])
+@login_page
+def edit_person_prop(name,action):
+    print(name)
+    print(action)
+    print(request.form)
+    core.addcommand(request,session,forms.FormCom.get_command(action,name,request))
+    return redirect('/stamboom/edit/'+name+'/')
 
 
 @app.route("/templates/titlebar")

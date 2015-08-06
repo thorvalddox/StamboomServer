@@ -4,6 +4,43 @@ import core
 from collections import namedtuple
 
 
+class FormCom: #Changes form ouput to data command
+    all_ = []
+    def __init__(self,pathname,command,*info,submit=[]):
+        self.pathname = pathname
+        self.command = command
+        self.info = info
+        self.submit = submit
+        FormCom.all_.append(self)
+    def getreq(self,data,name,request):
+        if data == "name":
+            return name
+        else:
+            return str(request.form(data)).replace(" ","_")
+    def buildcommand(self,command,name,request):
+        if self.pathname != command:
+            return None
+        if not all(s in request.form for s in self.submit):
+            return None
+        return self.command + " " + " ".join(self.getreq(i,name,request) for i in self.info)
+    @staticmethod
+    def get_command(command,name,request):
+        for i in FormCom.all_:
+            s = i.buildcommand()
+            if s is not None:
+                return s
+
+
+def generate_basic_forms():
+    FormCom("parents","parents","name","parent0","parent1")
+    FormCom("dates","person","name","birth","dead")
+    FormCom("addPartner","family","name","addPartner")
+    FormCom("remPartner","disband","name","remPartner")
+    FormCom("divPartner","divorce","name","divPartner")
+    FormCom("rmrPartner","remarry","name","rmrPartner")
+    FormCom("child","family","name","partner","addChild",submit=["addChildPress"])
+    FormCom("child","disconnect","name","partner","remChild",submit=["remChildPress"])
+
 def create_person_dropdown_safe(pList, default=None,name="selector"):
     return """
     <select name="{0}">
