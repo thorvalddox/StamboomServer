@@ -1,9 +1,11 @@
+#stamboomserver
+
 Voor de gene die dit leest, ik weet dat dit een gigantische rommel is.
 Als ge eraan uit wilt kunnen zou ik dit aan mij persoonlijk (Thorvald Dox) vragen.
 
 Als ge de code download en in het correcte framework stopt zal deze waarschijnlijk werken maar zal het onmogelijk zijn om in te loggen. Dit komt omdat de gebruikersnamen en wachtwoord-generatie-seed alleen op de server zijn opgeslagen. Bewerkt ook lieft niers in users.txt, dit zal waarschijnlijk leiden tot een merge-conflict wanneer ik deze inlaad in de server.
 
-Werking van de command-API
+##Werking van de command-API
 
 <user> <command> <arguments>
 
@@ -16,20 +18,22 @@ Als dit een datum is moet deze zoals 01/01/1990 ingegeven worden.
 
 de user bestaat uit een teken plus een string. De tekens betekenen het volgende:
 
-$ admin user (ook voor commandos dat het programma intern zelf maakt)
-\# ingelogde users (gevolgt door naam)
-? niet ingelogde users, hierna volgt het ip address.
+* $: admin user (ook voor commandos dat het programma intern zelf maakt)
+* \#: ingelogde users (gevolgt door naam)
+* ?: niet ingelogde users, hierna volgt het ip address.
 
 De commando's zien er als volgt uit:
 ```
 user person person_name 01/01/1900 01/01/2000 -> maakt een persoon aan of bewerkt een bestaande persoon
 user family parent_1 parent_2 child_1 child_2 -> stelt een familie samen
-user divorce person_1 person_2 -> duid een familie aan als gescheiden
-user head person_name -> decaptiated
-user delete person_name
-user disband person_1 person_2
-user parents child parent_1 parent_2
-user merge person_1 person_2
+user divorce person_1 person_2                -> duid een familie aan als gescheiden
+user head person_name                         -> decaptiated gebruik nu /view/
+
+user remarry person_1 person_2                -> duid een familie aan als niet gescheiden
+user delete person_name                       -> verwijderd een persoon en alle conecties
+user disband person_1 person_2                -> als deze 2 verbonden zijn worden deze ontkoppeld. ontkoppeld ook alle kinderen
+user parents child parent_1 parent_2          -> verwijderd de familie waarvan "child" een kind is en voeg deze toe aan de familie gedefinieerd door parent_1 parent_2
+user merge person_1 person_2                  -> verwijderd persoon 2 en voegt alle verbindingen toe aan persoon_1
 ```
 Lege argumenten worden aangeduid met *
 
