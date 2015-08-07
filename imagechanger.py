@@ -1,7 +1,8 @@
 __author__ = 'Thorvald'
 
-import os,os.path, glob
+import os,os.path, glob, shutil
 from PIL import Image
+from itertools import count
 
 allowed_extensions = [".jpg"]
 
@@ -36,9 +37,41 @@ def change_image(name,file):
 def rotate_image(name,clockwize=True):
     destroy_thumbnail(name)
     path = name_to_path(name)
-    Image.open(path).rotate([90, -90][clockwize]).save(path)
+    im = Image.open(path)
+    im = im.rotate([90, -90][clockwize])
+    im.save(path)
 
 def destroy_thumbnail(name):
     paths = glob.glob(name_to_path(name+"_*x*"))
     for p in paths:
         os.remove(p)
+
+
+def copy_images(person):
+    name = person.uname
+    source = name_to_path(name)
+    if not os.path.exists(source):
+        return name, 0
+    number = ImagePath.new()
+    path = ImagePath.get(number)
+    shutil.copy(source, path)
+    yield name, number
+
+
+class ImagePath:
+    @staticmethod
+    def new():
+        for i in count():
+            path = ImagePath.get(i)
+            if not os.path.exists(path):
+                return i
+
+
+    @staticmethod
+    def get(number):
+        return("StamboomServer/static/images/IM{:06}.jpg".format(number))
+
+    @staticmethod
+    def get_static(number):
+        return("images/IM{:06}.jpg".format(number))
+

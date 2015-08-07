@@ -6,6 +6,7 @@ import random
 import os.path
 
 from itertools import chain
+import imagechanger
 from collections import namedtuple
 
 import xml.etree.ElementTree as ET
@@ -328,6 +329,7 @@ class Person:
         self.name = name
         self.birth = birth
         self.dead = dead
+        self.image_index = None
         self.id_ = id_ if id_ != "none" else hex(random.randrange(16 ** 32))
         Person.all_[self.id_] = self
         # #print(self.name, self.id_)
@@ -361,10 +363,12 @@ class Person:
         """
         returns the path to the image
         """
-        name = "kopkes/" + self.uname + ".jpg"
-        if not os.path.exists("StamboomServer/static/" + name):
-            name = "kopkes/smiley.jpg"
-        return name
+        if self.image_index is None:
+            n, i = imagechanger.copy_images(self)
+            command = "image {} {}".format(n,i)
+            addcommand_bot(command)
+            self.image_index = i
+        return imagechanger.ImagePath.get_static(self.image_index)
 
     def __str__(self):
         return self.uname
@@ -461,6 +465,10 @@ class CommandLoader:
         p = self.tree.get_person(name)
         p.birth = birth
         p.dead = dead
+
+    def image(self, name, number):
+        p = self.tree.get_person
+        p.image_index = int(number)
 
     def family(self, p1, p2, *children):
         # #print("making family")
@@ -560,6 +568,13 @@ def addcommand(request, session, data):
         addcommand_user(session, data)
     else:
         addcommand_ip(request, data)
+
+def addcommand_bot(data):
+    """
+    adds a command to the command log
+    """
+    with open("StamboomServer/data.log", "a") as fff:
+        fff.write("${} {}\n".format("fixerbot", data))
 
 
 def xmlTest():
