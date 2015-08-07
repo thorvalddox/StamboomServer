@@ -196,7 +196,7 @@ class DrawJavaScript:
         :return:
         """
         filename, extension = image.split('.', 1)
-        path = "{s}_{d}x{d}.{s}".format(filename, width, height, extension)
+        path = "{:s}_{:d}x{:d}.{:s}".format(filename, width, height, extension)
         #path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
         #ooit al gehoord van .format en tuple unpacking?
         if not os.path.exists("StamboomServer/static/" + path):
