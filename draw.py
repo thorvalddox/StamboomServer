@@ -47,7 +47,7 @@ class DrawJavaScript:
         """ + "\n".join(self.commands) + """
             ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false)
-            c.addEventListener("click", on_click, false)""" + """
+            c.addEventListener("click", on_click, false)
         """ + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
