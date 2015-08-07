@@ -466,8 +466,8 @@ class CommandLoader:
         p.birth = birth
         p.dead = dead
 
-    def image(self, name, number):
-        p = self.tree.get_person
+    def image(self, name, number, *_):
+        p = self.tree.get_person(name)
         p.image_index = int(number)
 
     def family(self, p1, p2, *children):
