@@ -63,17 +63,17 @@ class ImagePath:
     @staticmethod
     def get(number,orient=0,genstring="StamboomServer/static/images/IM{:06}{}.jpg"):
         suffix = ["","_r","_o","_l"][orient]
-        base = genstring.format(number,"")
-        rot = genstring.format(number,suffix)
+        base = "StamboomServer/static/images/IM{:06}{}.jpg".format(number,"")
+        rot = "StamboomServer/static/images/IM{:06}{}.jpg".format(number,suffix)
         assert os.path.exists(base),"{} does not exist".format(base)
         if not os.path.exists(rot):
             rotate_image(base,rot,orient)
-        return(rot)
+        return(genstring.format(number,suffix))
 
     @staticmethod
     def get_static(number,orient=0):
         return(ImagePath.get(number,orient,"images/IM{:06}{}.jpg"))
     @staticmethod
     def get_wild(number):
-        return(ImagePath.get(number,0,"images/IM{:06}_*.jpg"))
+        return(ImagePath.get(number,0,"StamboomServer/static/images/IM{:06}_*.jpg"))
 
