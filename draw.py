@@ -47,7 +47,18 @@ class DrawJavaScript:
         """ + "\n".join(self.commands) + """
             ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false);
-            c.addEventListener("click", on_click, false);
+            c.addEventListener("click", on_click, false);""" + """
+        function downloadTree() {
+          var canvas = document.getElementById("canvas");
+          var dataURL = canvas.toDataURL();
+          downloadURI(dataURL,"stamboom.png")
+        }
+        function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            link.click();
+        }""".format() + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
 
