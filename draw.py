@@ -49,7 +49,7 @@ class DrawJavaScript:
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);""" + """
         function downloadTree() {{
-          var canvas = document.getElementById("canvas");
+          var canvas = document.getElementById("FamilyTreeCanvas");
           var dataURL = canvas.toDataURL();
           downloadURI(dataURL,"stamboom.png")
         }}
