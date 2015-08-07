@@ -3,7 +3,7 @@ __author__ = 'Thorvald'
 import core
 from itertools import chain
 import random
-import os.path
+import os.path, glob
 
 #from imageinfo import get_image_info
 
@@ -195,19 +195,18 @@ class DrawJavaScript:
         :param height:
         :return:
         """
-        delim_array = image.split('.', 1)
-        path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
+        filename, extension = image.split('.', 1)
+        path = "{s}_{d}x{d}.{s}".format(filename, width, height, extension)
+        #path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
+        #ooit al gehoord van .format en tuple unpacking?
         if not os.path.exists("StamboomServer/static/" + path):
             im = Image.open("StamboomServer/static/" + image)
             old_width, old_height = im.size
-            w_scale = float(width) / old_width
-            h_scale = float(height) / old_height
-            if (w_scale < 1) or (h_scale < 1):
+            scale = min(float(width) / old_width, float(height) / old_height)
+            if scale < 1:
                 # Image needs to be scaled
-                scale = min(w_scale, h_scale)
-                new_width = int(scale * old_width)
-                new_height = int(scale * old_height)
-                newimage = im.resize((new_width, new_height), Image.ANTIALIAS)
+                new_size = int(scale * old_width),int(scale * old_height)
+                newimage = im.resize(new_size, Image.ANTIALIAS)
                 newimage.save("StamboomServer/static/" + path, im.format)
             else:
                 im.save("StamboomServer/static/" + path, im.format)
@@ -431,6 +430,9 @@ def draw_people(tree, width=170, height=200, border=15, textsize=12):
         if s.check_valid(p):
             d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
+
+
+
 
 
 def main():

@@ -1,6 +1,7 @@
 __author__ = 'Thorvald'
 
-import os,os.path
+import os,os.path, glob
+from PIL import Image
 
 allowed_extensions = [".jpg"]
 
@@ -21,6 +22,7 @@ def makeversion(name):
     return(version)
 
 def change_image(name,file):
+    destroy_thumbnail(name)
     source = file.filename
     version = makeversion(name)
     location = name_to_path(name)
@@ -30,3 +32,13 @@ def change_image(name,file):
     print("start saving")
     file.save(location)
     print("end saving")
+
+def rotate_image(name,clockwize=True):
+    destroy_thumbnail(name)
+    path = name_to_path(name)
+    Image.open(path).rotate([90, -90][clockwize]).save(path)
+
+def destroy_thumbnail(name):
+    paths = glob.glob(name_to_path(name+"_*x*"))
+    for p in paths:
+        os.remove(p)

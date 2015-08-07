@@ -301,6 +301,12 @@ def upload_image(name):
     imagechanger.change_image(name, file)
     return redirect('/stamboom/edit/' + name)
 
+@app.route('/stamboom/edit/<name>/rotate/', methods=['POST'])
+@login_page
+def upload_image(name):
+    clockwise = "cw" in request.form
+    imagechanger.rotate_image(name, clockwise)
+    return redirect('/stamboom/edit/' + name)
 
 """ #commented out for data-driven counterpart.
 @app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])

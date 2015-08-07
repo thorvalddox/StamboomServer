@@ -443,7 +443,7 @@ class CommandLoader:
     """
     An object that can execute commands.
     Its member functions match the names of the different commands, and are the
-    functions that are accually called when executing the command.
+    functions that are actually called when executing the command.
     """
     def __init__(self, tree, accepted=[]):
         self.tree = tree

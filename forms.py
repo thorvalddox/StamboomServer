@@ -187,6 +187,10 @@ def edit_image_form():
         selecteer .jpg bestand :<input type="file" name="file"><br />
         <input type="submit" value="Upload"><br/>
     </form>
+    <form action="rotate/" method="post" enctype="multipart/form-data">
+        <input type="submit" value="Draai rechtsom" name="cw">
+        <input type="submit" value="Draai linksom" name="ccw">
+    </form>
     """
 
 def make_forms(tree,person):
