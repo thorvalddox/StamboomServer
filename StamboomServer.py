@@ -136,7 +136,7 @@ def catch_errors(func):
 
             error_code = traceback.format_exc().replace("\n", '<br/>')
             traceback.print_exc()
-            out = send_mail(loginHandler.users['thorvalddx94'], '<h1>stamboom error<\h1>' + error_code)
+            out = send_mail(loginHandler.users['thorvalddx94'], '<h1>stamboom error</h1>' + error_code)
             return make_response(render_template("error.html", log=error_code + "</p><p>" + out)), 500
 
     return catch_erros
