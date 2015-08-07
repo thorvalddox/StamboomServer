@@ -48,14 +48,8 @@ class DrawJavaScript:
             ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);""" + """
-        function downloadTree() {{
-          var link = document.createElement("a");
-          link.href = document.getElementById("FamilyTreeCanvas").toDataURL("image/png");
-          link.download = "stamboom.png";
-          console.log("downloading")
-          link.click();
-
-        }}
+            var downloadlink = document.getElementById("download")
+            downloadlink.href = c.toDataURL('image/png')
  """.format() + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
