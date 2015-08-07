@@ -49,8 +49,9 @@ class DrawJavaScript:
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);""" + """
             var downloadlink = document.getElementById("download")
-            downloadlink.href = c.toDataURL('image/png')
- """.format() + """
+            downloadlink.addEventListener('click', function (e) {
+                downloadlink.href = c.toDataURL('image/png')})
+        """ + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
 
