@@ -45,6 +45,7 @@ class DrawJavaScript:
         var c = document.getElementById("FamilyTreeCanvas");
         var ctx = c.getContext("2d");
         """ + "\n".join(self.commands) + """
+            ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);
         function getOffsetRect(elem) {
@@ -112,9 +113,7 @@ class DrawJavaScript:
         """
         self.commands.append("""
         ctx.moveTo({},{});
-        ctx.lineTo({},{});
-        ctx.stroke();
-        """.format(*coords))
+        ctx.lineTo({},{});""".format(*coords))
 
     def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
         """
@@ -131,10 +130,16 @@ class DrawJavaScript:
                 ctx.fillStyle = '{}';
                 ctx.fillRect({},{},{},{});
             """.format(back_color, x1, y1, x2 - x1, y2 - y1))
-        self.draw_line(x1, y1, x1, y2)
-        self.draw_line(x2, y1, x2, y2)
-        self.draw_line(x1, y1, x2, y1)
-        self.draw_line(x1, y2, x2, y2)
+        #self.draw_line(x1, y1, x1, y2)
+        #self.draw_line(x2, y1, x2, y2)
+        #self.draw_line(x1, y1, x2, y1)
+        #self.draw_line(x1, y2, x2, y2)
+        """
+        ctx.moveTo({x1},{y1});
+        ctx.lineTo({x1},{y2});
+        ctx.lineTo({x2},{y2});
+        ctx.lineTo({x2},{y1});
+        ctx.lineTo({x1},{y1});""".format(x1=x1,y1=y1,x2=x2,y2=y2)
 
     def draw_text(self, x, y, text, size=12):
         """
