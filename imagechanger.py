@@ -65,7 +65,7 @@ class ImagePath:
         suffix = ["","_r","_o","_l"][orient]
         base = genstring.format(number,"")
         rot = genstring.format(number,suffix)
-        assert os.path.exists(base),"Default file does not exist"
+        assert os.path.exists(base),"{} does not exist".format(base)
         if not os.path.exists(rot):
             rotate_image(base,rot,orient)
         return(rot)
