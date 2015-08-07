@@ -134,12 +134,12 @@ class DrawJavaScript:
         #self.draw_line(x2, y1, x2, y2)
         #self.draw_line(x1, y1, x2, y1)
         #self.draw_line(x1, y2, x2, y2)
-        """
+        self.commands.append("""
         ctx.moveTo({x1},{y1});
         ctx.lineTo({x1},{y2});
         ctx.lineTo({x2},{y2});
         ctx.lineTo({x2},{y1});
-        ctx.lineTo({x1},{y1});""".format(x1=x1,y1=y1,x2=x2,y2=y2)
+        ctx.lineTo({x1},{y1});""".format(x1=x1,y1=y1,x2=x2,y2=y2))
 
     def draw_text(self, x, y, text, size=12):
         """
