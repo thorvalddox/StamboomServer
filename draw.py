@@ -48,6 +48,8 @@ class DrawJavaScript:
             ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false)
             c.addEventListener("click", on_click, false)
+        </script>
+        <script>
         function downloadTree() {
             var link = document.getElementById("download")
             link.href = c.toDataURL("image/png")
