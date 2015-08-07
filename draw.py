@@ -49,17 +49,12 @@ class DrawJavaScript:
             c.addEventListener("mousemove", on_mousemove, false);
             c.addEventListener("click", on_click, false);""" + """
         function downloadTree() {{
-          var canvas = document.getElementById("FamilyTreeCanvas");
-          var dataURL = canvas.toDataURL("image/png");
-          downloadURI(dataURL,"stamboom.png")
-          window.location = dataURL
+          var link = document.createElement("a");
+          link.href = document.getElementById("FamilyTreeCanvas").toDataURL("image/png");
+          link.click();
+
         }}
-        function downloadURI(uri, name) {{
-            var link = document.createElement("a");
-            link.download = name;
-            link.href = uri;
-            link.click();
-        }}""".format() + """
+ """.format() + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
 
