@@ -50,8 +50,9 @@ class DrawJavaScript:
             c.addEventListener("click", on_click, false);""" + """
         function downloadTree() {{
           var canvas = document.getElementById("FamilyTreeCanvas");
-          var dataURL = canvas.toDataURL();
+          var dataURL = canvas.toDataURL("image/png");
           downloadURI(dataURL,"stamboom.png")
+          window.location = dataURL
         }}
         function downloadURI(uri, name) {{
             var link = document.createElement("a");
