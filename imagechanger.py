@@ -55,7 +55,7 @@ def copy_images(person):
     number = ImagePath.new()
     path = ImagePath.get(number)
     shutil.copy(source, path)
-    yield name, number
+    return name, number
 
 
 class ImagePath:
