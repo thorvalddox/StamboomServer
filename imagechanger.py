@@ -22,27 +22,25 @@ def makeversion(name):
         i += 1
     return(version)
 
-def change_image(name,file):
-    destroy_thumbnail(name)
-    source = file.filename
-    version = makeversion(name)
-    location = name_to_path(name)
-    print("start renaming")
-    if version != location:
-        os.rename(location,version)
+def change_image(file):
+    newindex = ImagePath.new()
     print("start saving")
-    file.save(location)
+    file.save(ImagePath.get(newindex))
     print("end saving")
+    return(newindex)
 
-def rotate_image(name,clockwize=True):
-    destroy_thumbnail(name)
-    path = name_to_path(name)
+def rotate_image(index,clockwize=True):
+    destroy_subs(index)
+    path = ImagePath.get(index)
     im = Image.open(path)
-    im = im.rotate([90, -90][clockwize])
-    im.save(path)
+    imr = im.rotate([90, -90][clockwize])
+    newindex = ImagePath.new()
+    path = ImagePath.get(newindex)
+    imr.save(path)
+    return(newindex)
 
-def destroy_thumbnail(name):
-    paths = glob.glob(name_to_path(name+"_*x*"))
+def destroy_subs(index):
+    paths = glob.glob(ImagePath.get_wild(index))
     for p in paths:
         os.remove(p)
 
@@ -75,3 +73,6 @@ class ImagePath:
     def get_static(number):
         return("images/IM{:06}.jpg".format(number))
 
+    @staticmethod
+    def get_wild(number):
+        return("StamboomServer/static/images/IM{:06}_*.jpg".format(number))

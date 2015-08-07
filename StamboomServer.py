@@ -298,14 +298,17 @@ def upload_image(name):
     print(name)
     print(request.files)
     file = request.files["file"]
-    imagechanger.change_image(name, file)
+    core.addcommand(request,session,"image {} {}".format(name,imagechanger.change_image(file)))
     return redirect('/stamboom/edit/' + name)
 
 @app.route('/stamboom/edit/<name>/rotate/', methods=['POST'])
 @login_page
 def rotate_image(name):
+    f = core.FamilyTree()
+    f.from_code("data.log")
     clockwise = "cw" in request.form
-    imagechanger.rotate_image(name, clockwise)
+    index = f.get_person(name).image_index
+    core.addcommand(request,session,"image {} {}".format(name,imagechanger.rotate_image(index, clockwise)))
     return redirect('/stamboom/edit/' + name)
 
 """ #commented out for data-driven counterpart.
