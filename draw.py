@@ -51,6 +51,8 @@ class DrawJavaScript:
         function downloadTree() {{
           var link = document.createElement("a");
           link.href = document.getElementById("FamilyTreeCanvas").toDataURL("image/png");
+          link.download = "stamboom.png";
+          console.log("downloading")
           link.click();
 
         }}
