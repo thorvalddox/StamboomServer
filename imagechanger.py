@@ -29,15 +29,10 @@ def change_image(file):
     print("end saving")
     return(newindex)
 
-def rotate_image(index,clockwize=True):
-    destroy_subs(index)
-    path = ImagePath.get(index)
-    im = Image.open(path)
-    imr = im.rotate([90, -90][clockwize])
-    newindex = ImagePath.new()
-    path = ImagePath.get(newindex)
-    imr.save(path)
-    return(newindex)
+def rotate_image(oldpath,newpath,orient):
+    im = Image.open(oldpath)
+    imr = im.rotate(90*orient)
+    imr.save(newpath)
 
 def destroy_subs(index):
     paths = glob.glob(ImagePath.get_wild(index))
@@ -66,13 +61,19 @@ class ImagePath:
 
 
     @staticmethod
-    def get(number):
-        return("StamboomServer/static/images/IM{:06}.jpg".format(number))
+    def get(number,orient=0,genstring="StamboomServer/static/images/IM{:06}{}.jpg"):
+        suffix = ["","_r","_o","_l"][orient]
+        base = genstring.format(number,"")
+        rot = genstring.format(number,suffix)
+        assert os.path.exists(base),"Default file does not exist"
+        if not os.path.exists(rot):
+            rotate_image(base,rot,orient)
+        return(rot)
 
     @staticmethod
-    def get_static(number):
-        return("images/IM{:06}.jpg".format(number))
-
+    def get_static(number,orient=0):
+        return(ImagePath.get(number,orient,"images/IM{:06}{}.jpg"))
     @staticmethod
     def get_wild(number):
-        return("StamboomServer/static/images/IM{:06}_*.jpg".format(number))
+        return(ImagePath.get(number,0,"images/IM{:06}_*.jpg"))
+

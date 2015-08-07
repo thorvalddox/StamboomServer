@@ -330,6 +330,7 @@ class Person:
         self.birth = birth
         self.dead = dead
         self.image_index = None
+        self.image_orient = 0
         self.id_ = id_ if id_ != "none" else hex(random.randrange(16 ** 32))
         Person.all_[self.id_] = self
         # #print(self.name, self.id_)
@@ -368,7 +369,7 @@ class Person:
             command = "image {} {}".format(n,i)
             addcommand_bot(command)
             self.image_index = i
-        return imagechanger.ImagePath.get_static(self.image_index)
+        return imagechanger.ImagePath.get_static(self.image_index,self.image_orient % 4)
 
     def __str__(self):
         return self.uname
@@ -469,6 +470,10 @@ class CommandLoader:
     def image(self, name, number, *_):
         p = self.tree.get_person(name)
         p.image_index = int(number)
+
+    def rotate(self, name, direction, *_):
+        p = self.tree.get_person(name)
+        p.image_orient += {"left":-1,"right":1}[direction]
 
     def family(self, p1, p2, *children):
         # #print("making family")
