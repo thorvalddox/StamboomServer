@@ -3,3 +3,7 @@
 {{ canvas |safe }}
 <script> {{ script | safe }}</script>
 {% endblock %}
+
+{% block options %}
+<li class="toplevel"><a href="javascript:downloadTree()">Download</a></li>
+{% endblock %}
