@@ -303,7 +303,7 @@ def upload_image(name):
 
 @app.route('/stamboom/edit/<name>/rotate/', methods=['POST'])
 @login_page
-def upload_image(name):
+def rotate_image(name):
     clockwise = "cw" in request.form
     imagechanger.rotate_image(name, clockwise)
     return redirect('/stamboom/edit/' + name)
