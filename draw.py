@@ -48,6 +48,10 @@ class DrawJavaScript:
             ctx.stroke();
             c.addEventListener("mousemove", on_mousemove, false)
             c.addEventListener("click", on_click, false)
+        function downloadTree() {
+            var link = document.getElementById("download")
+            link.href = c.toDataURL("image/png")
+        }
         """ + """
         function getOffsetRect(elem) {
             var box = elem.getBoundingClientRect()
