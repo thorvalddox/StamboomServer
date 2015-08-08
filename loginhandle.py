@@ -92,7 +92,7 @@ class User:
         return "{}({},{})".format(self.name, self.email, self.password_hash)
     @classmethod
     def saveall(cls):
-        with open("Stamboomserver/users.json","w") as jsonfile:
+        with open("StamboomServer/users.json","w") as jsonfile:
             json.dump([s.__dict__ for s in cls.all_],jsonfile)
 
 
