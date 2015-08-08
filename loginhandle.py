@@ -51,6 +51,8 @@ def randomstring(lenght=12):
     return("".join(random.choice("azertyuiopqsdfghjklmwxcvbn0123456789") for _ in range(lenght)))
 
 def load_users():
+    User.loadall()
+    """
     try:
         with open("StamboomServer/users.txt") as fff:
             command = "#test"
@@ -72,8 +74,8 @@ def load_users():
                 yield name.lower(),User(name.lower(),email)
     except FileNotFoundError:
         return []
+    """
     User.saveall()
-
 
 class User:
     all_ = []
@@ -94,8 +96,13 @@ class User:
     @classmethod
     def saveall(cls):
         with open("StamboomServer/users.json","w") as jsonfile:
-            json.dump([{"name":s.name,"email":s.email,"password_hash":str(s.password_hash)} for s in cls.all_],jsonfile)
-            print("\n".join({"name":s.name,"email":s.email,"password_hash":str(s.password_hash)} for s in cls.all_))
+            json.dump([{"name":s.name,"email":s.email,"password_hash":str(s.password_hash)} for s in cls.all_]
+                      ,jsonfile,indent=4)
 
+    @classmethod
+    def loadall(cls):
+        with open("StamboomServer/users.json") as jsonfile:
+            for t in json.load(jsonfile):
+                cls(**t)
 
 
