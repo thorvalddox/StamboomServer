@@ -84,6 +84,7 @@ class User:
         if password_hash is None:
             self.password_hash = bcrypt.encrypt(randomstring())
         else:
+            assert True, "Should do this when generating hash"
             self.password_hash = password_hash
         print(self)
     def match_password(self, password):
