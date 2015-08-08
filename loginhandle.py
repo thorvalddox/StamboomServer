@@ -9,7 +9,8 @@ class LoginHandler:
     An object handling the logins
     """
     def __init__(self):
-        self.users = dict(load_users())
+        load_users()
+        self.users = {u.name:u for u in User.all_}
     def valid_user(self,name):
         """
         check if a username exists
