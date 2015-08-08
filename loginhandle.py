@@ -81,7 +81,7 @@ class User:
         User.all_.append(self)
         self.name = name
         self.email = email
-        if hash is None:
+        if password_hash is None:
             self.password_hash = bcrypt.encrypt(randomstring())
         else:
             self.password_hash = password_hash
