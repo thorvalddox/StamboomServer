@@ -43,7 +43,7 @@
 <span class="kn">import</span> <span class="nn">core</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">os.path</span><span class="o">,</span> <span class="nn">glob</span>
 
 <span class="c">#from imageinfo import get_image_info</span>
 
@@ -85,8 +85,14 @@
 <span class="s">        var c = document.getElementById(&quot;FamilyTreeCanvas&quot;);</span>
 <span class="s">        var ctx = c.getContext(&quot;2d&quot;);</span>
 <span class="s">        &quot;&quot;&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">            c.addEventListener(&quot;mousemove&quot;, on_mousemove, false);</span>
-<span class="s">            c.addEventListener(&quot;click&quot;, on_click, false);</span>
+<span class="s">            ctx.stroke();</span>
+<span class="s">            c.addEventListener(&quot;mousemove&quot;, on_mousemove, false)</span>
+<span class="s">            c.addEventListener(&quot;click&quot;, on_click, false)</span>
+<span class="s">        function downloadTree() {</span>
+<span class="s">            var link = document.getElementById(&quot;download&quot;)</span>
+<span class="s">            link.href = c.toDataURL(&quot;image/png&quot;)</span>
+<span class="s">        }</span>
+<span class="s">        &quot;&quot;&quot;</span> <span class="o">+</span> <span class="s">&quot;&quot;&quot;</span>
 <span class="s">        function getOffsetRect(elem) {</span>
 <span class="s">            var box = elem.getBoundingClientRect()</span>
 
@@ -152,9 +158,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        ctx.moveTo({},{});</span>
-<span class="s">        ctx.lineTo({},{});</span>
-<span class="s">        ctx.stroke();</span>
-<span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">coords</span><span class="p">))</span>
+<span class="s">        ctx.lineTo({},{});&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">coords</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="DrawJavaScript.draw_rectangle"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_rectangle">[docs]</a>    <span class="k">def</span> <span class="nf">draw_rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">back_color</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -171,10 +175,16 @@
 <span class="s">                ctx.fillStyle = &#39;{}&#39;;</span>
 <span class="s">                ctx.fillRect({},{},{},{});</span>
 <span class="s">            &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">back_color</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="c">#self.draw_line(x1, y1, x1, y2)</span>
+        <span class="c">#self.draw_line(x2, y1, x2, y2)</span>
+        <span class="c">#self.draw_line(x1, y1, x2, y1)</span>
+        <span class="c">#self.draw_line(x1, y2, x2, y2)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        ctx.moveTo({x1},{y1});</span>
+<span class="s">        ctx.lineTo({x1},{y2});</span>
+<span class="s">        ctx.lineTo({x2},{y2});</span>
+<span class="s">        ctx.lineTo({x2},{y1});</span>
+<span class="s">        ctx.lineTo({x1},{y1});&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="o">=</span><span class="n">y2</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="DrawJavaScript.draw_text"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_text">[docs]</a>    <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -235,19 +245,18 @@
 <span class="sd">        :param height:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">delim_array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%d</span><span class="s">x</span><span class="si">%d</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">delim_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">delim_array</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;{:s}_{:d}x{:d}.{:s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+        <span class="c">#path = &quot;%s_%dx%d.%s&quot; % (delim_array[0], width, height, delim_array[1])</span>
+        <span class="c">#ooit al gehoord van .format en tuple unpacking?</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
             <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
             <span class="n">old_width</span><span class="p">,</span> <span class="n">old_height</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span>
-            <span class="n">w_scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_width</span>
-            <span class="n">h_scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_height</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">w_scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">h_scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_width</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_height</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c"># Image needs to be scaled</span>
-                <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">w_scale</span><span class="p">,</span> <span class="n">h_scale</span><span class="p">)</span>
-                <span class="n">new_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_width</span><span class="p">)</span>
-                <span class="n">new_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_height</span><span class="p">)</span>
-                <span class="n">newimage</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">new_width</span><span class="p">,</span> <span class="n">new_height</span><span class="p">),</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
+                <span class="n">new_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_width</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_height</span><span class="p">)</span>
+                <span class="n">newimage</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">new_size</span><span class="p">,</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
                 <span class="n">newimage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
@@ -451,7 +460,8 @@
                     <span class="k">continue</span>
                 <span class="n">cx</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
                 <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">)</span>
-                <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">)</span></div>
+                <span class="n">draw</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cyInter</span><span class="p">,</span> <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="BuildTree.check_valid"><a class="viewcode-back" href="../draw.html#draw.BuildTree.check_valid">[docs]</a>    <span class="k">def</span> <span class="nf">check_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if a person has a valid position. (And has one at all)</span>
@@ -470,6 +480,9 @@
         <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
             <span class="n">d</span><span class="o">.</span><span class="n">draw_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">d</span>
+
+
+
 
 </div>
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../draw.html#draw.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>

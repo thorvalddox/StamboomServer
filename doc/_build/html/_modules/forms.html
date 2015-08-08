@@ -88,6 +88,8 @@
 <span class="sd">    generates the correct FormCom objects to the edit ui</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;parents&quot;</span><span class="p">,</span><span class="s">&quot;parents&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;parent0&quot;</span><span class="p">,</span><span class="s">&quot;parent1&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;addSibling&quot;</span><span class="p">,</span><span class="s">&quot;sibling&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;addSibling&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;remSibling&quot;</span><span class="p">,</span><span class="s">&quot;delete&quot;</span><span class="p">,</span><span class="s">&quot;remSibling&quot;</span><span class="p">)</span>
     <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;dates&quot;</span><span class="p">,</span><span class="s">&quot;person&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;birth&quot;</span><span class="p">,</span><span class="s">&quot;dead&quot;</span><span class="p">)</span>
     <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;addPartner&quot;</span><span class="p">,</span><span class="s">&quot;family&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;addPartner&quot;</span><span class="p">)</span>
     <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;remPartner&quot;</span><span class="p">,</span><span class="s">&quot;delete&quot;</span><span class="p">,</span><span class="s">&quot;remPartner&quot;</span><span class="p">)</span>
@@ -187,6 +189,19 @@
 <span class="sd">         &lt;input type=&quot;submit&quot; value=&quot;Hertrouw &amp; Verzend&quot;&gt;</span>
 <span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmrBox</span><span class="p">)</span>
 </div>
+<div class="viewcode-block" id="edit_siblings_form"><a class="viewcode-back" href="../forms.html#forms.edit_siblings_form">[docs]</a><span class="k">def</span> <span class="nf">edit_siblings_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
+    <span class="n">partners</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
+    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;addSibling&quot;</span><span class="p">)</span>
+    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;remSibling&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;addSibling/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s">         Selecteer nieuwe broer/zus:{}&lt;br/&gt;</span>
+<span class="s">         &lt;input type=&quot;submit&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;</span>
+<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addBox</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="sd">&quot;&quot;&quot;&lt;form action=&quot;remSibling/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="sd">         Verwijder broer/zus:{}&lt;br/&gt;</span>
+<span class="sd">         &lt;input type=&quot;submit&quot; value=&quot;Verwijder &amp; Verzend&quot;&gt;</span>
+<span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remBox</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="edit_children_form"><a class="viewcode-back" href="../forms.html#forms.edit_children_form">[docs]</a><span class="k">def</span> <span class="nf">edit_children_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="n">partBox</span> <span class="o">=</span> <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;partner&quot;</span><span class="p">)</span>
     <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;addChild&quot;</span><span class="p">)</span>
@@ -212,16 +227,22 @@
 <span class="s">        selecteer .jpg bestand :&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;&lt;br /&gt;</span>
 <span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;&lt;br/&gt;</span>
 <span class="s">    &lt;/form&gt;</span>
+<span class="s">    &lt;form action=&quot;rotate/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Draai rechtsom&quot; name=&quot;cw&quot;&gt;</span>
+<span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Draai linksom&quot; name=&quot;ccw&quot;&gt;</span>
+<span class="s">    &lt;/form&gt;</span>
 <span class="s">    &quot;&quot;&quot;</span>
 </div>
 <div class="viewcode-block" id="make_forms"><a class="viewcode-back" href="../forms.html#forms.make_forms">[docs]</a><span class="k">def</span> <span class="nf">make_forms</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="k">yield</span> <span class="n">edit_parents_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">edit_siblings_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_partners_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_children_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_date_form</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_image_form</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="disabled_forms"><a class="viewcode-back" href="../forms.html#forms.disabled_forms">[docs]</a><span class="k">def</span> <span class="nf">disabled_forms</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
+    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
     <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
     <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
     <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>

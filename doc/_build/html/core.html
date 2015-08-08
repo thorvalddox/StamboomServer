@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="draw module" href="draw.html" />
+    <link rel="prev" title="StamboomServer module" href="StamboomServer.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -44,7 +46,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>An object that can execute commands.
 Its member functions match the names of the different commands, and are the
-functions that are accually called when executing the command.</p>
+functions that are actually called when executing the command.</p>
 <dl class="method">
 <dt id="core.CommandLoader.delete">
 <code class="descname">delete</code><span class="sig-paren">(</span><em>person</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.delete" title="Permalink to this definition">¶</a></dt>
@@ -76,15 +78,20 @@ functions that are accually called when executing the command.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="core.CommandLoader.image">
+<code class="descname">image</code><span class="sig-paren">(</span><em>name</em>, <em>number</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="core.CommandLoader.loginas">
 <code class="descname">loginas</code><span class="sig-paren">(</span><em>name</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.loginas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.loginas" title="Permalink to this definition">¶</a></dt>
-<dd><p>not accually a command, but is added to the log to track the author of different commands</p>
+<dd><p>not actually a command, but is added to the log to track the author of different commands</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="core.CommandLoader.logout">
 <code class="descname">logout</code><span class="sig-paren">(</span><em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.logout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.logout" title="Permalink to this definition">¶</a></dt>
-<dd><p>not accually a command, but is added to the log to track the author of different commands</p>
+<dd><p>not actually a command, but is added to the log to track the author of different commands</p>
 </dd></dl>
 
 <dl class="method">
@@ -105,6 +112,16 @@ functions that are accually called when executing the command.</p>
 <dl class="method">
 <dt id="core.CommandLoader.remarry">
 <code class="descname">remarry</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.remarry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.remarry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.rotate">
+<code class="descname">rotate</code><span class="sig-paren">(</span><em>name</em>, <em>direction</em>, <em>*_</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.rotate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="core.CommandLoader.sibling">
+<code class="descname">sibling</code><span class="sig-paren">(</span><em>old</em>, <em>new</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#CommandLoader.sibling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.CommandLoader.sibling" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -211,6 +228,12 @@ Gives the posterity and the single direction ancestors</p>
 <dt id="core.FamilyTree.get_family_down">
 <code class="descname">get_family_down</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_family_down"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_family_down" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns a iterator of families where the given person is a parent of</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.FamilyTree.get_family_up">
+<code class="descname">get_family_up</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#FamilyTree.get_family_up"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.FamilyTree.get_family_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a the family the person is a child of</p>
 </dd></dl>
 
 <dl class="method">
@@ -331,6 +354,12 @@ This one is usually chained, as to give the correct representation, they need th
 </dd></dl>
 
 <dl class="function">
+<dt id="core.addcommand_bot">
+<code class="descclassname">core.</code><code class="descname">addcommand_bot</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#addcommand_bot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.addcommand_bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a command to the command log</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="core.addcommand_ip">
 <code class="descclassname">core.</code><code class="descname">addcommand_ip</code><span class="sig-paren">(</span><em>request</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core.html#addcommand_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#core.addcommand_ip" title="Permalink to this definition">¶</a></dt>
 <dd><p>adds a command to the command log for a user that is not logged in.</p>
@@ -391,6 +420,8 @@ This one is usually chained, as to give the correct representation, they need th
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="StamboomServer.html" title="previous chapter">StamboomServer module</a></li>
+      <li>Next: <a href="draw.html" title="next chapter">draw module</a></li>
   </ul></li>
 </ul>
 </div>

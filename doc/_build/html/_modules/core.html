@@ -46,6 +46,7 @@
 <span class="kn">import</span> <span class="nn">os.path</span>
 
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span> <span class="nn">imagechanger</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
@@ -119,6 +120,15 @@
             <span class="c"># #print(str(f))</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
                 <span class="k">yield</span> <span class="n">f</span>
+</div>
+<div class="viewcode-block" id="FamilyTree.get_family_up"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_family_up">[docs]</a>    <span class="k">def</span> <span class="nf">get_family_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns a the family the person is a child of</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
+            <span class="c"># #print(str(f))</span>
+            <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span>
 </div>
 <div class="viewcode-block" id="FamilyTree.get_representation"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_representation">[docs]</a>    <span class="k">def</span> <span class="nf">get_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -359,6 +369,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">birth</span> <span class="o">=</span> <span class="n">birth</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">dead</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id_</span> <span class="o">=</span> <span class="n">id_</span> <span class="k">if</span> <span class="n">id_</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span> <span class="k">else</span> <span class="nb">hex</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">16</span> <span class="o">**</span> <span class="mi">32</span><span class="p">))</span>
         <span class="n">Person</span><span class="o">.</span><span class="n">all_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id_</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
         <span class="c"># #print(self.name, self.id_)</span>
@@ -392,10 +404,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns the path to the image</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;kopkes/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">uname</span> <span class="o">+</span> <span class="s">&quot;.jpg&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">):</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;kopkes/smiley.jpg&quot;</span>
-        <span class="k">return</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">imagechanger</span><span class="o">.</span><span class="n">copy_images</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;image {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">addcommand_bot</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">imagechanger</span><span class="o">.</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get_static</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_index</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uname</span>
@@ -449,9 +463,9 @@
                     <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;darkcyan&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
-            <span class="n">ret</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;&lt;span style=&quot;color:{1}&quot;&gt;{0}&lt;/span&gt; &lt;span style=&quot;color:{3}&quot;&gt;{2}&lt;/span&gt; {4}&lt;/br&gt;&quot;&quot;&quot;</span> \
+            <span class="n">ret</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt; &lt;span style=&quot;color:{3}&quot;&gt;{2:&lt;15}&lt;/span&gt; {4}&lt;/br&gt;&quot;&quot;&quot;</span> \
                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">usercolor</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">funccolor</span><span class="p">,</span>
-                        <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;&lt;span style=&quot;color:{1}&quot;&gt;{0}&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">argscolor</span><span class="p">)))</span>
+                        <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">argscolor</span><span class="p">)))</span>
 
         <span class="k">return</span> <span class="n">ret</span>
 </div>
@@ -474,7 +488,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An object that can execute commands.</span>
 <span class="sd">    Its member functions match the names of the different commands, and are the</span>
-<span class="sd">    functions that are accually called when executing the command.</span>
+<span class="sd">    functions that are actually called when executing the command.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">accepted</span><span class="o">=</span><span class="p">[]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span>
@@ -492,6 +506,14 @@
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">p</span><span class="o">.</span><span class="n">birth</span> <span class="o">=</span> <span class="n">birth</span>
         <span class="n">p</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">dead</span>
+</div>
+<div class="viewcode-block" id="CommandLoader.image"><a class="viewcode-back" href="../core.html#core.CommandLoader.image">[docs]</a>    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CommandLoader.rotate"><a class="viewcode-back" href="../core.html#core.CommandLoader.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">+=</span> <span class="p">{</span><span class="s">&quot;left&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;right&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}[</span><span class="n">direction</span><span class="p">]</span>
 </div>
 <div class="viewcode-block" id="CommandLoader.family"><a class="viewcode-back" href="../core.html#core.CommandLoader.family">[docs]</a>    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">children</span><span class="p">):</span>
         <span class="c"># #print(&quot;making family&quot;)</span>
@@ -552,12 +574,19 @@
 <div class="viewcode-block" id="CommandLoader.subhead"><a class="viewcode-back" href="../core.html#core.CommandLoader.subhead">[docs]</a>    <span class="k">def</span> <span class="nf">subhead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">subhead</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
 </div>
+<div class="viewcode-block" id="CommandLoader.sibling"><a class="viewcode-back" href="../core.html#core.CommandLoader.sibling">[docs]</a>    <span class="k">def</span> <span class="nf">sibling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family_up</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="CommandLoader.loginas"><a class="viewcode-back" href="../core.html#core.CommandLoader.loginas">[docs]</a>    <span class="k">def</span> <span class="nf">loginas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;not accually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;not actually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div>
 <div class="viewcode-block" id="CommandLoader.logout"><a class="viewcode-back" href="../core.html#core.CommandLoader.logout">[docs]</a>    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;not accually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;not actually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </div></div>
 <div class="viewcode-block" id="addcommand_ip"><a class="viewcode-back" href="../core.html#core.addcommand_ip">[docs]</a><span class="k">def</span> <span class="nf">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
@@ -584,6 +613,13 @@
         <span class="n">addcommand_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="addcommand_bot"><a class="viewcode-back" href="../core.html#core.addcommand_bot">[docs]</a><span class="k">def</span> <span class="nf">addcommand_bot</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    adds a command to the command log</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;${} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;fixerbot&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
 
 </div>
 <div class="viewcode-block" id="xmlTest"><a class="viewcode-back" href="../core.html#core.xmlTest">[docs]</a><span class="k">def</span> <span class="nf">xmlTest</span><span class="p">():</span>

@@ -41,13 +41,16 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
 
 <span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">passlib.hash</span> <span class="kn">import</span> <span class="n">bcrypt</span>
 
 <div class="viewcode-block" id="LoginHandler"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler">[docs]</a><span class="k">class</span> <span class="nc">LoginHandler</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An object handling the logins</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">load_users</span><span class="p">())</span>
+        <span class="n">load_users</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">:</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">User</span><span class="o">.</span><span class="n">all_</span><span class="p">}</span>
 <div class="viewcode-block" id="LoginHandler.valid_user"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_user">[docs]</a>    <span class="k">def</span> <span class="nf">valid_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        check if a username exists</span>
@@ -89,41 +92,60 @@
     <span class="k">return</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="s">&quot;azertyuiopqsdfghjklmwxcvbn0123456789&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lenght</span><span class="p">)))</span>
 </div>
 <div class="viewcode-block" id="load_users"><a class="viewcode-back" href="../loginhandle.html#loginhandle.load_users">[docs]</a><span class="k">def</span> <span class="nf">load_users</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/users.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;#test&quot;</span>
-            <span class="k">while</span> <span class="n">command</span> <span class="o">!=</span> <span class="s">&quot;seed&quot;</span><span class="p">:</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">fff</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">):</span>
-                    <span class="k">continue</span>
-                <span class="n">command</span><span class="p">,</span><span class="n">seed</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">User</span><span class="o">.</span><span class="n">loadall</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    try:</span>
+<span class="sd">        with open(&quot;StamboomServer/users.txt&quot;) as fff:</span>
+<span class="sd">            command = &quot;#test&quot;</span>
+<span class="sd">            while command != &quot;seed&quot;:</span>
+<span class="sd">                line = fff.readline()</span>
+<span class="sd">                if line.startswith(&quot;#&quot;):</span>
+<span class="sd">                    continue</span>
+<span class="sd">                command,seed = line.split(&quot; &quot;)</span>
 
-            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
-            <span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+<span class="sd">            random.seed(int(seed,16))</span>
+<span class="sd">            print(int(seed,16))</span>
 
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fff</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s">&quot;#&quot;</span><span class="p">,</span><span class="s">&quot;seed&quot;</span><span class="p">)):</span>
-                    <span class="k">continue</span>
-                <span class="c">#name,email = line[:-1].split(&quot; &quot;) #[:-1] to ignore newline character</span>
-                <span class="n">email</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot; </span><span class="se">\n\t</span><span class="s">&quot;</span><span class="p">)</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">yield</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">email</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-
+<span class="sd">            for line in fff:</span>
+<span class="sd">                if line.startswith((&quot;#&quot;,&quot;seed&quot;)):</span>
+<span class="sd">                    continue</span>
+<span class="sd">                #name,email = line[:-1].split(&quot; &quot;) #[:-1] to ignore newline character</span>
+<span class="sd">                email = line.strip(&quot; \n\t&quot;)</span>
+<span class="sd">                name = email.split(&quot;@&quot;)[0]</span>
+<span class="sd">                yield name.lower(),User(name.lower(),email)</span>
+<span class="sd">    except FileNotFoundError:</span>
+<span class="sd">        return []</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">User</span><span class="o">.</span><span class="n">saveall</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="User"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">email</span><span class="p">):</span>
+    <span class="n">all_</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">email</span><span class="p">,</span><span class="n">password_hash</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">User</span><span class="o">.</span><span class="n">all_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">randomstring</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
-<div class="viewcode-block" id="User.match_password"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User.match_password">[docs]</a>    <span class="k">def</span> <span class="nf">match_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">,</span><span class="n">password</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="n">password</span></div>
+        <span class="k">if</span> <span class="n">password_hash</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">randomstring</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;Should do this when generating hash&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">password_hash</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<div class="viewcode-block" id="User.match_password"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User.match_password">[docs]</a>    <span class="k">def</span> <span class="nf">match_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">)</span></div>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;{}({},{})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
-</pre></div></div>
+        <span class="k">return</span> <span class="s">&quot;{}({},{})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="User.saveall"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User.saveall">[docs]</a>    <span class="k">def</span> <span class="nf">saveall</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/users.json&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jsonfile</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">([{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="n">s</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="s">&quot;password_hash&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">password_hash</span><span class="p">)}</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">all_</span><span class="p">]</span>
+                      <span class="p">,</span><span class="n">jsonfile</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</div>
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="User.loadall"><a class="viewcode-back" href="../loginhandle.html#loginhandle.User.loadall">[docs]</a>    <span class="k">def</span> <span class="nf">loadall</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/users.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jsonfile</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jsonfile</span><span class="p">):</span>
+                <span class="n">cls</span><span class="p">(</span><span class="o">**</span><span class="n">t</span><span class="p">)</span>
+</pre></div></div></div>
 
           </div>
         </div>

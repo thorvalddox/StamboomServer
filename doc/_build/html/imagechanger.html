@@ -24,6 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="StamboomServer 0.2.0 documentation" href="index.html" />
+    <link rel="next" title="flask_mail module" href="flask_mail.html" />
+    <link rel="prev" title="loginhandle module" href="loginhandle.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -38,14 +40,50 @@
             
   <div class="section" id="module-imagechanger">
 <span id="imagechanger-module"></span><h1>imagechanger module<a class="headerlink" href="#module-imagechanger" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="imagechanger.ImagePath">
+<em class="property">class </em><code class="descclassname">imagechanger.</code><code class="descname">ImagePath</code><a class="reference internal" href="_modules/imagechanger.html#ImagePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.ImagePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="staticmethod">
+<dt id="imagechanger.ImagePath.get">
+<em class="property">static </em><code class="descname">get</code><span class="sig-paren">(</span><em>number</em>, <em>orient=0</em>, <em>genstring='StamboomServer/static/images/IM{:06}{}.jpg'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#ImagePath.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.ImagePath.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="imagechanger.ImagePath.get_static">
+<em class="property">static </em><code class="descname">get_static</code><span class="sig-paren">(</span><em>number</em>, <em>orient=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#ImagePath.get_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.ImagePath.get_static" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="imagechanger.ImagePath.get_wild">
+<em class="property">static </em><code class="descname">get_wild</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#ImagePath.get_wild"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.ImagePath.get_wild" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="imagechanger.ImagePath.new">
+<em class="property">static </em><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#ImagePath.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.ImagePath.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="imagechanger.change_image">
-<code class="descclassname">imagechanger.</code><code class="descname">change_image</code><span class="sig-paren">(</span><em>name</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#change_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.change_image" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">imagechanger.</code><code class="descname">change_image</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#change_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.change_image" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="imagechanger.check_valid">
 <code class="descclassname">imagechanger.</code><code class="descname">check_valid</code><span class="sig-paren">(</span><em>filename: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#check_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.check_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="imagechanger.copy_images">
+<code class="descclassname">imagechanger.</code><code class="descname">copy_images</code><span class="sig-paren">(</span><em>person</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#copy_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.copy_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="imagechanger.destroy_subs">
+<code class="descclassname">imagechanger.</code><code class="descname">destroy_subs</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#destroy_subs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.destroy_subs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -56,6 +94,11 @@
 <dl class="function">
 <dt id="imagechanger.name_to_path">
 <code class="descclassname">imagechanger.</code><code class="descname">name_to_path</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#name_to_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.name_to_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="imagechanger.rotate_image">
+<code class="descclassname">imagechanger.</code><code class="descname">rotate_image</code><span class="sig-paren">(</span><em>oldpath</em>, <em>newpath</em>, <em>orient</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/imagechanger.html#rotate_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#imagechanger.rotate_image" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -69,6 +112,8 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="loginhandle.html" title="previous chapter">loginhandle module</a></li>
+      <li>Next: <a href="flask_mail.html" title="next chapter">flask_mail module</a></li>
   </ul></li>
 </ul>
 </div>
