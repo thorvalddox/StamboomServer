@@ -87,7 +87,7 @@ class User:
             self.password_hash = password_hash
         print(self)
     def match_password(self, password):
-        return bcrypt.verify(self.password_hash, password)
+        return bcrypt.verify(password, self.password_hash)
     def __repr__(self):
         return "{}({},{})".format(self.name, self.email, self.password_hash)
     @classmethod
