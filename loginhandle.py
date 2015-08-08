@@ -95,7 +95,7 @@ class User:
     def saveall(cls):
         with open("StamboomServer/users.json","w") as jsonfile:
             json.dump([{"name":s.name,"email":s.email,"password_hash":str(s.password_hash)} for s in cls.all_],jsonfile)
-
+            print("\n".join({"name":s.name,"email":s.email,"password_hash":str(s.password_hash)} for s in cls.all_))
 
 
 
