@@ -418,7 +418,6 @@ def validate_login(path):
     else:
         return redirect("/" + path + "/login/invalid/")
 
-
 @app.route("/<path:path>/logout/")
 @catch_errors
 def logout(path):

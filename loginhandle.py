@@ -1,6 +1,8 @@
 __author__ = 'Thorvald'
 
 import random
+import json
+from passlib.hash import bcrypt
 
 class LoginHandler:
     """
@@ -70,19 +72,28 @@ def load_users():
                 yield name.lower(),User(name.lower(),email)
     except FileNotFoundError:
         return []
+    User.saveall()
 
 
 class User:
-    def __init__(self,name,email):
+    all_ = []
+    def __init__(self,name,email,password_hash=None):
+        User.all_.append(self)
         self.name = name
         self.email = email
-        self.password = randomstring()
-        print(self.name,self.email,self.password)
-    def match_password(self,password):
-        print(self.password,password)
-        return self.password == password
+        if hash is None:
+            self.password_hash = bcrypt.encrypt(randomstring())
+        else:
+            self.password_hash = password_hash
+        print(self)
+    def match_password(self, password):
+        return bcrypt.verify(self.password_hash, password)
     def __repr__(self):
-        return "{}({},{})".format(self.name,self.email,self.password)
+        return "{}({},{})".format(self.name, self.email, self.password_hash)
+    @classmethod
+    def saveall(cls):
+        with open("users.json","w") as jsonfile:
+            json.dump([s.__dict__ for s in cls.all_],jsonfile)
 
 
 
