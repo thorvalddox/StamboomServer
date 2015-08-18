@@ -49,6 +49,8 @@ Noteer dingen op de lijst als:
 - [x] Bezig
 Verwijder ze van de lijst als ze in orde zijn.
 
+###TO DO list
+
 - [ ] Koppelen van logins aan personen
 - [ ] Inschrijvingsformulieren, gekoppeld aan personen
 - [x] Naamkaartjes
