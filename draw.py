@@ -328,18 +328,6 @@ class DrawRaw(DrawObject):
         x1,y1,x2,y2 = coords
         self.draw.line([(x1,y1),(x2,y2)],(0,0,0),1)
 
-    def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
-        """
-        draws a rectangle between the given coordinates
-        :param x1:
-        :param y1:
-        :param x2:
-        :param y2:
-        :param back_color:
-        :return:
-        """
-        pass
-
     def draw_text(self, x, y, text, size=12):
         """
         draw a text at the given position. The position is the mid-top of the text
@@ -349,7 +337,7 @@ class DrawRaw(DrawObject):
         :param size:
         :return:
         """
-        #self.draw.text((x,y), text, font=ImageFont.truetype("StamboomServer/static/arial.ttf",size), fill=(0,0,0))
+        self.draw.text((x,y), text, font=ImageFont.truetype("static/arial.ttf",size), fill=(0,0,0))
 
 
     def draw_image(self, image, x, y, width, height):
