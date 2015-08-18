@@ -2,14 +2,13 @@ from flask import Flask
 
 from flask import make_response, url_for, request, redirect, session, send_file
 
-from jinja2 import Environment, PackageLoader
-
 from flask_mail import Mail, Message
 from jinja2 import Environment, PackageLoader
 
 import smtplib
 
 import os, os.path
+import glob
 import random
 from functools import wraps, update_wrapper
 
@@ -21,6 +20,7 @@ import forms
 from loginhandle import LoginHandler
 from autoupdate import update
 from datetime import datetime
+
 
 # Init Flask application
 app = Flask(__name__)
@@ -258,8 +258,12 @@ def download_fam_tree_custom(name):
     person = f.get_person(name)
     localfam = f.build_new(person)
     d = draw.draw_people_download(localfam, 120, 150, 10, 8)
-    d.image.save("StamboomServer/static/download.jpg")
-    response = send_file("static/download.jpg", mimetype='image/jpg')
+    paths = glob.glob("StamboomServer/static/download_*.jpg")
+    for i in paths:
+        os.remove(i)
+    suffix = hex(random.randrange(16**16))
+    d.image.save("StamboomServer/static/download_{}.jpg".format(suffix))
+    response = send_file("static/download_{}.jpg".format(suffix), mimetype='image/jpg')
     return response
 
 @app.route('/stamboom/safe/')
