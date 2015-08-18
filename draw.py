@@ -349,7 +349,7 @@ class DrawRaw(DrawObject):
         :param size:
         :return:
         """
-        self.draw.text((x,y), text, font=ImageFont.truetype("StamboomServer/static/arial.ttf",size), fill=(0,0,0))
+        #self.draw.text((x,y), text, font=ImageFont.truetype("StamboomServer/static/arial.ttf",size), fill=(0,0,0))
 
 
     def draw_image(self, image, x, y, width, height):
