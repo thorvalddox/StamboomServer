@@ -56,9 +56,9 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] Inschrijvingsformulieren, gekoppeld aan personen
 - [x] Naamkaartjes
 - [ ] meer login functies (wachtwoord wijzigen, herstellen), (nieuwe accounts)
-- [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
+- [J] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
 - [ ] Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
-- [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando
+- [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando (shadowban)
 - [ ] Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangapst worden telkens al er een commando bij op de lijst komt. (json?)
 - [ ] Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
 - [ ] Github moet de documenatie kunnen lezen
@@ -71,6 +71,11 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] meer bewerk opties (bv naam wijzigen, ...)
 - [ ] commando om de ministamboom in het groot te toen
 - [ ] geslachten
+- [ ] anders tonen van gescheiden families
+- [ ] comprimeren van fotos na uploaden (nieuw formaat max 600x400) om geheugenruimte te sparen
+- [ ] verwijderen van ongebruikte fotos met toestemming van de admin (rollback)
+
+
 - [ ] betere layout en css
 - [ ] volledigere docs & docstrings
 - [ ] statistieken
@@ -80,6 +85,5 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] Profiler/optimising
 - [ ] fix docs :param:
 - [ ] overall cleanup & refractor
-- [ ] anders tonen van gescheiden families
 
 

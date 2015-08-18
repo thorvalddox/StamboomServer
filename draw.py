@@ -101,6 +101,9 @@ class DrawJavaScript:
         """
 
     def get_html(self):
+        """
+        Intergrate this to the html page fore the full drawing of the tree.
+        """
         return(
             """
             {}
