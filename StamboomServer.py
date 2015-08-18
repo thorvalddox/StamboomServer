@@ -243,7 +243,7 @@ def download_fam_tree_custom(name):
     localfam = f.build_new(person)
     d = draw.draw_people_download(localfam, 120, 150, 10, 8)
     d.image.save("StamboomServer/static/download.jpg")
-    response = send_file("StamboomServer/static/download.jpg", mimetype='image/jpg')
+    response = send_file("static/download.jpg", mimetype='image/jpg')
     return response
 
 @app.route('/stamboom/safe/')
