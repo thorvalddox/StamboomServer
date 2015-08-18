@@ -251,8 +251,13 @@ def show_fam_tree_custom(name):
 
 @app.route('/stamboom/view/<name>/download/')
 @default_page
-@nocache
-def download_fam_tree_custom(name):
+def download_redirect(name):
+    return redirect("/stamboom/view/{}/download/{}/".format(name,hex(random.randrange(16**16))))
+
+
+@app.route('/stamboom/view/<name>/download/<suffix>/')
+@default_page
+def download_fam_tree_custom(name,suffix):
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
@@ -261,7 +266,6 @@ def download_fam_tree_custom(name):
     paths = glob.glob("StamboomServer/static/download_*.jpg")
     for i in paths:
         os.remove(i)
-    suffix = hex(random.randrange(16**16))
     d.image.save("StamboomServer/static/download_{}.jpg".format(suffix))
     response = send_file("static/download_{}.jpg".format(suffix), mimetype='image/jpg')
     return response
