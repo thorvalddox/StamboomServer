@@ -47,6 +47,7 @@ Als ergens de naam van een niet-bestaande persoon wordt opgegeven wordt deze aan
 Noteer dingen op de lijst als:
 - [ ] To do
 - [x] Bezig
+
 Verwijder ze van de lijst als ze in orde zijn.
 
 ###TO DO list
