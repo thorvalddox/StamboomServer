@@ -47,6 +47,8 @@ Als ergens de naam van een niet-bestaande persoon wordt opgegeven wordt deze aan
 Noteer dingen op de lijst als:
 - [ ] To do
 - [x] Bezig
+-     In Orde
+
 
 Verwijder ze van de lijst als ze in orde zijn.
 
@@ -56,8 +58,8 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] Inschrijvingsformulieren, gekoppeld aan personen
 - [x] Naamkaartjes
 - [ ] meer login functies (wachtwoord wijzigen, herstellen), (nieuwe accounts)
-- [J] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
-- [ ] Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
+- [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
+- [x] Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
 - [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando (shadowban)
 - [ ] Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangapst worden telkens al er een commando bij op de lijst komt. (json?)
 - [ ] Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
