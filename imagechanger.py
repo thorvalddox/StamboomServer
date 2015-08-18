@@ -71,6 +71,24 @@ class ImagePath:
         return(genstring.format(number,suffix))
 
     @staticmethod
+    def trunkate(image,width,height):
+        filename, extension = image.split('.', 1)
+        path = "{:s}_{:d}x{:d}.{:s}".format(filename, width, height, extension)
+        #path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
+        if not os.path.exists("StamboomServer/static/" + path):
+            im = Image.open("StamboomServer/static/" + image)
+            old_width, old_height = im.size
+            scale = min(float(width) / old_width, float(height) / old_height)
+            if scale < 1:
+                # Image needs to be scaled
+                new_size = int(scale * old_width),int(scale * old_height)
+                newimage = im.resize(new_size, Image.ANTIALIAS)
+                newimage.save("StamboomServer/static/" + path, im.format)
+            else:
+                im.save("StamboomServer/static/" + path, im.format)
+        return path
+
+    @staticmethod
     def get_static(number,orient=0):
         return(ImagePath.get(number,orient,"images/IM{:06}{}.jpg"))
     @staticmethod

@@ -1,6 +1,6 @@
 from flask import Flask
 
-from flask import make_response, url_for, request, redirect, session
+from flask import make_response, url_for, request, redirect, session, send_file
 
 from jinja2 import Environment, PackageLoader
 
@@ -234,6 +234,17 @@ def show_fam_tree_custom(name):
                                              script=d.get_html_script()))
     return response
 
+@app.route('/stamboom/view/<name>/download/')
+@default_page
+def download_fam_tree_custom(name):
+    f = core.FamilyTree()
+    f.from_code("data.log", 2)
+    person = f.get_person(name)
+    localfam = f.build_new(person)
+    d = draw.draw_people_download(localfam, 120, 150, 10, 8)
+    d.image.save("StamboomServer/static/download.jpg")
+    response = send_file("StamboomServer/static/download.jpg", mimetype='image/jpg')
+    return response
 
 @app.route('/stamboom/safe/')
 @default_page

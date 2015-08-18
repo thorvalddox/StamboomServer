@@ -4,16 +4,102 @@ import core
 from itertools import chain
 import random
 import os.path, glob
+from PIL import Image,ImageDraw,ImageFont
 
 #from imageinfo import get_image_info
 
-try:
-    import Image
-except ImportError:
-    from PIL import Image
+
+class DrawObject:
+    """
+    Astract object. Do not use.
+    """
+    def draw_line(self, *coords):  # x1 y1 x2 y2
+        """
+        Adds a line between to points
+        :param coords: x1 y1 x2 y2
+        :return:
+        """
+        pass
+
+    def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
+        """
+        draws a rectangle between the given coordinates
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :param back_color:
+        :return:
+        """
+        self.draw_line(x1, y1, x1, y2)
+        self.draw_line(x2, y1, x2, y2)
+        self.draw_line(x1, y1, x2, y1)
+        self.draw_line(x1, y2, x2, y2)
+
+    def draw_text(self, x, y, text, size=12):
+        """
+        draw a text at the given position. The position is the mid-top of the text
+        :param x:
+        :param y:
+        :param text:
+        :param size:
+        :return:
+        """
+        pass
 
 
-class DrawJavaScript:
+    def draw_image(self, image, x, y, width, height):
+        """
+        Draws an image at a given place with given dimensions
+        :param image: path of the image
+        :param x:
+        :param y:
+        :param width:
+        :param height:
+        :return:
+        """
+        pass
+
+    def draw_person(self, person, x, y, width, height, border, textsize):
+        """
+        Draws a person at a given position with given dimensions
+        :param person:
+        :param x:
+        :param y:
+        :param width:
+        :param height:
+        :param border: border between image and rectangle
+        :param textsize:
+        :return:
+        """
+        xdif = width / 2 - border
+        ydif = height / 2 - border
+        self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
+        self.draw_text(x, y + ydif - 4-2*(textsize+1), person.name,textsize)
+        self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
+        self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
+        self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
+        nw, nh = width - 3 * border, height - 3 * border - 3*textsize
+        self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
+
+
+    def add_mouse_link(self, link, x1, y1, x2, y2):
+        """
+        Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to
+        the given page.
+        Optiononal. If the subclass does not apply this, the family tree will be draw without
+        hyperlinks.
+        :param link:
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :return:
+        """
+        pass
+
+
+class DrawJavaScript(DrawObject):
     """
     A wrapper to draw a family tree using javascript. Different methods will create different shapes.
     The methods get_html_canvas and get_html_script return all the data needed on the html script.
@@ -190,13 +276,14 @@ class DrawJavaScript:
         :param x2:
         :param y2:
         :return:
-        Note: The hyperlink will not show up as link. Therefor use the function add_mouse_pointer
         """
+        self.add_mouse_pointer(x1,y1,x2,y2)
         self.clickevents.append("""
         if(x>={} && x <= {} && y>={} && y<= {}){{
             window.location = "{}"
         }}
         """.format(x1, x2, y1, y2, link))
+
 
     def draw_image(self, image, x, y, width, height):
         """
@@ -208,21 +295,7 @@ class DrawJavaScript:
         :param height:
         :return:
         """
-        filename, extension = image.split('.', 1)
-        path = "{:s}_{:d}x{:d}.{:s}".format(filename, width, height, extension)
-        #path = "%s_%dx%d.%s" % (delim_array[0], width, height, delim_array[1])
-        #ooit al gehoord van .format en tuple unpacking?
-        if not os.path.exists("StamboomServer/static/" + path):
-            im = Image.open("StamboomServer/static/" + image)
-            old_width, old_height = im.size
-            scale = min(float(width) / old_width, float(height) / old_height)
-            if scale < 1:
-                # Image needs to be scaled
-                new_size = int(scale * old_width),int(scale * old_height)
-                newimage = im.resize(new_size, Image.ANTIALIAS)
-                newimage.save("StamboomServer/static/" + path, im.format)
-            else:
-                im.save("StamboomServer/static/" + path, im.format)
+        path = core.imagechanger.ImagePath.trunkate(image,width,height)
 
         self.commands.append("""
             var imageObj{0} = new Image();
@@ -235,28 +308,63 @@ class DrawJavaScript:
               imageObj{0}.src = '/static/{5}';
         """.format(random.randrange(2 ** 64), x, y, width, height, path))
 
-    def draw_person(self, person, x, y, width, height, border, textsize):
+
+
+
+class DrawRaw(DrawObject):
+    """
+    An object used to draw Images directly with PILlow
+    """
+    def __init__(self,dimensions):
+        self.image = Image.new("RGB",dimensions,"white")
+        self.draw = ImageDraw.Draw(self.image)
+
+    def draw_line(self, *coords):  # x1 y1 x2 y2
         """
-        Draws a person at a given position with given dimensions
-        :param person:
+        Adds a line between to points
+        :param coords: x1 y1 x2 y2
+        :return:
+        """
+        x1,y1,x2,y2 = coords
+        self.draw.line([(x1,y1),(x2,y2)],(0,0,0),1)
+
+    def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
+        """
+        draws a rectangle between the given coordinates
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :param back_color:
+        :return:
+        """
+        pass
+
+    def draw_text(self, x, y, text, size=12):
+        """
+        draw a text at the given position. The position is the mid-top of the text
+        :param x:
+        :param y:
+        :param text:
+        :param size:
+        :return:
+        """
+        self.draw.text((x,y), text, font=ImageFont.truetype("static/arial.tff",size), fill=(0,0,0))
+
+
+    def draw_image(self, image, x, y, width, height):
+        """
+        Draws an image at a given place with given dimensions
+        :param image: path of the image
         :param x:
         :param y:
         :param width:
         :param height:
-        :param border: border between image and rectangle
-        :param textsize:
         :return:
         """
-        xdif = width / 2 - border
-        ydif = height / 2 - border
-        self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
-        self.draw_text(x, y + ydif - 4-2*(textsize+1), person.name,textsize)
-        self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
-        self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
-        self.add_mouse_pointer(x - xdif, y - ydif, x + xdif, y + ydif)
-        self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
-        nw, nh = width - 3 * border, height - 3 * border - 3*textsize
-        self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
+        path = core.imagechanger.ImagePath.trunkate(image,width,height)
+        image_obj = Image.open(path)
+        self.image.paste(image_obj,(x,y))
 
 
 
@@ -394,7 +502,7 @@ class BuildTree:
         """
         return 4 * height
 
-    def draw_family(self, draw:DrawJavaScript, fam:core.Family, width, height, border):
+    def draw_family(self, draw:DrawObject, fam:core.Family, width, height, border):
         """
         Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person
         """
@@ -443,6 +551,22 @@ def draw_people(tree, width=170, height=200, border=15, textsize=12):
         if s.check_valid(p):
             d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
+
+def draw_people_download(tree, width=170, height=200, border=15, textsize=12):
+    """
+    Creates a DrawJavaScript object with all needed data to draw a tree and returns it.
+    """
+    s = BuildTree(tree)
+
+    d = DrawRaw((s.get_width(width), s.get_height(height)))
+
+    for f in tree.families:
+        s.draw_family(d, f, width, height, border)
+    for p in tree.people_linked:
+        if s.check_valid(p):
+            d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
+    return d
+
 
 
 
