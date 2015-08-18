@@ -44,34 +44,39 @@ Als ergens de naam van een niet-bestaande persoon wordt opgegeven wordt deze aan
 
 ##TO DO
 
-* Koppelen van logins aan personen
-* Inschrijvingsformulieren, gekoppeld aan personen
-* NaamkaartjesLege argumenten worden aangeduid met *.
-* meer login functies (wachtwoord wijzigen, herstellen), (nieuwe accounts)
-* Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
-* Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
-* Maken van een blacklist van users die genegreerd worden in het creatiecommando
-* Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangapst worden telkens al er een commando bij op de lijst komt. (json?)
-* Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
-* Github moet de documenatie kunnen lezen
-* Github moet een wiki krijgen met daarin het gebruik (dus niet de werking, da moet in de docs) van alle functies van de site.
-* cathing van meerdere errors (403,400) enz en correcte catching van 500
-* Fix de autoupdate zodat deze blijft runnen als de server crashed (gedeeltelijk gedaan met de @cath_error decorator)
-* automatisch de docs generenen op "git push"
-* meer admin controle
-* betere interface voor de console
-* meer bewerk opties (bv naam wijzigen, ...)
-* commando om de ministamboom in het groot te toen
-* geslachten
-* betere layout en css
-* volledigere docs & docstrings
-* statistieken
-* meer informatie zoals sterrenbeelden
-* homepage
-* meer/duidelijkere interlinking
-* Profiler/optimising
-* fix docs :param:
-* overall cleanup & refractor
-* anders tonen van gescheiden families
+Noteer dingen op de lijst als:
+- [ ] To do
+- [x] Bezig
+Verwijder ze van de lijst als ze in orde zijn.
+
+- [ ] Koppelen van logins aan personen
+- [ ] Inschrijvingsformulieren, gekoppeld aan personen
+- [x] Naamkaartjes
+- [ ] meer login functies (wachtwoord wijzigen, herstellen), (nieuwe accounts)
+- [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
+- [ ] Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
+- [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando
+- [ ] Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangapst worden telkens al er een commando bij op de lijst komt. (json?)
+- [ ] Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
+- [ ] Github moet de documenatie kunnen lezen
+- [ ] Github moet een wiki krijgen met daarin het gebruik (dus niet de werking, da moet in de docs) van alle functies van de site.
+- [ ] cathing van meerdere errors (403,400) enz en correcte catching van 500
+- [ ] Fix de autoupdate zodat deze blijft runnen als de server crashed (gedeeltelijk gedaan met de @cath_error decorator)
+- [ ] automatisch de docs generenen op "git push"
+- [ ] meer admin controle
+- [ ] betere interface voor de console
+- [ ] meer bewerk opties (bv naam wijzigen, ...)
+- [ ] commando om de ministamboom in het groot te toen
+- [ ] geslachten
+- [ ] betere layout en css
+- [ ] volledigere docs & docstrings
+- [ ] statistieken
+- [ ] meer informatie zoals sterrenbeelden
+- [ ] homepage
+- [ ] meer/duidelijkere interlinking
+- [ ] Profiler/optimising
+- [ ] fix docs :param:
+- [ ] overall cleanup & refractor
+- [ ] anders tonen van gescheiden families
 
 
