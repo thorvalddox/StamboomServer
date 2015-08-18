@@ -362,7 +362,7 @@ class DrawRaw(DrawObject):
         :param height:
         :return:
         """
-        path = core.imagechanger.ImagePath.trunkate("StamboomServer/static/"+image,width,height)
+        path = "StamboomServer/static/"+core.imagechanger.ImagePath.trunkate(image,width,height)
         image_obj = Image.open(path)
         self.image.paste(image_obj,(x,y))
 
