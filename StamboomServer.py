@@ -10,6 +10,7 @@ import smtplib
 import os, os.path
 import glob
 import random
+import re
 from functools import wraps, update_wrapper
 
 import core
@@ -242,32 +243,32 @@ def show_fam_tree():
 def show_fam_tree_custom_redir(name):
     return redirect("/stamboom/view/{}/{}/".format(name,"120x150b10t8"))
 
-@app.route('/stamboom/view/<name>/<format>/')
+@app.route('/stamboom/view/<name>/<fformat>/')
 @default_page
-def show_fam_tree_custom(name,format):
+def show_fam_tree_custom(name,fformat):
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people(localfam, *format.split(tuple("xbt")))
+    d = draw.draw_people(localfam, *re.split(r"x|b|t",fformat))
     response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
                                              script=d.get_html_script()))
     return response
 
-@app.route('/stamboom/view/<name>/<format>/download/')
+@app.route('/stamboom/view/<name>/<fformat>/download/')
 @default_page
-def download_redirect(name,format):
-    return redirect("/stamboom/view/{}/{}/download/{}/".format(name,format,hex(random.randrange(16**16))))
+def download_redirect(name,fformat):
+    return redirect("/stamboom/view/{}/{}/download/{}/".format(name,fformat,hex(random.randrange(16**16))))
 
 
-@app.route('/stamboom/view/<name>/<format>/download/<suffix>/')
+@app.route('/stamboom/view/<name>/<formatformat>/download/<suffix>/')
 @default_page
-def download_fam_tree_custom(name,format,suffix):
+def download_fam_tree_custom(name,fformat,suffix):
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people_download(localfam, *format.split(tuple("xbt")))
+    d = draw.draw_people_download(localfam, *re.split(r"x|b|t",fformat))
     paths = glob.glob("StamboomServer/static/download_*.jpg")
     for i in paths:
         os.remove(i)
