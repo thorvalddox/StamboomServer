@@ -240,7 +240,7 @@ def show_fam_tree():
 @app.route('/stamboom/view/<name>/')
 @default_page
 def show_fam_tree_custom_redir(name):
-    return redirect("/stamboom/view/{name}/{format}/".format(name,"120x150b10t8"))
+    return redirect("/stamboom/view/{}/{}/".format(name,"120x150b10t8"))
 
 @app.route('/stamboom/view/<name>/<format>/')
 @default_page
