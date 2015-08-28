@@ -337,8 +337,10 @@ class DrawRaw(DrawObject):
         :param size:
         :return:
         """
-        self.draw.text((x,y), text, font=ImageFont.truetype("static/arial.ttf",size), fill=(0,0,0))
-
+        try:
+            self.draw.text((x,y), text, font=ImageFont.truetype("static/arial.ttf",size), fill=(0,0,0))
+        except (IOError,OSError):
+            self.draw.text((x,y), "?" + text + "?", fill=(0,0,0))
 
     def draw_image(self, image, x, y, width, height):
         """
@@ -352,7 +354,8 @@ class DrawRaw(DrawObject):
         """
         path = "StamboomServer/static/"+core.imagechanger.ImagePath.trunkate(image,width,height)
         image_obj = Image.open(path)
-        self.image.paste(image_obj,(int(x),int(y)))
+        realwidth = image_obj.width
+        self.image.paste(image_obj,(int(x)+(width-realwidth),int(y)))
 
 
 
