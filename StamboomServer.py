@@ -250,7 +250,7 @@ def show_fam_tree_custom(name,fformat):
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people(localfam, *re.split(r"x|b|t",fformat))
+    d = draw.draw_people(localfam, *map(int,re.split(r"x|b|t",fformat)))
     response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
                                              script=d.get_html_script()))
     return response
@@ -268,7 +268,7 @@ def download_fam_tree_custom(name,fformat,suffix):
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people_download(localfam, *re.split(r"x|b|t",fformat))
+    d = draw.draw_people_download(localfam, *map(int,re.split(r"x|b|t",fformat)))
     paths = glob.glob("StamboomServer/static/download_*.jpg")
     for i in paths:
         os.remove(i)
