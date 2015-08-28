@@ -354,8 +354,8 @@ class DrawRaw(DrawObject):
         """
         path = "StamboomServer/static/"+core.imagechanger.ImagePath.trunkate(image,width,height)
         image_obj = Image.open(path)
-        realwidth = image_obj.width
-        self.image.paste(image_obj,(int(x)+(width-realwidth),int(y)))
+        realwidth = image_obj.size[0]
+        self.image.paste(image_obj,(int(x+width-realwidth),int(y)))
 
 
 
