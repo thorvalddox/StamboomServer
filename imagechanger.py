@@ -65,7 +65,9 @@ class ImagePath:
         suffix = ["","_r","_o","_l"][orient]
         base = "StamboomServer/static/images/IM{:06}{}.jpg".format(number,"")
         rot = "StamboomServer/static/images/IM{:06}{}.jpg".format(number,suffix)
-        assert os.path.exists(base),"{} does not exist".format(base)
+        if not os.path.exists(base):
+            base = "StamboomServer/static/images/error.jpg"
+            rot = "StamboomServer/static/images/error{}.jpg".format(suffix)
         if not os.path.exists(rot):
             rotate_image(base,rot,orient)
         return(genstring.format(number,suffix))
