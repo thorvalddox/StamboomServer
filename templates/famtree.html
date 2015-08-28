@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block options %}
-    <li class="toplevel"><a id="download" href="download/">Download</a></li>
+    <li class="toplevel"><a id="download" href="download/">Download</a>
+        <ul>
+             <li><a href="download/">Pillow</a></li>
+             <li><a href="javascript:downloadTree()">Javascript</a></li>
+        </ul>
+    </li>
     <li class="toplevel"><a id="format" href="/stamboom/view/{{ pname }}/120x150b15t10">Formaat</a>
         <ul>
                 <li><a href="/stamboom/view/{{ pname }}/80x80b8t6">Klein</a></li>
