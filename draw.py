@@ -340,8 +340,8 @@ class DrawRaw(DrawObject):
 
         try:
             print(os.getcwd())
-            w, h = self.draw.textsize(text, font=ImageFont.truetype("arial.ttf",size))
-            self.draw.text((x-w/2,y-h), text, font=ImageFont.truetype("arial.ttf",size), fill=(0,0,0))
+            w, h = self.draw.textsize(text, font=ImageFont.truetype("/home/lightning939/StamboomServer/static/arial.ttf",size))
+            self.draw.text((x-w/2,y-h), text, font=ImageFont.truetype("/home/lightning939/StamboomServer/static/arial.ttf",size), fill=(0,0,0))
         except (IOError,OSError):
             w, h = self.draw.textsize(text)
             self.draw.text((x-w/2,y-h), text, fill=(0,0,0))
