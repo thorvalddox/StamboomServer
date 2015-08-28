@@ -252,7 +252,7 @@ def show_fam_tree_custom(name,fformat):
     localfam = f.build_new(person)
     d = draw.draw_people(localfam, *map(int,re.split(r"x|b|t",fformat)))
     response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
-                                             script=d.get_html_script(),name=name))
+                                             script=d.get_html_script(),pname=name))
     return response
 
 @app.route('/stamboom/view/<name>/<fformat>/download/')
@@ -275,17 +275,6 @@ def download_fam_tree_custom(name,fformat,suffix):
     d.image.save("StamboomServer/static/download_{}.jpg".format(suffix))
     response = send_file("static/download_{}.jpg".format(suffix), mimetype='image/jpg')
     return response
-
-@app.route('/stamboom/safe/')
-@default_page
-def show_fam_tree_safe():
-    f = core.FamilyTree()
-    f.from_code("data.log")
-    d = draw.draw_people(f)
-    response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
-                                             script=d.get_html_script()))
-    return response
-
 
 @app.route('/stamboom/edit/<name>/')
 @default_page
