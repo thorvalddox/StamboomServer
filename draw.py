@@ -339,6 +339,7 @@ class DrawRaw(DrawObject):
         """
 
         try:
+            print(os.chdir())
             w, h = self.draw.textsize(text, font=ImageFont.truetype("arial.ttf",size))
             self.draw.text((x-w/2,y-h), text, font=ImageFont.truetype("arial.ttf",size), fill=(0,0,0))
         except (IOError,OSError):
