@@ -10,6 +10,7 @@ import smtplib
 import os, os.path
 import glob
 import random
+import re
 from functools import wraps, update_wrapper
 
 import core
@@ -239,47 +240,41 @@ def show_fam_tree():
 
 @app.route('/stamboom/view/<name>/')
 @default_page
-def show_fam_tree_custom(name):
+def show_fam_tree_custom_redir(name):
+    return redirect("/stamboom/view/{}/{}/".format(name,"120x150b10t8"))
+
+@app.route('/stamboom/view/<name>/<fformat>/')
+@default_page
+def show_fam_tree_custom(name,fformat):
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people(localfam, 120, 150, 10, 8)
+    d = draw.draw_people(localfam, *map(int,re.split(r"x|b|t",fformat)))
     response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
-                                             script=d.get_html_script()))
+                                             script=d.get_html_script(),pname=name))
     return response
 
-@app.route('/stamboom/view/<name>/download/')
+@app.route('/stamboom/view/<name>/<fformat>/download/')
 @default_page
-def download_redirect(name):
-    return redirect("/stamboom/view/{}/download/{}/".format(name,hex(random.randrange(16**16))))
+def download_redirect(name,fformat):
+    return redirect("/stamboom/view/{}/{}/download/{}/".format(name,fformat,hex(random.randrange(16**16))))
 
 
-@app.route('/stamboom/view/<name>/download/<suffix>/')
+@app.route('/stamboom/view/<name>/<fformat>/download/<suffix>/')
 @default_page
-def download_fam_tree_custom(name,suffix):
+def download_fam_tree_custom(name,fformat,suffix):
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
     localfam = f.build_new(person)
-    d = draw.draw_people_download(localfam, 120, 150, 10, 8)
+    d = draw.draw_people_download(localfam, *map(int,re.split(r"x|b|t",fformat)))
     paths = glob.glob("StamboomServer/static/download_*.jpg")
     for i in paths:
         os.remove(i)
     d.image.save("StamboomServer/static/download_{}.jpg".format(suffix))
     response = send_file("static/download_{}.jpg".format(suffix), mimetype='image/jpg')
     return response
-
-@app.route('/stamboom/safe/')
-@default_page
-def show_fam_tree_safe():
-    f = core.FamilyTree()
-    f.from_code("data.log")
-    d = draw.draw_people(f)
-    response = make_response(render_template("famtree.html", canvas=d.get_html_canvas(),
-                                             script=d.get_html_script()))
-    return response
-
 
 @app.route('/stamboom/edit/<name>/')
 @default_page
