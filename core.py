@@ -30,7 +30,7 @@ class FamilyTree:
     @property
     def people_linked(self):
         """
-        returns a list of people the family tree contains and are connected
+        *returns* a list of people the family tree contains and are connected
         """
         for f in self.families:
             for p in f.parents + f.children:

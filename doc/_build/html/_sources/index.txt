@@ -11,7 +11,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-
   StamboomServer.rst
 
   core.rst

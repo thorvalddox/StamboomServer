@@ -594,3 +594,10 @@ $fixerbot image Caroline_Agtmael 0
 #local_user rotate Stijn_De_Schepper right
 #local_user rotate Stijn_De_Schepper right
 #local_user delete Kameliya_Angelova
+#local_user family Reinout_Dox Sofie_???
+$fixerbot image Sofie_??? 0
+#local_user family Henrik_Dox Hilde_???
+$fixerbot image Hilde_??? 0
+#local_user family Jorn_Dox Eva_???
+$fixerbot image Eva_??? 0
+$fixerbot image Eva_ 0

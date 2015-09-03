@@ -44,16 +44,104 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">os.path</span><span class="o">,</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span><span class="n">ImageDraw</span><span class="p">,</span><span class="n">ImageFont</span>
 
 <span class="c">#from imageinfo import get_image_info</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">Image</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
+<div class="viewcode-block" id="DrawObject"><a class="viewcode-back" href="../draw.html#draw.DrawObject">[docs]</a><span class="k">class</span> <span class="nc">DrawObject</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Astract object. Do not use.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DrawObject.draw_line"><a class="viewcode-back" href="../draw.html#draw.DrawObject.draw_line">[docs]</a>    <span class="k">def</span> <span class="nf">draw_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">coords</span><span class="p">):</span>  <span class="c"># x1 y1 x2 y2</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a line between to points</span>
+<span class="sd">        :param coords: x1 y1 x2 y2</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="DrawObject.draw_rectangle"><a class="viewcode-back" href="../draw.html#draw.DrawObject.draw_rectangle">[docs]</a>    <span class="k">def</span> <span class="nf">draw_rectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">back_color</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        draws a rectangle between the given coordinates</span>
+<span class="sd">        :param x1:</span>
+<span class="sd">        :param y1:</span>
+<span class="sd">        :param x2:</span>
+<span class="sd">        :param y2:</span>
+<span class="sd">        :param back_color:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_line</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DrawObject.draw_text"><a class="viewcode-back" href="../draw.html#draw.DrawObject.draw_text">[docs]</a>    <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        draw a text at the given position. The position is the mid-top of the text</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param text:</span>
+<span class="sd">        :param size:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
 
-<div class="viewcode-block" id="DrawJavaScript"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript">[docs]</a><span class="k">class</span> <span class="nc">DrawJavaScript</span><span class="p">:</span>
+</div>
+<div class="viewcode-block" id="DrawObject.draw_image"><a class="viewcode-back" href="../draw.html#draw.DrawObject.draw_image">[docs]</a>    <span class="k">def</span> <span class="nf">draw_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws an image at a given place with given dimensions</span>
+<span class="sd">        :param image: path of the image</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param width:</span>
+<span class="sd">        :param height:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="DrawObject.draw_person"><a class="viewcode-back" href="../draw.html#draw.DrawObject.draw_person">[docs]</a>    <span class="k">def</span> <span class="nf">draw_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws a person at a given position with given dimensions</span>
+<span class="sd">        :param person:</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param width:</span>
+<span class="sd">        :param height:</span>
+<span class="sd">        :param border: border between image and rectangle</span>
+<span class="sd">        :param textsize:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xdif</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="n">ydif</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_rectangle</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">,</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;*&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;+&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_link</span><span class="p">(</span><span class="s">&quot;/stamboom/edit/&quot;</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">)</span>
+        <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">textsize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span> <span class="o">+</span> <span class="n">border</span><span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span> <span class="o">+</span> <span class="n">border</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="DrawObject.add_mouse_link"><a class="viewcode-back" href="../draw.html#draw.DrawObject.add_mouse_link">[docs]</a>    <span class="k">def</span> <span class="nf">add_mouse_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to</span>
+<span class="sd">        the given page.</span>
+<span class="sd">        Optiononal. If the subclass does not apply this, the family tree will be draw without</span>
+<span class="sd">        hyperlinks.</span>
+
+<span class="sd">        :param link: link</span>
+<span class="sd">        :param x1: position</span>
+<span class="sd">        :param y1: position</span>
+<span class="sd">        :param x2: position</span>
+<span class="sd">        :param y2: position</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+</div></div>
+<div class="viewcode-block" id="DrawJavaScript"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript">[docs]</a><span class="k">class</span> <span class="nc">DrawJavaScript</span><span class="p">(</span><span class="n">DrawObject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A wrapper to draw a family tree using javascript. Different methods will create different shapes.</span>
 <span class="sd">    The methods get_html_canvas and get_html_script return all the data needed on the html script.</span>
@@ -141,6 +229,9 @@
 <span class="s">        &quot;&quot;&quot;</span>
 </div>
 <div class="viewcode-block" id="DrawJavaScript.get_html"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.get_html">[docs]</a>    <span class="k">def</span> <span class="nf">get_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Intergrate this to the html page fore the full drawing of the tree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span><span class="p">(</span>
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            {}</span>
@@ -227,13 +318,14 @@
 <span class="sd">        :param x2:</span>
 <span class="sd">        :param y2:</span>
 <span class="sd">        :return:</span>
-<span class="sd">        Note: The hyperlink will not show up as link. Therefor use the function add_mouse_pointer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_pointer</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clickevents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">        if(x&gt;={} &amp;&amp; x &lt;= {} &amp;&amp; y&gt;={} &amp;&amp; y&lt;= {}){{</span>
 <span class="s">            window.location = &quot;{}&quot;</span>
 <span class="s">        }}</span>
 <span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">link</span><span class="p">))</span>
+
 </div>
 <div class="viewcode-block" id="DrawJavaScript.draw_image"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_image">[docs]</a>    <span class="k">def</span> <span class="nf">draw_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -245,21 +337,7 @@
 <span class="sd">        :param height:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;{:s}_{:d}x{:d}.{:s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-        <span class="c">#path = &quot;%s_%dx%d.%s&quot; % (delim_array[0], width, height, delim_array[1])</span>
-        <span class="c">#ooit al gehoord van .format en tuple unpacking?</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
-            <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
-            <span class="n">old_width</span><span class="p">,</span> <span class="n">old_height</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span>
-            <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_width</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_height</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="c"># Image needs to be scaled</span>
-                <span class="n">new_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_width</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_height</span><span class="p">)</span>
-                <span class="n">newimage</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">new_size</span><span class="p">,</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
-                <span class="n">newimage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">imagechanger</span><span class="o">.</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">trunkate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">            var imageObj{0} = new Image();</span>
@@ -271,29 +349,59 @@
 
 <span class="s">              imageObj{0}.src = &#39;/static/{5}&#39;;</span>
 <span class="s">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">64</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">path</span><span class="p">))</span>
-</div>
-<div class="viewcode-block" id="DrawJavaScript.draw_person"><a class="viewcode-back" href="../draw.html#draw.DrawJavaScript.draw_person">[docs]</a>    <span class="k">def</span> <span class="nf">draw_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="p">):</span>
+
+
+
+</div></div>
+<div class="viewcode-block" id="DrawRaw"><a class="viewcode-back" href="../draw.html#draw.DrawRaw">[docs]</a><span class="k">class</span> <span class="nc">DrawRaw</span><span class="p">(</span><span class="n">DrawObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An object used to draw Images directly with PILlow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dimensions</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&quot;RGB&quot;</span><span class="p">,</span><span class="n">dimensions</span><span class="p">,</span><span class="s">&quot;white&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DrawRaw.draw_line"><a class="viewcode-back" href="../draw.html#draw.DrawRaw.draw_line">[docs]</a>    <span class="k">def</span> <span class="nf">draw_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">coords</span><span class="p">):</span>  <span class="c"># x1 y1 x2 y2</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Draws a person at a given position with given dimensions</span>
-<span class="sd">        :param person:</span>
+<span class="sd">        Adds a line between to points</span>
+<span class="sd">        :param coords: x1 y1 x2 y2</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span> <span class="o">=</span> <span class="n">coords</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">([(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">),(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">)],(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DrawRaw.draw_text"><a class="viewcode-back" href="../draw.html#draw.DrawRaw.draw_text">[docs]</a>    <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        draw a text at the given position. The position is the mid-top of the text</span>
+<span class="sd">        :param x:</span>
+<span class="sd">        :param y:</span>
+<span class="sd">        :param text:</span>
+<span class="sd">        :param size:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">textsize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="s">&quot;/home/lightning939/StamboomServer/static/arial.ttf&quot;</span><span class="p">,</span><span class="n">size</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="s">&quot;/home/lightning939/StamboomServer/static/arial.ttf&quot;</span><span class="p">,</span><span class="n">size</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IOError</span><span class="p">,</span><span class="ne">OSError</span><span class="p">):</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">textsize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">h</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="DrawRaw.draw_image"><a class="viewcode-back" href="../draw.html#draw.DrawRaw.draw_image">[docs]</a>    <span class="k">def</span> <span class="nf">draw_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draws an image at a given place with given dimensions</span>
+<span class="sd">        :param image: path of the image</span>
 <span class="sd">        :param x:</span>
 <span class="sd">        :param y:</span>
 <span class="sd">        :param width:</span>
 <span class="sd">        :param height:</span>
-<span class="sd">        :param border: border between image and rectangle</span>
-<span class="sd">        :param textsize:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">xdif</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
-        <span class="n">ydif</span> <span class="o">=</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">border</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_rectangle</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">,</span> <span class="s">&quot;white&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="o">-</span><span class="p">(</span><span class="n">textsize</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;*&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;+&quot;</span> <span class="o">*</span> <span class="nb">bool</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">,</span><span class="n">textsize</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_pointer</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_mouse_link</span><span class="p">(</span><span class="s">&quot;/stamboom/edit/&quot;</span> <span class="o">+</span> <span class="n">person</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">xdif</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">ydif</span><span class="p">)</span>
-        <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">border</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">textsize</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">xdif</span> <span class="o">+</span> <span class="n">border</span><span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">ydif</span> <span class="o">+</span> <span class="n">border</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;StamboomServer/static/&quot;</span><span class="o">+</span><span class="n">core</span><span class="o">.</span><span class="n">imagechanger</span><span class="o">.</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">trunkate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">image_obj</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">realwidth</span> <span class="o">=</span> <span class="n">image_obj</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">image_obj</span><span class="p">,(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="p">(</span><span class="n">width</span><span class="o">-</span><span class="n">realwidth</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
 
 
 </div></div>
@@ -431,7 +539,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">height</span>
 </div>
-<div class="viewcode-block" id="BuildTree.draw_family"><a class="viewcode-back" href="../draw.html#draw.BuildTree.draw_family">[docs]</a>    <span class="k">def</span> <span class="nf">draw_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw</span><span class="p">:</span><span class="n">DrawJavaScript</span><span class="p">,</span> <span class="n">fam</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">Family</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">):</span>
+<div class="viewcode-block" id="BuildTree.draw_family"><a class="viewcode-back" href="../draw.html#draw.BuildTree.draw_family">[docs]</a>    <span class="k">def</span> <span class="nf">draw_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw</span><span class="p">:</span><span class="n">DrawObject</span><span class="p">,</span> <span class="n">fam</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">Family</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -480,6 +588,22 @@
         <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
             <span class="n">d</span><span class="o">.</span><span class="n">draw_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">d</span>
+</div>
+<div class="viewcode-block" id="draw_people_download"><a class="viewcode-back" href="../draw.html#draw.draw_people_download">[docs]</a><span class="k">def</span> <span class="nf">draw_people_download</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a DrawJavaScript object with all needed data to draw a tree and returns it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">BuildTree</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">DrawRaw</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">get_width</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="n">s</span><span class="o">.</span><span class="n">get_height</span><span class="p">(</span><span class="n">height</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">draw_family</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">people_linked</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">check_valid</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">draw_person</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">get_pos</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="n">border</span><span class="p">,</span> <span class="n">textsize</span><span class="o">=</span><span class="n">textsize</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">d</span>
+
 
 
 

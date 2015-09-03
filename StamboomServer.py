@@ -64,7 +64,7 @@ print(os.getcwd())
 print("status:", ["ONLINE", "OFFLINE/DEBUG"][OFFLINE])
 # Init side processes
 
-loginHandler = LoginHandler()
+#loginHandler = LoginHandler()
 
 
 

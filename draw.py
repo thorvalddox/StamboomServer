@@ -89,11 +89,13 @@ class DrawObject:
         the given page.
         Optiononal. If the subclass does not apply this, the family tree will be draw without
         hyperlinks.
-        :param link:
-        :param x1:
-        :param y1:
-        :param x2:
-        :param y2:
+
+        :param link: link
+        :param x1: position
+        :param y1: position
+        :param x2: position
+        :param y2: position
+
         :return:
         """
         pass
