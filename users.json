@@ -1,257 +1,257 @@
 [
     {
-        "name": "ferdinand.dideleze",
         "email": "ferdinand.dideleze@telenet.be",
-        "password_hash": "$2a$12$H9A082EJva87DFZ.AT8zkuVcsSDhzodRxlP5ID2Xbvt.WZUYtRKTS"
+        "password_hash": "$2a$12$H9A082EJva87DFZ.AT8zkuVcsSDhzodRxlP5ID2Xbvt.WZUYtRKTS",
+        "name": "ferdinand.dideleze"
     },
     {
-        "name": "didelez.bvba",
         "email": "didelez.bvba@skynet.be",
-        "password_hash": "$2a$12$meOU12TRhBGHb1I1EXpy6e9mW6bYuELYfD6naKCziD1hddVTmwOWi"
+        "password_hash": "$2a$12$meOU12TRhBGHb1I1EXpy6e9mW6bYuELYfD6naKCziD1hddVTmwOWi",
+        "name": "didelez.bvba"
     },
     {
-        "name": "geert.dox",
         "email": "geert.dox@scarlet.be",
-        "password_hash": "$2a$12$GfBAHkdOja8qz86q6QIqMeealnaa7Y1EjffTLKbXqqKP2oue6P4uO"
+        "password_hash": "$2a$12$GfBAHkdOja8qz86q6QIqMeealnaa7Y1EjffTLKbXqqKP2oue6P4uO",
+        "name": "geert.dox"
     },
     {
-        "name": "jan.dox",
         "email": "jan.dox@scarlet.be",
-        "password_hash": "$2a$12$A6/nSA/vthmP57YCjgKTtu8S0DJHOf85HLzZR/ZdPzzFy21x.whmK"
+        "password_hash": "$2a$12$A6/nSA/vthmP57YCjgKTtu8S0DJHOf85HLzZR/ZdPzzFy21x.whmK",
+        "name": "jan.dox"
     },
     {
-        "name": "kathleen_dox",
         "email": "kathleen_dox@hotmail.com",
-        "password_hash": "$2a$12$.maFbFDD4hPHQNCKc2aug.K.K6t.ewu0rmHcpfNIPrK/kZ9CZ84T."
+        "password_hash": "$2a$12$.maFbFDD4hPHQNCKc2aug.K.K6t.ewu0rmHcpfNIPrK/kZ9CZ84T.",
+        "name": "kathleen_dox"
     },
     {
-        "name": "els.dox",
         "email": "els.dox@telenet.be",
-        "password_hash": "$2a$12$jJRbIbkGB0U.HhxZfZtRBuScnuvlVMQ.PtlMjs.77zsPOCOXW30me"
+        "password_hash": "$2a$12$jJRbIbkGB0U.HhxZfZtRBuScnuvlVMQ.PtlMjs.77zsPOCOXW30me",
+        "name": "els.dox"
     },
     {
-        "name": "stevendox",
         "email": "stevendox@live.be",
-        "password_hash": "$2a$12$oqnepraLfyUIkeP/RWJ9C.br4Xrgv4xmkwixNKwG5kmzV92OyPrXa"
+        "password_hash": "$2a$12$oqnepraLfyUIkeP/RWJ9C.br4Xrgv4xmkwixNKwG5kmzV92OyPrXa",
+        "name": "stevendox"
     },
     {
-        "name": "doxvangool",
         "email": "doxvangool@skynet.be",
-        "password_hash": "$2a$12$EfvKAUXNYMOhj/vY9fndH.WdFGMftkKOEQiXOuiQnRYNYgoHtJIES"
+        "password_hash": "$2a$12$EfvKAUXNYMOhj/vY9fndH.WdFGMftkKOEQiXOuiQnRYNYgoHtJIES",
+        "name": "doxvangool"
     },
     {
-        "name": "mieke.winkeler",
         "email": "mieke.winkeler@telenet.be",
-        "password_hash": "$2a$12$BH.tXBU6WDZ78Du/3i7KguV8P4cju3G/iHRHcZh.lltHpCdWCVfuO"
+        "password_hash": "$2a$12$BH.tXBU6WDZ78Du/3i7KguV8P4cju3G/iHRHcZh.lltHpCdWCVfuO",
+        "name": "mieke.winkeler"
     },
     {
-        "name": "peter.dox",
         "email": "peter.dox@skynet.be",
-        "password_hash": "$2a$12$HqXzm9ETj0490h0/7/lG4eGWNQNeLTTQV7wz/NgkxKC5Y5tkoOFBu"
+        "password_hash": "$2a$12$HqXzm9ETj0490h0/7/lG4eGWNQNeLTTQV7wz/NgkxKC5Y5tkoOFBu",
+        "name": "peter.dox"
     },
     {
-        "name": "joran.dox",
         "email": "joran.dox@skynet.be",
-        "password_hash": "$2a$12$ci7eb5bOWJ70BBDsqUYPje9uZnIHCv5Mq0YQHfQXthYjjZx.sXfRy"
+        "password_hash": "$2a$12$ci7eb5bOWJ70BBDsqUYPje9uZnIHCv5Mq0YQHfQXthYjjZx.sXfRy",
+        "name": "joran.dox"
     },
     {
-        "name": "kirstendaems",
         "email": "kirstendaems@live.be",
-        "password_hash": "$2a$12$BqWR9qubxzrIZARmukc5XOLbuyBN1xtn84XMuVoWqFSymB.kNJ6XS"
+        "password_hash": "$2a$12$BqWR9qubxzrIZARmukc5XOLbuyBN1xtn84XMuVoWqFSymB.kNJ6XS",
+        "name": "kirstendaems"
     },
     {
-        "name": "ruben.dox",
         "email": "ruben.dox@skynet.be",
-        "password_hash": "$2a$12$zVm16d9.AB13LdufTLg5k.x/tqrNK3zjvJFSN5jMaUs6d60q5Po9K"
+        "password_hash": "$2a$12$zVm16d9.AB13LdufTLg5k.x/tqrNK3zjvJFSN5jMaUs6d60q5Po9K",
+        "name": "ruben.dox"
     },
     {
-        "name": "ivodox",
         "email": "ivodox@telenet.be",
-        "password_hash": "$2a$12$axLo56RXHcjbQj5KMyR.NuuGcIPjiIbUT408WS6wYAa6gl.hnd7yu"
+        "password_hash": "$2a$12$axLo56RXHcjbQj5KMyR.NuuGcIPjiIbUT408WS6wYAa6gl.hnd7yu",
+        "name": "ivodox"
     },
     {
-        "name": "raf.waumans",
         "email": "raf.waumans@skynet.be",
-        "password_hash": "$2a$12$unQYzreRDVQ1GvXIGaBbYuq/BMFStHV/VH5CgpHfobPQYViXIBakq"
+        "password_hash": "$2a$12$unQYzreRDVQ1GvXIGaBbYuq/BMFStHV/VH5CgpHfobPQYViXIBakq",
+        "name": "raf.waumans"
     },
     {
-        "name": "geertjedox",
         "email": "geertjedox@gmail.com",
-        "password_hash": "$2a$12$kZqX7ya86eI9DbiVpMruc.hkED0XgOGIQlzThxfyagRHUxVNiGYFq"
+        "password_hash": "$2a$12$kZqX7ya86eI9DbiVpMruc.hkED0XgOGIQlzThxfyagRHUxVNiGYFq",
+        "name": "geertjedox"
     },
     {
-        "name": "lienwaumans",
         "email": "lienwaumans@hotmail.com",
-        "password_hash": "$2a$12$SxWOOWrjAa3NiJan89KR0eTBwvurnKCbjwtbEstMSUZ63etasnC/y"
+        "password_hash": "$2a$12$SxWOOWrjAa3NiJan89KR0eTBwvurnKCbjwtbEstMSUZ63etasnC/y",
+        "name": "lienwaumans"
     },
     {
-        "name": "peter_hallaert",
         "email": "Peter_Hallaert@telenet.be",
-        "password_hash": "$2a$12$YbxD2VFXBwLouEsQnUopRuW2sX1COEJ2gaMZ1xgUnVuFe526tbKNG"
+        "password_hash": "$2a$12$YbxD2VFXBwLouEsQnUopRuW2sX1COEJ2gaMZ1xgUnVuFe526tbKNG",
+        "name": "peter_hallaert"
     },
     {
-        "name": "lieven.dox",
         "email": "lieven.dox@telenet.be",
-        "password_hash": "$2a$12$PBEjhKmCL/uzCQVa9hYrpOUX9yb8G6TgSTFnBDwePVwxObecYqt4e"
+        "password_hash": "$2a$12$PBEjhKmCL/uzCQVa9hYrpOUX9yb8G6TgSTFnBDwePVwxObecYqt4e",
+        "name": "lieven.dox"
     },
     {
-        "name": "gilbert.verhelst",
         "email": "gilbert.verhelst@hotmail.com",
-        "password_hash": "$2a$12$JyI3VZIzYsOiysH95vdSv.OamRlgme/6M34QKURLAkpAr.5MvoCDu"
+        "password_hash": "$2a$12$JyI3VZIzYsOiysH95vdSv.OamRlgme/6M34QKURLAkpAr.5MvoCDu",
+        "name": "gilbert.verhelst"
     },
     {
-        "name": "luc.verhelst",
         "email": "luc.verhelst@gmail.com",
-        "password_hash": "$2a$12$TViwSIrcc/BfjpNT/QmkjusvR.15rBcZiVJl6jsGlzf5ZwLGPX.hy"
+        "password_hash": "$2a$12$TViwSIrcc/BfjpNT/QmkjusvR.15rBcZiVJl6jsGlzf5ZwLGPX.hy",
+        "name": "luc.verhelst"
     },
     {
-        "name": "firewout",
         "email": "firewout@gmail.com",
-        "password_hash": "$2a$12$Qkj.8hkPEZUX0AxM125J4epTWqgroUShjjZ0TIYYDGOxFoDD4xdaW"
+        "password_hash": "$2a$12$Qkj.8hkPEZUX0AxM125J4epTWqgroUShjjZ0TIYYDGOxFoDD4xdaW",
+        "name": "firewout"
     },
     {
-        "name": "ludo.dox",
         "email": "ludo.dox@hetnet.nl",
-        "password_hash": "$2a$12$4n/c2CsMn9jm9PwGXAdQGupOhDV6xqiQsgQTdWvjUP45e6iPXDPEi"
+        "password_hash": "$2a$12$4n/c2CsMn9jm9PwGXAdQGupOhDV6xqiQsgQTdWvjUP45e6iPXDPEi",
+        "name": "ludo.dox"
     },
     {
-        "name": "koendox",
         "email": "koendox@yahoo.com",
-        "password_hash": "$2a$12$GQeabQDRyyeeA5EcBmS9T.2Ng874Qx6f7qsyoIBaUjtruG9eKifTO"
+        "password_hash": "$2a$12$GQeabQDRyyeeA5EcBmS9T.2Ng874Qx6f7qsyoIBaUjtruG9eKifTO",
+        "name": "koendox"
     },
     {
-        "name": "karen.dox",
         "email": "karen.dox@telenet.be",
-        "password_hash": "$2a$12$3Ko7c3ttHKT8rJKcJvaXaOxfq0FJS7UzEjohhdl06YdmS/iVQZN2u"
+        "password_hash": "$2a$12$3Ko7c3ttHKT8rJKcJvaXaOxfq0FJS7UzEjohhdl06YdmS/iVQZN2u",
+        "name": "karen.dox"
     },
     {
-        "name": "doxwim",
         "email": "doxwim@gmail.com",
-        "password_hash": "$2a$12$lukpKkcf1.EcCJk0PB1HseIh0hOqQiLaUD8UpgHyTmXdPg58/EG5q"
+        "password_hash": "$2a$12$lukpKkcf1.EcCJk0PB1HseIh0hOqQiLaUD8UpgHyTmXdPg58/EG5q",
+        "name": "doxwim"
     },
     {
-        "name": "rafdox",
         "email": "rafdox@yahoo.com",
-        "password_hash": "$2a$12$huwn0584wIGPQsKoV7SCMuveZTtquP1ShxkWi5/kb3Gnmi34ppQma"
+        "password_hash": "$2a$12$huwn0584wIGPQsKoV7SCMuveZTtquP1ShxkWi5/kb3Gnmi34ppQma",
+        "name": "rafdox"
     },
     {
-        "name": "gerdadox",
         "email": "gerdadox@telenet.be",
-        "password_hash": "$2a$12$nDkjEF43Rbr5mnJuzrI7Yu1Aw4v3ZlrtNAbZF9RcP0BoKyR6uXY8K"
+        "password_hash": "$2a$12$nDkjEF43Rbr5mnJuzrI7Yu1Aw4v3ZlrtNAbZF9RcP0BoKyR6uXY8K",
+        "name": "gerdadox"
     },
     {
-        "name": "bert.michielsen2",
         "email": "bert.michielsen2@gmail.com",
-        "password_hash": "$2a$12$aQ1IZhW/MpxKu6.4Vn5RuumwHkc7pBjE/HEJnznMeKlT6gdDnaqhi"
+        "password_hash": "$2a$12$aQ1IZhW/MpxKu6.4Vn5RuumwHkc7pBjE/HEJnznMeKlT6gdDnaqhi",
+        "name": "bert.michielsen2"
     },
     {
-        "name": "k.vercruysse",
         "email": "k.vercruysse@hotmail.com",
-        "password_hash": "$2a$12$czzwIq31QcQj0tkiqd.32uxBYSibnc74dt2LfhL/peuJMB/c.OnvG"
+        "password_hash": "$2a$12$czzwIq31QcQj0tkiqd.32uxBYSibnc74dt2LfhL/peuJMB/c.OnvG",
+        "name": "k.vercruysse"
     },
     {
-        "name": "rudidox",
         "email": "rudidox@skynet.be",
-        "password_hash": "$2a$12$J5EgZqG2cjZZmrqF.2boWuZOeSUuokuTA99ppLRzWOoFukJd.LbiO"
+        "password_hash": "$2a$12$J5EgZqG2cjZZmrqF.2boWuZOeSUuokuTA99ppLRzWOoFukJd.LbiO",
+        "name": "rudidox"
     },
     {
-        "name": "rita.loos1",
         "email": "rita.loos1@skynet.be",
-        "password_hash": "$2a$12$X4mq4Ppdc1HqNESLkWXCceTUPx/VdncjI.ZY6tqy1AOsHJ3/XYCEW"
+        "password_hash": "$2a$12$X4mq4Ppdc1HqNESLkWXCceTUPx/VdncjI.ZY6tqy1AOsHJ3/XYCEW",
+        "name": "rita.loos1"
     },
     {
-        "name": "dox",
         "email": "dox@hotmail.be",
-        "password_hash": "$2a$12$1BUbwpf4OmmUfwU5r6Tp9eAmupRg5e48mGA9WCt6C4LDLaEMJz8f."
+        "password_hash": "$2a$12$1BUbwpf4OmmUfwU5r6Tp9eAmupRg5e48mGA9WCt6C4LDLaEMJz8f.",
+        "name": "dox"
     },
     {
-        "name": "bompa.bommie",
         "email": "bompa.bommie@gmail.com",
-        "password_hash": "$2a$12$c36wmyWYfQa81kuCqbFdQeEa/hETjba7xHJyFIbBPhL0057EQmo2i"
+        "password_hash": "$2a$12$c36wmyWYfQa81kuCqbFdQeEa/hETjba7xHJyFIbBPhL0057EQmo2i",
+        "name": "bompa.bommie"
     },
     {
-        "name": "dirk.dox",
         "email": "dirk.dox@telenet.be",
-        "password_hash": "$2a$12$PbN5grT4wp2661sDS04UZO2AxT2TgMr0IQePPY/Ey.HyoCaxu.10u"
+        "password_hash": "$2a$12$PbN5grT4wp2661sDS04UZO2AxT2TgMr0IQePPY/Ey.HyoCaxu.10u",
+        "name": "dirk.dox"
     },
     {
-        "name": "lindedox",
         "email": "lindedox@gmail.com",
-        "password_hash": "$2a$12$R37SVqsfiao35IWMCqilhOGgwkb8L3f0CUJrgZ0JGNsWUGQMlfomG"
+        "password_hash": "$2a$12$R37SVqsfiao35IWMCqilhOGgwkb8L3f0CUJrgZ0JGNsWUGQMlfomG",
+        "name": "lindedox"
     },
     {
-        "name": "arnout.dox",
         "email": "arnout.dox@gmail.com",
-        "password_hash": "$2a$12$KEy4RO06Pqb62l.4fXTy8u.rEQpwFrxxsx/r7ilw8lreGnO7eTiGu"
+        "password_hash": "$2a$12$KEy4RO06Pqb62l.4fXTy8u.rEQpwFrxxsx/r7ilw8lreGnO7eTiGu",
+        "name": "arnout.dox"
     },
     {
-        "name": "sarah.callaerts",
         "email": "sarah.callaerts@live.be",
-        "password_hash": "$2a$12$uMrT7s1qXtcP57QnhsPmPODTGWMYtpII7TUHC8u7oTBd3cYoUsmla"
+        "password_hash": "$2a$12$uMrT7s1qXtcP57QnhsPmPODTGWMYtpII7TUHC8u7oTBd3cYoUsmla",
+        "name": "sarah.callaerts"
     },
     {
-        "name": "ewout.dox",
         "email": "ewout.dox@gmail.com",
-        "password_hash": "$2a$12$afKoe9RZZb4OC1.B.S5iCugcb3ZlqGGw1iBIxtMQFskwPceUOieJ6"
+        "password_hash": "$2a$12$afKoe9RZZb4OC1.B.S5iCugcb3ZlqGGw1iBIxtMQFskwPceUOieJ6",
+        "name": "ewout.dox"
     },
     {
-        "name": "sytze.vanherck",
         "email": "sytze.vanherck@gmail.com",
-        "password_hash": "$2a$12$bIxvoQuYiPyluR898qG9cuTSUSLOVJYr3tJueqKMnj5KZeqA4QL6G"
+        "password_hash": "$2a$12$bIxvoQuYiPyluR898qG9cuTSUSLOVJYr3tJueqKMnj5KZeqA4QL6G",
+        "name": "sytze.vanherck"
     },
     {
-        "name": "rein.dox",
         "email": "rein.dox@gmail.com",
-        "password_hash": "$2a$12$tzoUGokiWRXJ75W3uHNa1..R8PfNr5KJq4D9AX7/kArTWX4N6gjx6"
+        "password_hash": "$2a$12$tzoUGokiWRXJ75W3uHNa1..R8PfNr5KJq4D9AX7/kArTWX4N6gjx6",
+        "name": "rein.dox"
     },
     {
-        "name": "hans.debecker",
         "email": "hans.debecker@telenet.be",
-        "password_hash": "$2a$12$YA/Rpz6sHE/Und7xav71uuBnpvNngpfPt9i4tZOLjL1DYMff55n/G"
+        "password_hash": "$2a$12$YA/Rpz6sHE/Und7xav71uuBnpvNngpfPt9i4tZOLjL1DYMff55n/G",
+        "name": "hans.debecker"
     },
     {
-        "name": "marleen.debecker",
         "email": "marleen.debecker@gmail.com",
-        "password_hash": "$2a$12$eEZz3vv3GSjRguIIndf0leLB1fw5PTaoc2fSk6QLv04qae14gxbna"
+        "password_hash": "$2a$12$eEZz3vv3GSjRguIIndf0leLB1fw5PTaoc2fSk6QLv04qae14gxbna",
+        "name": "marleen.debecker"
     },
     {
-        "name": "lodewijk.nuyens",
         "email": "lodewijk.nuyens@telenet.be",
-        "password_hash": "$2a$12$nhgEhDy0HYn0kBVam7bqfuQYw4Zol1Xi4gyLA7e/5Y5ZAMT9lUt/K"
+        "password_hash": "$2a$12$nhgEhDy0HYn0kBVam7bqfuQYw4Zol1Xi4gyLA7e/5Y5ZAMT9lUt/K",
+        "name": "lodewijk.nuyens"
     },
     {
-        "name": "nuyens.maria",
         "email": "nuyens.maria@gmail.com",
-        "password_hash": "$2a$12$ygSOcjQJSxgEbs/kdzzwvOKoI0aNTr6f0W3LzNpB7AwAu0P7WTCTm"
+        "password_hash": "$2a$12$ygSOcjQJSxgEbs/kdzzwvOKoI0aNTr6f0W3LzNpB7AwAu0P7WTCTm",
+        "name": "nuyens.maria"
     },
     {
-        "name": "astrid.verwoerdt",
         "email": "astrid.verwoerdt@telenet.be",
-        "password_hash": "$2a$12$gjgKPjGJdRRl6sAjlycXDuROx6xJRtC77ACodlZd10XsDOlqWq4ze"
+        "password_hash": "$2a$12$gjgKPjGJdRRl6sAjlycXDuROx6xJRtC77ACodlZd10XsDOlqWq4ze",
+        "name": "astrid.verwoerdt"
     },
     {
-        "name": "rene.wilma",
         "email": "rene.wilma@hotmail.com",
-        "password_hash": "$2a$12$0GsPjB35Z6xCX9WjstqH2O1Dbiw5NjFiMagj5CRQESehWMvOi7ql6"
+        "password_hash": "$2a$12$0GsPjB35Z6xCX9WjstqH2O1Dbiw5NjFiMagj5CRQESehWMvOi7ql6",
+        "name": "rene.wilma"
     },
     {
-        "name": "crypto",
         "email": "crypto@village.uunet.be",
-        "password_hash": "$2a$12$iw7rnogpJL8WoC.Oq4eFmeFqijdq9/504WJY5BYr2vUlRUcWb.VTu"
+        "password_hash": "$2a$12$iw7rnogpJL8WoC.Oq4eFmeFqijdq9/504WJY5BYr2vUlRUcWb.VTu",
+        "name": "crypto"
     },
     {
-        "name": "gerwind96",
         "email": "Gerwind96@gmail.com",
-        "password_hash": "$2a$12$6wVDeNMEGLGHlED8iP92pOpPW4SoWiMogoaQuwQ15PuieXMknt2oq"
+        "password_hash": "$2a$12$6wVDeNMEGLGHlED8iP92pOpPW4SoWiMogoaQuwQ15PuieXMknt2oq",
+        "name": "gerwind96"
     },
     {
-        "name": "thorvalddx94",
         "email": "thorvalddx94@gmail.com",
-        "password_hash": "$2a$12$mKihlQhm89rM5VWOIDyw5u/ydkzV1SKyb3o2LxMzWbjy3CWaHSdq2"
+        "password_hash": "$2a$12$mKihlQhm89rM5VWOIDyw5u/ydkzV1SKyb3o2LxMzWbjy3CWaHSdq2",
+        "name": "thorvalddx94"
     },
     {
-        "name": "doxenfeest",
         "email": "doxenfeest@gmail.com",
-        "password_hash": "$2a$12$UD7ULH5e5EAm0pEG6WEerOnEYGz4CinOtzMTeQta1RQiBbuEejL7y"
+        "password_hash": "$2a$12$UD7ULH5e5EAm0pEG6WEerOnEYGz4CinOtzMTeQta1RQiBbuEejL7y",
+        "name": "doxenfeest"
     }
 ]

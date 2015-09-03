@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>{{ pname }}</h1>
+<a id="displayN" href="javascript:toggle('displayN','toggleN');">bewerk</a>
+<div id="toggleN" style="display: none">{{ form.6 | safe}}</div>
 <table>
     <tr>
         <td style="width:300px">
@@ -14,7 +16,7 @@
 
         </td>
         <td rowspan="3">
-            <h2>locale stamboom</h2>
+            <h2><a href="/stamboom/view/{{ pname }}">locale stamboom</a></h2>
             {{ tree |safe }}
         </td>
     </tr>
