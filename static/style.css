@@ -14,7 +14,7 @@ ul .makecolumns {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #CFFF7F;
+	background-color: #7FCFFF;
 	font-size: 16px;
 }
 
@@ -31,7 +31,7 @@ ul .makecolumns {
 	    text-transform: uppercase;
 	}
 
-#content a:visited { /*The above block overides the default to white so this sets it back to purple*/
+#content a:visited { /*The above block overrides the default to white so this sets it back to purple*/
 	color: purple;
 }
 
