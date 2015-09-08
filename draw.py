@@ -3,7 +3,7 @@ __author__ = 'Thorvald'
 import core
 from itertools import chain
 import random
-import os.path, glob
+import os.path, glob, re
 from PIL import Image,ImageDraw,ImageFont
 
 #from imageinfo import get_image_info
@@ -198,7 +198,7 @@ class DrawJavaScript(DrawObject):
             <script>
             {}
             </script>
-            """.format(self.get_html_canvas(),self.get_html_script())
+            """.format(self.get_html_canvas(),re.sub(r"\t+","\t\t\t\t",self.get_html_script()))
         )
 
     def draw_line(self, *coords):  # x1 y1 x2 y2
