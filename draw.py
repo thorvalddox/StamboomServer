@@ -198,7 +198,7 @@ class DrawJavaScript(DrawObject):
             <script>
             {}
             </script>
-            """.format(self.get_html_canvas(),re.sub(r"\t+","\t\t\t\t",self.get_html_script()))
+            """.format(self.get_html_canvas(),self.get_html_script())
         )
 
     def draw_line(self, *coords):  # x1 y1 x2 y2
