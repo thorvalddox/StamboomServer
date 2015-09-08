@@ -117,10 +117,11 @@ def auto_update(func):
     @wraps(func)
     def updated_func(*args, **kwargs):
         if not OFFLINE:  # not updating when offline.
-            update()
+            if update():
+                return "The server is being updated"
         return func(*args, **kwargs)
 
-    return (updated_func)
+    return updated_func
 
 
 def catch_errors(func):
