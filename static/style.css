@@ -31,8 +31,12 @@ ul .makecolumns {
 	    text-transform: uppercase;
 	}
 
-#content a:visited { /*The above block overrides the default to white so this sets it back to purple*/
+/*#content a:visited { /*The above block overrides the default to white so this sets it back to purple
 	color: purple;
+}*/
+
+#content a:visited { /* Sets the visited links to show like the normal links. */
+	color: blue;
 }
 
 #stamboomheader	a:hover, a:active {
