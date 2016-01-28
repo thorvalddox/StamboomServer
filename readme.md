@@ -90,3 +90,5 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] overall cleanup & refractor
 
 
+- [ ] wapen van de doxen in de rechterbovenhoek.
+
