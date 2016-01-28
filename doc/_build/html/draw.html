@@ -72,7 +72,7 @@ on the canvas</p>
 
 <dl class="method">
 <dt id="draw.BuildTree.draw_family">
-<code class="descname">draw_family</code><span class="sig-paren">(</span><em>draw: draw.DrawJavaScript</em>, <em>fam: core.Family</em>, <em>width</em>, <em>height</em>, <em>border</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.draw_family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.draw_family" title="Permalink to this definition">¶</a></dt>
+<code class="descname">draw_family</code><span class="sig-paren">(</span><em>draw: draw.DrawObject</em>, <em>fam: core.Family</em>, <em>width</em>, <em>height</em>, <em>border</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#BuildTree.draw_family"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.BuildTree.draw_family" title="Permalink to this definition">¶</a></dt>
 <dd><p>Will add a family to a DrawJavaScript object. Uses the same parameters as draw_person</p>
 </dd></dl>
 
@@ -146,7 +146,7 @@ in the correct order, starting with the top layer.
 <dl class="class">
 <dt id="draw.DrawJavaScript">
 <em class="property">class </em><code class="descclassname">draw.</code><code class="descname">DrawJavaScript</code><span class="sig-paren">(</span><em>dimensions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawJavaScript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawJavaScript" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#draw.DrawObject" title="draw.DrawObject"><code class="xref py py-class docutils literal"><span class="pre">draw.DrawObject</span></code></a></p>
 <p>A wrapper to draw a family tree using javascript. Different methods will create different shapes.
 The methods get_html_canvas and get_html_script return all the data needed on the html script.
 Put get_html_canvas on the place where you want to show the tree and get_html_script in the script section.
@@ -161,8 +161,7 @@ the given page.
 :param y1:
 :param x2:
 :param y2:
-:return:
-Note: The hyperlink will not show up as link. Therefor use the function add_mouse_pointer</p>
+:return:</p>
 </dd></dl>
 
 <dl class="method">
@@ -197,20 +196,6 @@ Note: The hyperlink will not show up as link. Therefor use the function add_mous
 </dd></dl>
 
 <dl class="method">
-<dt id="draw.DrawJavaScript.draw_person">
-<code class="descname">draw_person</code><span class="sig-paren">(</span><em>person</em>, <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>border</em>, <em>textsize</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawJavaScript.draw_person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawJavaScript.draw_person" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draws a person at a given position with given dimensions
-:param person:
-:param x:
-:param y:
-:param width:
-:param height:
-:param border: border between image and rectangle
-:param textsize:
-:return:</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="draw.DrawJavaScript.draw_rectangle">
 <code class="descname">draw_rectangle</code><span class="sig-paren">(</span><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>back_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawJavaScript.draw_rectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawJavaScript.draw_rectangle" title="Permalink to this definition">¶</a></dt>
 <dd><p>draws a rectangle between the given coordinates
@@ -236,7 +221,8 @@ Note: The hyperlink will not show up as link. Therefor use the function add_mous
 <dl class="method">
 <dt id="draw.DrawJavaScript.get_html">
 <code class="descname">get_html</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawJavaScript.get_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawJavaScript.get_html" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Intergrate this to the html page fore the full drawing of the tree.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="draw.DrawJavaScript.get_html_canvas">
@@ -254,9 +240,144 @@ Note: The hyperlink will not show up as link. Therefor use the function add_mous
 
 </dd></dl>
 
+<dl class="class">
+<dt id="draw.DrawObject">
+<em class="property">class </em><code class="descclassname">draw.</code><code class="descname">DrawObject</code><a class="reference internal" href="_modules/draw.html#DrawObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Astract object. Do not use.</p>
+<dl class="method">
+<dt id="draw.DrawObject.add_mouse_link">
+<code class="descname">add_mouse_link</code><span class="sig-paren">(</span><em>link</em>, <em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.add_mouse_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.add_mouse_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to
+the given page.
+Optiononal. If the subclass does not apply this, the family tree will be draw without
+hyperlinks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>link</strong> &#8211; link</li>
+<li><strong>x1</strong> &#8211; position</li>
+<li><strong>y1</strong> &#8211; position</li>
+<li><strong>x2</strong> &#8211; position</li>
+<li><strong>y2</strong> &#8211; position</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawObject.draw_image">
+<code class="descname">draw_image</code><span class="sig-paren">(</span><em>image</em>, <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.draw_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.draw_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws an image at a given place with given dimensions
+:param image: path of the image
+:param x:
+:param y:
+:param width:
+:param height:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawObject.draw_line">
+<code class="descname">draw_line</code><span class="sig-paren">(</span><em>*coords</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.draw_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.draw_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a line between to points
+:param coords: x1 y1 x2 y2
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawObject.draw_person">
+<code class="descname">draw_person</code><span class="sig-paren">(</span><em>person</em>, <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em>, <em>border</em>, <em>textsize</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.draw_person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.draw_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a person at a given position with given dimensions
+:param person:
+:param x:
+:param y:
+:param width:
+:param height:
+:param border: border between image and rectangle
+:param textsize:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawObject.draw_rectangle">
+<code class="descname">draw_rectangle</code><span class="sig-paren">(</span><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>back_color=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.draw_rectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.draw_rectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>draws a rectangle between the given coordinates
+:param x1:
+:param y1:
+:param x2:
+:param y2:
+:param back_color:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawObject.draw_text">
+<code class="descname">draw_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>size=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawObject.draw_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawObject.draw_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw a text at the given position. The position is the mid-top of the text
+:param x:
+:param y:
+:param text:
+:param size:
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="draw.DrawRaw">
+<em class="property">class </em><code class="descclassname">draw.</code><code class="descname">DrawRaw</code><span class="sig-paren">(</span><em>dimensions</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawRaw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawRaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#draw.DrawObject" title="draw.DrawObject"><code class="xref py py-class docutils literal"><span class="pre">draw.DrawObject</span></code></a></p>
+<p>An object used to draw Images directly with PILlow</p>
+<dl class="method">
+<dt id="draw.DrawRaw.draw_image">
+<code class="descname">draw_image</code><span class="sig-paren">(</span><em>image</em>, <em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawRaw.draw_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawRaw.draw_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws an image at a given place with given dimensions
+:param image: path of the image
+:param x:
+:param y:
+:param width:
+:param height:
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawRaw.draw_line">
+<code class="descname">draw_line</code><span class="sig-paren">(</span><em>*coords</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawRaw.draw_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawRaw.draw_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a line between to points
+:param coords: x1 y1 x2 y2
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="draw.DrawRaw.draw_text">
+<code class="descname">draw_text</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>text</em>, <em>size=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#DrawRaw.draw_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.DrawRaw.draw_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw a text at the given position. The position is the mid-top of the text
+:param x:
+:param y:
+:param text:
+:param size:
+:return:</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="function">
 <dt id="draw.draw_people">
 <code class="descclassname">draw.</code><code class="descname">draw_people</code><span class="sig-paren">(</span><em>tree</em>, <em>width=170</em>, <em>height=200</em>, <em>border=15</em>, <em>textsize=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#draw_people"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.draw_people" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a DrawJavaScript object with all needed data to draw a tree and returns it.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="draw.draw_people_download">
+<code class="descclassname">draw.</code><code class="descname">draw_people_download</code><span class="sig-paren">(</span><em>tree</em>, <em>width=170</em>, <em>height=200</em>, <em>border=15</em>, <em>textsize=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/draw.html#draw_people_download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#draw.draw_people_download" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a DrawJavaScript object with all needed data to draw a tree and returns it.</p>
 </dd></dl>
 

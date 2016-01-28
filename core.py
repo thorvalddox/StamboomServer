@@ -30,7 +30,7 @@ class FamilyTree:
     @property
     def people_linked(self):
         """
-        returns a list of people the family tree contains and are connected
+        *returns* a list of people the family tree contains and are connected
         """
         for f in self.families:
             for p in f.parents + f.children:
@@ -108,14 +108,16 @@ class FamilyTree:
         elif len(famlist) == 1:
             # #print(person.name, "married ones")
             fam, = famlist
-            return Representation(filter_invalid([person, self.get_parther(person, fam)]), fam.children)
+            return Representation(filter_invalid([person, self.get_parther(person, fam)]),
+                                  sorted(fam.children,key=lambda x:x.ubirth,reverse=False))
         elif len(famlist) == 2:
             # #print(person.name, "married twice")
             fam1, fam2 = sorted(famlist,key=lambda f:self.get_parther(person,f).ubirth
                                 if self.get_parther(person,f) is not None else time.localtime())
             return Representation(
                 filter_invalid([self.get_parther(person, fam1), person, self.get_parther(person, fam2)]),
-                fam1.children + fam2.children)
+                sorted(fam1.children,key=lambda x:x.ubirth,reverse=False) +
+                sorted(fam2.children,key=lambda x:x.ubirth,reverse=False))
         else:
             return Representation([person], [])
 
@@ -494,13 +496,15 @@ class CommandLoader:
         del person
 
     def merge(self, person1, person2, *_):
+        old = self.tree.get_person(person1)
+        new = self.tree.get_person(person2)
         for f in self.tree.families:
-            if person2 in f.parents:
-                f.parents.remove(person2)
-                f.parents.append(person1)
-            if person2 in f.children:
-                f.children.remove(person2)
-                f.children.append(person1)
+            if old in f.parents:
+                f.parents.remove(old)
+                f.parents.append(new)
+            if old in f.children:
+                f.children.remove(old)
+                f.children.append(new)
 
     def disband(self, person1, person2, *_):
         f = self.tree.get_family(person1, person2)
@@ -540,6 +544,21 @@ class CommandLoader:
                 f.children.remove(new)
         f = self.tree.get_family_up(old)
         f.children.append(new)
+
+    def rename(self, newname, oldname, *_):
+        old = self.tree.get_person(oldname)
+        new = self.tree.get_person(newname)
+        for f in self.tree.families:
+            if old in f.parents:
+                f.parents.remove(old)
+                f.parents.append(new)
+            if old in f.children:
+                f.children.remove(old)
+                f.children.append(new)
+        new.ubirth = old.ubirth
+        new.udead = old.udead
+        new.image_index = old.image_index
+
 
     def loginas(self, name, *_):
         """not actually a command, but is added to the log to track the author of different commands"""

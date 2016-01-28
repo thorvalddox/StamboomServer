@@ -43,6 +43,15 @@ class FormCom:
                 return s
 
 
+class VizForm:
+    def __init__(self,link,*data):
+        self.link = link
+        self.data = data
+    def get_html(self):
+        pass
+
+
+
 def generate_basic_forms():
     """
     generates the correct FormCom objects to the edit ui
@@ -57,6 +66,7 @@ def generate_basic_forms():
     FormCom("rmrPartner","remarry","name","rmrPartner")
     FormCom("child","family","name","partner","addChild",submit=["addChildPress"])
     FormCom("child","disconnect","name","partner","remChild",submit=["remChildPress"])
+    FormCom("rename","rename","newname","name")
 
 def create_person_dropdown_safe(pList, default=None,name="selector"):
     """
@@ -122,6 +132,14 @@ def edit_parents_form(tree:core.FamilyTree,person):
          Ouder2:{}<br/>
          <input type="submit" value="Verzend wijzigingen">
     </form>""".format(*selectBoxes)
+
+
+def edit_name_form(tree:core.FamilyTree,person):
+    selectBox = create_person_dropdown([],person,"newname")
+    return """<form action="rename/" method="post" enctype="multipart/form-data">
+         nieuwe naam:{}<br/>
+         <input type="submit" value="Verzend wijzigingen">
+    </form>""".format(selectBox)
 
 
 def edit_partners_form(tree:core.FamilyTree,person):
@@ -200,6 +218,7 @@ def make_forms(tree,person):
     yield edit_children_form(tree,person)
     yield edit_date_form(person)
     yield edit_image_form()
+    yield edit_name_form(tree,person)
 
 def disabled_forms(tree,person):
     yield "<a href='login/'>log in om</br>te bewerken</a>"
@@ -211,4 +230,5 @@ def disabled_forms(tree,person):
          Gestorven op:{}</br>
          <a href='login/'>log in om te bewerken</a>
     </form>""".format(person.birth,person.dead)
+    yield "<a href='login/'>log in om</br>te bewerken</a>"
     yield "<a href='login/'>log in om</br>te bewerken</a>"

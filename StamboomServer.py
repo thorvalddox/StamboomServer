@@ -117,10 +117,11 @@ def auto_update(func):
     @wraps(func)
     def updated_func(*args, **kwargs):
         if not OFFLINE:  # not updating when offline.
-            update()
+            if update():
+                return "The server is being updated"
         return func(*args, **kwargs)
 
-    return (updated_func)
+    return updated_func
 
 
 def catch_errors(func):
@@ -418,8 +419,13 @@ def render_titlebar():
 
 @app.route("/<path:path>/login/")
 def render_login(path):
-    response = make_response(render_template("login.html", message="", path=path))
-    return response
+    if not OFFLINE:
+        response = make_response(render_template("login.html", message="", path=path))
+        return response
+    else:
+        session["username"] = "local_user"
+        return redirect("/" + path + "/")
+
 
 
 @app.route("/<path:path>/login/invalid/")
@@ -440,8 +446,8 @@ def render_login_admin(path):
 @app.route("/<path:path>/login/validate/", methods=["POST"])
 @catch_errors
 def validate_login(path):
-    if loginHandler.valid_login(request.form["name"],
-                                request.form["password"]) or OFFLINE:  # offline you can always log in.
+    if OFFLINE or loginHandler.valid_login(request.form["name"],
+                                request.form["password"]):  # offline you can always log in.
         session["username"] = request.form["name"]
         core.addcommand_ip(request, "loginas #{}".format(session["username"]))
         return redirect("/" + path + "/")

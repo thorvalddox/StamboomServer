@@ -32,6 +32,8 @@ def check_for_changes() -> bool:
 def update():
     if try_update():
         restart_server()
+        return True
+    return False
 
 
 def try_update() -> bool:

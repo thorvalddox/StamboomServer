@@ -1,2 +1,7 @@
+
 *.pyc
 *.jpg
+
+__pycache__/*
+users.txt
+

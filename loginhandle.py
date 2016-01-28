@@ -15,7 +15,7 @@ class LoginHandler:
         """
         check if a username exists
         """
-        return name.lower() in self.users
+        return name.lower() in self.users or name == "local_user"
     def valid_login(self,name,password):
         """
         check if a username exists and has the correct password

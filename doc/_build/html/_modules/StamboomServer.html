@@ -40,18 +40,18 @@
   <h1>Source code for StamboomServer</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">make_response</span><span class="p">,</span><span class="n">url_for</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">redirect</span><span class="p">,</span><span class="n">session</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">send_file</span>
 
-<span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">PackageLoader</span>
-
-<span class="kn">from</span> <span class="nn">flask_mail</span> <span class="kn">import</span> <span class="n">Mail</span><span class="p">,</span><span class="n">Message</span>
+<span class="kn">from</span> <span class="nn">flask_mail</span> <span class="kn">import</span> <span class="n">Mail</span><span class="p">,</span> <span class="n">Message</span>
 <span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">PackageLoader</span>
 
 <span class="kn">import</span> <span class="nn">smtplib</span>
 
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span><span class="p">,</span> <span class="n">update_wrapper</span>
 
 <span class="kn">import</span> <span class="nn">core</span>
 <span class="kn">import</span> <span class="nn">draw</span>
@@ -60,58 +60,55 @@
 
 <span class="kn">from</span> <span class="nn">loginhandle</span> <span class="kn">import</span> <span class="n">LoginHandler</span>
 <span class="kn">from</span> <span class="nn">autoupdate</span> <span class="kn">import</span> <span class="n">update</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 
-<span class="c">#Init Flask application</span>
+<span class="c"># Init Flask application</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
-
-
 
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;UPLOAD_FOLDER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;uploads/&#39;</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
-    <span class="n">MAIL_SERVER</span> <span class="o">=</span> <span class="s">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
-    <span class="n">MAIL_PORT</span> <span class="o">=</span> <span class="mi">465</span><span class="p">,</span>
-    <span class="n">MAIL_USE_TLS</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
-    <span class="n">MAIL_USE_SSL</span><span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
-    <span class="n">MAIL_USERNAME</span> <span class="o">=</span> <span class="s">&quot;stamboom.dox@gmail.com&quot;</span><span class="p">,</span>
-    <span class="n">MAIL_PASSWORD</span> <span class="o">=</span> <span class="s">&quot;d0xst4mb00m&quot;</span><span class="p">,</span>
-    <span class="n">DEFAULT_MAIL_SENDER</span>  <span class="o">=</span> <span class="s">&quot;stamboom.dox@gmail.com&quot;</span><span class="p">,</span>
+    <span class="n">MAIL_SERVER</span><span class="o">=</span><span class="s">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
+    <span class="n">MAIL_PORT</span><span class="o">=</span><span class="mi">465</span><span class="p">,</span>
+    <span class="n">MAIL_USE_TLS</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">MAIL_USE_SSL</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">MAIL_USERNAME</span><span class="o">=</span><span class="s">&quot;stamboom.dox@gmail.com&quot;</span><span class="p">,</span>
+    <span class="n">MAIL_PASSWORD</span><span class="o">=</span><span class="s">&quot;d0xst4mb00m&quot;</span><span class="p">,</span>
+    <span class="n">DEFAULT_MAIL_SENDER</span><span class="o">=</span><span class="s">&quot;stamboom.dox@gmail.com&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="o">+</span> <span class="mi">64</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
 
-<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
-
-<span class="c">#Init Flask_mail</span>
+<span class="c"># Init Flask_mail</span>
 
 <span class="n">mail</span> <span class="o">=</span> <span class="n">Mail</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-<span class="c">#init jinja2 enviroment</span>
+<span class="c"># init jinja2 enviroment</span>
 
 <span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">PackageLoader</span><span class="p">(</span><span class="s">&#39;StamboomServer&#39;</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">))</span>
 
-<div class="viewcode-block" id="render_template"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_template">[docs]</a><span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="render_template"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_template">[docs]</a><span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    renders a flask template with the correct enviroment variables</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="c">#fix path on local machines</span>
+<span class="c"># fix path on local machines</span>
 </div>
-<span class="n">OFFLINE</span> <span class="o">=</span> <span class="bp">False</span> <span class="c">#true if the server is ran on a local machine.</span>
+<span class="n">OFFLINE</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c"># true if the server is ran on a local machine.</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;status:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;ONLINE&quot;</span><span class="p">,</span> <span class="s">&quot;OFFLINE/DEBUG&quot;</span><span class="p">][</span><span class="n">OFFLINE</span><span class="p">])</span>
+<span class="c"># Init side processes</span>
 
-
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;status:&quot;</span><span class="p">,[</span><span class="s">&quot;ONLINE&quot;</span><span class="p">,</span><span class="s">&quot;OFFLINE/DEBUG&quot;</span><span class="p">][</span><span class="n">OFFLINE</span><span class="p">])</span>
-<span class="c">#Init side processes</span>
-
-<span class="n">loginHandler</span> <span class="o">=</span> <span class="n">LoginHandler</span><span class="p">()</span>
+<span class="c">#loginHandler = LoginHandler()</span>
 
 
 
-<span class="c">#Decorators from here.</span>
+<span class="c"># Decorators from here.</span>
 
 <div class="viewcode-block" id="check_logged_in"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.check_logged_in">[docs]</a><span class="k">def</span> <span class="nf">check_logged_in</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -121,28 +118,34 @@
         <span class="k">return</span> <span class="bp">False</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">valid_user</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">])</span>
+
 </div>
 <div class="viewcode-block" id="login_required"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.login_required">[docs]</a><span class="k">def</span> <span class="nf">login_required</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorater. Put this after @app.route. Defines if you need to be logged in to access a certain page.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">save_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">save_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">check_logged_in</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span><span class="s">&quot;login/&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">save_function</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">&quot;login/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">save_function</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="admin_required"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.admin_required">[docs]</a><span class="k">def</span> <span class="nf">admin_required</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorater. Put this after @app.route. Defines if you need to be an admin to access a certain page.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">save_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">save_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">check_logged_in</span><span class="p">(</span><span class="n">session</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">check_admin</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span><span class="s">&quot;login/admin/&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">save_function</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">&quot;login/admin/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">save_function</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="auto_update"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.auto_update">[docs]</a><span class="k">def</span> <span class="nf">auto_update</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -150,28 +153,35 @@
 <span class="sd">    Decorater. Put this after @app.route. Defines if the page must check for updates before loading.</span>
 <span class="sd">    It should be the default. Only f.e. the login page shouldn&#39;t have it.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">updated_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">OFFLINE</span><span class="p">:</span> <span class="c">#not updating when offline.</span>
+    <span class="k">def</span> <span class="nf">updated_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">OFFLINE</span><span class="p">:</span>  <span class="c"># not updating when offline.</span>
             <span class="n">update</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">updated_func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">updated_func</span><span class="p">)</span>
+
 </div>
 <div class="viewcode-block" id="catch_errors"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.catch_errors">[docs]</a><span class="k">def</span> <span class="nf">catch_errors</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorater. Put this after @app.route. Catches the errors of the different functions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">catch_erros</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">catch_erros</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">traceback</span>
-            <span class="n">error_code</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&#39;&lt;br/&gt;&#39;</span><span class="p">)</span>
+
+            <span class="n">error_code</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&#39;&lt;br/&gt;&#39;</span><span class="p">)</span>
             <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">send_mail</span><span class="p">(</span><span class="n">loginHandler</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="s">&#39;thorvalddx94&#39;</span><span class="p">],</span><span class="s">&#39;&lt;h1&gt;stamboom error&lt;\h1&gt;&#39;</span><span class="o">+</span><span class="n">error_code</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;error.html&quot;</span><span class="p">,</span><span class="n">log</span><span class="o">=</span><span class="n">error_code</span><span class="o">+</span><span class="s">&quot;&lt;/p&gt;&lt;p&gt;&quot;</span><span class="o">+</span><span class="n">out</span><span class="p">)),</span><span class="mi">500</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">send_mail</span><span class="p">(</span><span class="n">loginHandler</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="s">&#39;thorvalddx94&#39;</span><span class="p">],</span> <span class="s">&#39;&lt;h1&gt;stamboom error&lt;/h1&gt;&#39;</span> <span class="o">+</span> <span class="n">error_code</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;error.html&quot;</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="n">error_code</span> <span class="o">+</span> <span class="s">&quot;&lt;/p&gt;&lt;p&gt;&quot;</span> <span class="o">+</span> <span class="n">out</span><span class="p">)),</span> <span class="mi">500</span>
+
     <span class="k">return</span> <span class="n">catch_erros</span>
+
 </div>
 <div class="viewcode-block" id="update_jinja2_env"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.update_jinja2_env">[docs]</a><span class="k">def</span> <span class="nf">update_jinja2_env</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -179,11 +189,27 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">update_jinja2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;username:&quot;</span><span class="p">,</span><span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">update_jinja2</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">update_jinja2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;username:&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">globals</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">update_jinja2</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="nocache"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.nocache">[docs]</a><span class="k">def</span> <span class="nf">nocache</span><span class="p">(</span><span class="n">view</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prevent sended images from being chached</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">no_cache</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Last-Modified&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Cache-Control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0&#39;</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Pragma&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;no-cache&#39;</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Expires&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;-1&#39;</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">return</span> <span class="n">update_wrapper</span><span class="p">(</span><span class="n">no_cache</span><span class="p">,</span> <span class="n">view</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="default_page"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.default_page">[docs]</a><span class="k">def</span> <span class="nf">default_page</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -191,6 +217,7 @@
 <span class="sd">    combines different decorators. (catch_errors, update_jinja2_env, auto_update)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)(</span><span class="n">catch_errors</span><span class="p">(</span><span class="n">auto_update</span><span class="p">(</span><span class="n">update_jinja2_env</span><span class="p">(</span><span class="n">func</span><span class="p">))))</span>
+
 </div>
 <div class="viewcode-block" id="login_page"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.login_page">[docs]</a><span class="k">def</span> <span class="nf">login_page</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -198,95 +225,115 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)(</span><span class="n">default_page</span><span class="p">(</span><span class="n">login_required</span><span class="p">(</span><span class="n">func</span><span class="p">)))</span>
+
 </div>
-<div class="viewcode-block" id="admin_page"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.admin_page">[docs]</a><span class="k">def</span> <span class="nf">admin_page</span><span class="p">(</span><span class="n">func</span><span class="p">):</span> <span class="c">#combines default_age with login_required</span>
+<div class="viewcode-block" id="admin_page"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.admin_page">[docs]</a><span class="k">def</span> <span class="nf">admin_page</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>  <span class="c"># combines default_age with login_required</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    combines different decorators. (default_page, admin_required)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)(</span><span class="n">default_page</span><span class="p">(</span><span class="n">admin_required</span><span class="p">(</span><span class="n">func</span><span class="p">)))</span>
 
-<span class="c">#wrappers from here</span>
+<span class="c"># wrappers from here</span>
 
 
-<span class="c">#initilisize forms</span>
+<span class="c"># initilisize forms</span>
 </div>
 <span class="n">forms</span><span class="o">.</span><span class="n">generate_basic_forms</span><span class="p">()</span>
 
-<span class="c">#apps from here</span>
+<span class="c"># apps from here</span>
 
-<span class="c">#webpages from here:</span>
+<span class="c"># webpages from here:</span>
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="index"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.index">[docs]</a><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">update</span><span class="p">()</span>
-    <span class="c">#response = make_response(render_template(&quot;titlepage.html&quot;))</span>
+    <span class="c"># response = make_response(render_template(&quot;titlepage.html&quot;))</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/stamboom/&quot;</span><span class="p">)</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/commands/oldxml/&#39;</span><span class="p">)</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="show_old_xml"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_old_xml">[docs]</a><span class="k">def</span> <span class="nf">show_old_xml</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span><span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">xmlTest</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">xmlTest</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/commands/handled/&#39;</span><span class="p">)</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="show_handled_code"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_handled_code">[docs]</a><span class="k">def</span> <span class="nf">show_handled_code</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span><span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">bashTest</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">bashTest</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/commands/raw/&#39;</span><span class="p">)</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="show_raw_code"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_raw_code">[docs]</a><span class="k">def</span> <span class="nf">show_raw_code</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span><span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">rawCode</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;code_show.html&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">rawCode</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/&#39;</span><span class="p">)</span>
 <span class="nd">@default_page</span>
 <div class="viewcode-block" id="show_fam_tree"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_fam_tree">[docs]</a><span class="k">def</span> <span class="nf">show_fam_tree</span><span class="p">():</span>
-    <span class="c"># f = core.FamilyTree()</span>
-    <span class="c"># f.from_code(&quot;data.log&quot;,2)</span>
-    <span class="c"># d = draw.draw_people(f,120,150,10,8)</span>
-    <span class="c"># response = make_response(render_template(&quot;famtree.html&quot;,canvas=d.get_html_canvas(),script=d.get_html_script()))</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/stamboom/view/Petrus_Ludovicus_Carolus_Dox&quot;</span><span class="p">)</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/view/&lt;name&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@default_page</span>
-<div class="viewcode-block" id="show_fam_tree_custom"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_fam_tree_custom">[docs]</a><span class="k">def</span> <span class="nf">show_fam_tree_custom</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="show_fam_tree_custom_redir"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_fam_tree_custom_redir">[docs]</a><span class="k">def</span> <span class="nf">show_fam_tree_custom_redir</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/stamboom/view/{}/{}/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;120x150b10t8&quot;</span><span class="p">))</span>
+</div>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/view/&lt;name&gt;/&lt;fformat&gt;/&#39;</span><span class="p">)</span>
+<span class="nd">@default_page</span>
+<div class="viewcode-block" id="show_fam_tree_custom"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_fam_tree_custom">[docs]</a><span class="k">def</span> <span class="nf">show_fam_tree_custom</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">fformat</span><span class="p">):</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">person</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">localfam</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">build_new</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people</span><span class="p">(</span><span class="n">localfam</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;famtree.html&quot;</span><span class="p">,</span><span class="n">canvas</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span><span class="n">script</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">()))</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people</span><span class="p">(</span><span class="n">localfam</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">r&quot;x|b|t&quot;</span><span class="p">,</span><span class="n">fformat</span><span class="p">)))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;famtree.html&quot;</span><span class="p">,</span> <span class="n">canvas</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span>
+                                             <span class="n">script</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">(),</span><span class="n">pname</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">response</span>
 </div>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/safe/&#39;</span><span class="p">)</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/view/&lt;name&gt;/&lt;fformat&gt;/download/&#39;</span><span class="p">)</span>
 <span class="nd">@default_page</span>
-<div class="viewcode-block" id="show_fam_tree_safe"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.show_fam_tree_safe">[docs]</a><span class="k">def</span> <span class="nf">show_fam_tree_safe</span><span class="p">():</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">)</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;famtree.html&quot;</span><span class="p">,</span><span class="n">canvas</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span><span class="n">script</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">()))</span>
-    <span class="k">return</span> <span class="n">response</span>
+<div class="viewcode-block" id="download_redirect"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.download_redirect">[docs]</a><span class="k">def</span> <span class="nf">download_redirect</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">fformat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/stamboom/view/{}/{}/download/{}/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">fformat</span><span class="p">,</span><span class="nb">hex</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">16</span><span class="o">**</span><span class="mi">16</span><span class="p">))))</span>
 
+</div>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/view/&lt;name&gt;/&lt;fformat&gt;/download/&lt;suffix&gt;/&#39;</span><span class="p">)</span>
+<span class="nd">@default_page</span>
+<div class="viewcode-block" id="download_fam_tree_custom"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.download_fam_tree_custom">[docs]</a><span class="k">def</span> <span class="nf">download_fam_tree_custom</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">fformat</span><span class="p">,</span><span class="n">suffix</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">localfam</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">build_new</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people_download</span><span class="p">(</span><span class="n">localfam</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">r&quot;x|b|t&quot;</span><span class="p">,</span><span class="n">fformat</span><span class="p">)))</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/download_*.jpg&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/download_{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">send_file</span><span class="p">(</span><span class="s">&quot;static/download_{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix</span><span class="p">),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s">&#39;image/jpg&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/&#39;</span><span class="p">)</span>
 <span class="nd">@default_page</span>
 <div class="viewcode-block" id="edit"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.edit">[docs]</a><span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">person</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">forms</span><span class="o">.</span><span class="n">create_person_link</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">person</span><span class="p">)]</span>
     <span class="n">localfam</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">build_new</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
-    <span class="n">tree</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people</span><span class="p">(</span><span class="n">localfam</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">draw_people</span><span class="p">(</span><span class="n">localfam</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">check_logged_in</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
-        <span class="n">form</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">make_forms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">person</span><span class="p">))</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">make_forms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">person</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">form</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">disabled_forms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">person</span><span class="p">))</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;edit.html&quot;</span><span class="p">,</span><span class="n">pname</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">uname</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-                                             <span class="n">image</span><span class="o">=</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">image</span><span class="p">),</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span>
-                                             <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span><span class="n">tree_script</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">()))</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">disabled_forms</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">person</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;edit.html&quot;</span><span class="p">,</span> <span class="n">pname</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">uname</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                                             <span class="n">image</span><span class="o">=</span><span class="n">url_for</span><span class="p">(</span><span class="s">&#39;static&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">image</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span>
+                                             <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">get_html_canvas</span><span class="p">(),</span> <span class="n">tree_script</span><span class="o">=</span><span class="n">tree</span><span class="o">.</span><span class="n">get_html_script</span><span class="p">()))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/list/people/&#39;</span><span class="p">)</span>
 <span class="nd">@default_page</span>
@@ -294,35 +341,42 @@
     <span class="n">f</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">()</span>
     <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">create_person_link</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">people</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;newperson.html&quot;</span><span class="p">,</span><span class="n">people</span><span class="o">=</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;newperson.html&quot;</span><span class="p">,</span> <span class="n">people</span><span class="o">=</span><span class="n">data</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">response</span>
-
 
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/console/&#39;</span><span class="p">)</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="editRaw"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.editRaw">[docs]</a><span class="k">def</span> <span class="nf">editRaw</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;rawcommand.html&quot;</span><span class="p">,</span><span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">rawCode</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;rawcommand.html&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">rawCode</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/console/rawcommand/&#39;</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/console/rawcommand/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="rawcommand"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.rawcommand">[docs]</a><span class="k">def</span> <span class="nf">rawcommand</span><span class="p">():</span>
     <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
     <span class="n">command</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;command&quot;</span><span class="p">]</span>
     <span class="k">print</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="n">command</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/console/&#39;</span><span class="p">)</span>
 
 </div>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/upload/&#39;</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/upload/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
 <span class="nd">@login_page</span>
 <div class="viewcode-block" id="upload_image"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.upload_image">[docs]</a><span class="k">def</span> <span class="nf">upload_image</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
     <span class="nb">file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="s">&quot;file&quot;</span><span class="p">]</span>
-    <span class="n">imagechanger</span><span class="o">.</span><span class="n">change_image</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="nb">file</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&#39;</span><span class="o">+</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="s">&quot;image {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">imagechanger</span><span class="o">.</span><span class="n">change_image</span><span class="p">(</span><span class="nb">file</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+</div>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/rotate/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@login_page</span>
+<div class="viewcode-block" id="rotate_image"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.rotate_image">[docs]</a><span class="k">def</span> <span class="nf">rotate_image</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">clockwise</span> <span class="o">=</span> <span class="s">&quot;cw&quot;</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="s">&quot;rotate {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,[</span><span class="s">&quot;left&quot;</span><span class="p">,</span><span class="s">&quot;right&quot;</span><span class="p">][</span><span class="n">clockwise</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
 </div>
 <span class="sd">&quot;&quot;&quot; #commented out for data-driven counterpart.</span>
 <span class="sd">@app.route(&#39;/stamboom/edit/&lt;name&gt;/parents/&#39;, methods = [&#39;POST&#39;])</span>
@@ -385,65 +439,78 @@
 <span class="sd">    return redirect(&#39;/stamboom/edit/&#39;+name)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/&lt;action&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&lt;name&gt;/&lt;action&gt;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;POST&#39;</span><span class="p">])</span>
 <span class="nd">@login_page</span>
-<div class="viewcode-block" id="edit_person_prop"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.edit_person_prop">[docs]</a><span class="k">def</span> <span class="nf">edit_person_prop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">action</span><span class="p">):</span>
+<div class="viewcode-block" id="edit_person_prop"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.edit_person_prop">[docs]</a><span class="k">def</span> <span class="nf">edit_person_prop</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="n">forms</span><span class="o">.</span><span class="n">FormCom</span><span class="o">.</span><span class="n">get_command</span><span class="p">(</span><span class="n">action</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">&#39;/&#39;</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">forms</span><span class="o">.</span><span class="n">FormCom</span><span class="o">.</span><span class="n">get_command</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">request</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&#39;/stamboom/edit/&#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span><span class="p">)</span>
 
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/templates/titlebar&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="render_titlebar"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_titlebar">[docs]</a><span class="k">def</span> <span class="nf">render_titlebar</span><span class="p">():</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;titlebar.html&quot;</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/login/&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="render_login"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_login">[docs]</a><span class="k">def</span> <span class="nf">render_login</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">response</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">OFFLINE</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;local_user&quot;</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
+
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/login/invalid/&quot;</span><span class="p">)</span>
 <span class="nd">@catch_errors</span>
 <div class="viewcode-block" id="render_login_invalid"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_login_invalid">[docs]</a><span class="k">def</span> <span class="nf">render_login_invalid</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;The password combination was invalid&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&quot;The password combination was invalid&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">response</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/login/admin/&quot;</span><span class="p">)</span>
 <span class="nd">@catch_errors</span>
 <div class="viewcode-block" id="render_login_admin"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.render_login_admin">[docs]</a><span class="k">def</span> <span class="nf">render_login_admin</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;You need to be an admin to view this page&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span>
+        <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&quot;You need to be an admin to view this page&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">response</span>
 
 </div>
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/login/validate/&quot;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/login/validate/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@catch_errors</span>
 <div class="viewcode-block" id="validate_login"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.validate_login">[docs]</a><span class="k">def</span> <span class="nf">validate_login</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">valid_login</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">],</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">])</span> <span class="ow">or</span> <span class="n">OFFLINE</span><span class="p">:</span> <span class="c">#offline you can always log in.</span>
+    <span class="k">if</span> <span class="n">OFFLINE</span> <span class="ow">or</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">valid_login</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">],</span>
+                                <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">]):</span>  <span class="c"># offline you can always log in.</span>
         <span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s">&quot;loginas #{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">&quot;loginas #{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="o">+</span><span class="s">&quot;/login/invalid/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&quot;/login/invalid/&quot;</span><span class="p">)</span>
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&lt;path:path&gt;/logout/&quot;</span><span class="p">)</span>
 <span class="nd">@catch_errors</span>
 <div class="viewcode-block" id="logout"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.logout">[docs]</a><span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">session</span><span class="p">,</span><span class="s">&quot;logout&quot;</span><span class="p">)</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="bp">None</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="o">+</span><span class="n">path</span><span class="o">+</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="s">&quot;logout&quot;</span><span class="p">)</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="chain_strings"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.chain_strings">[docs]</a><span class="k">def</span> <span class="nf">chain_strings</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">chains</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">chains</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&lt;br/&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
     <span class="k">return</span> <span class="n">chains</span>
+
 </div>
 <span class="nd">@chain_strings</span>
-<div class="viewcode-block" id="send_mail"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.send_mail">[docs]</a><span class="k">def</span> <span class="nf">send_mail</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="n">contents</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;sending email&quot;</span><span class="p">,</span><span class="n">user</span><span class="p">)</span>
+<div class="viewcode-block" id="send_mail"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.send_mail">[docs]</a><span class="k">def</span> <span class="nf">send_mail</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;sending email&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
 
     <span class="k">yield</span> <span class="s">&quot;sending email to &quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
     <span class="k">yield</span> <span class="s">&quot;username=&quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -456,55 +523,60 @@
         <span class="k">yield</span> <span class="s">&quot;-&gt; check spam&quot;</span>
     <span class="k">except</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTPAuthenticationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">traceback</span>
+
         <span class="k">yield</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
         <span class="k">yield</span> <span class="s">&quot;Authentication not valid&quot;</span>
     <span class="k">except</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTPDataError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">traceback</span>
+
         <span class="k">yield</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
         <span class="k">yield</span> <span class="s">&quot;Data limit exceeded&quot;</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">traceback</span>
+
         <span class="k">yield</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
 
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/stamboom/doc/&lt;name&gt;.html&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="see_doc"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.see_doc">[docs]</a><span class="k">def</span> <span class="nf">see_doc</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&#39;doc/_build/html/{}.html&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/stamboom/admin/&quot;</span><span class="p">)</span>
 <span class="nd">@admin_page</span>
 <div class="viewcode-block" id="email_form"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.email_form">[docs]</a><span class="k">def</span> <span class="nf">email_form</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;send_emails.html&quot;</span><span class="p">,</span><span class="n">users</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">loginHandler</span><span class="o">.</span><span class="n">get_user_list</span><span class="p">())))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;send_emails.html&quot;</span><span class="p">,</span> <span class="n">users</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">loginHandler</span><span class="o">.</span><span class="n">get_user_list</span><span class="p">())))</span>
     <span class="k">return</span> <span class="n">response</span>
-
 
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/stamboom/admin/sendemails/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@admin_page</span>
 <div class="viewcode-block" id="send_user_mails"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.send_user_mails">[docs]</a><span class="k">def</span> <span class="nf">send_user_mails</span><span class="p">():</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
-    <span class="c">#app.config.update(MAIL_PASSWORD=request.form.get(&quot;password&quot;,&quot;&quot;))</span>
+    <span class="c"># app.config.update(MAIL_PASSWORD=request.form.get(&quot;password&quot;,&quot;&quot;))</span>
     <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s">&quot;name_&quot;</span><span class="o">+</span><span class="n">u</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;name_&quot;</span><span class="o">+</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
-                <span class="n">msg</span> <span class="o">+=</span> <span class="n">send_mail</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">render_template</span><span class="p">(</span><span class="s">&quot;email.html&quot;</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">password</span><span class="p">))</span> <span class="o">+</span> <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
+        <span class="k">if</span> <span class="s">&quot;name_&quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s">&quot;name_&quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="n">send_mail</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&quot;email.html&quot;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">password</span><span class="p">))</span> <span class="o">+</span> <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;no mail was send to &quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="o">+</span>  <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;no mail was send to &quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="o">+</span> <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;no form data about &quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="o">+</span>  <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;no form data about &quot;</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">email</span> <span class="o">+</span> <span class="s">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
 </div>
 <span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/stamboom/admin/seeUsers/&quot;</span><span class="p">)</span>
 <span class="nd">@admin_page</span>
 <div class="viewcode-block" id="see_users"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.see_users">[docs]</a><span class="k">def</span> <span class="nf">see_users</span><span class="p">():</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&lt;table&gt;&quot;</span>
-    <span class="c">#msg += &quot;logged in with &quot;+app.config[&quot;MAIL_USERNAME&quot;] + &quot;\n&quot;</span>
-    <span class="c">#msg += &quot;password: &quot;+app.config[&quot;MAIL_PASSWORD&quot;] + &quot;\n&quot;</span>
+    <span class="c"># msg += &quot;logged in with &quot;+app.config[&quot;MAIL_USERNAME&quot;] + &quot;\n&quot;</span>
+    <span class="c"># msg += &quot;password: &quot;+app.config[&quot;MAIL_PASSWORD&quot;] + &quot;\n&quot;</span>
     <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">loginHandler</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;&lt;tr&gt;&lt;td&gt;{}&lt;/td&gt;&lt;td&gt;{}&lt;/td&gt;&lt;td&gt;{}&lt;/td&gt;&lt;/tr&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span><span class="n">u</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;&lt;tr&gt;&lt;td&gt;{}&lt;/td&gt;&lt;td&gt;{}&lt;/td&gt;&lt;td&gt;{}&lt;/td&gt;&lt;/tr&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">12</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
     <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;&lt;/table&gt;&quot;</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
 </div>
 <span class="nd">@app.errorhandler</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
 <div class="viewcode-block" id="page_not_found"><a class="viewcode-back" href="../StamboomServer.html#StamboomServer.page_not_found">[docs]</a><span class="k">def</span> <span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>

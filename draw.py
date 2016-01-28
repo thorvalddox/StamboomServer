@@ -3,7 +3,7 @@ __author__ = 'Thorvald'
 import core
 from itertools import chain
 import random
-import os.path, glob
+import os.path, glob, re
 from PIL import Image,ImageDraw,ImageFont
 
 #from imageinfo import get_image_info
@@ -89,11 +89,13 @@ class DrawObject:
         the given page.
         Optiononal. If the subclass does not apply this, the family tree will be draw without
         hyperlinks.
-        :param link:
-        :param x1:
-        :param y1:
-        :param x2:
-        :param y2:
+
+        :param link: link
+        :param x1: position
+        :param y1: position
+        :param x2: position
+        :param y2: position
+
         :return:
         """
         pass

@@ -14,7 +14,7 @@ ul .makecolumns {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: #CFFF7F;
+	background-color: #7FCFFF;
 	font-size: 16px;
 }
 
@@ -24,19 +24,23 @@ ul .makecolumns {
 	    width: 120px;
 	    font-weight: bold;
 	    color: #FFFFFF;
-	    background-color: #98bf21;
+	    background-color: #2198bf;
 	    text-align: center;
 	    padding: 4px;
 	    text-decoration: none;
 	    text-transform: uppercase;
 	}
 
-#content a:visited { /*The above block overides the default to white so this sets it back to purple*/
+/*#content a:visited { /*The above block overrides the default to white so this sets it back to purple
 	color: purple;
+}*/
+
+#content a:visited { /* Sets the visited links to show like the normal links. */
+	color: blue;
 }
 
 #stamboomheader	a:hover, a:active {
-	    background-color: #7A991A;
+	    background-color: #1A7A99;
 	}
 
 #nav, #nav ul{

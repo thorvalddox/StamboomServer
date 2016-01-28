@@ -55,7 +55,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        check if a username exists</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span></div>
+        <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&quot;local_user&quot;</span></div>
 <div class="viewcode-block" id="LoginHandler.valid_login"><a class="viewcode-back" href="../loginhandle.html#loginhandle.LoginHandler.valid_login">[docs]</a>    <span class="k">def</span> <span class="nf">valid_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        check if a username exists and has the correct password</span>
