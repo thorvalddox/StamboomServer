@@ -529,7 +529,7 @@ class BuildTree:
                 cx, _ = self.get_pos(c, width, height)
 
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
-            allxposses = [self.get_pos(c, width, height)[0] for c in fam.children] + [px]
+            allxposses = [next(self.get_pos(c, width, height)) for c in fam.children] + [px]
             draw.draw_line(min(allxposses), cyInter, max(allxposses), cyInter)
 
     def check_valid(self,person):
