@@ -161,7 +161,7 @@ def update_jinja2_env(func):
 
     return (update_jinja2)
 
-def nocache(view):
+def nocache(view): #Does not work. Use filename scrambling instead
     """
     Prevent sended images from being chached
     """
