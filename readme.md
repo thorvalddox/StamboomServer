@@ -59,7 +59,6 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [x] Naamkaartjes
 - [ ] meer login functies (wachtwoord wijzigen, herstellen), (nieuwe accounts)
 - [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
-- [x] Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
 - [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando (shadowban)
 - [ ] Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangapst worden telkens al er een commando bij op de lijst komt. (json?)
 - [ ] Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
@@ -71,7 +70,7 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] meer admin controle
 - [ ] betere interface voor de console
 - [ ] meer bewerk opties (bv naam wijzigen, ...)
-- [ ] commando om de ministamboom in het groot te toen
+- [ ] commando om de ministamboom in het groot te doen
 - [ ] geslachten
 - [ ] anders tonen van gescheiden families
 - [ ] comprimeren van fotos na uploaden (nieuw formaat max 600x400) om geheugenruimte te sparen

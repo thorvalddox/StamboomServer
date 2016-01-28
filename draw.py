@@ -516,7 +516,7 @@ class BuildTree:
             p1, = fam.parents
             px, py = self.get_pos(p1, width, height)
         else:
-            raise Exception("Incorrect amoutn of parents")
+            raise Exception("Incorrect amount of parents")
         if fam.children:
             cy = list(self.get_pos(fam.children[0], width, height))[1]
             cyInter = (py + cy) // 2
@@ -525,8 +525,10 @@ class BuildTree:
                 if not self.check_valid(c):
                     continue
                 cx, _ = self.get_pos(c, width, height)
-                draw.draw_line(px, cyInter, cx, cyInter)
+
                 draw.draw_line(cx, cyInter, cx, cy - ydif)
+            allxposses = [self.get_pos(c, width, height)[0] for c in fam.children] + [px]
+            draw.draw_line(min(px), cyInter, max(px), cyInter)
 
     def check_valid(self,person):
         """
