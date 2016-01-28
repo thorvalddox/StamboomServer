@@ -536,7 +536,7 @@ class BuildTree:
         """
         Check if a person has a valid position. (And has one at all)
         """
-        return(self.coords[person] != (-1,-1))
+        return self.coords[person] != (-1,-1)
 
 def draw_people(tree, width=170, height=200, border=15, textsize=12):
     """
