@@ -118,7 +118,11 @@ def auto_update(func):
     def updated_func(*args, **kwargs):
         if not OFFLINE:  # not updating when offline.
             if update():
-                return "The server is being updated"
+                return """The server is being updated
+                <script>
+                       setTimeout(function(){
+                        window.location.reload(1);
+                        }, 5000);<script/>"""
         return func(*args, **kwargs)
 
     return updated_func
