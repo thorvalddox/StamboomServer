@@ -546,7 +546,7 @@ def draw_people(tree, width=170, height=200, border=15, textsize=12):
     d = DrawJavaScript((s.get_width(width), s.get_height(height)))
     for f in tree.families:
         s.draw_family(d, f, width, height, border)
-    for p in tree.people_linked:
+    for p in set(tree.people_linked):
         if s.check_valid(p):
             d.draw_person(p, *s.get_pos(p, width, height), width=width, height=height, border=border, textsize=textsize)
     return d
