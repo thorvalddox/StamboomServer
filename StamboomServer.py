@@ -122,7 +122,7 @@ def auto_update(func):
                 <script>
                        setTimeout(function(){
                         window.location.reload(1);
-                        }, 5000);<script/>"""
+                        }, 5000);</script>"""
         return func(*args, **kwargs)
 
     return updated_func
