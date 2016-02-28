@@ -42,6 +42,19 @@ De eertse 4 functies worden ook gecreerd bij de computer gegeneerde comandos
 
 Als ergens de naam van een niet-bestaande persoon wordt opgegeven wordt deze aangemaakt.
 
+## Storage in SQL
+
+2 tables
+
+People:
+
+bevat:
+
+name: string: naam van persoon
+birth: date: geboortedatum of null
+dead: date: sterftedatum of null
+
+
 ##TO DO
 
 Noteer dingen op de lijst als:

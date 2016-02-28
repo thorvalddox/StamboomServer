@@ -1,7 +1,8 @@
 
 *.pyc
 *.jpg
-
+*.db
+*.png
 __pycache__/*
 users.txt
 
