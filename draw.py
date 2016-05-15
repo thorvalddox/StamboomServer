@@ -21,6 +21,20 @@ class DrawObject:
         """
         pass
 
+    def draw_line_broken(self, *coords):
+        """
+        Adds a broken line between 2 points
+        :param coords: x1 y1 x2 y2
+        """
+        x1,y1,x2,y2 = coords
+
+        cx,cy = (y2-y1)//10,(x1-x2)//10
+        segments = [(x1 + (i * (x2 - x1)) // 10 + cx*(-1)**i, y1 + (i * (y2 - y1)) // 10 + cy*(-1)**i)
+                    for i in range(11)]
+
+        for i in range(10):
+            self.draw_line(segments[i]+segments[i+1])
+
     def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
         """
         draws a rectangle between the given coordinates
@@ -511,7 +525,10 @@ class BuildTree:
             p1, p2 = fam.parents
             px1, py1 = self.get_pos(p1, width, height)
             px2, py2 = self.get_pos(p2, width, height)
-            draw.draw_line(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
+            if not fam.divorced:
+                draw.draw_line(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
+            else:
+                draw.draw_line_broken(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
             px = (px1 + px2) // 2
             py = py1
         elif len(fam.parents) == 1:
