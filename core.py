@@ -461,7 +461,10 @@ class CommandLoader:
         user, func, *args = command
         args = list(args) + [""] * 4  # missing last arguments
         if any(user.startswith(pref) for pref in self.accepted):
-            getattr(self, func)(*args)
+            try:
+                getattr(self, func.lower())(*args)
+            except AttributeError:
+                pass
 
     def person(self, name, birth, dead, *_):
         # #print("making",name)
