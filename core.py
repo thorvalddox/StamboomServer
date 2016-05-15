@@ -526,13 +526,11 @@ class CommandLoader:
         self.family(p1, p2, child.uname)
 
     def divorce(self, p1, p2, *_):
-        parentlist = [p for p in (p1, p2) if p != ""]
-        f = self.tree.get_family(*parentlist)
+        f = self.tree.get_family(*(p1, p2))
         f.divorced = True
 
     def remarry(self, p1, p2, *_):
-        parentlist = [p for p in (p1, p2) if p != ""]
-        f = self.tree.get_family(*parentlist)
+        f = self.tree.get_family(*(p1, p2))
         f.divorced = False
 
     def head(self, p, *_):
