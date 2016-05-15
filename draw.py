@@ -528,7 +528,7 @@ class BuildTree:
             if not fam.divorced:
                 draw.draw_line(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
             else:
-                draw.draw_line_broken(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
+                #draw.draw_line_broken(min(px1, px2) + xdif, py1, max(px1, px2) - xdif, py2)
             px = (px1 + px2) // 2
             py = py1
         elif len(fam.parents) == 1:
