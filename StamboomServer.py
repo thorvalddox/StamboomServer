@@ -506,7 +506,7 @@ def see_doc(name):
 
 @app.route("/stamboom/docs/<folder>/<name>")
 @default_page
-def see_doc(folder,name):
+def see_doc_folder(folder,name):
     return make_response(render_template('doc/_build/html/{}/{}'.format(folder,name)).replace("\"_static","\"/static/_static"))
 
 @app.route("/stamboom/admin/")
