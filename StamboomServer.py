@@ -504,6 +504,10 @@ def send_mail(user, contents):
 def see_doc(name):
     return make_response(render_template('doc/_build/html/{}.html'.format(name)).replace("\"_static","\"/static/_static"))
 
+@app.route("/stamboom/docs/<folder>/<name>.html")
+@default_page
+def see_doc(folder,name):
+    return make_response(render_template('doc/_build/html/{}/{}.html'.format(folder,name)).replace("\"_static","\"/static/_static"))
 
 @app.route("/stamboom/admin/")
 @admin_page
