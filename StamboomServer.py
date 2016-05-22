@@ -499,7 +499,7 @@ def send_mail(user, contents):
         yield traceback.format_exc()
 
 def render_raw(filename):
-    with open("Stamboomserver/"+filename) as file:
+    with open("StamboomServer/"+filename) as file:
         return file.read()
 
 @app.route("/stamboom/docs/<name>")
