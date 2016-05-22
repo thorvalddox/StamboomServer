@@ -502,7 +502,7 @@ def send_mail(user, contents):
 @app.route("/stamboom/doc/<name>.html")
 @default_page
 def see_doc(name):
-    return make_response(render_template('doc/_build/html/{}.html'.format(name)))
+    return make_response(render_template('doc/_build/html/{}.html'.format(name)).replace(("\"_static","\"/doc/_build/html/_static")))
 
 
 @app.route("/stamboom/admin/")
