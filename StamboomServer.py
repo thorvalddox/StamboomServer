@@ -499,15 +499,15 @@ def send_mail(user, contents):
         yield traceback.format_exc()
 
 
-@app.route("/stamboom/docs/<name>.html")
+@app.route("/stamboom/docs/<name>")
 @default_page
 def see_doc(name):
-    return make_response(render_template('doc/_build/html/{}.html'.format(name)).replace("\"_static","\"/static/_static"))
+    return make_response(render_template('doc/_build/html/{}'.format(name)).replace("\"_static","\"/static/_static"))
 
-@app.route("/stamboom/docs/<folder>/<name>.html")
+@app.route("/stamboom/docs/<folder>/<name>")
 @default_page
 def see_doc(folder,name):
-    return make_response(render_template('doc/_build/html/{}/{}.html'.format(folder,name)).replace("\"_static","\"/static/_static"))
+    return make_response(render_template('doc/_build/html/{}/{}'.format(folder,name)).replace("\"_static","\"/static/_static"))
 
 @app.route("/stamboom/admin/")
 @admin_page
