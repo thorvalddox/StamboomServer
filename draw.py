@@ -16,6 +16,7 @@ class DrawObject:
     def draw_line(self, *coords):  # x1 y1 x2 y2
         """
         Adds a line between to points
+
         :param coords: x1 y1 x2 y2
         :return:
         """
@@ -24,6 +25,7 @@ class DrawObject:
     def draw_line_broken(self, *coords):
         """
         Adds a broken line between 2 points
+
         :param coords: x1 y1 x2 y2
         """
         x1,y1,x2,y2 = coords
@@ -38,6 +40,7 @@ class DrawObject:
     def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
         """
         draws a rectangle between the given coordinates
+
         :param x1:
         :param y1:
         :param x2:
@@ -53,6 +56,7 @@ class DrawObject:
     def draw_text(self, x, y, text, size=12):
         """
         draw a text at the given position. The position is the mid-top of the text
+
         :param x:
         :param y:
         :param text:
@@ -65,6 +69,7 @@ class DrawObject:
     def draw_image(self, image, x, y, width, height):
         """
         Draws an image at a given place with given dimensions
+
         :param image: path of the image
         :param x:
         :param y:
@@ -77,6 +82,7 @@ class DrawObject:
     def draw_person(self, person, x, y, width, height, border, textsize):
         """
         Draws a person at a given position with given dimensions
+
         :param person:
         :param x:
         :param y:
@@ -131,6 +137,7 @@ class DrawJavaScript(DrawObject):
     def get_html_canvas(self):
         """
         returns the needed html code to create the canvas
+
         :return:
         """
         return """
@@ -141,6 +148,7 @@ class DrawJavaScript(DrawObject):
     def get_html_script(self):  # put this between the <script> tag
         """
         returns the javascript code needed to build the tree
+
         :return:
         """
         return """
@@ -218,6 +226,7 @@ class DrawJavaScript(DrawObject):
     def draw_line(self, *coords):  # x1 y1 x2 y2
         """
         Adds a line between to points
+
         :param coords: x1 y1 x2 y2
         :return:
         """
@@ -228,6 +237,7 @@ class DrawJavaScript(DrawObject):
     def draw_rectangle(self, x1, y1, x2, y2, back_color=None):
         """
         draws a rectangle between the given coordinates
+
         :param x1:
         :param y1:
         :param x2:
@@ -254,6 +264,7 @@ class DrawJavaScript(DrawObject):
     def draw_text(self, x, y, text, size=12):
         """
         draw a text at the given position. The position is the mid-top of the text
+
         :param x:
         :param y:
         :param text:
@@ -270,6 +281,7 @@ class DrawJavaScript(DrawObject):
     def add_mouse_pointer(self, x1, y1, x2, y2):
         """
         Changes the mouse pointer to a pointer style (like over hyperlinks) in the given rectangle
+
         :param x1:
         :param y1:
         :param x2:
@@ -286,6 +298,7 @@ class DrawJavaScript(DrawObject):
         """
         Makes an area of the canvas into an hyperlink. Clicking in the rectangle will link you to
         the given page.
+
         :param link:
         :param x1:
         :param y1:
@@ -304,6 +317,7 @@ class DrawJavaScript(DrawObject):
     def draw_image(self, image, x, y, width, height):
         """
         Draws an image at a given place with given dimensions
+
         :param image: path of the image
         :param x:
         :param y:
@@ -338,6 +352,7 @@ class DrawRaw(DrawObject):
     def draw_line(self, *coords):  # x1 y1 x2 y2
         """
         Adds a line between to points
+
         :param coords: x1 y1 x2 y2
         :return:
         """
@@ -347,6 +362,7 @@ class DrawRaw(DrawObject):
     def draw_text(self, x, y, text, size=12):
         """
         draw a text at the given position. The position is the mid-top of the text
+
         :param x:
         :param y:
         :param text:
@@ -365,6 +381,7 @@ class DrawRaw(DrawObject):
     def draw_image(self, image, x, y, width, height):
         """
         Draws an image at a given place with given dimensions
+
         :param image: path of the image
         :param x:
         :param y:
