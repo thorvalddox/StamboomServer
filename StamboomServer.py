@@ -21,7 +21,7 @@ import forms
 from loginhandle import LoginHandler
 from autoupdate import update
 from datetime import datetime
-
+from makedoc import makedocs
 
 # Init Flask application
 app = Flask(__name__)
@@ -67,6 +67,7 @@ print("status:", ["ONLINE", "OFFLINE/DEBUG"][OFFLINE])
 loginHandler = LoginHandler()
 
 
+makedocs()
 
 # Decorators from here.
 
@@ -544,10 +545,6 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-@app.route("/stamboom/doc/<page>")
-@default_page
-def opens_docs(page):
-    return render_template("doc/_build/html/{}".format(page))
 
 
 if __name__ == '__main__':
