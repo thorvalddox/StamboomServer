@@ -146,7 +146,7 @@ def catch_errors(func):
 
 def update_jinja2_env(func):
     """
-    Decorater. Put this after @app.route. Updates the global variables
+    Decorater. Put this after @app.route. Updates the global variables for the jinja 2 enviroment
     """
 
     @wraps(func)
@@ -542,6 +542,11 @@ def see_users():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.route("/stamboom/doc/<page>")
+def opens_docs(page):
+    return render_template("doc/{}".format(page))
 
 
 if __name__ == '__main__':
