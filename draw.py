@@ -45,7 +45,7 @@ class DrawObject:
         :param y1:
         :param x2:
         :param y2:
-        :param back_color:
+        :param back_color: does nothing
         :return:
         """
         self.draw_line(x1, y1, x1, y2)
@@ -59,8 +59,8 @@ class DrawObject:
 
         :param x:
         :param y:
-        :param text:
-        :param size:
+        :param text: string containing text to be drawn
+        :param size: font size
         :return:
         """
         pass
@@ -95,12 +95,12 @@ class DrawObject:
         xdif = width / 2 - border
         ydif = height / 2 - border
         self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
-        self.draw_text(x, y + ydif - 4-2*(textsize+1), person.name,textsize)
+        self.draw_text(x, y - ydif + border / 2, person.name,textsize)
         self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
         self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
         self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
         nw, nh = width - 3 * border, height - 3 * border - 3*textsize
-        self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2, nw, nh)
+        self.draw_image(person.image, x - xdif + border/ 2, y - ydif + border / 2+(textsize+1), nw, nh)
 
 
     def add_mouse_link(self, link, x1, y1, x2, y2):
@@ -242,7 +242,7 @@ class DrawJavaScript(DrawObject):
         :param y1:
         :param x2:
         :param y2:
-        :param back_color:
+        :param back_color: Color to fill the rectangle with
         :return:
         """
         if back_color is not None:

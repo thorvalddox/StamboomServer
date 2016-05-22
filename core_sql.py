@@ -7,7 +7,10 @@ class FamilyTree:
         self.conn = sqlite3.connect('famtree.db')
         self.c = self.conn.cursor()
         self.execute = self.c.execute
-    def create(self,command_source):
+    def create(self):
+        """
+            Builds the sql database using the command log
+        """
         try:
             self.execute("DROP TABLE people")
             self.execute("DROP TABLE parents")
@@ -46,6 +49,15 @@ class FamilyTree:
 
         print(self.get_person_id("Thorvald","Dox"))
     def add_person(self,firstname,lastname="",birth=None,death=None):
+        """
+        Adds a person with the given data to the database
+
+        :param firstname: First name
+        :param lastname:
+        :param birth: date object containing birth date
+        :param dead: date object containing death date
+        """
+
         if birth is not None:
             birth = time.strftime("%Y-%m-%d",birth)
         if death is not None:
@@ -57,10 +69,21 @@ class FamilyTree:
 
 
     def add_child(self,parent_id,child_id):
+        """
+        Connects two people, forcing them to have a parent child relation.
+        NOT IMPLEMENTED YET
+
+        :param parent_id: identification number of the person that should be the parent
+        :param child_id: identification number of the person that should be the child
+        """
         self.execute("")
 
 
     def get_person_id(self,firstname,lastname):
+        """
+        Returns the identification number of the person matching firstname and lastname.
+        If no such person exists, it returns none
+        """
         results = self.execute("SELECT * FROM people WHERE firstname=? AND lastname=?",(firstname,lastname))
         if not results:
             return None
@@ -68,37 +91,50 @@ class FamilyTree:
             return results.fetchall()[0][0]
 
     def save(self):
+        """
+        Saves the database
+        """
         self.conn.commit()
 
     def finish(self):
+        """
+        Closes the database
+        """
         self.conn.close()
     def __del__(self):
         self.finish()
 
 class Person:
     """
-    just a set of handlers to use when handling Family tree data
+    just a set of handlers to use when handling Family tree data.
+    It tries to match the old syntax for handling People and families, but it just contains a lot of pointers
+    to the database.
     """
     def __init__(self,parent,index):
+        """
+        Initalises a person.
+        :param parent: The database (FamilyTree object) the person is in.
+        :param index: Id of the selected person
+        """
         self.parent = parent
         self.index = index
     def __eq__(self,other):
         return self.parent == other.parent and self.index == other.index
     @property
     def firstname(self):
-        return self.parent.get_data[1]
+        return self.parent.get_data(self.index)[1]
     @property
     def lastname(self):
-        return self.parent.get_data[2]
+        return self.parent.get_data(self.index)[2]
     @property
     def name(self):
         return "{} {}".format(self.firstname,self.lastname)
     def birth(self):
-        return self.parent.get_data[3]
+        return self.parent.get_data(self.index)[3]
     def death(self):
-        return self.parent.get_data[4]
+        return self.parent.get_data(self.index)[4]
 
 
 
 if __name__ == "__main__":
-    FamilyTree().create("autodata.log")
+    FamilyTree().create()
