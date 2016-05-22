@@ -499,7 +499,7 @@ def send_mail(user, contents):
         yield traceback.format_exc()
 
 
-@app.route("/stamboom/doc/<name>.html")
+@app.route("/stamboom/docs/<name>.html")
 @default_page
 def see_doc(name):
     return make_response(render_template('doc/_build/html/{}.html'.format(name)).replace("\"_static","\"/doc/_build/html/_static"))
