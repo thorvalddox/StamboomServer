@@ -545,8 +545,9 @@ def page_not_found(e):
 
 
 @app.route("/stamboom/doc/<page>")
+@default_page
 def opens_docs(page):
-    return render_template("doc/{}".format(page))
+    return render_template("doc/_build/html/{}".format(page))
 
 
 if __name__ == '__main__':
