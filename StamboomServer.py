@@ -427,7 +427,7 @@ def render_login(path):
 @app.route("/<path:path>/login/invalid/")
 @catch_errors
 def render_login_invalid(path):
-    response = make_response(render_template("login.html", message="The password combination was invalid", path=path))
+    response = make_response(render_template("google-login-button.html", message="The password combination was invalid", path=path))
     return response
 
 
@@ -435,7 +435,7 @@ def render_login_invalid(path):
 @catch_errors
 def render_login_admin(path):
     response = make_response(
-        render_template("login.html", message="You need to be an admin to view this page", path=path))
+        render_template("google-login-button.html", message="You need to be an admin to view this page", path=path))
     return response
 
 
