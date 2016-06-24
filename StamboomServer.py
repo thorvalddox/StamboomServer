@@ -421,7 +421,7 @@ def render_titlebar():
 @app.route("/<path:path>/login/")
 def render_login(path):
     if not OFFLINE:
-        response = make_response(render_template("login.html", message="", path=path, login1=render_template("google-login-button.html")))
+        response = make_response(render_template("google-login-button.html", message="", path=path))
         return response
     else:
         session["username"] = "local_user"
