@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-Voer uw naam en wachtwoord in:
-    <form action="/{{ path }}/login/validate/" method="post" enctype="multipart/form-data">
-        naam:<input type="text" name="name"><br /><br />
-        wachtwoord:<input type="password" name="password"><br /><br />
-        <input type="submit" value="Log in">
-    </form>
+    {{ safe|login1 }}
+    {{ safe|login2 }}
 <span style="color:red">{{ message }}</span>
 {% endblock %}

@@ -1,5 +1,7 @@
 __author__ = 'Thorvald'
 
+
+
 import random
 import json
 from passlib.hash import bcrypt
@@ -105,5 +107,4 @@ class User:
         with open("StamboomServer/users.json") as jsonfile:
             for t in json.load(jsonfile):
                 cls(**t)
-
 

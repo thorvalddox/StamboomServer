@@ -421,7 +421,7 @@ def render_titlebar():
 @app.route("/<path:path>/login/")
 def render_login(path):
     if not OFFLINE:
-        response = make_response(render_template("login.html", message="", path=path))
+        response = make_response(render_template("login.html", message="", path=path, login1=render_template("google-login-button")))
         return response
     else:
         session["username"] = "local_user"
@@ -460,6 +460,8 @@ def validate_login(path):
 def logout(path):
     core.addcommand(request, session, "logout")
     session.pop("username", None)
+    session.pop("UserGoogle", None)
+    session.pop("UserFacebook", None)
     return redirect("/" + path + "/")
 
 
