@@ -5,6 +5,7 @@ Als ge eraan uit wilt kunnen zou ik dit aan mij persoonlijk (Thorvald Dox) vrage
 
 Als ge de code download en in het correcte framework stopt zal deze waarschijnlijk werken maar zal het onmogelijk zijn om in te loggen. Dit komt omdat de gebruikersnamen en wachtwoord-generatie-seed alleen op de server zijn opgeslagen. 
 
+
 ##TO DO
 
 Noteer dingen op de lijst als:
@@ -12,53 +13,52 @@ Noteer dingen op de lijst als:
 - [x] Bezig
 -     In Orde
 
+Documenteer u code! plz
 
 Verwijder ze van de lijst als ze in orde zijn.
 
 ###TO DO list
+####Very high priority
+- [ ] SQL database moet werken
+- [ ] Gebruik van flask-security en flask-social om "login with facebook/login with google/login with twitter" knoppen te maken, en de clusterfuck da de logins nu zijn te verwijderen.
+- [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando (shadowban)
 
-- [ ] Docs moeten de :param arg: tags correct tonen (om een of andere reden doen ze dat niet).
-- [ ] Koppelen van logins aan personen
+####high priority
 - [ ] Inschrijvingsformulieren, gekoppeld aan personen
 - [ ] Naamkaartjes
-- [ ] Gebruik van flask-security en flask-social om "login with facebook/login with google/login with twitter" knoppen te maken, en de clusterfuck da de logins nu zijn te verwijderen.
-- [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
-- Aanpassen van downloadcode voor support voor IE en Google Chrome (postscript?)
-- [ ] Maken van een blacklist van users die genegreerd worden in het creatiecommando (shadowban)
-- [ ] Comprimeren (of ten minste opslaan) van de stamboom om deze sneller te laden. Deze moet aangepast worden telkens al er een commando bij op de lijst komt. (json?)
-- Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
-- [ ] Github moet de documenatie kunnen lezen
+- [ ] Fix de autoupdate zodat deze blijft runnen als de server crashed (gedeeltelijk gedaan met de @cath_error decorator)
+- [ ] anders tonen van gescheiden families (dit is geimplementeerd maar werkt niet).
+- [ ] 
+
+####normal priority
+- [ ] Docs moeten de :param arg: tags correct tonen (om een of andere reden doen ze dat niet).
 - [ ] Github moet een wiki krijgen met daarin het gebruik (dus niet de werking, da moet in de docs) van alle functies van de site.
 - [ ] cathing van meerdere errors (403,400) enz en correcte catching van 500
-- [ ] Fix de autoupdate zodat deze blijft runnen als de server crashed (gedeeltelijk gedaan met de @cath_error decorator)
 - [ ] automatisch de docs generenen op "git push"
+- [ ] meer bewerk opties (bv naam wijzigen, ...)
+- [ ] geslachten
+- [ ] comprimeren van fotos na uploaden (nieuw formaat max 600x400) om geheugenruimte te sparen
+- [ ] betere layout en css
+- [ ] meer/duidelijkere interlinking
+
+####low priority
+- [ ] Koppelen van logins aan personen
+- [ ] Aanpassen van tekenalgorimte zodat niet alleen nakomelingen en partners hiervan getekend worden maar ook die hun voorouders
+- [ ]Website moet volledig offline werken zodat deze kan aangepast worden op het doxenfeest zelf en dat de stamboom getest kan worden zonder hem te uploaden.
+- [ ] Github moet de documenatie kunnen lezen
 - [ ] meer admin controle
 - [ ] betere interface voor de console
-- [ ] meer bewerk opties (bv naam wijzigen, ...)
-- commando om de ministamboom in het groot te doen
-- [ ] geslachten
-- [ ] anders tonen van gescheiden families
-- [ ] comprimeren van fotos na uploaden (nieuw formaat max 600x400) om geheugenruimte te sparen
 - [ ] verwijderen van ongebruikte fotos met toestemming van de admin (rollback)
-
-
-- [ ] betere layout en css
-- [ ] volledigere docs & docstrings
 - [ ] statistieken
 - [ ] meer informatie zoals sterrenbeelden
 - [ ] homepage
-- [ ] meer/duidelijkere interlinking
-- [ ] Profiler/optimising
-- [ ] fix docs :param:
-- [ ] overall cleanup & refractor
-
-
 - [ ] wapen van de doxen in de rechterbovenhoek.
-
-
 
 ##Werking van de command-API
 !! Is bezig met vervangen te worden door de sql-server.
+!! Het opslagen van de data wordlt binnenkort vervangen door sql maar deze zal blijven in gebruik genomen worden voor Rollback puporses
+
+
 <user> <command> <arguments>
 
 user: degene die het commando heeft doorgevoert
