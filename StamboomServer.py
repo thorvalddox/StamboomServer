@@ -458,7 +458,7 @@ def validate_login(path):
 @app.route("/<path:path>/login/sendcreds/", methods = ['POST'])
 @catch_errors
 def receive_credentials(path):
-    return request.data
+    return render_template("info.html",info=str(request))
 
 @app.route("/<path:path>/logout/")
 @catch_errors
