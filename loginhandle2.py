@@ -1,7 +1,7 @@
 import json
 
 def check_credentials(session):
-    with open("userlist.json") as file:
+    with open("Stamboomserver/userlist.json") as file:
         all_names = json.load(file)
         for k,v in all_names:
             if session.get(k,...) in v:
