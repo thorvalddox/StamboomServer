@@ -6,7 +6,7 @@ def check_credentials(session):
         for k,v in all_names.items():
             if session.get(k,...) in v:
                 return True
-    return
+    return False
 
 
 def check_admin(session):
