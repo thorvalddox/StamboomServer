@@ -455,7 +455,7 @@ def validate_login(path):
             file.write("    {}\n".format(str(dict(session))))
         return redirect("/" + path + "/login/invalid/")
 
-@app.route("/<path:path>/login/sendcreds/",method="POST")
+@app.route("/<path:path>/login/sendcreds/", methods = ['POST'])
 @catch_errors
 def receive_credentials(path):
     return request.data
