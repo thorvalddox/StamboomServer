@@ -11,6 +11,7 @@ import os, os.path
 import glob
 import random
 import re
+from time import sleep
 from functools import wraps, update_wrapper
 
 import core
@@ -447,9 +448,11 @@ def validate_login(path):
     if check_logged_in():
         return redirect("/" + path + "/")
     else:
-        with open("not_aut_users.text","a") as file:
-            file.write("{}".format(session.get("username","<unknown>")))
-            file.write("    {}".format(session.get("UserGoogle", "<None>")))
+        sleep(3)
+        with open("StamboomServer/not_aut_users.txt","a") as file:
+            file.write("{}\n".format(session.get("username","<unknown>")))
+            file.write("    google:{}\n".format(session.get("UserGoogle", "<None>")))
+            file.write("    {}\n".format(str(dict(session))))
         return redirect("/" + path + "/login/invalid/")
 
 @app.route("/<path:path>/logout/")
