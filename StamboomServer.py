@@ -441,7 +441,7 @@ def render_login_admin(path):
     return response
 
 
-@app.route("/<path:path>/login/validate/", methods=["POST"])
+@app.route("/<path:path>/login/validate/")
 @catch_errors
 def validate_login(path):
     if check_logged_in():
