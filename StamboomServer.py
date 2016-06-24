@@ -427,8 +427,10 @@ def render_login(path):
 @app.route("/<path:path>/login/invalid/")
 @catch_errors
 def render_login_invalid(path):
-    response = make_response(render_template("google-login-button.html", message="Uw account is niet geaccepteerd op deze server. Neem contact op met de admin (Thorvald Dox) om deze te laten toevoegen op de lijst. Mail naar thorvalddx94@gmail.com", path=path))
-    return response
+    if check_logged_in(): #check if really invalid
+        return redirect("/" + path + "/")
+    return make_response(render_template("google-login-button.html", message="Uw account is niet geaccepteerd op deze server. Neem contact op met de admin (Thorvald Dox) om deze te laten toevoegen op de lijst. Mail naar thorvalddx94@gmail.com", path=path))
+
 
 
 @app.route("/<path:path>/login/admin/")

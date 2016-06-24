@@ -27,6 +27,7 @@
           '<%Session["UserGoogle"] = "' + id_token + '"; %>';
           '<%Session["username"] = "' + profile.getName() + '"; %>';
           jQuery.post("validate/")
+          window.location = "invalid/"
       };
     </script>
     <span style="color:red">{{ message }}</span>
