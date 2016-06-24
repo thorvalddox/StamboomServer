@@ -29,7 +29,7 @@
           '<%Session["username"] = "' + profile.getName() + '"; %>';
           {%  if message == "" %}
           window.location = "validate/"
-          {% end if %}
+          {% endif %}
       };
     </script>
     <span style="color:red">{{ message }}</span>
