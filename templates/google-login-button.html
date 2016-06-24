@@ -24,7 +24,7 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
           '<%Session["UserGoogle"] = "' + id_token + '"; %>';
-          window.location = "{{ path }}";
+          window.location = "/{{ path }}/";
       };
     </script>
     <span style="color:red">{{ message }}</span>
