@@ -25,6 +25,7 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
           '<%Session["UserGoogle"] = "' + id_token + '"; %>';
+          '<%Session["username"] = "' + profile.getName() + '"; %>';
           jQuery.post("validate/")
       };
     </script>
