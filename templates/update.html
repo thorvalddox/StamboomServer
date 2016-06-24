@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Doxstamboom</title>
-</head>
-<body>
-The server is being updated. Please wait a few seconds. The page will automatically reload when the update is done
+{% extends "base.html" %}
+{% block content %}
+De Server wordt geupdate <br/>
+    Deze pagina wordt opnieuw geladen wanneer de server klaar is met updaten.
 <script>
     setTimeout(function(){
         window.location.reload(1);
     }, 5000);
 </script>
-</body>
-</html>
+{% endblock %}
