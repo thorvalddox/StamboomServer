@@ -9,6 +9,7 @@
 
 {% block content %}
     <h1>Log in met Google</h1>
+
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <script>
       function onSignIn(googleUser) {
@@ -26,7 +27,9 @@
         console.log("ID Token: " + id_token);
           '<%Session["UserGoogle"] = "' + id_token + '"; %>';
           '<%Session["username"] = "' + profile.getName() + '"; %>';
+          {%  if message == "" %}
           window.location = "validate/"
+          {% end if %}
       };
     </script>
     <span style="color:red">{{ message }}</span>
