@@ -27,7 +27,7 @@
     <link rel="up" title="Module code" href="index.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -38,7 +38,7 @@
           <div class="body" role="main">
             
   <h1>Source code for core</h1><div class="highlight"><pre>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
+<span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Thorvald&#39;</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">re</span>
@@ -51,13 +51,13 @@
 
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
 
-<span class="c"># commands should look like this: user person person_name 01/01/1900 01/01/2000</span>
-<span class="c">#                               user family parent_1 parent_2 child_1 child_2</span>
-<span class="c">#                               user delete person_name</span>
-<span class="c">#                               user parents child parent_1 parent_2</span>
-<span class="c">#                               user merge person_1 person_2</span>
+<span class="c1"># commands should look like this: user person person_name 01/01/1900 01/01/2000</span>
+<span class="c1">#                               user family parent_1 parent_2 child_1 child_2</span>
+<span class="c1">#                               user delete person_name</span>
+<span class="c1">#                               user parents child parent_1 parent_2</span>
+<span class="c1">#                               user merge person_1 person_2</span>
 
-<span class="n">Representation</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Representation&quot;</span><span class="p">,</span> <span class="s">&quot;head,tail&quot;</span><span class="p">)</span>
+<span class="n">Representation</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Representation&quot;</span><span class="p">,</span> <span class="s2">&quot;head,tail&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FamilyTree"><a class="viewcode-back" href="../core.html#core.FamilyTree">[docs]</a><span class="k">class</span> <span class="nc">FamilyTree</span><span class="p">:</span>
@@ -81,7 +81,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns a list of people the family tree contains, iven the not yet connected ones</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span>
 
 <div class="viewcode-block" id="FamilyTree.get_person"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_person">[docs]</a>    <span class="k">def</span> <span class="nf">get_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -90,46 +90,46 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">Person</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">name</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;{} is not a string&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;{} is not a string&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">people</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="c"># #print(&quot;did not find {}, creating new person&quot;.format(name))</span>
+            <span class="c1"># #print(&quot;did not find {}, creating new person&quot;.format(name))</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">people</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">p</span>
-</div>
+            <span class="k">return</span> <span class="n">p</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_family"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_family">[docs]</a>    <span class="k">def</span> <span class="nf">get_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">names</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns a family with the given parent names. Makes a new one if not found.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">)]</span>
+        <span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;*&quot;</span><span class="p">)]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span> <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">people</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
             <span class="n">f</span> <span class="o">=</span> <span class="n">Family</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="p">[])</span>
-            <span class="c"># #print(f)</span>
+            <span class="c1"># #print(f)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">f</span>
-</div>
+            <span class="k">return</span> <span class="n">f</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_family_down"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_family_down">[docs]</a>    <span class="k">def</span> <span class="nf">get_family_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns a iterator of families where the given person is a parent of</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
-            <span class="c"># #print(str(f))</span>
+            <span class="c1"># #print(str(f))</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="n">f</span>
-</div>
+                <span class="k">yield</span> <span class="n">f</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_family_up"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_family_up">[docs]</a>    <span class="k">def</span> <span class="nf">get_family_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns a the family the person is a child of</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
-            <span class="c"># #print(str(f))</span>
+            <span class="c1"># #print(str(f))</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">f</span>
-</div>
+                <span class="k">return</span> <span class="n">f</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_representation"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_representation">[docs]</a>    <span class="k">def</span> <span class="nf">get_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Object to represent a part of the family tree.</span>
@@ -139,60 +139,62 @@
 <span class="sd">            This one is usually chained, as to give the correct representation, they need the head entry of each child</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">person</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="c">#print(&quot;Invalid representation&quot;)</span>
+            <span class="c1">#print(&quot;Invalid representation&quot;)</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">Representation</span><span class="p">([],</span> <span class="p">[]))</span>
         <span class="n">famlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_family_down</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">famlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c"># #print(person.name, &quot;never married&quot;)</span>
+            <span class="c1"># #print(person.name, &quot;never married&quot;)</span>
             <span class="k">return</span> <span class="n">Representation</span><span class="p">([</span><span class="n">person</span><span class="p">],</span> <span class="p">[])</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">famlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c"># #print(person.name, &quot;married ones&quot;)</span>
+            <span class="c1"># #print(person.name, &quot;married ones&quot;)</span>
             <span class="n">fam</span><span class="p">,</span> <span class="o">=</span> <span class="n">famlist</span>
-            <span class="k">return</span> <span class="n">Representation</span><span class="p">(</span><span class="n">filter_invalid</span><span class="p">([</span><span class="n">person</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">fam</span><span class="p">)]),</span> <span class="n">fam</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Representation</span><span class="p">(</span><span class="n">filter_invalid</span><span class="p">([</span><span class="n">person</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">fam</span><span class="p">)]),</span>
+                                  <span class="nb">sorted</span><span class="p">(</span><span class="n">fam</span><span class="o">.</span><span class="n">children</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">ubirth</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">famlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="c"># #print(person.name, &quot;married twice&quot;)</span>
+            <span class="c1"># #print(person.name, &quot;married twice&quot;)</span>
             <span class="n">fam1</span><span class="p">,</span> <span class="n">fam2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">famlist</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ubirth</span>
                                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span><span class="n">f</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span>
             <span class="k">return</span> <span class="n">Representation</span><span class="p">(</span>
                 <span class="n">filter_invalid</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">fam1</span><span class="p">),</span> <span class="n">person</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parther</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="n">fam2</span><span class="p">)]),</span>
-                <span class="n">fam1</span><span class="o">.</span><span class="n">children</span> <span class="o">+</span> <span class="n">fam2</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+                <span class="nb">sorted</span><span class="p">(</span><span class="n">fam1</span><span class="o">.</span><span class="n">children</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">ubirth</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="o">+</span>
+                <span class="nb">sorted</span><span class="p">(</span><span class="n">fam2</span><span class="o">.</span><span class="n">children</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">ubirth</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Representation</span><span class="p">([</span><span class="n">person</span><span class="p">],</span> <span class="p">[])</span>
-</div>
+            <span class="k">return</span> <span class="n">Representation</span><span class="p">([</span><span class="n">person</span><span class="p">],</span> <span class="p">[])</span></div>
+
 <div class="viewcode-block" id="FamilyTree.from_xml"><a class="viewcode-back" href="../core.html#core.FamilyTree.from_xml">[docs]</a>    <span class="k">def</span> <span class="nf">from_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build the family tree given an old-format xml file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># #print(os.getcwd())</span>
+        <span class="c1"># #print(os.getcwd())</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">root</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;persoon&quot;</span><span class="p">:</span>
-                <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s">&quot;naam&quot;</span><span class="p">],</span> <span class="n">id_</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;persoon&quot;</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;naam&quot;</span><span class="p">],</span> <span class="n">id_</span><span class="o">=</span><span class="n">node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;head&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;head&quot;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">p</span>
-                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;geb&quot;</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;geb&quot;</span><span class="p">:</span>
                         <span class="n">p</span><span class="o">.</span><span class="n">birth</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span>
-                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;stf&quot;</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;stf&quot;</span><span class="p">:</span>
                         <span class="n">p</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">text</span>
-            <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;familie&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;familie&quot;</span><span class="p">:</span>
                 <span class="n">parents</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">div</span> <span class="o">=</span> <span class="bp">False</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;ouder&quot;</span><span class="p">,</span> <span class="s">&quot;kind&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ouder&quot;</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">):</span>
                         <span class="k">try</span><span class="p">:</span>
                             <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">all_</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
                         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                            <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;ouder&quot;</span><span class="p">:</span>
+                            <span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;ouder&quot;</span><span class="p">:</span>
                             <span class="n">parents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&quot;divorsed&quot;</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="n">i</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;divorsed&quot;</span><span class="p">:</span>
                         <span class="n">div</span> <span class="o">=</span> <span class="bp">True</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Family</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">children</span><span class="p">,</span> <span class="n">div</span><span class="p">))</span>
-</div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Family</span><span class="p">(</span><span class="n">parents</span><span class="p">,</span> <span class="n">children</span><span class="p">,</span> <span class="n">div</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="FamilyTree.from_code"><a class="viewcode-back" href="../core.html#core.FamilyTree.from_code">[docs]</a>    <span class="k">def</span> <span class="nf">from_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        generates family tree from a code object</span>
@@ -200,18 +202,18 @@
 <span class="sd">        1 is logged in users</span>
 <span class="sd">        2 is all</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">CommandLoader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="s">&quot;$#?&quot;</span><span class="p">[:</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/&quot;</span><span class="o">+</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">CommandLoader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;$#?&quot;</span><span class="p">[:</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/&quot;</span><span class="o">+</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Commands</span><span class="o">.</span><span class="n">from_raw</span><span class="p">(</span><span class="n">fff</span><span class="o">.</span><span class="n">read</span><span class="p">()):</span>
-                <span class="n">c</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</div>
+                <span class="n">c</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="FamilyTree.write"><a class="viewcode-back" href="../core.html#core.FamilyTree.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns a string representing the posterity of the given person</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s">&quot;{} {{ {} }}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">top</span><span class="p">),</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bottom</span><span class="p">))</span>
-</div>
+        <span class="k">return</span> <span class="s2">&quot;{} {{ {} }}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">top</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">bottom</span><span class="p">))</span></div>
+
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
 
@@ -222,23 +224,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">family</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">person</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">p</span>
-</div>
+                <span class="k">return</span> <span class="n">p</span></div>
+
 <div class="viewcode-block" id="FamilyTree.build_commands"><a class="viewcode-back" href="../core.html#core.FamilyTree.build_commands">[docs]</a>    <span class="k">def</span> <span class="nf">build_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a list of commands that could rebuild this whole family tree</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">people_linked</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="s">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s">&quot;person&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">dead</span>
+            <span class="k">yield</span> <span class="s2">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s2">&quot;person&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">dead</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="s">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s">&quot;head&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">uname</span>
+                <span class="k">yield</span> <span class="s2">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s2">&quot;head&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">uname</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
-            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">uname</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">uname</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
             <span class="n">clist</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">uname</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">]</span>
-            <span class="k">yield</span> <span class="p">(</span><span class="s">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s">&quot;family&quot;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">clist</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="s2">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s2">&quot;family&quot;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">clist</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">divorced</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="p">(</span><span class="s">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s">&quot;divorce&quot;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
-</div>
+                <span class="k">yield</span> <span class="p">(</span><span class="s2">&quot;$convbot&quot;</span><span class="p">,</span> <span class="s2">&quot;divorce&quot;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_parents"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_parents">[docs]</a>    <span class="k">def</span> <span class="nf">get_parents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all persons parents</span>
@@ -246,8 +248,8 @@
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="n">p</span>
-</div>
+                    <span class="k">yield</span> <span class="n">p</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_children"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_children">[docs]</a>    <span class="k">def</span> <span class="nf">get_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all persons children</span>
@@ -257,8 +259,8 @@
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                     <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">ubirth</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">ubirth</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_siblings"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_siblings">[docs]</a>    <span class="k">def</span> <span class="nf">get_siblings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all persons siblings and half-siblings</span>
@@ -266,8 +268,8 @@
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parents</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">person</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="n">c</span>
-</div>
+                    <span class="k">yield</span> <span class="n">c</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_partners"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_partners">[docs]</a>    <span class="k">def</span> <span class="nf">get_partners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all persons partners</span>
@@ -276,8 +278,8 @@
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="n">person</span><span class="p">:</span>
-                        <span class="k">yield</span> <span class="n">p</span>
-</div>
+                        <span class="k">yield</span> <span class="n">p</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_data"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all data to use in edit.html</span>
@@ -285,8 +287,8 @@
         <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parents</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
-        <span class="k">yield</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_siblings</span><span class="p">(</span><span class="n">person</span><span class="p">)))</span>
-</div>
+        <span class="k">yield</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_siblings</span><span class="p">(</span><span class="n">person</span><span class="p">)))</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_clan"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_clan">[docs]</a>    <span class="k">def</span> <span class="nf">get_clan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all posterity and there partners</span>
@@ -295,20 +297,20 @@
             <span class="k">yield</span> <span class="n">p</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_representation</span><span class="p">(</span><span class="n">person</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clan</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">i</span>
-</div>
+                <span class="k">yield</span> <span class="n">i</span></div>
+
 <div class="viewcode-block" id="FamilyTree.get_ancestors"><a class="viewcode-back" href="../core.html#core.FamilyTree.get_ancestors">[docs]</a>    <span class="k">def</span> <span class="nf">get_ancestors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">person</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parents</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ancestors</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">i</span>
-</div>
+                <span class="k">yield</span> <span class="n">i</span></div>
+
 <div class="viewcode-block" id="FamilyTree.build_new"><a class="viewcode-back" href="../core.html#core.FamilyTree.build_new">[docs]</a>    <span class="k">def</span> <span class="nf">build_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns new famaily tree representing a certain root of the family.</span>
 <span class="sd">        Gives the posterity and the single direction ancestors</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c">#print(&quot;1&quot;)</span>
+        <span class="c1">#print(&quot;1&quot;)</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">FamilyTree</span><span class="p">()</span>
         <span class="n">families</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clan</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
@@ -316,72 +318,72 @@
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ancestors</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
             <span class="n">new</span><span class="o">.</span><span class="n">people</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">people</span><span class="p">:</span>
-            <span class="c">#print(p)</span>
+            <span class="c1">#print(p)</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_family_down</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-                <span class="c">#print(f)</span>
+                <span class="c1">#print(f)</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">people</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">families</span><span class="p">:</span>
                     <span class="n">families</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="c">#print(new.people)</span>
+        <span class="c1">#print(new.people)</span>
         <span class="n">new</span><span class="o">.</span><span class="n">families</span> <span class="o">=</span> <span class="p">[</span><span class="n">Family</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">people</span><span class="p">])</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">families</span><span class="p">]</span>
-        <span class="c"># for f in families:</span>
-        <span class="c">#     for p in f.children:</span>
-        <span class="c">#         if p not in new.people:</span>
-        <span class="c">#             new.people.append(p)</span>
+        <span class="c1"># for f in families:</span>
+        <span class="c1">#     for p in f.children:</span>
+        <span class="c1">#         if p not in new.people:</span>
+        <span class="c1">#             new.people.append(p)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">in</span> <span class="n">new</span><span class="o">.</span><span class="n">people</span><span class="p">:</span>
             <span class="n">new</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">key</span>
-        <span class="k">return</span> <span class="n">new</span>
+        <span class="k">return</span> <span class="n">new</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="filter_invalid"><a class="viewcode-back" href="../core.html#core.filter_invalid">[docs]</a><span class="k">def</span> <span class="nf">filter_invalid</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Filters the None objects out of a list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">])</span></div>
 
-</div>
+
 <div class="viewcode-block" id="builddate"><a class="viewcode-back" href="../core.html#core.builddate">[docs]</a><span class="k">def</span> <span class="nf">builddate</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Builds a datetime object out of a string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">date</span> <span class="ow">and</span> <span class="n">date</span> <span class="o">!=</span> <span class="s">&quot;never&quot;</span><span class="p">:</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&quot;[ */-]+&quot;</span><span class="p">,</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s">/%m/%Y&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="ow">and</span> <span class="n">date</span> <span class="o">!=</span> <span class="s2">&quot;never&quot;</span><span class="p">:</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">r&quot;[ */-]+&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s">&quot;01/01/3000&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s">/%m/%Y&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">&quot;01/01/3000&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="showdate"><a class="viewcode-back" href="../core.html#core.showdate">[docs]</a><span class="k">def</span> <span class="nf">showdate</span><span class="p">(</span><span class="n">date</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Builds a string out of a datetime object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">date</span> <span class="o">==</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s">&quot;01/01/3000&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%d</span><span class="s">/%m/%Y&quot;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="o">==</span> <span class="n">time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s2">&quot;01/01/3000&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%d</span><span class="s">/%m/%Y&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Person"><a class="viewcode-back" href="../core.html#core.Person">[docs]</a><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
-    <span class="n">all_</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c"># used to get people_linked not in the family tree. Only works for id&#39;s people_linked in diffrenet trees can have te same name, but not the same id</span>
+    <span class="n">all_</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># used to get people_linked not in the family tree. Only works for id&#39;s people_linked in diffrenet trees can have te same name, but not the same id</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">birth</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">dead</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">birth</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">dead</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">id_</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">birth</span> <span class="o">=</span> <span class="n">birth</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">dead</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id_</span> <span class="o">=</span> <span class="n">id_</span> <span class="k">if</span> <span class="n">id_</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span> <span class="k">else</span> <span class="nb">hex</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">16</span> <span class="o">**</span> <span class="mi">32</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_</span> <span class="o">=</span> <span class="n">id_</span> <span class="k">if</span> <span class="n">id_</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span> <span class="k">else</span> <span class="nb">hex</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">16</span> <span class="o">**</span> <span class="mi">32</span><span class="p">))</span>
         <span class="n">Person</span><span class="o">.</span><span class="n">all_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id_</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="c"># #print(self.name, self.id_)</span>
+        <span class="c1"># #print(self.name, self.id_)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
 
     <span class="nd">@name.setter</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">uname</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;_&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uname</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">birth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -406,7 +408,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">imagechanger</span><span class="o">.</span><span class="n">copy_images</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;image {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;image {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
             <span class="n">addcommand_bot</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="n">i</span>
         <span class="k">return</span> <span class="n">imagechanger</span><span class="o">.</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get_static</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_index</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
@@ -415,9 +417,9 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uname</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;Person({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uname</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Person({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uname</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Family"><a class="viewcode-back" href="../core.html#core.Family">[docs]</a><span class="k">class</span> <span class="nc">Family</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">children</span><span class="p">,</span> <span class="n">divorced</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="o">=</span> <span class="n">parents</span>
@@ -425,9 +427,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">divorced</span> <span class="o">=</span> <span class="n">divorced</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;-&gt;&quot;</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-&gt;&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Commands"><a class="viewcode-back" href="../core.html#core.Commands">[docs]</a><span class="k">class</span> <span class="nc">Commands</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This object is a list of tuples of strings. The tuples represent single commands,</span>
@@ -437,38 +439,38 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        changes a list of command object to a raw string of commands</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="n">args</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="k">else</span> <span class="s">&quot;*&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">c</span><span class="p">)</span>
-            <span class="n">ret</span> <span class="o">+=</span> <span class="n">args</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-        <span class="k">return</span> <span class="n">ret</span>
-</div>
+            <span class="n">args</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="s2">&quot;*&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">c</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="n">args</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
 <div class="viewcode-block" id="Commands.to_html"><a class="viewcode-back" href="../core.html#core.Commands.to_html">[docs]</a>    <span class="k">def</span> <span class="nf">to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        changes a list of command object to a html display, used to show the console on the website</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
             <span class="n">user</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">c</span>
-            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="k">else</span> <span class="s">&quot;*&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
-            <span class="n">usercolor</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;$&quot;</span><span class="p">:</span> <span class="s">&quot;gold&quot;</span><span class="p">,</span> <span class="s">&quot;#&quot;</span><span class="p">:</span> <span class="s">&quot;olive&quot;</span><span class="p">,</span> <span class="s">&quot;?&quot;</span><span class="p">:</span> <span class="s">&quot;darkgrey&quot;</span><span class="p">}[</span><span class="n">user</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">funccolor</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;person&quot;</span><span class="p">:</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;family&quot;</span><span class="p">:</span> <span class="s">&quot;green&quot;</span><span class="p">,</span> <span class="s">&quot;delete&quot;</span><span class="p">:</span> <span class="s">&quot;darkcyan&quot;</span><span class="p">,</span> <span class="s">&quot;merge&quot;</span><span class="p">:</span> <span class="s">&quot;purple&quot;</span><span class="p">,</span>
-                         <span class="s">&quot;parents&quot;</span><span class="p">:</span> <span class="s">&quot;darkgreen&quot;</span><span class="p">,</span><span class="s">&quot;disconnect&quot;</span><span class="p">:</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span>
-                         <span class="s">&quot;head&quot;</span><span class="p">:</span> <span class="s">&quot;darkblue&quot;</span><span class="p">,</span> <span class="s">&quot;divorce&quot;</span><span class="p">:</span> <span class="s">&quot;darkorange&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">)</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="s2">&quot;*&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
+            <span class="n">usercolor</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;$&quot;</span><span class="p">:</span> <span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">:</span> <span class="s2">&quot;olive&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">:</span> <span class="s2">&quot;darkgrey&quot;</span><span class="p">}[</span><span class="n">user</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">funccolor</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;person&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;family&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span> <span class="s2">&quot;merge&quot;</span><span class="p">:</span> <span class="s2">&quot;purple&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;parents&quot;</span><span class="p">:</span> <span class="s2">&quot;darkgreen&quot;</span><span class="p">,</span><span class="s2">&quot;disconnect&quot;</span><span class="p">:</span><span class="s2">&quot;darkred&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;head&quot;</span><span class="p">:</span> <span class="s2">&quot;darkblue&quot;</span><span class="p">,</span> <span class="s2">&quot;divorce&quot;</span><span class="p">:</span> <span class="s2">&quot;darkorange&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">)</span>
             <span class="n">argscolor</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s">&quot;ERROR&quot;</span><span class="p">:</span>
-                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&quot;[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;darkcyan&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">:</span>
+                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">r&quot;[0-9][0-9].[0-9][0-9].[0-9][0-9][0-9][0-9]&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;darkcyan&quot;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">)</span>
-            <span class="n">ret</span> <span class="o">+=</span> <span class="s">&quot;&quot;&quot;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt; &lt;span style=&quot;color:{3}&quot;&gt;{2:&lt;15}&lt;/span&gt; {4}&lt;/br&gt;&quot;&quot;&quot;</span> \
+                    <span class="n">argscolor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt; &lt;span style=&quot;color:{3}&quot;&gt;{2:&lt;15}&lt;/span&gt; {4}&lt;/br&gt;&quot;&quot;&quot;</span> \
                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">usercolor</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">funccolor</span><span class="p">,</span>
-                        <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">argscolor</span><span class="p">)))</span>
+                        <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;&lt;span style=&quot;color:{1}&quot;&gt;{0:&lt;15}&lt;/span&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">argscolor</span><span class="p">)))</span>
 
-        <span class="k">return</span> <span class="n">ret</span>
-</div>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Commands.from_raw"><a class="viewcode-back" href="../core.html#core.Commands.from_raw">[docs]</a>    <span class="k">def</span> <span class="nf">from_raw</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -477,13 +479,13 @@
 <span class="sd">        changes a string of commands to a list of command objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="k">continue</span>
-            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s">&quot;*&quot;</span> <span class="k">else</span> <span class="s">&quot;&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="s2">&quot;*&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">cls</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="CommandLoader"><a class="viewcode-back" href="../core.html#core.CommandLoader">[docs]</a><span class="k">class</span> <span class="nc">CommandLoader</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An object that can execute commands.</span>
@@ -492,161 +494,179 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">accepted</span><span class="o">=</span><span class="p">[]):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">tree</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">accepted</span> <span class="o">=</span> <span class="n">accepted</span> <span class="o">+</span> <span class="p">[</span><span class="s">&quot;$&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accepted</span> <span class="o">=</span> <span class="n">accepted</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;$&quot;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-        <span class="c"># #print(command)</span>
+        <span class="c1"># #print(command)</span>
         <span class="n">user</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">command</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c"># missing last arguments</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c1"># missing last arguments</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">pref</span><span class="p">)</span> <span class="k">for</span> <span class="n">pref</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">accepted</span><span class="p">):</span>
-            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">lower</span><span class="p">())(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">pass</span>
 
 <div class="viewcode-block" id="CommandLoader.person"><a class="viewcode-back" href="../core.html#core.CommandLoader.person">[docs]</a>    <span class="k">def</span> <span class="nf">person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">birth</span><span class="p">,</span> <span class="n">dead</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="c"># #print(&quot;making&quot;,name)</span>
+        <span class="c1"># #print(&quot;making&quot;,name)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">p</span><span class="o">.</span><span class="n">birth</span> <span class="o">=</span> <span class="n">birth</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">dead</span>
-</div>
+        <span class="n">p</span><span class="o">.</span><span class="n">dead</span> <span class="o">=</span> <span class="n">dead</span></div>
+
 <div class="viewcode-block" id="CommandLoader.image"><a class="viewcode-back" href="../core.html#core.CommandLoader.image">[docs]</a>    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-</div>
+        <span class="n">p</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="CommandLoader.rotate"><a class="viewcode-back" href="../core.html#core.CommandLoader.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">+=</span> <span class="p">{</span><span class="s">&quot;left&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;right&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}[</span><span class="n">direction</span><span class="p">]</span>
-</div>
+        <span class="n">p</span><span class="o">.</span><span class="n">image_orient</span> <span class="o">+=</span> <span class="p">{</span><span class="s2">&quot;left&quot;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;right&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">}[</span><span class="n">direction</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="CommandLoader.family"><a class="viewcode-back" href="../core.html#core.CommandLoader.family">[docs]</a>    <span class="k">def</span> <span class="nf">family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">children</span><span class="p">):</span>
-        <span class="c"># #print(&quot;making family&quot;)</span>
-        <span class="n">parentlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+        <span class="c1"># #print(&quot;making family&quot;)</span>
+        <span class="n">parentlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="o">*</span><span class="n">parentlist</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">children</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
-</div>
+        <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">children</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="CommandLoader.delete"><a class="viewcode-back" href="../core.html#core.CommandLoader.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">person</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
-                <span class="c">#print(&quot;delete downlink&quot;)</span>
+                <span class="c1">#print(&quot;delete downlink&quot;)</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-                <span class="c">#print(&quot;delete uplink&quot;)</span>
+                <span class="c1">#print(&quot;delete uplink&quot;)</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">people</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
-        <span class="k">del</span> <span class="n">person</span>
-</div>
+        <span class="k">del</span> <span class="n">person</span></div>
+
 <div class="viewcode-block" id="CommandLoader.merge"><a class="viewcode-back" href="../core.html#core.CommandLoader.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person1</span><span class="p">,</span> <span class="n">person2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">person2</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">person2</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">person2</span><span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">person2</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">person2</span><span class="p">)</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person1</span><span class="p">)</span>
-</div>
+            <span class="k">if</span> <span class="n">old</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">old</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="CommandLoader.disband"><a class="viewcode-back" href="../core.html#core.CommandLoader.disband">[docs]</a>    <span class="k">def</span> <span class="nf">disband</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person1</span><span class="p">,</span> <span class="n">person2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">person1</span><span class="p">,</span> <span class="n">person2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">del</span> <span class="n">f</span>
-</div>
+        <span class="k">del</span> <span class="n">f</span></div>
+
 <div class="viewcode-block" id="CommandLoader.disconnect"><a class="viewcode-back" href="../core.html#core.CommandLoader.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">person1</span><span class="p">,</span> <span class="n">person2</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">person1</span><span class="p">,</span> <span class="n">person2</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span> <span class="k">if</span> <span class="n">child</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">c</span><span class="o">.</span><span class="n">uname</span><span class="p">)]</span>
-</div>
+        <span class="n">f</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span> <span class="k">if</span> <span class="n">child</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">c</span><span class="o">.</span><span class="n">uname</span><span class="p">)]</span></div>
+
 <div class="viewcode-block" id="CommandLoader.parents"><a class="viewcode-back" href="../core.html#core.CommandLoader.parents">[docs]</a>    <span class="k">def</span> <span class="nf">parents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="n">child</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">uname</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">child</span><span class="o">.</span><span class="n">uname</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="CommandLoader.divorce"><a class="viewcode-back" href="../core.html#core.CommandLoader.divorce">[docs]</a>    <span class="k">def</span> <span class="nf">divorce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="n">parentlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="o">*</span><span class="n">parentlist</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">divorced</span> <span class="o">=</span> <span class="bp">True</span>
-</div>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">divorced</span> <span class="o">=</span> <span class="bp">True</span></div>
+
 <div class="viewcode-block" id="CommandLoader.remarry"><a class="viewcode-back" href="../core.html#core.CommandLoader.remarry">[docs]</a>    <span class="k">def</span> <span class="nf">remarry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="n">parentlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="o">*</span><span class="n">parentlist</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">divorced</span> <span class="o">=</span> <span class="bp">False</span>
-</div>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">divorced</span> <span class="o">=</span> <span class="bp">False</span></div>
+
 <div class="viewcode-block" id="CommandLoader.head"><a class="viewcode-back" href="../core.html#core.CommandLoader.head">[docs]</a>    <span class="k">def</span> <span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="CommandLoader.subhead"><a class="viewcode-back" href="../core.html#core.CommandLoader.subhead">[docs]</a>    <span class="k">def</span> <span class="nf">subhead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">subhead</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">subhead</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">p</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="CommandLoader.sibling"><a class="viewcode-back" href="../core.html#core.CommandLoader.sibling">[docs]</a>    <span class="k">def</span> <span class="nf">sibling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family_up</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-</div>
+        <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLoader.rename"><a class="viewcode-back" href="../core.html#core.CommandLoader.rename">[docs]</a>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newname</span><span class="p">,</span> <span class="n">oldname</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">oldname</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_person</span><span class="p">(</span><span class="n">newname</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">families</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">old</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">old</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">ubirth</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="n">ubirth</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">udead</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="n">udead</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">image_index</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="n">image_index</span></div>
+
+
 <div class="viewcode-block" id="CommandLoader.loginas"><a class="viewcode-back" href="../core.html#core.CommandLoader.loginas">[docs]</a>    <span class="k">def</span> <span class="nf">loginas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;not actually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
+        <span class="k">pass</span></div>
+
 <div class="viewcode-block" id="CommandLoader.logout"><a class="viewcode-back" href="../core.html#core.CommandLoader.logout">[docs]</a>    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;not actually a command, but is added to the log to track the author of different commands&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div></div>
+        <span class="k">pass</span></div></div>
+
 <div class="viewcode-block" id="addcommand_ip"><a class="viewcode-back" href="../core.html#core.addcommand_ip">[docs]</a><span class="k">def</span> <span class="nf">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adds a command to the command log for a user that is not logged in.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;?{} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;REMOTE_ADDR&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;?{} {}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;REMOTE_ADDR&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="addcommand_user"><a class="viewcode-back" href="../core.html#core.addcommand_user">[docs]</a><span class="k">def</span> <span class="nf">addcommand_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adds a command to the command log for a user who is logged in</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;#{} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#{} {}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s2">&quot;username&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="addcommand"><a class="viewcode-back" href="../core.html#core.addcommand">[docs]</a><span class="k">def</span> <span class="nf">addcommand</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adds a command to the command log</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="s">&quot;username&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;username&quot;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
         <span class="n">addcommand_user</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-</div>
+        <span class="n">addcommand_ip</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="addcommand_bot"><a class="viewcode-back" href="../core.html#core.addcommand_bot">[docs]</a><span class="k">def</span> <span class="nf">addcommand_bot</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    adds a command to the command log</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;${} {}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;fixerbot&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/data.log&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;${} {}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;fixerbot&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="xmlTest"><a class="viewcode-back" href="../core.html#core.xmlTest">[docs]</a><span class="k">def</span> <span class="nf">xmlTest</span><span class="p">():</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s">&quot;alles.xml&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s2">&quot;alles.xml&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="bashTest"><a class="viewcode-back" href="../core.html#core.bashTest">[docs]</a><span class="k">def</span> <span class="nf">bashTest</span><span class="p">():</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s">&quot;data.log&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_code</span><span class="p">(</span><span class="s2">&quot;data.log&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="rawCode"><a class="viewcode-back" href="../core.html#core.rawCode">[docs]</a><span class="k">def</span> <span class="nf">rawCode</span><span class="p">():</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/data.log&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Commands</span><span class="o">.</span><span class="n">from_raw</span><span class="p">(</span><span class="n">fff</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/data.log&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Commands</span><span class="o">.</span><span class="n">from_raw</span><span class="p">(</span><span class="n">fff</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../core.html#core.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">f</span> <span class="o">=</span> <span class="n">FamilyTree</span><span class="p">()</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s">&quot;dox.xml&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/autodata.log&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
-        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_raw</span><span class="p">())</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s2">&quot;dox.xml&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/autodata.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fff</span><span class="p">:</span>
+        <span class="n">fff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Commands</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">build_commands</span><span class="p">())</span><span class="o">.</span><span class="n">to_raw</span><span class="p">())</span></div>
 
-</div>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
@@ -684,8 +704,8 @@
       &copy;2015, Thorvald_Dox.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
 

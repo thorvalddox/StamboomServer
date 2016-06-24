@@ -28,7 +28,7 @@
     <link rel="prev" title="autoupdate module" href="autoupdate.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -38,88 +38,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-loginhandle">
-<span id="loginhandle-module"></span><h1>loginhandle module<a class="headerlink" href="#module-loginhandle" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="loginhandle.LoginHandler">
-<em class="property">class </em><code class="descclassname">loginhandle.</code><code class="descname">LoginHandler</code><a class="reference internal" href="_modules/loginhandle.html#LoginHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>An object handling the logins</p>
-<dl class="method">
-<dt id="loginhandle.LoginHandler.admins">
-<code class="descname">admins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.admins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.admins" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a list of users with admin access</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.LoginHandler.check_admin">
-<code class="descname">check_admin</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.check_admin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.check_admin" title="Permalink to this definition">¶</a></dt>
-<dd><p>check if the currently logged in user is an admin</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.LoginHandler.get_user_list">
-<code class="descname">get_user_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.get_user_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.get_user_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a list of directiroes containing user data</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.LoginHandler.user">
-<code class="descname">user</code><span class="sig-paren">(</span><em>session</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.user" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the same of the currently logged in user, or an empty string if no user has logged in.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.LoginHandler.valid_login">
-<code class="descname">valid_login</code><span class="sig-paren">(</span><em>name</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.valid_login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.valid_login" title="Permalink to this definition">¶</a></dt>
-<dd><p>check if a username exists and has the correct password</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.LoginHandler.valid_user">
-<code class="descname">valid_user</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#LoginHandler.valid_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.LoginHandler.valid_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>check if a username exists</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="loginhandle.User">
-<em class="property">class </em><code class="descclassname">loginhandle.</code><code class="descname">User</code><span class="sig-paren">(</span><em>name</em>, <em>email</em>, <em>password_hash=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.User" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<dl class="attribute">
-<dt id="loginhandle.User.all_">
-<code class="descname">all_</code><em class="property"> = []</em><a class="headerlink" href="#loginhandle.User.all_" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="loginhandle.User.loadall">
-<em class="property">classmethod </em><code class="descname">loadall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#User.loadall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.User.loadall" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="loginhandle.User.match_password">
-<code class="descname">match_password</code><span class="sig-paren">(</span><em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#User.match_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.User.match_password" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="classmethod">
-<dt id="loginhandle.User.saveall">
-<em class="property">classmethod </em><code class="descname">saveall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#User.saveall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.User.saveall" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="loginhandle.load_users">
-<code class="descclassname">loginhandle.</code><code class="descname">load_users</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#load_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.load_users" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="loginhandle.randomstring">
-<code class="descclassname">loginhandle.</code><code class="descname">randomstring</code><span class="sig-paren">(</span><em>lenght=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/loginhandle.html#randomstring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#loginhandle.randomstring" title="Permalink to this definition">¶</a></dt>
-<dd><p>generates a random lower alphanumerical string with a given lenght</p>
-</dd></dl>
-
+  <div class="section" id="loginhandle-module">
+<h1>loginhandle module<a class="headerlink" href="#loginhandle-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -164,8 +84,8 @@
       &copy;2015, Thorvald_Dox.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
       |
       <a href="_sources/loginhandle.txt"

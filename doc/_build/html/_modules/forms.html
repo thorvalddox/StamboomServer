@@ -27,7 +27,7 @@
     <link rel="up" title="Module code" href="index.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -38,7 +38,7 @@
           <div class="body" role="main">
             
   <h1>Source code for forms</h1><div class="highlight"><pre>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
+<span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Thorvald&#39;</span>
 
 <span class="kn">import</span> <span class="nn">core</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
@@ -59,10 +59,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get data from request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s">&quot;name&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="n">data</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="s">&quot;_&quot;</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="n">data</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span></div>
 <div class="viewcode-block" id="FormCom.buildcommand"><a class="viewcode-back" href="../forms.html#forms.FormCom.buildcommand">[docs]</a>    <span class="k">def</span> <span class="nf">buildcommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">command</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        build a command from a request.form data if the command matches</span>
@@ -71,7 +71,7 @@
             <span class="k">return</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">s</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">submit</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getreq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getreq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">)</span></div>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="FormCom.get_command"><a class="viewcode-back" href="../forms.html#forms.FormCom.get_command">[docs]</a>    <span class="k">def</span> <span class="nf">get_command</span><span class="p">(</span><span class="n">command</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -80,102 +80,120 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">FormCom</span><span class="o">.</span><span class="n">all_</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">buildcommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">request</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">s</span>
+                <span class="k">return</span> <span class="n">s</span></div></div>
 
-</div></div>
+
+<div class="viewcode-block" id="VizForm"><a class="viewcode-back" href="../forms.html#forms.VizForm">[docs]</a><span class="k">class</span> <span class="nc">VizForm</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">link</span><span class="p">,</span><span class="o">*</span><span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link</span> <span class="o">=</span> <span class="n">link</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+<div class="viewcode-block" id="VizForm.get_html"><a class="viewcode-back" href="../forms.html#forms.VizForm.get_html">[docs]</a>    <span class="k">def</span> <span class="nf">get_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+
+
+
 <div class="viewcode-block" id="generate_basic_forms"><a class="viewcode-back" href="../forms.html#forms.generate_basic_forms">[docs]</a><span class="k">def</span> <span class="nf">generate_basic_forms</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    generates the correct FormCom objects to the edit ui</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;parents&quot;</span><span class="p">,</span><span class="s">&quot;parents&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;parent0&quot;</span><span class="p">,</span><span class="s">&quot;parent1&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;addSibling&quot;</span><span class="p">,</span><span class="s">&quot;sibling&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;addSibling&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;remSibling&quot;</span><span class="p">,</span><span class="s">&quot;delete&quot;</span><span class="p">,</span><span class="s">&quot;remSibling&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;dates&quot;</span><span class="p">,</span><span class="s">&quot;person&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;birth&quot;</span><span class="p">,</span><span class="s">&quot;dead&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;addPartner&quot;</span><span class="p">,</span><span class="s">&quot;family&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;addPartner&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;remPartner&quot;</span><span class="p">,</span><span class="s">&quot;delete&quot;</span><span class="p">,</span><span class="s">&quot;remPartner&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;divPartner&quot;</span><span class="p">,</span><span class="s">&quot;divorce&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;divPartner&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;rmrPartner&quot;</span><span class="p">,</span><span class="s">&quot;remarry&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;rmrPartner&quot;</span><span class="p">)</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;child&quot;</span><span class="p">,</span><span class="s">&quot;family&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;partner&quot;</span><span class="p">,</span><span class="s">&quot;addChild&quot;</span><span class="p">,</span><span class="n">submit</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;addChildPress&quot;</span><span class="p">])</span>
-    <span class="n">FormCom</span><span class="p">(</span><span class="s">&quot;child&quot;</span><span class="p">,</span><span class="s">&quot;disconnect&quot;</span><span class="p">,</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;partner&quot;</span><span class="p">,</span><span class="s">&quot;remChild&quot;</span><span class="p">,</span><span class="n">submit</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;remChildPress&quot;</span><span class="p">])</span>
-</div>
-<div class="viewcode-block" id="create_person_dropdown_safe"><a class="viewcode-back" href="../forms.html#forms.create_person_dropdown_safe">[docs]</a><span class="k">def</span> <span class="nf">create_person_dropdown_safe</span><span class="p">(</span><span class="n">pList</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;selector&quot;</span><span class="p">):</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;parents&quot;</span><span class="p">,</span><span class="s2">&quot;parents&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;parent0&quot;</span><span class="p">,</span><span class="s2">&quot;parent1&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;addSibling&quot;</span><span class="p">,</span><span class="s2">&quot;sibling&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;addSibling&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;remSibling&quot;</span><span class="p">,</span><span class="s2">&quot;delete&quot;</span><span class="p">,</span><span class="s2">&quot;remSibling&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;dates&quot;</span><span class="p">,</span><span class="s2">&quot;person&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;birth&quot;</span><span class="p">,</span><span class="s2">&quot;dead&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;addPartner&quot;</span><span class="p">,</span><span class="s2">&quot;family&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;addPartner&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;remPartner&quot;</span><span class="p">,</span><span class="s2">&quot;delete&quot;</span><span class="p">,</span><span class="s2">&quot;remPartner&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;divPartner&quot;</span><span class="p">,</span><span class="s2">&quot;divorce&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;divPartner&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;rmrPartner&quot;</span><span class="p">,</span><span class="s2">&quot;remarry&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;rmrPartner&quot;</span><span class="p">)</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">,</span><span class="s2">&quot;family&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;partner&quot;</span><span class="p">,</span><span class="s2">&quot;addChild&quot;</span><span class="p">,</span><span class="n">submit</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;addChildPress&quot;</span><span class="p">])</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;child&quot;</span><span class="p">,</span><span class="s2">&quot;disconnect&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;partner&quot;</span><span class="p">,</span><span class="s2">&quot;remChild&quot;</span><span class="p">,</span><span class="n">submit</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;remChildPress&quot;</span><span class="p">])</span>
+    <span class="n">FormCom</span><span class="p">(</span><span class="s2">&quot;rename&quot;</span><span class="p">,</span><span class="s2">&quot;rename&quot;</span><span class="p">,</span><span class="s2">&quot;newname&quot;</span><span class="p">,</span><span class="s2">&quot;name&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="create_person_dropdown_safe"><a class="viewcode-back" href="../forms.html#forms.create_person_dropdown_safe">[docs]</a><span class="k">def</span> <span class="nf">create_person_dropdown_safe</span><span class="p">(</span><span class="n">pList</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;selector&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    creates a dropdown list, forcing you to take a given option</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">    &lt;select name=&quot;{0}&quot;&gt;</span>
-<span class="s">        &lt;option value=&quot;*&quot; {2}&gt; -- geen --&lt;/option&gt;</span>
-<span class="s">        {1}</span>
-<span class="s">    &lt;/select&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;option value=&quot;{}&quot; {}&gt;{}&lt;/option&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="s">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">default</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span>
-        <span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pList</span><span class="p">)),</span><span class="s">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;&quot;</span>
-    <span class="p">)</span>
-</div>
-<div class="viewcode-block" id="create_person_dropdown"><a class="viewcode-back" href="../forms.html#forms.create_person_dropdown">[docs]</a><span class="k">def</span> <span class="nf">create_person_dropdown</span><span class="p">(</span><span class="n">pList</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;selector&quot;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;select name=&quot;{0}&quot;&gt;</span>
+<span class="s2">        &lt;option value=&quot;*&quot; {2}&gt; -- geen --&lt;/option&gt;</span>
+<span class="s2">        {1}</span>
+<span class="s2">    &lt;/select&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;option value=&quot;{}&quot; {}&gt;{}&lt;/option&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="s2">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">default</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pList</span><span class="p">)),</span><span class="s2">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="create_person_dropdown"><a class="viewcode-back" href="../forms.html#forms.create_person_dropdown">[docs]</a><span class="k">def</span> <span class="nf">create_person_dropdown</span><span class="p">(</span><span class="n">pList</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;selector&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    creates a dropdown list, where the user can select a person or type the name of a new one</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">    &lt;input name=&quot;{0}&quot; list=&quot;{0}_data&quot; value=&quot;{3}&quot;&gt;</span>
-<span class="s">    &lt;datalist id=&quot;{0}_data&quot;&gt;</span>
-<span class="s">        &lt;option value=&quot;*&quot; {2}&gt; -- geen --&lt;/option&gt;</span>
-<span class="s">        {1}</span>
-<span class="s">    &lt;/datalist&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="p">(</span><span class="s">&quot;&quot;&quot;&lt;option value=&quot;{}&quot; {}&gt;{}&lt;/option&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="s">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">default</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span>
-        <span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pList</span><span class="p">)),</span><span class="s">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
-               <span class="p">(</span><span class="n">default</span><span class="o">.</span><span class="n">uname</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-</div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;input name=&quot;{0}&quot; list=&quot;{0}_data&quot; value=&quot;{3}&quot;&gt;</span>
+<span class="s2">    &lt;datalist id=&quot;{0}_data&quot;&gt;</span>
+<span class="s2">        &lt;option value=&quot;*&quot; {2}&gt; -- geen --&lt;/option&gt;</span>
+<span class="s2">        {1}</span>
+<span class="s2">    &lt;/datalist&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;option value=&quot;{}&quot; {}&gt;{}&lt;/option&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="s2">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="n">default</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pList</span><span class="p">)),</span><span class="s2">&quot;selected=&#39;selected&#39;&quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+               <span class="p">(</span><span class="n">default</span><span class="o">.</span><span class="n">uname</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
 <div class="viewcode-block" id="create_person_link"><a class="viewcode-back" href="../forms.html#forms.create_person_link">[docs]</a><span class="k">def</span> <span class="nf">create_person_link</span><span class="p">(</span><span class="n">pList</span><span class="p">,</span><span class="n">split</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates aa list of people, splitting it in columns after a given amount.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">    &lt;table&gt;</span>
-<span class="s">    &lt;tr&gt;</span>
-<span class="s">    &lt;td&gt;</span>
-<span class="s">    &lt;ul&gt;</span>
-<span class="s">        {}</span>
-<span class="s">    &lt;/ul&gt;</span>
-<span class="s">    &lt;/td&gt;</span>
-<span class="s">    &lt;/tr&gt;</span>
-<span class="s">    &lt;/table&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;table&gt;</span>
+<span class="s2">    &lt;tr&gt;</span>
+<span class="s2">    &lt;td&gt;</span>
+<span class="s2">    &lt;ul&gt;</span>
+<span class="s2">        {}</span>
+<span class="s2">    &lt;/ul&gt;</span>
+<span class="s2">    &lt;/td&gt;</span>
+<span class="s2">    &lt;/tr&gt;</span>
+<span class="s2">    &lt;/table&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
         <span class="sd">&quot;&quot;&quot;&lt;li&gt;&lt;a href=&#39;/stamboom/edit/{}&#39;&gt;{}&lt;/a&gt;&lt;/li&gt;{}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;&lt;/ul&gt;&lt;/td&gt;&lt;td&gt;&lt;ul&gt;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">][</span><span class="nb">bool</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">split</span><span class="p">)]</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">uname</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;&lt;/ul&gt;&lt;/td&gt;&lt;td&gt;&lt;ul&gt;&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">][</span><span class="nb">bool</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">split</span><span class="p">)]</span>
         <span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pList</span><span class="p">)</span>
-    <span class="p">))</span>
-</div>
-<span class="n">invalidPerson</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;InvalidPerson&quot;</span><span class="p">,</span><span class="s">&quot;name,uname&quot;</span><span class="p">)(</span><span class="s">&quot;--none--&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    <span class="p">))</span></div>
+
+<span class="n">invalidPerson</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;InvalidPerson&quot;</span><span class="p">,</span><span class="s2">&quot;name,uname&quot;</span><span class="p">)(</span><span class="s2">&quot;--none--&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="edit_parents_form"><a class="viewcode-back" href="../forms.html#forms.edit_parents_form">[docs]</a><span class="k">def</span> <span class="nf">edit_parents_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="n">parents</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_parents</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">parents</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">))</span>
-    <span class="n">selectBoxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="s">&quot;parent&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parents</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;parents/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Ouder1:{}&lt;br/&gt;</span>
-<span class="s">         Ouder2:{}&lt;br/&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; value=&quot;Verzend wijzigingen&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">selectBoxes</span><span class="p">)</span>
+    <span class="n">selectBoxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="s2">&quot;parent&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parents</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;parents/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Ouder1:{}&lt;br/&gt;</span>
+<span class="s2">         Ouder2:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; value=&quot;Verzend wijzigingen&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">selectBoxes</span><span class="p">)</span></div>
 
-</div>
+
+<div class="viewcode-block" id="edit_name_form"><a class="viewcode-back" href="../forms.html#forms.edit_name_form">[docs]</a><span class="k">def</span> <span class="nf">edit_name_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
+    <span class="n">selectBox</span> <span class="o">=</span> <span class="n">create_person_dropdown</span><span class="p">([],</span><span class="n">person</span><span class="p">,</span><span class="s2">&quot;newname&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;rename/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         nieuwe naam:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; value=&quot;Verzend wijzigingen&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selectBox</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="edit_partners_form"><a class="viewcode-back" href="../forms.html#forms.edit_partners_form">[docs]</a><span class="k">def</span> <span class="nf">edit_partners_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="n">partners</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
-    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;addPartner&quot;</span><span class="p">)</span>
-    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;remPartner&quot;</span><span class="p">)</span>
+    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;addPartner&quot;</span><span class="p">)</span>
+    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;remPartner&quot;</span><span class="p">)</span>
     <span class="n">divBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="ow">not</span> <span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">divorced</span><span class="p">,</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
-                                     <span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;divPartner&quot;</span><span class="p">)</span>
+                                     <span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;divPartner&quot;</span><span class="p">)</span>
     <span class="n">rmrBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tree</span><span class="o">.</span><span class="n">get_family</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">divorced</span><span class="p">,</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
-                                     <span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;rmrPartner&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;addPartner/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Selecteer nieuwe partner:{}&lt;br/&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addBox</span><span class="p">)</span> <span class="o">+</span> \
+                                     <span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;rmrPartner&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;addPartner/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Selecteer nieuwe partner:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addBox</span><span class="p">)</span> <span class="o">+</span> \
     <span class="sd">&quot;&quot;&quot;&lt;form action=&quot;remPartner/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
 <span class="sd">         Verwijder partner:{}&lt;br/&gt;</span>
 <span class="sd">         &lt;input type=&quot;submit&quot; value=&quot;Verwijder &amp; Verzend&quot;&gt;</span>
@@ -187,52 +205,52 @@
     <span class="sd">&quot;&quot;&quot;&lt;form action=&quot;rmrPartner/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
 <span class="sd">         Hertrouwen:{}&lt;br/&gt;</span>
 <span class="sd">         &lt;input type=&quot;submit&quot; value=&quot;Hertrouw &amp; Verzend&quot;&gt;</span>
-<span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmrBox</span><span class="p">)</span>
-</div>
+<span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmrBox</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="edit_siblings_form"><a class="viewcode-back" href="../forms.html#forms.edit_siblings_form">[docs]</a><span class="k">def</span> <span class="nf">edit_siblings_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="n">partners</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">))</span>
-    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;addSibling&quot;</span><span class="p">)</span>
-    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;remSibling&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;addSibling/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Selecteer nieuwe broer/zus:{}&lt;br/&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addBox</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;addSibling&quot;</span><span class="p">)</span>
+    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;remSibling&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;addSibling/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Selecteer nieuwe broer/zus:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">addBox</span><span class="p">)</span> <span class="o">+</span> \
     <span class="sd">&quot;&quot;&quot;&lt;form action=&quot;remSibling/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
 <span class="sd">         Verwijder broer/zus:{}&lt;br/&gt;</span>
 <span class="sd">         &lt;input type=&quot;submit&quot; value=&quot;Verwijder &amp; Verzend&quot;&gt;</span>
-<span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remBox</span><span class="p">)</span>
-</div>
+<span class="sd">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remBox</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="edit_children_form"><a class="viewcode-back" href="../forms.html#forms.edit_children_form">[docs]</a><span class="k">def</span> <span class="nf">edit_children_form</span><span class="p">(</span><span class="n">tree</span><span class="p">:</span><span class="n">core</span><span class="o">.</span><span class="n">FamilyTree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
-    <span class="n">partBox</span> <span class="o">=</span> <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;partner&quot;</span><span class="p">)</span>
-    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;addChild&quot;</span><span class="p">)</span>
-    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s">&quot;remChild&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;child/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Selecteer Partner:{}&lt;br/&gt;</span>
-<span class="s">         Selecteer nieuw kind:{}&lt;br/&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; name=&quot;addChildPress&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;&lt;br/&gt;</span>
-<span class="s">         Verwijder kind:{}&lt;br/&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; name=&quot;remChildPress&quot; value=&quot;Verwijder &amp; Verzend&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">partBox</span><span class="p">,</span><span class="n">addBox</span><span class="p">,</span><span class="n">remBox</span><span class="p">)</span>
-</div>
+    <span class="n">partBox</span> <span class="o">=</span> <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_partners</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;partner&quot;</span><span class="p">)</span>
+    <span class="n">addBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">people_all</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;addChild&quot;</span><span class="p">)</span>
+    <span class="n">remBox</span> <span class="o">=</span>  <span class="n">create_person_dropdown</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="n">person</span><span class="p">),</span><span class="bp">None</span><span class="p">,</span><span class="s2">&quot;remChild&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;child/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Selecteer Partner:{}&lt;br/&gt;</span>
+<span class="s2">         Selecteer nieuw kind:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; name=&quot;addChildPress&quot; value=&quot;Voeg toe &amp; Verzend&quot;&gt;&lt;br/&gt;</span>
+<span class="s2">         Verwijder kind:{}&lt;br/&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; name=&quot;remChildPress&quot; value=&quot;Verwijder &amp; Verzend&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">partBox</span><span class="p">,</span><span class="n">addBox</span><span class="p">,</span><span class="n">remBox</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="edit_date_form"><a class="viewcode-back" href="../forms.html#forms.edit_date_form">[docs]</a><span class="k">def</span> <span class="nf">edit_date_form</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;dates/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Geboren op:&lt;input type=&quot;text&quot; name=&quot;birth&quot; value=&quot;{}&quot;&gt;&lt;/br&gt;</span>
-<span class="s">         Gestorven op:&lt;input type=&quot;text&quot; name=&quot;dead&quot; value=&quot;{}&quot;&gt;&lt;/br&gt;</span>
-<span class="s">         &lt;input type=&quot;submit&quot; value=&quot;Verzend wijzigingen&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span>
-</div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;dates/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Geboren op:&lt;input type=&quot;text&quot; name=&quot;birth&quot; value=&quot;{}&quot;&gt;&lt;/br&gt;</span>
+<span class="s2">         Gestorven op:&lt;input type=&quot;text&quot; name=&quot;dead&quot; value=&quot;{}&quot;&gt;&lt;/br&gt;</span>
+<span class="s2">         &lt;input type=&quot;submit&quot; value=&quot;Verzend wijzigingen&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="edit_image_form"><a class="viewcode-back" href="../forms.html#forms.edit_image_form">[docs]</a><span class="k">def</span> <span class="nf">edit_image_form</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s">        &lt;form action=&quot;upload/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">        selecteer .jpg bestand :&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;&lt;br /&gt;</span>
-<span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;&lt;br/&gt;</span>
-<span class="s">    &lt;/form&gt;</span>
-<span class="s">    &lt;form action=&quot;rotate/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Draai rechtsom&quot; name=&quot;cw&quot;&gt;</span>
-<span class="s">        &lt;input type=&quot;submit&quot; value=&quot;Draai linksom&quot; name=&quot;ccw&quot;&gt;</span>
-<span class="s">    &lt;/form&gt;</span>
-<span class="s">    &quot;&quot;&quot;</span>
-</div>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        &lt;form action=&quot;upload/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">        selecteer .jpg bestand :&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;&lt;br /&gt;</span>
+<span class="s2">        &lt;input type=&quot;submit&quot; value=&quot;Upload&quot;&gt;&lt;br/&gt;</span>
+<span class="s2">    &lt;/form&gt;</span>
+<span class="s2">    &lt;form action=&quot;rotate/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">        &lt;input type=&quot;submit&quot; value=&quot;Draai rechtsom&quot; name=&quot;cw&quot;&gt;</span>
+<span class="s2">        &lt;input type=&quot;submit&quot; value=&quot;Draai linksom&quot; name=&quot;ccw&quot;&gt;</span>
+<span class="s2">    &lt;/form&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span></div>
+
 <div class="viewcode-block" id="make_forms"><a class="viewcode-back" href="../forms.html#forms.make_forms">[docs]</a><span class="k">def</span> <span class="nf">make_forms</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
     <span class="k">yield</span> <span class="n">edit_parents_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_siblings_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
@@ -240,18 +258,20 @@
     <span class="k">yield</span> <span class="n">edit_children_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_date_form</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
     <span class="k">yield</span> <span class="n">edit_image_form</span><span class="p">()</span>
-</div>
+    <span class="k">yield</span> <span class="n">edit_name_form</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="disabled_forms"><a class="viewcode-back" href="../forms.html#forms.disabled_forms">[docs]</a><span class="k">def</span> <span class="nf">disabled_forms</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="n">person</span><span class="p">):</span>
-    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
-    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
-    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
-    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
-    <span class="k">yield</span> <span class="s">&quot;&quot;&quot;&lt;form action=&quot;dates/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
-<span class="s">         Geboren op:{}&lt;/br&gt;</span>
-<span class="s">         Gestorven op:{}&lt;/br&gt;</span>
-<span class="s">         &lt;a href=&#39;login/&#39;&gt;log in om te bewerken&lt;/a&gt;</span>
-<span class="s">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span>
-    <span class="k">yield</span> <span class="s">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span></div>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&quot;&quot;&lt;form action=&quot;dates/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span>
+<span class="s2">         Geboren op:{}&lt;/br&gt;</span>
+<span class="s2">         Gestorven op:{}&lt;/br&gt;</span>
+<span class="s2">         &lt;a href=&#39;login/&#39;&gt;log in om te bewerken&lt;/a&gt;</span>
+<span class="s2">    &lt;/form&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birth</span><span class="p">,</span><span class="n">person</span><span class="o">.</span><span class="n">dead</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span>
+    <span class="k">yield</span> <span class="s2">&quot;&lt;a href=&#39;login/&#39;&gt;log in om&lt;/br&gt;te bewerken&lt;/a&gt;&quot;</span></div>
 </pre></div>
 
           </div>
@@ -288,8 +308,8 @@
       &copy;2015, Thorvald_Dox.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
 

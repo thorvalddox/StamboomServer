@@ -27,7 +27,7 @@
     <link rel="up" title="Module code" href="index.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -38,48 +38,48 @@
           <div class="body" role="main">
             
   <h1>Source code for imagechanger</h1><div class="highlight"><pre>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Thorvald&#39;</span>
+<span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Thorvald&#39;</span>
 
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">os.path</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
 
-<span class="n">allowed_extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;.jpg&quot;</span><span class="p">]</span>
+<span class="n">allowed_extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.jpg&quot;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="check_valid"><a class="viewcode-back" href="../imagechanger.html#imagechanger.check_valid">[docs]</a><span class="k">def</span> <span class="nf">check_valid</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">allowed_extensions</span><span class="p">)</span>
-</div>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">allowed_extensions</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="name_to_path"><a class="viewcode-back" href="../imagechanger.html#imagechanger.name_to_path">[docs]</a><span class="k">def</span> <span class="nf">name_to_path</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/kopkes/{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-</div>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="s2">&quot;StamboomServer/static/kopkes/{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="makeversion"><a class="viewcode-back" href="../imagechanger.html#imagechanger.makeversion">[docs]</a><span class="k">def</span> <span class="nf">makeversion</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="n">location</span> <span class="o">=</span> <span class="n">name_to_path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="n">version</span> <span class="o">=</span> <span class="n">location</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">version</span><span class="p">):</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="n">location</span> <span class="o">+</span> <span class="s">&quot;v&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">location</span> <span class="o">+</span> <span class="s2">&quot;v&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
-</div>
+    <span class="k">return</span><span class="p">(</span><span class="n">version</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="change_image"><a class="viewcode-back" href="../imagechanger.html#imagechanger.change_image">[docs]</a><span class="k">def</span> <span class="nf">change_image</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
     <span class="n">newindex</span> <span class="o">=</span> <span class="n">ImagePath</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;start saving&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;start saving&quot;</span><span class="p">)</span>
     <span class="nb">file</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">newindex</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;end saving&quot;</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">newindex</span><span class="p">)</span>
-</div>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;end saving&quot;</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">newindex</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="rotate_image"><a class="viewcode-back" href="../imagechanger.html#imagechanger.rotate_image">[docs]</a><span class="k">def</span> <span class="nf">rotate_image</span><span class="p">(</span><span class="n">oldpath</span><span class="p">,</span><span class="n">newpath</span><span class="p">,</span><span class="n">orient</span><span class="p">):</span>
     <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">oldpath</span><span class="p">)</span>
     <span class="n">imr</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">90</span><span class="o">*</span><span class="n">orient</span><span class="p">)</span>
-    <span class="n">imr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">newpath</span><span class="p">)</span>
-</div>
+    <span class="n">imr</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">newpath</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="destroy_subs"><a class="viewcode-back" href="../imagechanger.html#imagechanger.destroy_subs">[docs]</a><span class="k">def</span> <span class="nf">destroy_subs</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
     <span class="n">paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get_wild</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="copy_images"><a class="viewcode-back" href="../imagechanger.html#imagechanger.copy_images">[docs]</a><span class="k">def</span> <span class="nf">copy_images</span><span class="p">(</span><span class="n">person</span><span class="p">):</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">person</span><span class="o">.</span><span class="n">uname</span>
     <span class="n">source</span> <span class="o">=</span> <span class="n">name_to_path</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -88,55 +88,56 @@
     <span class="n">number</span> <span class="o">=</span> <span class="n">ImagePath</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span></div>
 
-</div>
+
 <div class="viewcode-block" id="ImagePath"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath">[docs]</a><span class="k">class</span> <span class="nc">ImagePath</span><span class="p">:</span>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="ImagePath.new"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.new">[docs]</a>    <span class="k">def</span> <span class="nf">new</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">count</span><span class="p">():</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">i</span>
+                <span class="k">return</span> <span class="n">i</span></div>
 
-</div>
+
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ImagePath.get"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">genstring</span><span class="o">=</span><span class="s">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="p">):</span>
-        <span class="n">suffix</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;_r&quot;</span><span class="p">,</span><span class="s">&quot;_o&quot;</span><span class="p">,</span><span class="s">&quot;_l&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span>
-        <span class="n">base</span> <span class="o">=</span> <span class="s">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-        <span class="n">rot</span> <span class="o">=</span> <span class="s">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">suffix</span><span class="p">)</span>
+<div class="viewcode-block" id="ImagePath.get"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">genstring</span><span class="o">=</span><span class="s2">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="p">):</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="s2">&quot;_r&quot;</span><span class="p">,</span><span class="s2">&quot;_o&quot;</span><span class="p">,</span><span class="s2">&quot;_l&quot;</span><span class="p">][</span><span class="n">orient</span><span class="p">]</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">rot</span> <span class="o">=</span> <span class="s2">&quot;StamboomServer/static/images/IM{:06}{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">suffix</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
-            <span class="n">base</span> <span class="o">=</span> <span class="s">&quot;StamboomServer/static/images/error.jpg&quot;</span>
-            <span class="n">rot</span> <span class="o">=</span> <span class="s">&quot;StamboomServer/static/images/error{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="s2">&quot;StamboomServer/static/images/error.jpg&quot;</span>
+            <span class="n">rot</span> <span class="o">=</span> <span class="s2">&quot;StamboomServer/static/images/error{}.jpg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">rot</span><span class="p">):</span>
             <span class="n">rotate_image</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">rot</span><span class="p">,</span><span class="n">orient</span><span class="p">)</span>
-        <span class="k">return</span><span class="p">(</span><span class="n">genstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">suffix</span><span class="p">))</span>
-</div>
+        <span class="k">return</span><span class="p">(</span><span class="n">genstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">suffix</span><span class="p">))</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="ImagePath.trunkate"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.trunkate">[docs]</a>    <span class="k">def</span> <span class="nf">trunkate</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">):</span>
-        <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;{:s}_{:d}x{:d}.{:s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
-        <span class="c">#path = &quot;%s_%dx%d.%s&quot; % (delim_array[0], width, height, delim_array[1])</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
-            <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
+        <span class="n">filename</span><span class="p">,</span> <span class="n">extension</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;{:s}_{:d}x{:d}.{:s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">extension</span><span class="p">)</span>
+        <span class="c1">#path = &quot;%s_%dx%d.%s&quot; % (delim_array[0], width, height, delim_array[1])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">):</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">image</span><span class="p">)</span>
             <span class="n">old_width</span><span class="p">,</span> <span class="n">old_height</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span>
             <span class="n">scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_width</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">old_height</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="c"># Image needs to be scaled</span>
+                <span class="c1"># Image needs to be scaled</span>
                 <span class="n">new_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_width</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">old_height</span><span class="p">)</span>
                 <span class="n">newimage</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">new_size</span><span class="p">,</span> <span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span>
-                <span class="n">newimage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+                <span class="n">newimage</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">path</span>
-</div>
+                <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;StamboomServer/static/&quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span> <span class="n">im</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="ImagePath.get_static"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.get_static">[docs]</a>    <span class="k">def</span> <span class="nf">get_static</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">orient</span><span class="p">,</span><span class="s">&quot;images/IM{:06}{}.jpg&quot;</span><span class="p">))</span></div>
+        <span class="k">return</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">orient</span><span class="p">,</span><span class="s2">&quot;images/IM{:06}{}.jpg&quot;</span><span class="p">))</span></div>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="ImagePath.get_wild"><a class="viewcode-back" href="../imagechanger.html#imagechanger.ImagePath.get_wild">[docs]</a>    <span class="k">def</span> <span class="nf">get_wild</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-        <span class="k">return</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;StamboomServer/static/images/IM{:06}_*.jpg&quot;</span><span class="p">))</span>
-</pre></div></div></div>
+        <span class="k">return</span><span class="p">(</span><span class="n">ImagePath</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;StamboomServer/static/images/IM{:06}_*.jpg&quot;</span><span class="p">))</span></div></div>
+
+</pre></div>
 
           </div>
         </div>
@@ -172,8 +173,8 @@
       &copy;2015, Thorvald_Dox.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
 

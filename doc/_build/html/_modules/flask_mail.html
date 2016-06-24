@@ -27,7 +27,7 @@
     <link rel="up" title="Module code" href="index.html" />
    
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
   <body role="document">  
@@ -38,7 +38,7 @@
           <div class="body" role="main">
             
   <h1>Source code for flask_mail</h1><div class="highlight"><pre>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    flaskext.mail</span>
 <span class="sd">    ~~~~~~~~~~~~~</span>
@@ -50,7 +50,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">with_statement</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;0.9.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.9.1&#39;</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">blinker</span>
@@ -84,7 +84,7 @@
     <span class="n">text_type</span> <span class="o">=</span> <span class="nb">unicode</span>
     <span class="n">message_policy</span> <span class="o">=</span> <span class="bp">None</span>
 
-<span class="n">charset</span><span class="o">.</span><span class="n">add_charset</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">charset</span><span class="o">.</span><span class="n">SHORTEST</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="n">charset</span><span class="o">.</span><span class="n">add_charset</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">charset</span><span class="o">.</span><span class="n">SHORTEST</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="FlaskMailUnicodeDecodeError"><a class="viewcode-back" href="../flask_mail.html#flask_mail.FlaskMailUnicodeDecodeError">[docs]</a><span class="k">class</span> <span class="nc">FlaskMailUnicodeDecodeError</span><span class="p">(</span><span class="ne">UnicodeDecodeError</span><span class="p">):</span>
@@ -94,10 +94,10 @@
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">original</span> <span class="o">=</span> <span class="ne">UnicodeDecodeError</span><span class="o">.</span><span class="n">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">. You passed in </span><span class="si">%r</span><span class="s"> (</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">. You passed in </span><span class="si">%r</span><span class="s1"> (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">))</span></div>
 
-</div>
-<div class="viewcode-block" id="force_text"><a class="viewcode-back" href="../flask_mail.html#flask_mail.force_text">[docs]</a><span class="k">def</span> <span class="nf">force_text</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s">&#39;strict&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="force_text"><a class="viewcode-back" href="../flask_mail.html#flask_mail.force_text">[docs]</a><span class="k">def</span> <span class="nf">force_text</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;strict&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Similar to smart_text, except that lazy instances are resolved to</span>
 <span class="sd">    strings, rather than kept as lazy objects.</span>
@@ -114,7 +114,7 @@
                     <span class="n">s</span> <span class="o">=</span> <span class="n">text_type</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">s</span> <span class="o">=</span> <span class="n">text_type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;__unicode__&#39;</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;__unicode__&#39;</span><span class="p">):</span>
                 <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">s</span> <span class="o">=</span> <span class="n">text_type</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
@@ -124,21 +124,21 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">FlaskMailUnicodeDecodeError</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">force_text</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">strings_only</span><span class="p">,</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">force_text</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">strings_only</span><span class="p">,</span>
                     <span class="n">errors</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">s</span>
-</div>
-<div class="viewcode-block" id="sanitize_subject"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_subject">[docs]</a><span class="k">def</span> <span class="nf">sanitize_subject</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span></div>
+
+<div class="viewcode-block" id="sanitize_subject"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_subject">[docs]</a><span class="k">def</span> <span class="nf">sanitize_subject</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">subject</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">subject</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
-            <span class="n">subject</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">subject</span>
-</div>
-<div class="viewcode-block" id="sanitize_address"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_address">[docs]</a><span class="k">def</span> <span class="nf">sanitize_address</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">):</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">subject</span></div>
+
+<div class="viewcode-block" id="sanitize_address"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_address">[docs]</a><span class="k">def</span> <span class="nf">sanitize_address</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
         <span class="n">addr</span> <span class="o">=</span> <span class="n">parseaddr</span><span class="p">(</span><span class="n">force_text</span><span class="p">(</span><span class="n">addr</span><span class="p">))</span>
     <span class="n">nm</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
@@ -146,27 +146,27 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">nm</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
-        <span class="n">nm</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+        <span class="n">nm</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">nm</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">addr</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>  <span class="c"># IDN</span>
-        <span class="k">if</span> <span class="s">&#39;@&#39;</span> <span class="ow">in</span> <span class="n">addr</span><span class="p">:</span>
-            <span class="n">localpart</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">addr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;@&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">addr</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>  <span class="c1"># IDN</span>
+        <span class="k">if</span> <span class="s1">&#39;@&#39;</span> <span class="ow">in</span> <span class="n">addr</span><span class="p">:</span>
+            <span class="n">localpart</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">addr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">localpart</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Header</span><span class="p">(</span><span class="n">localpart</span><span class="p">,</span> <span class="n">encoding</span><span class="p">))</span>
-            <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;idna&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
-            <span class="n">addr</span> <span class="o">=</span> <span class="s">&#39;@&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">localpart</span><span class="p">,</span> <span class="n">domain</span><span class="p">])</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;idna&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+            <span class="n">addr</span> <span class="o">=</span> <span class="s1">&#39;@&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">localpart</span><span class="p">,</span> <span class="n">domain</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">addr</span> <span class="o">=</span> <span class="n">Header</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">formataddr</span><span class="p">((</span><span class="n">nm</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">formataddr</span><span class="p">((</span><span class="n">nm</span><span class="p">,</span> <span class="n">addr</span><span class="p">))</span></div>
 
-</div>
-<div class="viewcode-block" id="sanitize_addresses"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_addresses">[docs]</a><span class="k">def</span> <span class="nf">sanitize_addresses</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">encoding</span><span class="p">),</span> <span class="n">addresses</span><span class="p">)</span>
 
-</div>
+<div class="viewcode-block" id="sanitize_addresses"><a class="viewcode-back" href="../flask_mail.html#flask_mail.sanitize_addresses">[docs]</a><span class="k">def</span> <span class="nf">sanitize_addresses</span><span class="p">(</span><span class="n">addresses</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">encoding</span><span class="p">),</span> <span class="n">addresses</span><span class="p">)</span></div>
+
+
 <span class="k">def</span> <span class="nf">_has_newline</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Used by has_bad_header to check for \\r or \\n&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">line</span> <span class="ow">and</span> <span class="p">(</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">line</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 
@@ -203,19 +203,19 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">username</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
             <span class="n">host</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">host</span>
-</div>
+        <span class="k">return</span> <span class="n">host</span></div>
+
 <div class="viewcode-block" id="Connection.send"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Connection.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">envelope_from</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Verifies and sends message.</span>
 
 <span class="sd">        :param message: Message instance.</span>
 <span class="sd">        :param envelope_from: Email address to be used in MAIL FROM command.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">assert</span> <span class="n">message</span><span class="o">.</span><span class="n">send_to</span><span class="p">,</span> <span class="s">&quot;No recipients have been added&quot;</span>
+        <span class="k">assert</span> <span class="n">message</span><span class="o">.</span><span class="n">send_to</span><span class="p">,</span> <span class="s2">&quot;No recipients have been added&quot;</span>
 
         <span class="k">assert</span> <span class="n">message</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="p">(</span>
-                <span class="s">&quot;The message does not specify a sender and a default sender &quot;</span>
-                <span class="s">&quot;has not been configured&quot;</span><span class="p">)</span>
+                <span class="s2">&quot;The message does not specify a sender and a default sender &quot;</span>
+                <span class="s2">&quot;has not been configured&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">has_bad_headers</span><span class="p">():</span>
             <span class="k">raise</span> <span class="n">BadHeaderError</span>
@@ -238,8 +238,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">num_emails</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configure_host</span><span class="p">()</span>
-</div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configure_host</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Connection.send_message"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Connection.send_message">[docs]</a>    <span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shortcut for send(msg).</span>
 
@@ -248,13 +248,13 @@
 <span class="sd">        :versionadded: 0.3.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Message</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">Message</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="BadHeaderError"><a class="viewcode-back" href="../flask_mail.html#flask_mail.BadHeaderError">[docs]</a><span class="k">class</span> <span class="nc">BadHeaderError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="k">pass</span>
+    <span class="k">pass</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Attachment"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Attachment">[docs]</a><span class="k">class</span> <span class="nc">Attachment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Encapsulates file attachment information.</span>
 
@@ -271,10 +271,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">content_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">disposition</span> <span class="o">=</span> <span class="n">disposition</span> <span class="ow">or</span> <span class="s">&#39;attachment&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disposition</span> <span class="o">=</span> <span class="n">disposition</span> <span class="ow">or</span> <span class="s1">&#39;attachment&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Message"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message">[docs]</a><span class="k">class</span> <span class="nc">Message</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Encapsulates an email message.</span>
 
@@ -294,7 +294,7 @@
 <span class="sd">    :param rcpt_options:  A list of ESMTP options to be used in RCPT commands</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
                  <span class="n">recipients</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">html</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -309,10 +309,10 @@
                  <span class="n">mail_options</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">rcpt_options</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-        <span class="n">sender</span> <span class="o">=</span> <span class="n">sender</span> <span class="ow">or</span> <span class="n">current_app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s">&#39;mail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default_sender</span>
+        <span class="n">sender</span> <span class="o">=</span> <span class="n">sender</span> <span class="ow">or</span> <span class="n">current_app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default_sender</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">sender</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> &lt;</span><span class="si">%s</span><span class="s">&gt;&quot;</span> <span class="o">%</span> <span class="n">sender</span>
+            <span class="n">sender</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="n">sender</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">recipients</span> <span class="o">=</span> <span class="n">recipients</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="n">subject</span>
@@ -334,76 +334,76 @@
     <span class="k">def</span> <span class="nf">send_to</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipients</span><span class="p">)</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bcc</span> <span class="ow">or</span> <span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="ow">or</span> <span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s">&#39;plain&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a MIMEText object with the given subtype (default: &#39;plain&#39;)</span>
 <span class="sd">        If the text is unicode, the utf-8 charset is used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">charset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s">&#39;utf-8&#39;</span>
+        <span class="n">charset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s1">&#39;utf-8&#39;</span>
         <span class="k">return</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">_subtype</span><span class="o">=</span><span class="n">subtype</span><span class="p">,</span> <span class="n">_charset</span><span class="o">=</span><span class="n">charset</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates the email&quot;&quot;&quot;</span>
-        <span class="n">ascii_attachments</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s">&#39;mail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ascii_attachments</span>
-        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s">&#39;utf-8&#39;</span>
+        <span class="n">ascii_attachments</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ascii_attachments</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s1">&#39;utf-8&#39;</span>
 
         <span class="n">attachments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attachments</span> <span class="ow">or</span> <span class="p">[]</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attachments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">:</span>
-            <span class="c"># No html content and zero attachments means plain text</span>
+            <span class="c1"># No html content and zero attachments means plain text</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">attachments</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">:</span>
-            <span class="c"># No html and at least one attachment means multipart</span>
+            <span class="c1"># No html and at least one attachment means multipart</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
             <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c"># Anything else</span>
+            <span class="c1"># Anything else</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
-            <span class="n">alternative</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s">&#39;alternative&#39;</span><span class="p">)</span>
-            <span class="n">alternative</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="s">&#39;plain&#39;</span><span class="p">))</span>
-            <span class="n">alternative</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">))</span>
+            <span class="n">alternative</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s1">&#39;alternative&#39;</span><span class="p">)</span>
+            <span class="n">alternative</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;plain&#39;</span><span class="p">))</span>
+            <span class="n">alternative</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mimetext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">))</span>
             <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">alternative</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">:</span>
-            <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_subject</span><span class="p">(</span><span class="n">force_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">),</span> <span class="n">encoding</span><span class="p">)</span>
+            <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_subject</span><span class="p">(</span><span class="n">force_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">),</span> <span class="n">encoding</span><span class="p">)</span>
 
-        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sanitize_addresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipients</span><span class="p">,</span> <span class="n">encoding</span><span class="p">))))</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sanitize_addresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">recipients</span><span class="p">,</span> <span class="n">encoding</span><span class="p">))))</span>
 
-        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">formatdate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">localtime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="c"># see RFC 5322 section 3.6.4.</span>
-        <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Message-ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msgId</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">formatdate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">localtime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c1"># see RFC 5322 section 3.6.4.</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Message-ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msgId</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">:</span>
-            <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Cc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sanitize_addresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">,</span> <span class="n">encoding</span><span class="p">))))</span>
+            <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Cc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">sanitize_addresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">,</span> <span class="n">encoding</span><span class="p">))))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reply_to</span><span class="p">:</span>
-            <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Reply-To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reply_to</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+            <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Reply-To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sanitize_address</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reply_to</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">msg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-        <span class="n">SPACES</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;[\s]+&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
+        <span class="n">SPACES</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">r&#39;[\s]+&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments</span><span class="p">:</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="o">*</span><span class="n">attachment</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">))</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="o">*</span><span class="n">attachment</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
             <span class="n">f</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
             <span class="n">encode_base64</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
             <span class="n">filename</span> <span class="o">=</span> <span class="n">attachment</span><span class="o">.</span><span class="n">filename</span>
             <span class="k">if</span> <span class="n">filename</span> <span class="ow">and</span> <span class="n">ascii_attachments</span><span class="p">:</span>
-                <span class="c"># force filename to ascii</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="n">SPACES</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">u&#39; &#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="c1"># force filename to ascii</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">SPACES</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">u&#39; &#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">filename</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
+                <span class="n">filename</span> <span class="ow">and</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">UnicodeEncodeError</span><span class="p">:</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">PY3</span><span class="p">:</span>
-                    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span>
-                <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;UTF8&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;UTF8&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-            <span class="n">f</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s">&#39;Content-Disposition&#39;</span><span class="p">,</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">,</span>
                          <span class="n">attachment</span><span class="o">.</span><span class="n">disposition</span><span class="p">,</span>
                          <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
 
@@ -417,14 +417,14 @@
         <span class="k">return</span> <span class="n">msg</span>
 
 <div class="viewcode-block" id="Message.as_string"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.as_string">[docs]</a>    <span class="k">def</span> <span class="nf">as_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">()</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">()</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Message.as_bytes"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.as_bytes">[docs]</a>    <span class="k">def</span> <span class="nf">as_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">PY34</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">()</span><span class="o">.</span><span class="n">as_bytes</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c"># fallback for old Python (3) versions</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">()</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
-</div>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># fallback for old Python (3) versions</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">()</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">charset</span> <span class="ow">or</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
 
@@ -443,36 +443,36 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">_has_newline</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">linenum</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r\n</span><span class="s">&#39;</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">linenum</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)):</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
                         <span class="k">return</span> <span class="bp">True</span>
-                    <span class="k">if</span> <span class="n">linenum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s">&#39;</span><span class="se">\t</span><span class="s"> &#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">linenum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1"> &#39;</span><span class="p">:</span>
                         <span class="k">return</span> <span class="bp">True</span>
                     <span class="k">if</span> <span class="n">_has_newline</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
                         <span class="k">return</span> <span class="bp">True</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="bp">False</span>
-</div>
+        <span class="k">return</span> <span class="bp">False</span></div>
+
 <div class="viewcode-block" id="Message.is_bad_headers"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.is_bad_headers">[docs]</a>    <span class="k">def</span> <span class="nf">is_bad_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;is_bad_headers is deprecated, use the new has_bad_headers method instead.&#39;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;is_bad_headers is deprecated, use the new has_bad_headers method instead.&#39;</span>
         <span class="n">warn</span><span class="p">(</span><span class="ne">DeprecationWarning</span><span class="p">(</span><span class="n">msg</span><span class="p">),</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_bad_headers</span><span class="p">()</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_bad_headers</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Message.send"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.send">[docs]</a>    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Verifies and sends the message.&quot;&quot;&quot;</span>
 
-        <span class="n">connection</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</div>
+        <span class="n">connection</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Message.add_recipient"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.add_recipient">[docs]</a>    <span class="k">def</span> <span class="nf">add_recipient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Adds another recipient to the message.</span>
 
 <span class="sd">        :param recipient: email address of recipient.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">recipient</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recipients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">recipient</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Message.attach"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Message.attach">[docs]</a>    <span class="k">def</span> <span class="nf">attach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                <span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -487,9 +487,9 @@
 <span class="sd">        :param disposition: content-disposition (if any)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attachments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="n">Attachment</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">disposition</span><span class="p">,</span> <span class="n">headers</span><span class="p">))</span>
+            <span class="n">Attachment</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">disposition</span><span class="p">,</span> <span class="n">headers</span><span class="p">))</span></div></div>
 
-</div></div>
+
 <span class="k">class</span> <span class="nc">_MailMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="nd">@contextmanager</span>
@@ -506,7 +506,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">email_dispatched</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;blinker must be installed&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;blinker must be installed&quot;</span><span class="p">)</span>
 
         <span class="n">outbox</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -542,11 +542,11 @@
 
     <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Opens a connection to the mail host.&quot;&quot;&quot;</span>
-        <span class="n">app</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;app&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">current_app</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;app&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">current_app</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Connection</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s">&#39;mail&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">Connection</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;The curent application was not configured with Flask-Mail&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;The curent application was not configured with Flask-Mail&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">_Mail</span><span class="p">(</span><span class="n">_MailMixin</span><span class="p">):</span>
@@ -581,19 +581,19 @@
 
 <div class="viewcode-block" id="Mail.init_mail"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Mail.init_mail">[docs]</a>    <span class="k">def</span> <span class="nf">init_mail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">testing</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_Mail</span><span class="p">(</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_SERVER&#39;</span><span class="p">,</span> <span class="s">&#39;127.0.0.1&#39;</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_USERNAME&#39;</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_PASSWORD&#39;</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_PORT&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_USE_TLS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_USE_SSL&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_DEFAULT_SENDER&#39;</span><span class="p">),</span>
-            <span class="nb">int</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_DEBUG&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="p">)),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_MAX_EMAILS&#39;</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_SUPPRESS_SEND&#39;</span><span class="p">,</span> <span class="n">testing</span><span class="p">),</span>
-            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;MAIL_ASCII_ATTACHMENTS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="p">)</span>
-</div>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_SERVER&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USERNAME&#39;</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_PASSWORD&#39;</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_PORT&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_TLS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_USE_SSL&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_DEFAULT_SENDER&#39;</span><span class="p">),</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_DEBUG&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="p">)),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_MAX_EMAILS&#39;</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_SUPPRESS_SEND&#39;</span><span class="p">,</span> <span class="n">testing</span><span class="p">),</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MAIL_ASCII_ATTACHMENTS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="Mail.init_app"><a class="viewcode-back" href="../flask_mail.html#flask_mail.Mail.init_app">[docs]</a>    <span class="k">def</span> <span class="nf">init_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initializes your mail settings from the application settings.</span>
 
@@ -604,21 +604,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_mail</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">debug</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">testing</span><span class="p">)</span>
 
-        <span class="c"># register extension with app</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s">&#39;extensions&#39;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s">&#39;mail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
-        <span class="k">return</span> <span class="n">state</span>
-</div>
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="c1"># register extension with app</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;extensions&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">extensions</span><span class="p">[</span><span class="s1">&#39;mail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="k">return</span> <span class="n">state</span></div>
 
-</div>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span></div>
+
+
 <span class="n">signals</span> <span class="o">=</span> <span class="n">blinker</span><span class="o">.</span><span class="n">Namespace</span><span class="p">()</span>
 
-<span class="n">email_dispatched</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="s">&quot;email-dispatched&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">Signal sent when an email is dispatched. This signal will also be sent</span>
-<span class="s">in testing mode, even though the email will not actually be sent.</span>
-<span class="s">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">email_dispatched</span> <span class="o">=</span> <span class="n">signals</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="s2">&quot;email-dispatched&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Signal sent when an email is dispatched. This signal will also be sent</span>
+<span class="s2">in testing mode, even though the email will not actually be sent.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -655,8 +655,8 @@
       &copy;2015, Thorvald_Dox.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
 
