@@ -455,6 +455,11 @@ def validate_login(path):
             file.write("    {}\n".format(str(dict(session))))
         return redirect("/" + path + "/login/invalid/")
 
+@app.route("/<path:path>/login/sendcreds/",method="POST")
+@catch_errors
+def receive_credentials(path):
+    return request.data
+
 @app.route("/<path:path>/logout/")
 @catch_errors
 def logout(path):
