@@ -18,10 +18,11 @@ import draw
 import imagechanger
 import forms
 
-from loginhandle import LoginHandler
+
 from autoupdate import update
 from datetime import datetime
 from makedoc import makedocs
+import loginhandle2
 
 # Init Flask application
 app = Flask(__name__)
@@ -64,22 +65,17 @@ print(os.getcwd())
 print("status:", ["ONLINE", "OFFLINE/DEBUG"][OFFLINE])
 # Init side processes
 
-loginHandler = LoginHandler()
 
 
 makedocs()
 
 # Decorators from here.
 
-def check_logged_in(session):
+def check_logged_in():
     """
     check if the currect user is logged in.
     """
-    if "username" not in session:
-        return False
-    else:
-        return loginHandler.valid_user(session["username"])
-
+    return loginhandle2.check_credentials(session)
 
 def login_required(func):
     """
@@ -88,7 +84,7 @@ def login_required(func):
 
     @wraps(func)
     def save_function(*args, **kwargs):
-        if not check_logged_in(session):
+        if not check_logged_in():
             return redirect(request.path + "login/")
         return func(*args, **kwargs)
 
@@ -102,7 +98,7 @@ def admin_required(func):
 
     @wraps(func)
     def save_function(*args, **kwargs):
-        if not check_logged_in(session) or not loginHandler.check_admin(session):
+        if not check_logged_in() or not loginhandle2.check_admin(session):
             return redirect(request.path + "login/admin/")
         return func(*args, **kwargs)
 
@@ -447,11 +443,8 @@ def render_login_admin(path):
 @app.route("/<path:path>/login/validate/", methods=["POST"])
 @catch_errors
 def validate_login(path):
-    if OFFLINE or loginHandler.valid_login(request.form["name"],
-                                request.form["password"]):  # offline you can always log in.
-        session["username"] = request.form["name"]
-        core.addcommand_ip(request, "loginas #{}".format(session["username"]))
-        return redirect("/" + path + "/")
+    if check_logged_in():
+        return
     else:
         return redirect("/" + path + "/login/invalid/")
 
