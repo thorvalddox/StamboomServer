@@ -135,8 +135,7 @@ def catch_errors(func):
 
             error_code = traceback.format_exc().replace("\n", '<br/>')
             traceback.print_exc()
-            out = send_mail(loginHandler.users['thorvalddx94'], '<h1>stamboom error</h1>' + error_code)
-            return make_response(render_template("error.html", log=error_code + "</p><p>" + out)), 500
+            return make_response(render_template("error.html", log=error_code + "</p><p>")), 500
 
     return catch_erros
 
@@ -514,33 +513,9 @@ def email_form():
     return response
 
 
-@app.route("/stamboom/admin/sendemails/", methods=["POST"])
-@admin_page
-def send_user_mails():
-    msg = ""
-    # app.config.update(MAIL_PASSWORD=request.form.get("password",""))
-    for u in loginHandler.users.values():
-        print(request.form)
-        if "name_" + u.name in request.form:
-            if request.form["name_" + u.name]:
-                msg += send_mail(u, render_template("email.html", username=u.name, password=u.password)) + "<br/><br/>"
-            else:
-                msg += "no mail was send to " + u.email + "<br/><br/>"
-        else:
-            msg += "no form data about " + u.email + "<br/><br/>"
-    return (msg)
 
 
-@app.route("/stamboom/admin/seeUsers/")
-@admin_page
-def see_users():
-    msg = "<table>"
-    # msg += "logged in with "+app.config["MAIL_USERNAME"] + "\n"
-    # msg += "password: "+app.config["MAIL_PASSWORD"] + "\n"
-    for u in loginHandler.users.values():
-        msg += "<tr><td>{}</td><td>{}</td><td>{}</td></tr>".format(u.name, "*" * 12, u.email)
-    msg += "</table>"
-    return (msg)
+
 
 
 @app.errorhandler(404)
