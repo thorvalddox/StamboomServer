@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    {{ safe|login1 }}
-    {{ safe|login2 }}
+    {{ login1|safe }}
 <span style="color:red">{{ message }}</span>
 {% endblock %}
