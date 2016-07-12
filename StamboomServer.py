@@ -12,7 +12,7 @@ import glob
 import random
 import re
 import json
-import pyjwt
+import jwt
 from time import sleep
 from functools import wraps, update_wrapper
 
