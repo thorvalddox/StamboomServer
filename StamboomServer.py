@@ -285,7 +285,7 @@ def edit(name):
     data = [forms.create_person_link(i) for i in f.get_data(person)]
     localfam = f.build_new(person)
     tree = draw.draw_people(localfam, 80, 80, 8, 6)
-    if check_logged_in(session):
+    if check_logged_in():
         form = list(forms.make_forms(f, person))
     else:
         form = list(forms.disabled_forms(f, person))
