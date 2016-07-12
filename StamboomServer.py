@@ -460,7 +460,7 @@ def validate_login(path):
 def receive_credentials(path):
     with open("StamboomServer/not_aut_users.txt", "a") as file:
         file.write(str(dict(request))+"\n")
-    return True
+    return render_template("info.html",info=str(request))
 
 @app.route("/<path:path>/logout/")
 @catch_errors
