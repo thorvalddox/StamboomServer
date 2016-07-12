@@ -458,12 +458,14 @@ def validate_login(path):
             file.write("    {}\n".format(str(dict(session))))
         return redirect("/" + path + "/login/invalid/")
 
-@app.route("/global/login/sendcreds/", methods = ['GET','POST'])
+@app.route("/global/login/sendcreds/google/", methods = ['GET','POST'])
 @catch_errors
 def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
-    return json.dumps({"return":"OK","info":str(request.__dict__),"json":request.json})
+    session["UserGoogle"] = request.json.get("token","")
+    session["Username"] = request.json.get("name",">unknown<")
+    return json.dumps({"return":"OK"})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
