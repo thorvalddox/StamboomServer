@@ -95,7 +95,7 @@ class DrawObject:
         xdif = width / 2 - border
         ydif = height / 2 - border
         self.draw_rectangle(x - xdif, y - ydif, x + xdif, y + ydif, "white")
-        self.draw_text(x, y - ydif + border / 2, person.name,textsize)
+        self.draw_text(x, y - ydif + border / 2 + textsize//2, person.name,textsize)
         self.draw_text(x, y + ydif - 4-(textsize+1), "*" * bool(person.birth) + person.birth,textsize)
         self.draw_text(x, y + ydif - 4, "+" * bool(person.dead) + person.dead,textsize)
         self.add_mouse_link("/stamboom/edit/" + person.uname, x - xdif, y - ydif, x + xdif, y + ydif)
