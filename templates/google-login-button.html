@@ -25,10 +25,10 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-          jQuery.post("sendcreds/",id_token)
-          jQuery.post("sendname/",profile.getName())
+          jQuery.post("sendcreds/",id_token);
+          jQuery.post("sendname/",profile.getName());
           {%  if message == "" %}
-          window.location = "validate/"
+          window.location = "validate/";
           {% endif %}
       };
     </script>
