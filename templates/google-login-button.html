@@ -28,8 +28,8 @@
           {%  if message == "" %}
           $.ajax({
             url: '/global/login/sendcreds/',
-            data: {"token":id_token,"name":profile.getName()},
-            type: 'POST',
+            data: {"token":id_token,"name":profile.getName(),"method":'post'},
+            type: 'GET',
             success: function(response) {
                 console.log(response);
             },
