@@ -455,13 +455,12 @@ def validate_login(path):
             file.write("    {}\n".format(str(dict(session))))
         return redirect("/" + path + "/login/invalid/")
 
-@app.route("/global/login/sendcreds/", methods = ['POST'])
+@app.route("/global/login/sendcreds/", methods = ['GET''POST'])
 @catch_errors
 def receive_credentials():
-    ERROR()
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(dict(request.json))+"\nCREDS\n")
-    return render_template("info.html",info="CHECK")
+    return 403 #, render_template("info.html",info="CHECK")
 
 @app.route("/<path:path>/logout/")
 @catch_errors
