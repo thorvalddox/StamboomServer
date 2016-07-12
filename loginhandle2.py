@@ -21,5 +21,5 @@ def check_admin(session):
 def get_google_public_key():
     with urllib.request.urlopen('https://www.googleapis.com/oauth2/v1/certs') as keyfile:
         data = keyfile.read().decode('utf-8')
-        for k,v in json.loads(data):
+        for k,v in json.loads(data).items():
             yield v
