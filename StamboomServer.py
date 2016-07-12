@@ -136,8 +136,6 @@ def catch_errors(func):
 
             error_code = traceback.format_exc().replace("\n", '<br/>')
             traceback.print_exc()
-            with open("StamboomServer/log.txt", "a") as file:
-                file.write(traceback.format_exc())
             return make_response(render_template("error.html", log=error_code + "</p><p>")), 500
 
     return catch_erros
