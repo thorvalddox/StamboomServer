@@ -11,6 +11,7 @@
     <h1>Log in met Google</h1>
 
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <!--<a href = "validate/"> Klik hier als je ingelogt bent met google </a>-->
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -29,8 +30,9 @@
 
           $.ajax({
             url: '/global/login/sendcreds/',
-            data: {"token":id_token,"name":profile.getName(),"method":'post'},
-            type: 'GET',
+            data: {"token":id_token,"name":profile.getName()},
+            type: 'POST',
+              async: false,
             success: function(response) {
                 console.log(response);
             },
@@ -38,7 +40,8 @@
                 console.log(error);
             }
         });
-          //window.location = "validate/";
+
+          window.location = "validate/";
           {% endif %}
       };
     </script>
