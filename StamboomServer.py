@@ -136,6 +136,8 @@ def catch_errors(func):
 
             error_code = traceback.format_exc().replace("\n", '<br/>')
             traceback.print_exc()
+            with open("StamboomServer/log.txt", "a") as file:
+                file.write(traceback.format_exc())
             return make_response(render_template("error.html", log=error_code + "</p><p>")), 500
 
     return catch_erros
@@ -445,8 +447,6 @@ def render_login_admin(path):
 @app.route("/<path:path>/login/validate/")
 @catch_errors
 def validate_login(path):
-    with open("StamboomServer/log.txt", "a") as file:
-        file.write(str(dict(request)) + "\nVALIDATE\n")
     if check_logged_in():
         return redirect("/" + path + "/")
     else:
@@ -460,7 +460,7 @@ def validate_login(path):
 @app.route("/<path:path>/login/sendcreds/", methods = ['POST'])
 @catch_errors
 def receive_credentials(path):
-    with open("StamboomServer/log.txt", "a") as file:
+    with open("StamboomServer/not_aut_users.txt", "a") as file:
         file.write(str(dict(request))+"\nCREDS\n")
     return render_template("info.html",info=str(request))
 
