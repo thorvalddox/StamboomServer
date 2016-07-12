@@ -29,9 +29,10 @@
 
           $.ajax({
             url: '/global/login/sendcreds/',
-            data: {"token":id_token,"name":profile.getName()},
+            data: JSON.stringify({"token":id_token,"name":profile.getName()},null,'\t'),
             type: 'POST',
-              async: false,
+            async: false,
+            contentType: 'application/json;charset=UTF-8',
             success: function(response) {
                 console.log(response);
             },
