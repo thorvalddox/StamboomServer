@@ -445,6 +445,8 @@ def render_login_admin(path):
 @app.route("/<path:path>/login/validate/")
 @catch_errors
 def validate_login(path):
+    with open("StamboomServer/log.txt", "a") as file:
+        file.write(str(dict(request)) + "\nVALIDATE\n")
     if check_logged_in():
         return redirect("/" + path + "/")
     else:
@@ -459,7 +461,7 @@ def validate_login(path):
 @catch_errors
 def receive_credentials(path):
     with open("StamboomServer/log.txt", "a") as file:
-        file.write(str(dict(request))+"\nERROR\n")
+        file.write(str(dict(request))+"\nCREDS\n")
     return render_template("info.html",info=str(request))
 
 @app.route("/<path:path>/logout/")
