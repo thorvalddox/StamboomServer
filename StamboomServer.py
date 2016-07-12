@@ -11,6 +11,7 @@ import os, os.path
 import glob
 import random
 import re
+import json
 from time import sleep
 from functools import wraps, update_wrapper
 
@@ -24,6 +25,7 @@ from autoupdate import update
 from datetime import datetime
 from makedoc import makedocs
 import loginhandle2
+
 
 # Init Flask application
 app = Flask(__name__)
@@ -88,7 +90,7 @@ def login_required(func):
         if not check_logged_in():
             return redirect(request.path + "login/")
         return func(*args, **kwargs)
-
+    return(func)
     return (save_function)
 
 
@@ -459,8 +461,8 @@ def validate_login(path):
 @catch_errors
 def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
-    #    file.write(str(dict(request.json))+"\nCREDS\n")
-    return render_template("info.html",info="CHECK")
+    #    file.write(str(json.loads(request.json))+"\nCREDS\n")
+    return render_template("info.html",info="????????")
 
 @app.route("/<path:path>/logout/")
 @catch_errors
