@@ -465,7 +465,7 @@ def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
     token = request.json.get("token","")
-    payload = pyjwt.decode(token)
+    payload = jwt.decode(token)
     session["UserGoogle"] = "TEST"
     session["Username"] = request.json.get("name",">unknown<")
     return json.dumps({"succes":True,"payload":payload})
