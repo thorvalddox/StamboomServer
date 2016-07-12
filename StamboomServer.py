@@ -12,6 +12,7 @@ import glob
 import random
 import re
 import json
+import pyjwt
 from time import sleep
 from functools import wraps, update_wrapper
 
@@ -463,9 +464,11 @@ def validate_login(path):
 def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
-    session["UserGoogle"] = request.json.get("token","")
+    token = request.json.get("token","")
+    payload = pyjwt.decode(token)
+    session["UserGoogle"] = "TEST"
     session["Username"] = request.json.get("name",">unknown<")
-    return json.dumps({"succes":True})
+    return json.dumps({"succes":True,"payload":payload})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
