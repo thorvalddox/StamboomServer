@@ -472,10 +472,10 @@ def receive_credentials():
         except ValueError:
             pass
     else:
-        payload = {"No valid keys"}
+        payload = {"Invalid":"No valid keys"}
     session["UserGoogle"] = "TEST"
     session["Username"] = request.json.get("name",">unknown<")
-    return json.dumps({"succes":True,"key":key,"payload":payload})
+    return json.dumps({"succes":True,"token":token,"key":key,"payload":payload})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
