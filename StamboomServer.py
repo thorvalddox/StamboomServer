@@ -461,7 +461,7 @@ def validate_login(path):
 def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
-    return json.dumps({"return":"OK"})# render_template("info.html",info="????????")
+    return json.dumps({"return":"OK","info":request.json})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
