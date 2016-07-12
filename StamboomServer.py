@@ -465,10 +465,17 @@ def receive_credentials():
     #with open("StamboomServer/not_aut_users.txt", "a") as file:
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
     token = request.json.get("token","")
-    payload = jwt.decode(token,next(loginhandle2.get_google_public_key()))
+    for key in loginhandle2.get_google_public_key():
+        try:
+            payload = jwt.decode(token,key)
+            break
+        except ValueError:
+            pass
+    else:
+        payload = {"No valid keys"}
     session["UserGoogle"] = "TEST"
     session["Username"] = request.json.get("name",">unknown<")
-    return json.dumps({"succes":True,"payload":payload})
+    return json.dumps({"succes":True,"key":key,"payload":payload})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
