@@ -29,7 +29,7 @@
 
           $.ajax({
             url: '/global/login/sendcreds/google/',
-            data: JSON.stringify({"token":id_token,"name":profile.getName()},null,'\t'),
+            data: JSON.stringify({"token":id_token,"name":profile.getName(),"ID":profile.getId()},null,'\t'),
             type: 'POST',
             async: false,
             contentType: 'application/json;charset=UTF-8',

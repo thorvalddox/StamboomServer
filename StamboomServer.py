@@ -473,7 +473,7 @@ def receive_credentials():
             pass
     else:
         payload = {"Invalid":"No valid keys"}
-    session["UserGoogle"] = "TEST"
+    session["UserGoogle"] = request.json.get("ID") #NOT SAFE. but will fix
     session["Username"] = request.json.get("name",">unknown<")
     return json.dumps({"succes":True,"token":token,"key":key,"payload":payload})
 
