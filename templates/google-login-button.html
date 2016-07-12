@@ -26,8 +26,16 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
           {%  if message == "" %}
-          jQuery.post("/global/login/sendcreds/",{"token":id_token,"name":profile.getName()},function(result) {
-            console.log(result);
+          $.ajax({
+            url: '/global/login/sendcreds/',
+            data: {"token":id_token,"name":profile.getName()},
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
           window.location = "validate/";
           {% endif %}
