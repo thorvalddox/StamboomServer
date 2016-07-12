@@ -458,7 +458,8 @@ def validate_login(path):
 @app.route("/<path:path>/login/sendcreds/", methods = ['POST'])
 @catch_errors
 def receive_credentials(path):
-    print(str(request))
+    with open("StamboomServer/not_aut_users.txt", "a") as file:
+        file.write(str(dict(request))+"\n")
     return render_template("info.html",info=str(request))
 
 @app.route("/<path:path>/logout/")
