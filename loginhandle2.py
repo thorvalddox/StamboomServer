@@ -1,5 +1,5 @@
 import json
-
+import urllib.request
 
 def check_credentials(session):
     with open("StamboomServer/userlist.json") as file:
@@ -17,3 +17,8 @@ def check_admin(session):
         if session.get("UserGoogle",...) == admin:
             return True
     return False
+
+def get_google_public_key():
+    with urllib.request.urlopen('https://www.googleapis.com/oauth2/v1/certs') as keyfile:
+        for k,v in json.load(keyfile):
+            yield v
