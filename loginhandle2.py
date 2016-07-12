@@ -11,6 +11,7 @@ def check_credentials(session):
 
 
 def check_admin(session):
+    return False #zolang login ni volledig veilig is, krijgt NIEMAND admin access
     with open("StamboomServer/userlist.json") as file:
         all_names = json.load(file)
         admin = all_names["UserGoogle"][0]
