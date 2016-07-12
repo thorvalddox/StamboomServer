@@ -460,9 +460,9 @@ def validate_login(path):
 @app.route("/global/login/sendcreds/", methods = ['POST'])
 @catch_errors
 def receive_credentials():
-    with open("StamboomServer/not_aut_users.txt", "a") as file:
-        file.write(str(dict(request))+"\nCREDS\n")
-    return render_template("info.html",info=str(request))
+    #with open("StamboomServer/not_aut_users.txt", "a") as file:
+    #    file.write(str(dict(request))+"\nCREDS\n")
+    return "CHECK"#render_template("info.html",info="CHECK")
 
 @app.route("/<path:path>/logout/")
 @catch_errors
