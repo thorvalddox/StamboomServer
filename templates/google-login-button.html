@@ -28,7 +28,7 @@
           {%  if message == "" %}
 
           $.ajax({
-            url: '/global/login/sendcreds/',
+            url: '/global/login/sendcreds/google/',
             data: JSON.stringify({"token":id_token,"name":profile.getName()},null,'\t'),
             type: 'POST',
             async: false,

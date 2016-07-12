@@ -465,7 +465,7 @@ def receive_credentials():
     #    file.write(str(json.loads(request.json))+"\nCREDS\n")
     session["UserGoogle"] = request.json.get("token","")
     session["Username"] = request.json.get("name",">unknown<")
-    return json.dumps({"return":"OK"})
+    return json.dumps({"succes":True})
 
 @app.route("/<path:path>/logout/")
 @catch_errors
