@@ -431,7 +431,9 @@ def render_login(path):
 def render_login_invalid(path):
     if check_logged_in(): #check if really invalid
         return redirect("/" + path + "/")
-    return make_response(render_template("google-login-button.html", message="Uw account is niet geaccepteerd op deze server. Neem contact op met de admin (Thorvald Dox) om deze te laten toevoegen op de lijst. Mail naar thorvalddx94@gmail.com", path=path))
+    return make_response(render_template("info.html",title="Login ongeldig",
+                                         info="Uw account is niet geaccepteerd op deze server. Neem contact op met de admin (Thorvald Dox) om deze te laten toevoegen op de lijst. Mail naar thorvalddx94@gmail.com"))
+    #return make_response(render_template("google-login-button.html", message="Uw account is niet geaccepteerd op deze server. Neem contact op met de admin (Thorvald Dox) om deze te laten toevoegen op de lijst. Mail naar thorvalddx94@gmail.com", path=path))
 
 
 
