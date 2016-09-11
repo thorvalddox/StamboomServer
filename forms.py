@@ -115,7 +115,7 @@ def create_person_link(pList,split=50):
     </tr>
     </table>
     """.format("\n".join(
-        """<li><a href='/stamboom/edit/{}'>{}</a></li>{}""".format(
+        """<li><a href='/stamboom/edit/?name={}'>{}</a></li>{}""".format(
             p.uname, p.name, ["</ul></td><td><ul>",""][bool((i+1)%split)]
         ) for i,p in enumerate(pList)
     ))
@@ -127,7 +127,7 @@ def edit_parents_form(tree:core.FamilyTree,person):
     if len(parents) < 2:
         parents += [None]*(2-len(parents))
     selectBoxes = [create_person_dropdown(tree.people_all,p,"parent"+str(i)) for i,p in enumerate(parents)]
-    return """<form action="parents/" method="post" enctype="multipart/form-data">
+    return """<form action="parents/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Ouder1:{}<br/>
          Ouder2:{}<br/>
          <input type="submit" value="Verzend wijzigingen">
@@ -136,7 +136,7 @@ def edit_parents_form(tree:core.FamilyTree,person):
 
 def edit_name_form(tree:core.FamilyTree,person):
     selectBox = create_person_dropdown([],person,"newname")
-    return """<form action="rename/" method="post" enctype="multipart/form-data">
+    return """<form action="rename/?name={{ pname }}" method="post" enctype="multipart/form-data">
          nieuwe naam:{}<br/>
          <input type="submit" value="Verzend wijzigingen">
     </form>""".format(selectBox)
@@ -150,19 +150,19 @@ def edit_partners_form(tree:core.FamilyTree,person):
                                      ,None,"divPartner")
     rmrBox =  create_person_dropdown(filter(lambda x:tree.get_family(x.name,person.name).divorced,tree.get_partners(person))
                                      ,None,"rmrPartner")
-    return """<form action="addPartner/" method="post" enctype="multipart/form-data">
+    return """<form action="addPartner/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Selecteer nieuwe partner:{}<br/>
          <input type="submit" value="Voeg toe & Verzend">
     </form>""".format(addBox) + \
-    """<form action="remPartner/" method="post" enctype="multipart/form-data">
+    """<form action="remPartner/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Verwijder partner:{}<br/>
          <input type="submit" value="Verwijder & Verzend">
     </form>""".format(remBox) + \
-    """<form action="divPartner/" method="post" enctype="multipart/form-data">
+    """<form action="divPartner/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Scheiden van:{}<br/>
          <input type="submit" value="Scheid & Verzend">
     </form>""".format(divBox) + \
-    """<form action="rmrPartner/" method="post" enctype="multipart/form-data">
+    """<form action="rmrPartner/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Hertrouwen:{}<br/>
          <input type="submit" value="Hertrouw & Verzend">
     </form>""".format(rmrBox)
@@ -171,11 +171,11 @@ def edit_siblings_form(tree:core.FamilyTree,person):
     partners = list(tree.get_partners(person))
     addBox =  create_person_dropdown(tree.people_all,None,"addSibling")
     remBox =  create_person_dropdown(tree.get_partners(person),None,"remSibling")
-    return """<form action="addSibling/" method="post" enctype="multipart/form-data">
+    return """<form action="addSibling/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Selecteer nieuwe broer/zus:{}<br/>
          <input type="submit" value="Voeg toe & Verzend">
     </form>""".format(addBox) + \
-    """<form action="remSibling/" method="post" enctype="multipart/form-data">
+    """<form action="remSibling/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Verwijder broer/zus:{}<br/>
          <input type="submit" value="Verwijder & Verzend">
     </form>""".format(remBox)
@@ -184,7 +184,7 @@ def edit_children_form(tree:core.FamilyTree,person):
     partBox = create_person_dropdown(tree.get_partners(person),None,"partner")
     addBox =  create_person_dropdown(tree.people_all,None,"addChild")
     remBox =  create_person_dropdown(tree.get_children(person),None,"remChild")
-    return """<form action="child/" method="post" enctype="multipart/form-data">
+    return """<form action="child/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Selecteer Partner:{}<br/>
          Selecteer nieuw kind:{}<br/>
          <input type="submit" name="addChildPress" value="Voeg toe & Verzend"><br/>
@@ -193,7 +193,7 @@ def edit_children_form(tree:core.FamilyTree,person):
     </form>""".format(partBox,addBox,remBox)
 
 def edit_date_form(person):
-    return """<form action="dates/" method="post" enctype="multipart/form-data">
+    return """<form action="dates/?name={{ pname }}" method="post" enctype="multipart/form-data">
          Geboren op:<input type="text" name="birth" value="{}"></br>
          Gestorven op:<input type="text" name="dead" value="{}"></br>
          <input type="submit" value="Verzend wijzigingen">
@@ -205,7 +205,7 @@ def edit_image_form():
         selecteer .jpg bestand :<input type="file" name="file"><br />
         <input type="submit" value="Upload"><br/>
     </form>
-    <form action="rotate/" method="post" enctype="multipart/form-data">
+    <form action="rotate/?name={{ pname }}" method="post" enctype="multipart/form-data">
         <input type="submit" value="Draai rechtsom" name="cw">
         <input type="submit" value="Draai linksom" name="ccw">
     </form>

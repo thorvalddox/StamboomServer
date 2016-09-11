@@ -235,17 +235,18 @@ def show_raw_code():
 @app.route('/stamboom/')
 @default_page
 def show_fam_tree():
-    return redirect("/stamboom/view/Petrus_Ludovicus_Carolus_Dox")
-
-
-@app.route('/stamboom/view/<name>/')
-@default_page
-def show_fam_tree_custom_redir(name):
-    return redirect("/stamboom/view/{}/{}/".format(name,"120x150b10t8"))
+    return redirect("/stamboom/view/")
 
 @app.route('/stamboom/view/<name>/<fformat>/')
 @default_page
-def show_fam_tree_custom(name,fformat):
+def show_fam_tree_old(name,fformat):
+    return redirect('/stamboom/view/?name={}&format={}'.format(name,fformat))
+
+@app.route('/stamboom/view/')
+@default_page
+def show_fam_tree_custom():
+    name = request.args.get("name","Petrus_Ludovicus_Carolus_Dox")
+    fformat = request.args.get("format","120x150b10t8")
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
@@ -255,15 +256,19 @@ def show_fam_tree_custom(name,fformat):
                                              script=d.get_html_script(),pname=name))
     return response
 
-@app.route('/stamboom/view/<name>/<fformat>/download/')
+@app.route('/stamboom/view/download/')
 @default_page
-def download_redirect(name,fformat):
-    return redirect("/stamboom/view/{}/{}/download/{}/".format(name,fformat,hex(random.randrange(16**16))))
+def download_redirect():
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
+    fformat = request.args.get("format", "120x150b10t8")
+    return redirect("/stamboom/view/download/{2}/?name={0}&format={1}".format(name,fformat,hex(random.randrange(16**16))))
 
 
-@app.route('/stamboom/view/<name>/<fformat>/download/<suffix>/')
+@app.route('/stamboom/view/download/<suffix>/')
 @default_page
 def download_fam_tree_custom(name,fformat,suffix):
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
+    fformat = request.args.get("format", "120x150b10t8")
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
@@ -278,7 +283,14 @@ def download_fam_tree_custom(name,fformat,suffix):
 
 @app.route('/stamboom/edit/<name>/')
 @default_page
-def edit(name):
+def edit_old(name):
+    return redirect('stamboom/edit/?name={}'.format(name))
+
+
+@app.route('/stamboom/edit/')
+@default_page
+def edit():
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
     f = core.FamilyTree()
     f.from_code("data.log", 2)
     person = f.get_person(name)
@@ -324,90 +336,37 @@ def rawcommand():
 
 @app.route('/stamboom/edit/<name>/upload/', methods=['POST'])
 @login_page
-def upload_image(name):
+def upload_image_old(name):
+    return redirect('stamboom/edit/upload/?name={}'.format(name))
+
+
+@app.route('/stamboom/edit/upload/', methods=['POST'])
+@login_page
+def upload_image():
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
     print(name)
     print(request.files)
     file = request.files["file"]
     core.addcommand(request,session,"image {} {}".format(name,imagechanger.change_image(file)))
-    return redirect('/stamboom/edit/' + name)
+    return redirect("/stamboom/edit/?name={}".format(name))
 
-@app.route('/stamboom/edit/<name>/rotate/', methods=['POST'])
+@app.route('/stamboom/edit/rotate/', methods=['POST'])
 @login_page
-def rotate_image(name):
+def rotate_image():
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
     clockwise = "cw" in request.form
     core.addcommand(request,session,"rotate {} {}".format(name,["left","right"][clockwise]))
-    return redirect('/stamboom/edit/' + name)
+    return redirect("/stamboom/edit/?name={}".format(name))
 
-""" #commented out for data-driven counterpart.
-@app.route('/stamboom/edit/<name>/parents/', methods = ['POST'])
+@app.route('/stamboom/edit/<action>/', methods=['POST'])
 @login_page
-def edit_parents(name):
-    print(name)
-    print(request.form)
-    first = request.form["parent0"]
-    second = request.form["parent1"]
-    core.addcommand(request,session,"parents {} {} {}".format(name,first,second))
-    return redirect('/stamboom/edit/'+name)
-
-@app.route('/stamboom/edit/<name>/dates/', methods = ['POST'])
-@login_page
-def edit_dates(name):
-    print(name)
-    print(request.form)
-    first = request.form["birth"]
-    second = request.form["dead"]
-    core.addcommand(request,session,"person {} {} {}".format(name,first,second))
-    return redirect('/stamboom/edit/'+name)
-
-@app.route('/stamboom/edit/<name>/addPartner/', methods = ['POST'])
-@login_page
-def edit_add_partner(name):
-    print(name)
-    print(request.form)
-    partner = request.form["addPartner"]
-    core.addcommand(request,session,"family {} {}".format(name,partner.replace(" ","_")))
-    return redirect('/stamboom/edit/'+name)
-
-@app.route('/stamboom/edit/<name>/remPartner/', methods = ['POST'])
-@login_page
-def edit_rem_partner(name):
-    print(name)
-    print(request.form)
-    partner = request.form["remPartner"]
-    core.addcommand(request,session,"disband {} {}".format(name,partner.replace(" ","_")))
-    return redirect('/stamboom/edit/'+name)
-
-@app.route('/stamboom/edit/<name>/divPartner/', methods = ['POST'])
-@login_page
-def edit_div_partner(name):
-    print(name)
-    print(request.form)
-    partner = request.form["divPartner"]
-    core.addcommand(request,session,"divorce {} {}".format(name,partner.replace(" ","_")))
-    return redirect('/stamboom/edit/'+name)
-
-@app.route('/stamboom/edit/<name>/child/', methods = ['POST'])
-@login_page
-def edit_child(name):
-    partner = request.form["partner"]
-    if "addChildPress" in request.form:
-        child = request.form["addChild"]
-        core.addcommand(request,session,"family {} {} {}".format(name,partner.replace(" ","_"),child.replace(" ","_")))
-    elif "remChildPress" in request.form:
-        child = request.form["remChild"]
-        core.addcommand(request,session,"disconnect {} {} {}".format(name,partner.replace(" ","_"),child.replace(" ","_")))
-    return redirect('/stamboom/edit/'+name)
-"""
-
-
-@app.route('/stamboom/edit/<name>/<action>/', methods=['POST'])
-@login_page
-def edit_person_prop(name, action):
+def edit_person_prop(action):
+    name = request.args.get("name", "Petrus_Ludovicus_Carolus_Dox")
     print(name)
     print(action)
     print(request.form)
     core.addcommand(request, session, forms.FormCom.get_command(action, name, request))
-    return redirect('/stamboom/edit/' + name + '/')
+    return redirect("/stamboom/edit/?name={}".format(name))
 
 
 @app.route("/templates/titlebar")
