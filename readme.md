@@ -28,14 +28,12 @@ Verwijder ze van de lijst als ze in orde zijn.
 - [ ] Naamkaartjes
 - [ ] Fix de autoupdate zodat deze blijft runnen als de server crashed (gedeeltelijk gedaan met de @cath_error decorator)
 - [ ] anders tonen van gescheiden families (dit is geimplementeerd maar werkt niet).
-- [ ] 
 
 ####normal priority
 - [ ] Docs moeten de :param arg: tags correct tonen (om een of andere reden doen ze dat niet).
 - [ ] Github moet een wiki krijgen met daarin het gebruik (dus niet de werking, da moet in de docs) van alle functies van de site.
-- [ ] cathing van meerdere errors (403,400) enz en correcte catching van 500
-- [ ] automatisch de docs generenen op "git push"
-- [ ] meer bewerk opties (bv naam wijzigen, ...)
+- [ ] Correcte catching van 500
+- [ ] automatisch de docs generenen op "git push" of op autoupdate
 - [ ] geslachten
 - [ ] comprimeren van fotos na uploaden (nieuw formaat max 600x400) om geheugenruimte te sparen
 - [ ] betere layout en css
