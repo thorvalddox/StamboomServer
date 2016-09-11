@@ -7,6 +7,7 @@
    StamboomServer
    autoupdate
    core
+   core_sql
    draw
    flask_mail
    forms
