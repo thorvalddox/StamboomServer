@@ -1,4 +1,4 @@
-print("Starting Family tree server")
+print("Starting Family tree server ")
 
 from flask import Flask
 
