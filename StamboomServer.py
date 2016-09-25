@@ -500,8 +500,7 @@ def see_doc_folder(folder,name):
 @app.route("/stamboom/admin/")
 @admin_page
 def email_form():
-    response = make_response(render_template("send_emails.html", users=list(loginHandler.get_user_list())))
-    return response
+    pass
 
 
 
@@ -523,5 +522,5 @@ def permission_denied(e):
 def method_not_allowed(e):
     return render_template('405.html'), 405
 
-if __name__ == '__main__':
-    app.run()
+#if __name__ == '__main__':
+#    app.run()
