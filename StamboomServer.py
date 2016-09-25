@@ -73,7 +73,7 @@ print("status:", ["ONLINE", "OFFLINE/DEBUG"][OFFLINE])
 
 
 
-makedocs()
+# makedocs()
 
 # Decorators from here.
 
