@@ -1,3 +1,5 @@
+print("Starting Family tree server")
+
 from flask import Flask
 
 from flask import make_response, url_for, request, redirect, session, send_file
